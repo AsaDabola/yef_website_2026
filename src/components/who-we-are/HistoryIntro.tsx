@@ -22,7 +22,7 @@ export default function HistoryIntro() {
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="relative aspect-[849/637] w-full overflow-hidden rounded-2xl sm:row-span-2">
               <Image
-                src="https://www.figma.com/api/mcp/asset/28c9d8fd-3e4b-4555-beee-43b1ea8bb3b7.png"
+                src="/images/history/hero-large.png"
                 alt="Youth Evangelical Fellowship headquarters building"
                 fill
                 sizes="(min-width: 1024px) 35vw, 100vw"
@@ -31,21 +31,25 @@ export default function HistoryIntro() {
             </div>
             <div className="relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
               <Image
-                src="https://www.figma.com/api/mcp/asset/f3112a13-921a-4670-b9d5-d9b91b23e0b0.png"
+                src="/images/history/hero-small-top.png"
                 alt="YEF international staff gathered together"
                 fill
                 sizes="(min-width: 1024px) 35vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
+            <div className="group relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
               <Image
-                src="https://www.figma.com/api/mcp/asset/0d770b70-2756-4a98-b7d0-d6e22f62a712.png"
+                src="/images/history/hero-small-bottom.png"
                 alt="Students on a campus mission trip"
                 fill
                 sizes="(min-width: 1024px) 35vw, 100vw"
                 className="object-cover"
               />
+              <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/60 font-medium text-lg text-white transition-opacity group-hover:bg-black/70">
+                See More
+                <span aria-hidden="true">&rarr;</span>
+              </div>
             </div>
           </div>
 

@@ -5,7 +5,7 @@ export default function SubPageHero() {
   return (
     <section className="relative h-[220px] overflow-hidden bg-yef-navy-deep sm:h-[320px] lg:h-[450px]">
       <Image
-        src="https://www.figma.com/api/mcp/asset/cbb2424e-b06f-4484-a191-41a558963d5c.png"
+        src="/images/shared/subpage-hero-bg.png"
         alt=""
         fill
         priority
