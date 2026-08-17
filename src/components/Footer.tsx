@@ -64,7 +64,7 @@ export default function Footer() {
         <div className="mx-auto max-w-[1800px] px-6 pb-16 pt-16 lg:px-16 lg:pt-20">
           <Link href="/" className="relative block h-16 w-44 sm:h-20 sm:w-52">
             <Image
-              src="https://www.figma.com/api/mcp/asset/ec406bff-b775-4d3b-80ec-ea9b249f5800.svg"
+              src="/images/icons/logo-yef-white.svg"
               alt="Youth Evangelical Fellowship"
               fill
               sizes="208px"

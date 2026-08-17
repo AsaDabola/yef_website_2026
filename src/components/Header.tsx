@@ -26,7 +26,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 py-8 lg:px-16">
         <Link href="/" className="relative h-16 w-44 shrink-0 sm:h-20 sm:w-52">
           <Image
-            src="https://www.figma.com/api/mcp/asset/d8c008e5-d074-43c4-8911-084116a6c4b8.svg"
+            src="/images/icons/logo-yef-white.svg"
             alt="Youth Evangelical Fellowship"
             fill
             sizes="208px"

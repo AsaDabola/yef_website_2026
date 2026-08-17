@@ -5,22 +5,22 @@ import { useRef } from "react";
 const values = [
   {
     number: "01",
-    title: "Know Christ & Make Him Known",
+    title: "Jesus Is Our Message",
     body: "To know Jesus Christ deeply through His Word, prayer and a growing life of faith, and to boldly share the hope and truth of the Gospel so that others may come to know Him too.",
   },
   {
     number: "02",
-    title: "Make Disciples",
+    title: "People Are Our Heart",
     body: "To walk alongside young believers as they grow in faith, helping them become deeply rooted in God's Word and equipping them to follow Christ, serve others, and make disciples themselves.",
   },
   {
     number: "03",
-    title: "Live in Community",
+    title: "Generosity Is Our Privilege",
     body: "To build Christ-centered communities where young people can belong, worship, pray, study the Bible, serve and encourage one another as they grow together in faith.",
   },
   {
     number: "04",
-    title: "Reach the Nations",
+    title: "Excellence Is Our Spirit",
     body: "To raise a generation with a heart for the Great Commission, equipping young believers to carry the Gospel beyond their campuses and communities to cities and nations across the world.",
   },
   {
