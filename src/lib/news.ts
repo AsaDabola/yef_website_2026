@@ -55,7 +55,7 @@ export const newsArticles: NewsArticle[] = [
   },
   {
     slug: "day-in-the-life-tanzania",
-    tag: "News",
+    tag: "Event",
     title: "Breaking the Cycle: A Day in the Life of YEF Tanzania",
     excerpt:
       "Local chapters are breaking cycles of hopelessness in Tanzania. Come see how they're helping students grow into thriving followers of Jesus in Iringa.",
@@ -100,7 +100,7 @@ export const newsArticles: NewsArticle[] = [
   },
   {
     slug: "forgiveness-in-the-bible",
-    tag: "Blog Post",
+    tag: "Story",
     title: "Forgiveness in the Bible: Verses & a Deeper Look",
     excerpt:
       "What does it mean to truly forgive? Here, we explore forgiveness in the Bible and what it looks like to forgive those who hurt us.",

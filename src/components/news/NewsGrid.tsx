@@ -6,61 +6,68 @@ import { useState } from "react";
 import { newsArticles } from "@/lib/news";
 import HoverGroup from "@/components/ui/HoverGroup";
 
-const tabs = ["View All", "By Topic", "By Country"];
+const tabs = ["View All", "News", "Story", "Event"];
 
 export default function NewsGrid() {
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
+  const articles =
+    activeTab === "View All"
+      ? newsArticles
+      : newsArticles.filter((article) => article.tag === activeTab);
+
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-between gap-6 border-b border-v2-border pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-6 border-b border-[#dcdfe5]">
         <div className="flex gap-8">
           {tabs.map((tab) => (
             <button
               key={tab}
               type="button"
               onClick={() => setActiveTab(tab)}
-              className={`pb-3 font-semibold text-lg transition-colors ${
+              className={`border-b-2 pb-3 font-semibold text-[15px] transition-colors ${
                 tab === activeTab
-                  ? "border-b-2 border-v2-blue text-v2-navy"
-                  : "text-v2-muted hover:text-v2-navy"
+                  ? "border-v2-blue text-v2-blue"
+                  : "border-transparent text-v2-muted-dark-2 hover:text-v2-navy"
               }`}
             >
               {tab}
             </button>
           ))}
         </div>
-        <div className="flex gap-3 text-sm text-v2-muted-dark-2">
-          <span className="rounded-full border border-v2-border px-4 py-2">
+        <div className="flex gap-3 pb-3 text-sm text-v2-muted-dark-2">
+          <span className="flex items-center gap-1.5 rounded-lg border border-v2-border px-4 py-2">
             Newest
+            <span aria-hidden="true">&#9662;</span>
           </span>
-          <span className="rounded-full border border-v2-border px-4 py-2">
-            12 per page
+          <span className="flex items-center gap-1.5 rounded-lg border border-v2-border px-4 py-2">
+            12
+            <span aria-hidden="true">&#9662;</span>
           </span>
         </div>
       </div>
 
-      <HoverGroup className="mt-10 grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-        {newsArticles.map((article) => (
+      <HoverGroup className="mt-10 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        {articles.map((article) => (
           <Link
             key={article.slug}
             href={`/news/${article.slug}`}
             className="group"
           >
-            <div className="relative aspect-[312/234] w-full overflow-hidden">
+            <div className="relative aspect-[312/234] w-full overflow-hidden rounded-2xl">
               <Image
                 src={article.image}
                 alt={article.title}
                 fill
-                sizes="(min-width: 1024px) 33vw, 100vw"
+                sizes="(min-width: 1024px) 25vw, 50vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/15" />
             </div>
-            <p className="mt-6 font-semibold text-xs text-v2-muted tracking-[1px] uppercase">
+            <p className="mt-6 font-semibold text-[13px] text-v2-blue">
               {article.tag}
             </p>
-            <div className="mt-2 flex items-start justify-between gap-4">
+            <div className="mt-2 flex items-start justify-between gap-3">
               <h3 className="font-display font-bold text-xl text-black leading-snug">
                 {article.title}
               </h3>
@@ -71,7 +78,7 @@ export default function NewsGrid() {
                 &#8599;
               </span>
             </div>
-            <p className="mt-3 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mt-3 text-[15px] text-v2-muted-dark-2 leading-relaxed">
               {article.excerpt}
             </p>
           </Link>
@@ -81,18 +88,20 @@ export default function NewsGrid() {
       <div className="mt-16 flex items-center justify-between border-t border-v2-border pt-6">
         <button
           type="button"
-          className="flex items-center gap-2 font-semibold text-v2-navy"
+          className="flex items-center gap-2 font-semibold text-sm text-v2-muted-dark-2"
         >
-          &larr; Previous
+          <span aria-hidden="true">&larr;</span> Previous
         </button>
         <div className="flex gap-2">
           {["1", "2", "…", "32"].map((page) => (
             <span
               key={page}
-              className={`flex size-10 items-center justify-center rounded-full font-semibold ${
+              className={`flex size-12 items-center justify-center rounded-lg font-semibold text-v2-blue ${
                 page === "1"
-                  ? "bg-v2-blue text-white"
-                  : "text-v2-muted-dark-2"
+                  ? "border border-v2-blue bg-[#eff5ff]"
+                  : page === "…"
+                    ? "text-v2-muted-dark-2"
+                    : "border border-transparent"
               }`}
             >
               {page}
@@ -101,9 +110,9 @@ export default function NewsGrid() {
         </div>
         <button
           type="button"
-          className="flex items-center gap-2 font-semibold text-v2-navy"
+          className="flex items-center gap-2 font-semibold text-sm text-v2-navy"
         >
-          Next &rarr;
+          Next <span aria-hidden="true">&rarr;</span>
         </button>
       </div>
     </div>
