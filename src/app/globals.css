@@ -55,26 +55,3 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
-
-@keyframes giggle {
-  0%,
-  100% {
-    transform: rotate(0deg) scale(0.98);
-  }
-  25% {
-    transform: rotate(-1.6deg) scale(0.965);
-  }
-  75% {
-    transform: rotate(1.6deg) scale(0.965);
-  }
-}
-
-.animate-giggle {
-  animation: giggle 0.45s ease-in-out;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-giggle {
-    animation: none;
-  }
-}

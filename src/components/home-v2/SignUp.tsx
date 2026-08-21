@@ -9,7 +9,7 @@ export default function SignUp() {
         alt=""
         fill
         sizes="100vw"
-        className="object-cover opacity-20"
+        className="object-cover opacity-45"
       />
       <div className="relative mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
         <Reveal>

@@ -16,7 +16,6 @@ export default function HoverGroup({
     <div className={className}>
       {items.map((child, index) => {
         const isHovered = hovered === index;
-        const isSibling = hovered !== null && hovered !== index;
 
         return (
           <div
@@ -25,7 +24,7 @@ export default function HoverGroup({
             onMouseLeave={() => setHovered(null)}
             className={`transition-all duration-300 ease-out will-change-transform ${
               isHovered ? "z-10 -translate-y-2 scale-[1.035]" : ""
-            } ${isSibling ? "animate-giggle scale-[0.98] opacity-90" : ""}`}
+            }`}
             style={
               isHovered
                 ? {

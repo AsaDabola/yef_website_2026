@@ -44,7 +44,7 @@ export default function Testimonials() {
         </Reveal>
 
         <Reveal delay={120}>
-          <HoverGroup className="mt-16 grid grid-cols-1 gap-px overflow-hidden border-y border-v2-navy/15 bg-v2-navy/15 sm:grid-cols-3 sm:border-x">
+          <HoverGroup className="mt-16 grid grid-cols-1 gap-px overflow-hidden bg-v2-border sm:grid-cols-3">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.name}

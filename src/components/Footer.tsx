@@ -62,17 +62,17 @@ export default function Footer() {
     <footer className="bg-black">
       <div className="bg-yef-navy">
         <div className="mx-auto max-w-[1800px] px-6 pb-16 pt-16 lg:px-16 lg:pt-20">
-          <Link href="/" className="relative block h-[74px] w-[210px]">
+          <Link href="/" className="relative block h-[60px] w-[170px]">
             <Image
               src="/images/icons/logo-yef-white-compact.svg"
               alt="Youth Evangelical Fellowship"
               fill
-              sizes="210px"
+              sizes="170px"
               className="object-contain object-left"
             />
           </Link>
 
-          <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.7fr_1fr_1fr_1fr_1fr]">
             <div>
               <p className="font-medium text-sm uppercase tracking-[0.7px] text-yef-gray">
                 Subscribe for news, updates, and events
