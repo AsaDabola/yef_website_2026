@@ -13,7 +13,7 @@ export default function AboutUs() {
     <section className="bg-white">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
-          <Reveal className="group relative aspect-[620/700] w-full cursor-pointer overflow-hidden rounded-2xl transition-transform duration-300 hover:-translate-y-1">
+          <Reveal className="group relative aspect-[620/700] w-full cursor-pointer overflow-hidden transition-transform duration-300 hover:-translate-y-1">
             <Image
               src="/images/home-v2/about-us-photo.png"
               alt="Students celebrating together on campus"

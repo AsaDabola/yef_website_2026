@@ -44,7 +44,7 @@ export default function Testimonials() {
         </Reveal>
 
         <Reveal delay={120}>
-          <HoverGroup className="mt-16 grid grid-cols-1 gap-px overflow-hidden border border-v2-border bg-v2-border sm:grid-cols-3">
+          <HoverGroup className="mt-16 grid grid-cols-1 gap-px overflow-hidden border-y border-v2-navy/15 bg-v2-navy/15 sm:grid-cols-3 sm:border-x">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.name}
@@ -56,7 +56,7 @@ export default function Testimonials() {
                 <p className="mt-4 text-base text-v2-navy leading-relaxed">
                   {testimonial.quote}
                 </p>
-                <div className="mt-8 flex items-center gap-3.5 border-t border-v2-border pt-5">
+                <div className="mt-8 flex items-center gap-3.5 border-t border-v2-navy/15 pt-5">
                   <div className="group relative size-12 shrink-0 cursor-pointer overflow-hidden rounded-full">
                     <Image
                       src={testimonial.image}

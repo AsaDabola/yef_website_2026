@@ -46,7 +46,7 @@ export default function Giving() {
 
           <Reveal
             delay={150}
-            className="group relative aspect-[700/520] w-full cursor-pointer overflow-hidden rounded-2xl"
+            className="group relative aspect-[700/520] w-full cursor-pointer overflow-hidden"
           >
             <Image
               src="/images/home-v2/giving-bg.png"

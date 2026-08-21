@@ -79,7 +79,7 @@ export default function GetInvolved() {
             <HoverGroup className="flex w-max gap-[26px]">
               {cards.map((card) => (
                 <div key={card.title} className="w-[300px] sm:w-[380px]">
-                  <div className="group relative aspect-[380/507] w-full cursor-pointer overflow-hidden rounded-xl bg-v2-navy">
+                  <div className="group relative aspect-[380/507] w-full cursor-pointer overflow-hidden bg-v2-navy">
                     <Image
                       src={card.image}
                       alt={card.title}

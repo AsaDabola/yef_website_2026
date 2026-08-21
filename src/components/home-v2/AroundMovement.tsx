@@ -34,11 +34,11 @@ export default function AroundMovement() {
         </Reveal>
 
         <Reveal delay={120} className="mt-14">
-          <HoverGroup className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <HoverGroup className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {items.map((item) => (
               <div
                 key={item.alt}
-                className="group relative aspect-[469/496] w-full cursor-pointer overflow-hidden rounded-2xl"
+                className="group relative aspect-[469/496] w-full cursor-pointer overflow-hidden"
               >
                 <Image
                   src={item.image}

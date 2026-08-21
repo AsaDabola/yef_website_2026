@@ -23,7 +23,7 @@ export default function HoverGroup({
             key={child.key ?? index}
             onMouseEnter={() => setHovered(index)}
             onMouseLeave={() => setHovered(null)}
-            className={`rounded-2xl transition-all duration-300 ease-out will-change-transform ${
+            className={`transition-all duration-300 ease-out will-change-transform ${
               isHovered ? "z-10 -translate-y-2 scale-[1.035]" : ""
             } ${isSibling ? "animate-giggle scale-[0.98] opacity-90" : ""}`}
             style={
