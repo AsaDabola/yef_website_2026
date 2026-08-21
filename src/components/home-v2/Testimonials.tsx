@@ -36,7 +36,7 @@ export default function Testimonials() {
           </p>
           <h2 className="mt-4 text-center font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl">
             You are the Christ, the Son of the{" "}
-            <span className="font-instrument-serif italic text-v2-accent">
+            <span className="font-instrument-serif font-normal italic text-v2-accent">
               living God
             </span>
             .

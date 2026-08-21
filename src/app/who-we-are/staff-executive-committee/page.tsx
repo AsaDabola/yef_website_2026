@@ -13,44 +13,37 @@ const staff = [
   {
     name: "Dr. William Mark Wagner",
     title: "President",
-    image:
-      "https://www.figma.com/api/mcp/asset/b75cd778-8ff1-4bfb-9144-fbb792dfc3b5.png",
+    image: "/images/staff/william_mark_wagner.jpg",
   },
   {
     name: "Danielle White",
     title: "General Secretary",
-    image:
-      "https://www.figma.com/api/mcp/asset/768eaf6c-269c-4b7b-bfbc-664045cf0ad4.png",
+    image: "/images/staff/Danielle_white.jpg",
   },
   {
     name: "Emmanual Reid",
     title: "YEF HQ Mission Staff",
-    image:
-      "https://www.figma.com/api/mcp/asset/3342d1e9-4efa-456c-b507-f1ef11b3baa4.png",
+    image: "/images/staff/Emmanual_Reid-1.jpg",
   },
   {
     name: "Olivia Lin",
     title: "Director of Chinese Mission",
-    image:
-      "https://www.figma.com/api/mcp/asset/1e95be2e-5bec-4c70-a0e6-090a1897f5b3.png",
+    image: "/images/staff/olivia-1.jpg",
   },
   {
     name: "Selemon Trife",
     title: "YEF Africa Representative",
-    image:
-      "https://www.figma.com/api/mcp/asset/6c40b460-d7a1-4271-aef6-3d3f71365fb7.png",
+    image: "/images/staff/Selemon_Trife.jpg",
   },
   {
     name: "Victor Ahn",
     title: "YEF Asia Pacific Representative",
-    image:
-      "https://www.figma.com/api/mcp/asset/b4529512-621e-484d-b73f-0962b6f89b70.png",
+    image: "/images/staff/victer_ahn.jpg",
   },
   {
     name: "Deborah Lan",
     title: "YEF China Representative",
-    image:
-      "https://www.figma.com/api/mcp/asset/155aa1d8-4cdb-4eb8-b03f-8eb59be23046.png",
+    image: "/images/staff/Deborah_Lan.jpg",
   },
 ];
 

@@ -29,7 +29,10 @@ export default function AroundMovement() {
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
-            Around the Movement
+            Around the{" "}
+            <span className="font-instrument-serif font-normal italic text-v2-accent">
+              Movement
+            </span>
           </h2>
         </Reveal>
 

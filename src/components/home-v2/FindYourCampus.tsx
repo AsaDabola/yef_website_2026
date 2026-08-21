@@ -22,7 +22,7 @@ export default function FindYourCampus() {
         <Reveal>
           <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl">
             Find Your{" "}
-            <span className="font-instrument-serif italic text-v2-accent">
+            <span className="font-instrument-serif font-normal italic text-v2-accent">
               Campus
             </span>
           </h2>

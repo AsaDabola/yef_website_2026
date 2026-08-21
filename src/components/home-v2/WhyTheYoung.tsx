@@ -29,9 +29,10 @@ export default function WhyTheYoung() {
           <h2 className="mt-4 max-w-3xl font-display font-bold text-4xl text-v2-navy leading-tight tracking-[-1px] sm:text-5xl">
             Revival has always arrived early &mdash; carried by people the
             world called{" "}
-            <span className="font-instrument-serif italic text-v2-accent">
-              too young.
+            <span className="font-instrument-serif font-normal italic text-v2-accent">
+              too young
             </span>
+            .
           </h2>
         </Reveal>
 

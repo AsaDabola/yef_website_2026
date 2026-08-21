@@ -13,9 +13,10 @@ export default function Giving() {
             </p>
             <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
               Giving is{" "}
-              <span className="font-instrument-serif italic text-v2-accent">
-                worship.
+              <span className="font-instrument-serif font-normal italic text-v2-accent">
+                worship
               </span>
+              .
             </h2>
             <p className="mt-8 text-v2-muted-dark-2 leading-relaxed">
               Every Bible study, every plane ticket, every student who gets to

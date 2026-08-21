@@ -29,7 +29,11 @@ export default function AboutUs() {
               About Us
             </p>
             <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy leading-tight tracking-[-1px] sm:text-5xl">
-              We are a fellowship of the young.
+              We are a fellowship of the{" "}
+              <span className="font-instrument-serif font-normal italic text-v2-accent">
+                young
+              </span>
+              .
             </h2>
             <p className="mt-6 font-medium text-lg text-v2-navy">
               YEF is a group of proactive, outreaching Christians whose youth
@@ -46,7 +50,7 @@ export default function AboutUs() {
             <div className="mt-10 flex flex-wrap gap-10 border-t border-v2-border pt-8">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <p className="font-display font-bold text-4xl text-v2-navy">
+                  <p className="font-display font-bold text-4xl text-v2-blue">
                     {stat.value}
                   </p>
                   <p className="mt-2 font-medium text-[11px] text-v2-muted tracking-[1px] uppercase">
