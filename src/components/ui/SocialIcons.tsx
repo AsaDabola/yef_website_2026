@@ -72,6 +72,27 @@ export function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
+export function ShareIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="15.5" cy="4.5" r="2.5" />
+      <circle cx="4.5" cy="10" r="2.5" />
+      <circle cx="15.5" cy="15.5" r="2.5" />
+      <path d="M6.7 8.8 13.3 5.7" />
+      <path d="M6.7 11.2 13.3 14.3" />
+    </svg>
+  );
+}
+
 export function SearchIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">

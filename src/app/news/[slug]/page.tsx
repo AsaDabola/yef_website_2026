@@ -7,6 +7,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import { getArticleBySlug, newsArticles } from "@/lib/news";
 import { forgivenessArticleBody } from "@/lib/articleContent";
+import { ShareIcon } from "@/components/ui/SocialIcons";
 
 export function generateStaticParams() {
   return newsArticles.map((article) => ({ slug: article.slug }));
@@ -57,7 +58,7 @@ export default async function NewsArticlePage({
               {[article.tag, "Christian Faith", "Discipleship"].map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-v2-border px-4 py-1.5 text-sm text-v2-muted-dark-2"
+                  className="rounded-full border border-[#8996a7] px-3.5 py-1.5 font-semibold text-[13px] text-[#353b45]"
                 >
                   {tag}
                 </span>
@@ -65,13 +66,14 @@ export default async function NewsArticlePage({
             </div>
             <button
               type="button"
-              className="flex items-center gap-2 rounded-full border border-v2-border px-4 py-2 text-sm text-v2-navy"
+              className="flex items-center gap-2 rounded-lg border border-[#8996a7] px-3.5 py-2 font-semibold text-[13px] text-[#353b45] shadow-sm"
             >
-              &#128257; Share
+              <ShareIcon className="size-[18px]" />
+              Share
             </button>
           </div>
 
-          <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden">
+          <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-2xl">
             <Image
               src={article.image}
               alt={article.title}
@@ -82,7 +84,7 @@ export default async function NewsArticlePage({
             />
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[1fr_320px]">
+          <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_320px]">
             <div className="max-w-2xl space-y-6 text-lg text-black leading-relaxed">
               {isForgiveness ? (
                 <>
@@ -130,7 +132,7 @@ export default async function NewsArticlePage({
                     </li>
                   </ul>
 
-                  <div className="relative aspect-[4/3] w-full overflow-hidden">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
                     <Image
                       src="/images/news/forgiveness-praying.png"
                       alt="A young woman praying with an open Bible"
@@ -205,40 +207,20 @@ export default async function NewsArticlePage({
                 </>
               )}
 
-              <div className="flex flex-wrap items-center justify-between gap-4 border-t border-v2-border pt-6">
-                <div className="flex flex-wrap gap-2">
-                  {[article.tag, "Christian Faith", "Discipleship"].map(
-                    (tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-v2-border px-4 py-1.5 text-sm text-v2-muted-dark-2"
-                      >
-                        {tag}
-                      </span>
-                    ),
-                  )}
-                </div>
-                <button
-                  type="button"
-                  className="flex items-center gap-2 rounded-full border border-v2-border px-4 py-2 text-sm text-v2-navy"
-                >
-                  &#128257; Share
-                </button>
-              </div>
             </div>
 
-            <aside className="h-fit space-y-8 lg:sticky lg:top-24">
+            <aside className="h-fit">
               {isForgiveness && (
-                <div>
-                  <p className="font-semibold text-sm text-v2-muted uppercase tracking-[1px]">
+                <div className="border-b border-[#dcdfe5] pb-6">
+                  <p className="font-semibold text-[19px] text-black">
                     Table of Contents
                   </p>
-                  <ul className="mt-4 space-y-3 border-t border-v2-border pt-4">
+                  <ul className="mt-4 space-y-3">
                     {forgivenessArticleBody.toc.map((item) => (
                       <li key={item.id}>
                         <a
                           href={`#${item.id}`}
-                          className="text-v2-blue hover:underline"
+                          className="text-[15px] text-v2-blue hover:underline"
                         >
                           {item.label}
                         </a>
@@ -248,52 +230,50 @@ export default async function NewsArticlePage({
                 </div>
               )}
 
-              <div className="rounded-2xl bg-v2-bg p-6">
-                <p className="font-display font-bold text-lg text-v2-navy">
-                  Join YEF International Subscribers!
-                </p>
-                <form className="mt-4 space-y-3">
-                  <label className="block">
-                    <span className="text-sm text-v2-muted-dark-2">
-                      Email*
-                    </span>
-                    <input
-                      type="email"
-                      required
-                      placeholder="Email Address"
-                      className="mt-1 w-full rounded-lg border border-v2-border bg-white px-3 py-2.5 text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-sm text-v2-muted-dark-2">
-                      First name*
-                    </span>
-                    <input
-                      type="text"
-                      required
-                      placeholder="First name"
-                      className="mt-1 w-full rounded-lg border border-v2-border bg-white px-3 py-2.5 text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-sm text-v2-muted-dark-2">
-                      Last name*
-                    </span>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Last name"
-                      className="mt-1 w-full rounded-lg border border-v2-border bg-white px-3 py-2.5 text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none"
-                    />
-                  </label>
-                  <button
-                    type="submit"
-                    className="w-full rounded-lg bg-v2-blue py-2.5 font-semibold text-white transition-opacity hover:opacity-90"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-              </div>
+              <p className="mt-6 font-semibold text-[19px] text-[#4b5565]">
+                Join YEF International Subscribers!
+              </p>
+              <form className="mt-4 space-y-3">
+                <label className="block">
+                  <span className="text-[13px] font-medium text-[#353b45]">
+                    Email<span className="text-[#f97066]">*</span>
+                  </span>
+                  <input
+                    type="email"
+                    required
+                    placeholder="Email Address"
+                    className="mt-1.5 w-full rounded-lg border border-[#8996a7] bg-white px-3 py-2.5 text-[15px] text-v2-navy shadow-sm placeholder:text-[#757575] focus:border-v2-accent focus:outline-none"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-[13px] font-medium text-[#353b45]">
+                    First name<span className="text-[#f97066]">*</span>
+                  </span>
+                  <input
+                    type="text"
+                    required
+                    placeholder="First Name"
+                    className="mt-1.5 w-full rounded-lg border border-[#8996a7] bg-white px-3 py-2.5 text-[15px] text-v2-navy shadow-sm placeholder:text-[#757575] focus:border-v2-accent focus:outline-none"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-[13px] font-medium text-[#353b45]">
+                    Last name<span className="text-[#f97066]">*</span>
+                  </span>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Last Name"
+                    className="mt-1.5 w-full rounded-lg border border-[#8996a7] bg-white px-3 py-2.5 text-[15px] text-v2-navy shadow-sm placeholder:text-[#757575] focus:border-v2-accent focus:outline-none"
+                  />
+                </label>
+                <button
+                  type="submit"
+                  className="w-full rounded-lg bg-v2-blue py-3 font-semibold text-[15px] text-white transition-opacity hover:opacity-90"
+                >
+                  Subscribe
+                </button>
+              </form>
             </aside>
           </div>
         </article>
@@ -310,7 +290,7 @@ export default async function NewsArticlePage({
                   href={`/news/${item.slug}`}
                   className="group"
                 >
-                  <div className="relative aspect-[312/234] w-full overflow-hidden">
+                  <div className="relative aspect-[312/234] w-full overflow-hidden rounded-2xl">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -319,7 +299,7 @@ export default async function NewsArticlePage({
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
-                  <p className="mt-4 font-semibold text-xs text-v2-muted tracking-[1px] uppercase">
+                  <p className="mt-4 font-semibold text-[13px] text-[#1d46d8]">
                     {item.tag}
                   </p>
                   <div className="mt-2 flex items-start justify-between gap-4">
