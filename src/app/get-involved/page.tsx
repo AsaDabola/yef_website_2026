@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
+import GetInvolvedHero from "@/components/get-involved/GetInvolvedHero";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import MinistrySection from "@/components/get-involved/MinistrySection";
 import MissionTripPromo from "@/components/get-involved/MissionTripPromo";
@@ -17,18 +16,7 @@ export default function GetInvolvedPage() {
   return (
     <>
       <main>
-        <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[450px]">
-          <Image
-            src="/images/get-involved/banner-crowd.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
-          <HeaderV2 />
-        </section>
+        <GetInvolvedHero />
 
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
