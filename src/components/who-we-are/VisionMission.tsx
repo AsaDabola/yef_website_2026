@@ -19,7 +19,7 @@ const pillars = [
 
 export default function VisionMission() {
   return (
-    <section className="bg-[#f1f6ff]">
+    <section className="font-body bg-[#f1f6ff]">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <h2 className="font-display font-extrabold text-4xl text-[#0e1216] tracking-[-0.8px] sm:text-5xl">

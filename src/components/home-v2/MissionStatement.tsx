@@ -2,7 +2,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function MissionStatement() {
   return (
-    <section className="bg-gradient-to-br from-v2-navy via-v2-blue to-v2-navy">
+    <section className="font-body bg-gradient-to-br from-v2-navy via-v2-blue to-v2-navy">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <p className="font-semibold text-[11px] text-white/50 tracking-[2.42px] uppercase">

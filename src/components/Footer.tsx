@@ -62,12 +62,12 @@ export default function Footer() {
     <footer className="bg-black">
       <div className="bg-yef-navy">
         <div className="mx-auto max-w-[1800px] px-6 pb-16 pt-16 lg:px-16 lg:pt-20">
-          <Link href="/" className="relative block h-16 w-44 sm:h-20 sm:w-52">
+          <Link href="/" className="relative block h-[74px] w-[210px]">
             <Image
-              src="/images/icons/logo-yef-white.svg"
+              src="/images/icons/logo-yef-white-compact.svg"
               alt="Youth Evangelical Fellowship"
               fill
-              sizes="208px"
+              sizes="210px"
               className="object-contain object-left"
             />
           </Link>

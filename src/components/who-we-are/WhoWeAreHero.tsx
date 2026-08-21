@@ -4,7 +4,7 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 
 export default function WhoWeAreHero() {
   return (
-    <section className="relative flex min-h-[560px] items-center overflow-hidden bg-v2-navy lg:min-h-[650px]">
+    <section className="font-body relative flex min-h-[560px] items-center overflow-hidden bg-v2-navy lg:min-h-[650px]">
       <Image
         src="https://www.figma.com/api/mcp/asset/af8421b1-f6a1-4f03-a9f2-71f8f6b06a0e.png"
         alt="Mountain range at dusk"

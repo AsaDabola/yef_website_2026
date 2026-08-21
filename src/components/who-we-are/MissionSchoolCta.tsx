@@ -26,7 +26,7 @@ const cards = [
 
 export default function MissionSchoolCta() {
   return (
-    <section className="bg-gradient-to-b from-yef-primary to-yef-primary-light">
+    <section className="font-body bg-gradient-to-b from-yef-primary to-yef-primary-light">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:items-center">
           <Reveal>

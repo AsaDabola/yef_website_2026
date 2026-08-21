@@ -4,7 +4,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function Giving() {
   return (
-    <section className="bg-v2-bg">
+    <section className="font-body bg-v2-bg">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
           <Reveal>
@@ -32,13 +32,13 @@ export default function Giving() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/donate"
-                className="inline-flex items-center justify-center rounded-full bg-v2-navy px-8 py-4 font-semibold text-xs text-white tracking-[1px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
+                className="inline-flex items-center justify-center rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
               >
                 Give Now
               </Link>
               <Link
                 href="/donate#support-a-student"
-                className="inline-flex items-center justify-center rounded-full border border-v2-navy/20 px-8 py-4 font-semibold text-xs text-v2-navy tracking-[1px] uppercase transition-all duration-200 hover:scale-105 hover:bg-v2-navy hover:text-white"
+                className="inline-flex items-center justify-center rounded-full border border-v2-navy px-8 py-4 font-semibold text-xs text-v2-navy tracking-[1px] uppercase transition-all duration-200 hover:scale-105 hover:bg-v2-navy hover:text-white"
               >
                 Support a Student
               </Link>
@@ -57,6 +57,9 @@ export default function Giving() {
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/20" />
+            <p className="absolute bottom-3.5 left-3.5 font-normal text-[10.5px] text-white tracking-[1.05px]">
+              Donate YEF
+            </p>
           </Reveal>
         </div>
       </div>

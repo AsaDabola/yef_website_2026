@@ -20,7 +20,7 @@ const proof = [
 
 export default function WhyTheYoung() {
   return (
-    <section className="bg-white">
+    <section className="font-body bg-white">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">

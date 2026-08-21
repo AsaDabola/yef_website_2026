@@ -28,7 +28,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="border-t border-v2-border bg-white">
+    <section className="font-body border-t border-v2-border bg-white">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <p className="text-center font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">

@@ -35,7 +35,7 @@ const cards = [
 
 export default function IntroCards() {
   return (
-    <section className="bg-white">
+    <section className="font-body bg-white">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
           <div>

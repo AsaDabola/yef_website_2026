@@ -29,7 +29,7 @@ const stories = [
 
 export default function StoriesNews() {
   return (
-    <section className="bg-white">
+    <section className="font-body bg-white">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <HoverGroup className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">

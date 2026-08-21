@@ -40,7 +40,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative flex min-h-[640px] items-center overflow-hidden bg-v2-navy lg:min-h-screen">
+    <section className="font-body relative flex min-h-[640px] items-center overflow-hidden bg-v2-navy lg:min-h-screen">
       {slides.map((slide, index) => (
         <div
           key={slide.image}

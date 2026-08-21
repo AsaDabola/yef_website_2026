@@ -17,7 +17,7 @@ export default function FindYourCampus() {
   const [active, setActive] = useState(chips[0]);
 
   return (
-    <section className="bg-v2-bg">
+    <section className="font-body bg-v2-bg">
       <div className="mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
         <Reveal>
           <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl">

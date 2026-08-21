@@ -4,10 +4,11 @@ import Reveal from "@/components/ui/Reveal";
 
 const items = [
   {
-    tag: "",
-    title: "",
-    image: "/images/home-v2/get-involved-bible-study.png",
-    alt: "Summer Training 2027",
+    tag: "Bible Study",
+    title: "Summer Training 2027",
+    image:
+      "https://www.figma.com/api/mcp/asset/f297bc2e-9ed4-4eba-99f4-1df6bd8c20fd.png",
+    alt: "Students gathered together for Summer Training 2027",
   },
   {
     tag: "FIELD REPORT",
@@ -25,7 +26,7 @@ const items = [
 
 export default function AroundMovement() {
   return (
-    <section className="bg-white">
+    <section className="font-body bg-white">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
@@ -55,7 +56,7 @@ export default function AroundMovement() {
                   <>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                     <div className="absolute bottom-8 left-8 right-8 text-white">
-                      <p className="font-semibold text-[11px] tracking-[1.98px] uppercase text-white/80">
+                      <p className="font-semibold text-[11px] tracking-[2.42px] uppercase text-white/60">
                         {item.tag}
                       </p>
                       <p className="mt-2 font-display font-bold text-2xl">
