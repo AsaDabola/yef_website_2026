@@ -6,14 +6,17 @@ const pillars = [
   {
     title: "Reach the Next Generation",
     body: "Share the Gospel with university students and young people, helping them encounter Jesus Christ and build their lives upon God's Word.",
+    icon: "/images/icons/icon-christ.svg",
   },
   {
     title: "Raise Disciples and Leaders",
     body: "Nurture young believers through Bible study, fellowship, and spiritual training, equipping them to become faithful disciples who can lead and serve others.",
+    icon: "/images/icons/icon-church.svg",
   },
   {
     title: "Advance the Gospel to the Nations",
     body: "Establish and strengthen campus fellowships around the world, raising missionaries and sending the next generation to participate in the Great Commission.",
+    icon: "/images/icons/icon-child.svg",
   },
 ];
 
@@ -36,10 +39,10 @@ export default function VisionMission() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
+          <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start lg:pl-10">
             <div className="group relative aspect-[656/492] w-full cursor-pointer overflow-hidden rounded-2xl">
               <Image
-                src="https://www.figma.com/api/mcp/asset/0be33399-c624-43f5-8f43-650330cfdc7a.png"
+                src="https://www.figma.com/api/mcp/asset/a5305e18-8a19-4b85-9b44-2620deaecd64.png"
                 alt="An open Bible in front of a cross at sunset"
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
@@ -49,10 +52,19 @@ export default function VisionMission() {
             </div>
 
             <div>
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {pillars.map((pillar) => (
-                  <div key={pillar.title}>
-                    <p className="text-lg text-black">
+                  <div key={pillar.title} className="flex gap-4">
+                    <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm">
+                      <Image
+                        src={pillar.icon}
+                        alt=""
+                        width={24}
+                        height={24}
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <p className="pt-1 text-lg text-black">
                       <span className="font-semibold">{pillar.title} :</span>{" "}
                       <span className="text-[#4b5565]">{pillar.body}</span>
                     </p>
