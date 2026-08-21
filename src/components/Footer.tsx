@@ -77,21 +77,21 @@ export default function Footer() {
               <p className="font-medium text-sm uppercase tracking-[0.7px] text-yef-gray">
                 Subscribe for news, updates, and events
               </p>
-              <form className="mt-6 flex max-w-xs flex-col gap-3">
+              <form className="mt-6 flex max-w-xs items-center rounded-full border border-white/25 bg-white/10 p-1 pl-4">
                 <label className="sr-only" htmlFor="footer-email">
-                  Email
+                  Email address
                 </label>
                 <input
                   id="footer-email"
                   type="email"
-                  placeholder="Email"
-                  className="rounded-[3px] border border-[#cbd6e2] bg-[#f5f8fa] px-3 py-2.5 text-sm text-yef-navy-deep placeholder:text-yef-navy-deep/50"
+                  placeholder="Email address"
+                  className="min-w-0 flex-1 bg-transparent py-2 text-sm text-white placeholder:text-white/60 focus:outline-none"
                 />
                 <button
                   type="submit"
-                  className="w-fit rounded-[3px] bg-yef-primary px-5 py-2.5 font-bold text-xs text-white"
+                  className="shrink-0 rounded-full bg-white px-4 py-2.5 font-bold text-[11px] text-yef-navy tracking-[0.5px] uppercase transition-transform duration-200 hover:scale-105"
                 >
-                  Submit
+                  Sign Up
                 </button>
               </form>
 

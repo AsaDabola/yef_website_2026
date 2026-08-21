@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import HoverGroup from "@/components/ui/HoverGroup";
+import Reveal from "@/components/ui/Reveal";
 
 const stories = [
   {
@@ -28,34 +30,37 @@ const stories = [
 export default function StoriesNews() {
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-[1800px] px-6 py-20 lg:px-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {stories.map((story) => (
-            <Link key={story.title} href={story.href} className="group">
-              <div className="relative aspect-[432/243] w-full overflow-hidden rounded-2xl">
-                <Image
-                  src={story.image}
-                  alt={story.title}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div className="mt-6 flex items-start justify-between gap-4">
-                <h3 className="font-semibold text-2xl text-black">
-                  {story.title}
-                </h3>
-                <span
-                  aria-hidden="true"
-                  className="mt-1 text-2xl text-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                >
-                  &#8599;
-                </span>
-              </div>
-              <p className="mt-4 text-[#4b5565]">{story.body}</p>
-            </Link>
-          ))}
-        </div>
+      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+        <Reveal>
+          <HoverGroup className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {stories.map((story) => (
+              <Link key={story.title} href={story.href} className="group">
+                <div className="relative aspect-[432/243] w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src={story.image}
+                    alt={story.title}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/15" />
+                </div>
+                <div className="mt-6 flex items-start justify-between gap-4">
+                  <h3 className="font-semibold text-2xl text-black">
+                    {story.title}
+                  </h3>
+                  <span
+                    aria-hidden="true"
+                    className="mt-1 text-2xl text-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                  >
+                    &#8599;
+                  </span>
+                </div>
+                <p className="mt-4 text-[#4b5565]">{story.body}</p>
+              </Link>
+            ))}
+          </HoverGroup>
+        </Reveal>
       </div>
     </section>
   );
