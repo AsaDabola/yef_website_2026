@@ -1,13 +1,13 @@
-import About from "@/components/home/About";
-import Hero from "@/components/home/Hero";
-import LiveOnMission from "@/components/home/LiveOnMission";
-import News from "@/components/home/News";
-import OurValues from "@/components/home/OurValues";
-import ProgramsTabs from "@/components/home/ProgramsTabs";
-import Quote from "@/components/home/Quote";
-import QuickLinks from "@/components/home/QuickLinks";
-import Testimonials from "@/components/home/Testimonials";
-import WorldMap from "@/components/home/WorldMap";
+import Hero from "@/components/home-v2/Hero";
+import FindYourCampus from "@/components/home-v2/FindYourCampus";
+import AboutUs from "@/components/home-v2/AboutUs";
+import MissionStatement from "@/components/home-v2/MissionStatement";
+import WhyTheYoung from "@/components/home-v2/WhyTheYoung";
+import GetInvolved from "@/components/home-v2/GetInvolved";
+import Testimonials from "@/components/home-v2/Testimonials";
+import Giving from "@/components/home-v2/Giving";
+import AroundMovement from "@/components/home-v2/AroundMovement";
+import SignUp from "@/components/home-v2/SignUp";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -15,15 +15,15 @@ export default function Home() {
     <>
       <main>
         <Hero />
-        <QuickLinks />
-        <About />
-        <ProgramsTabs />
-        <Quote />
-        <News />
-        <OurValues />
+        <FindYourCampus />
+        <AboutUs />
+        <MissionStatement />
+        <WhyTheYoung />
+        <GetInvolved />
         <Testimonials />
-        <WorldMap />
-        <LiveOnMission />
+        <Giving />
+        <AroundMovement />
+        <SignUp />
       </main>
       <Footer />
     </>

@@ -12,6 +12,15 @@
   --color-yef-footer-strip: #155597;
   --color-yef-gray: #b1b1b1;
   --color-yef-gray-light: #f7f7f7;
+
+  --color-v2-navy: #00203f;
+  --color-v2-blue: #0656a5;
+  --color-v2-accent: #3d9be9;
+  --color-v2-muted: #7c90a6;
+  --color-v2-muted-dark: #425a72;
+  --color-v2-muted-dark-2: #4a6076;
+  --color-v2-bg: #f2f6fb;
+  --color-v2-border: rgba(0, 42, 85, 0.13);
 }
 
 @theme inline {
@@ -28,9 +37,43 @@
   --color-yef-footer-strip: var(--color-yef-footer-strip);
   --color-yef-gray: var(--color-yef-gray);
   --color-yef-gray-light: var(--color-yef-gray-light);
+  --font-display: var(--font-bricolage);
+  --font-instrument-serif: var(--font-instrument-serif);
+
+  --color-v2-navy: var(--color-v2-navy);
+  --color-v2-blue: var(--color-v2-blue);
+  --color-v2-accent: var(--color-v2-accent);
+  --color-v2-muted: var(--color-v2-muted);
+  --color-v2-muted-dark: var(--color-v2-muted-dark);
+  --color-v2-muted-dark-2: var(--color-v2-muted-dark-2);
+  --color-v2-bg: var(--color-v2-bg);
+  --color-v2-border: var(--color-v2-border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+@keyframes giggle {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(0.98);
+  }
+  25% {
+    transform: rotate(-1.6deg) scale(0.965);
+  }
+  75% {
+    transform: rotate(1.6deg) scale(0.965);
+  }
+}
+
+.animate-giggle {
+  animation: giggle 0.45s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-giggle {
+    animation: none;
+  }
 }
