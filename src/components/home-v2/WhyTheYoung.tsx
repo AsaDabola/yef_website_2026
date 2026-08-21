@@ -20,13 +20,13 @@ const proof = [
 
 export default function WhyTheYoung() {
   return (
-    <section className="font-body bg-white">
+    <section className="font-body bg-[#f2f6fb]">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
             Why The Young
           </p>
-          <h2 className="mt-4 max-w-3xl font-display font-bold text-4xl text-v2-navy leading-tight tracking-[-1px] sm:text-5xl">
+          <h2 className="mt-4 max-w-3xl font-display font-bold text-4xl text-v2-navy leading-[1.05] tracking-[-1.3px] sm:text-5xl lg:text-[52px]">
             Revival has always arrived early &mdash; carried by people the
             world called{" "}
             <span className="font-serif font-normal italic text-v2-accent">
@@ -47,13 +47,13 @@ export default function WhyTheYoung() {
                     : "pb-8"
                 }
               >
-                <p className="font-display font-bold text-5xl text-v2-blue">
+                <p className="font-display font-bold text-5xl text-yef-primary tracking-[-1.92px] lg:text-[64px]">
                   {item.number}
                 </p>
-                <p className="mt-4 font-semibold text-lg text-v2-navy">
+                <p className="mt-4 font-display font-bold text-lg text-v2-navy">
                   {item.name}
                 </p>
-                <p className="mt-2 text-v2-muted-dark-2 leading-relaxed">
+                <p className="mt-2 text-[14px] text-v2-muted-dark leading-[1.65]">
                   {item.body}
                 </p>
               </div>
