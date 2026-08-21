@@ -71,14 +71,17 @@ export default function GetInvolved() {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/25" />
+                  <span className="absolute bottom-3 left-3 rounded-[3px] bg-black/30 px-2 py-1 font-normal text-[9.5px] text-white/45 tracking-[0.95px] uppercase">
+                    Video
+                  </span>
                 </div>
-                <p className="mt-6 font-medium text-[11px] text-v2-muted tracking-[1.98px] uppercase">
+                <p className="mt-6 font-normal text-[11px] text-v2-muted tracking-[1.98px] uppercase">
                   {card.tag}
                 </p>
-                <h3 className="mt-2 font-display font-bold text-2xl text-v2-navy tracking-[-0.6px]">
+                <h3 className="mt-2.5 font-display font-bold text-[25px] text-v2-navy tracking-[-0.625px]">
                   {card.title}
                 </h3>
-                <p className="mt-3 text-[14.5px] text-v2-muted-dark-2 leading-relaxed">
+                <p className="mt-3 text-[14.5px] text-v2-muted-dark-2 leading-[1.7]">
                   {card.body}
                 </p>
               </div>
