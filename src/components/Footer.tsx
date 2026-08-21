@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  FacebookIcon,
   InstagramIcon,
-  XIcon,
+  LinkArrowIcon,
+  PinIcon,
 } from "@/components/ui/SocialIcons";
 
 const columns: { title: string; links: { label: string; href: string }[] }[] = [
@@ -52,8 +52,8 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "#", Icon: FacebookIcon },
-  { label: "X", href: "#", Icon: XIcon },
+  { label: "Pinterest", href: "#", Icon: PinIcon },
+  { label: "Link", href: "#", Icon: LinkArrowIcon },
   { label: "Instagram", href: "#", Icon: InstagramIcon },
 ];
 

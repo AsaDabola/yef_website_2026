@@ -14,12 +14,60 @@ export function XIcon({ className }: { className?: string }) {
   );
 }
 
+export function PinIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 32 38"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M16 31C22.6274 31 28 25.6274 28 19C28 12.3726 22.6274 7 16 7C9.37258 7 4 12.3726 4 19C4 25.6274 9.37258 31 16 31Z" />
+      <path d="M21 14H19C18.2044 14 17.4413 14.3161 16.8787 14.8787C16.3161 15.4413 16 16.2044 16 17V31" />
+      <path d="M12 21H20" />
+    </svg>
+  );
+}
+
+export function LinkArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 32 38"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M6 8H12L26 30H20L6 8Z" />
+      <path d="M14 21L6 30" />
+      <path d="M26 8L18 17" />
+    </svg>
+  );
+}
+
 export function InstagramIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={className} aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+    <svg
+      viewBox="0 0 32 38"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M16 24C18.7614 24 21 21.7614 21 19C21 16.2386 18.7614 14 16 14C13.2386 14 11 16.2386 11 19C11 21.7614 13.2386 24 16 24Z" />
+      <path d="M22 7H10C6.68629 7 4 9.68629 4 13V25C4 28.3137 6.68629 31 10 31H22C25.3137 31 28 28.3137 28 25V13C28 9.68629 25.3137 7 22 7Z" />
+      <path
+        d="M22.5 14C23.3284 14 24 13.3284 24 12.5C24 11.6716 23.3284 11 22.5 11C21.6716 11 21 11.6716 21 12.5C21 13.3284 21.6716 14 22.5 14Z"
+        fill="currentColor"
+        stroke="none"
+      />
     </svg>
   );
 }

@@ -29,7 +29,7 @@ export default function WhyTheYoung() {
           <h2 className="mt-4 max-w-3xl font-display font-bold text-4xl text-v2-navy leading-tight tracking-[-1px] sm:text-5xl">
             Revival has always arrived early &mdash; carried by people the
             world called{" "}
-            <span className="font-instrument-serif font-normal italic text-v2-accent">
+            <span className="font-serif font-normal italic text-v2-accent">
               too young
             </span>
             .
@@ -37,9 +37,16 @@ export default function WhyTheYoung() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="mt-12 grid grid-cols-1 gap-10 border-t border-v2-border pt-10 sm:grid-cols-3">
-            {proof.map((item) => (
-              <div key={item.name}>
+          <div className="mt-12 grid grid-cols-1 border-t border-v2-border pt-10 sm:grid-cols-3">
+            {proof.map((item, index) => (
+              <div
+                key={item.name}
+                className={
+                  index < proof.length - 1
+                    ? "border-v2-border pb-8 pr-8 sm:border-r"
+                    : "pb-8"
+                }
+              >
                 <p className="font-display font-bold text-5xl text-v2-blue">
                   {item.number}
                 </p>
