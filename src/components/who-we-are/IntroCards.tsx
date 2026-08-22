@@ -46,7 +46,7 @@ export default function IntroCards() {
                 <p className="font-semibold text-xs text-[#626973] tracking-[2.64px] uppercase">
                   Who we are
                 </p>
-                <h2 className="mt-3 font-display font-extrabold text-4xl text-[#0e1216] tracking-[-1px] sm:text-5xl">
+                <h2 className="mt-3 font-display font-extrabold text-4xl text-[#0e1216] leading-[1] tracking-[-1.59px] sm:text-5xl lg:text-[54.4px]">
                   Youth Evangelical Fellowship
                 </h2>
               </div>
