@@ -7,9 +7,10 @@ export default function SignUp() {
       <Image
         src="/images/home-v2/signup-bg.png"
         alt=""
-        fill
+        width={1964}
+        height={833}
         sizes="100vw"
-        className="object-cover opacity-20"
+        className="absolute inset-x-0 top-0 h-[833px] w-full max-w-full object-cover opacity-20"
       />
       <div className="relative mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
         <Reveal>

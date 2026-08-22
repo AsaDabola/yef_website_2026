@@ -60,14 +60,25 @@ export default function WelcomePage() {
                   </p>
                 </div>
 
-                <div className="relative aspect-[596/335] w-full overflow-hidden rounded-2xl">
+                <div className="relative aspect-[344/573] w-full max-w-[344px] justify-self-center overflow-hidden rounded-[20px] bg-[#1a1e22] lg:justify-self-end">
                   <Image
                     src="https://www.figma.com/api/mcp/asset/b8e34bde-e9bb-4a6c-853c-71147a428f3c.png"
                     alt="Sunset over the ocean"
                     fill
-                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    sizes="(min-width: 1024px) 25vw, 90vw"
                     className="object-cover"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e1216] from-5% via-[#0e1216]/35 via-45% to-[#0e1216]/5" />
+                  <div className="absolute inset-0 flex flex-col justify-between p-6">
+                    <p className="max-w-[110px] font-semibold text-[11px] text-white/85 tracking-[1.6px] uppercase leading-[1.5]">
+                      Thy kingdom come, thy will be done on earth as it is in
+                      heaven.{" "}
+                      <span className="font-normal">Matthew 6:10</span>
+                    </p>
+                    <p className="font-display font-extrabold text-3xl text-white tracking-[-0.3px]">
+                      Welcome
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

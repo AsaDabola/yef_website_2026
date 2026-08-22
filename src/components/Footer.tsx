@@ -135,7 +135,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="bg-yef-footer-strip">
-        <p className="mx-auto max-w-[1800px] px-6 py-6 text-center font-medium text-base text-yef-gray lg:px-16">
+        <p className="mx-auto max-w-[1800px] px-6 py-6 text-center font-normal text-base leading-[1.6] text-yef-gray lg:px-16">
           Copyright © {new Date().getFullYear()} Youth Evangelical Fellowship
           International. All Rights Reserved.
         </p>
