@@ -11,7 +11,7 @@ export default function MissionStatement() {
           <p className="mt-8 max-w-4xl font-display font-bold text-4xl text-[#f2f6fb] leading-[1.12] tracking-[-1.8px] sm:text-5xl lg:text-[60px]">
             Your people will offer themselves freely on the day of your
             power; young people will come to{" "}
-            <span className="font-instrument-serif italic tracking-[-0.48px]">
+            <span className="font-instrument-serif font-normal italic">
               you like the morning dew.
             </span>
           </p>

@@ -28,18 +28,18 @@ export default function AboutUs() {
             <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
               About Us
             </p>
-            <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy leading-tight tracking-[-1px] sm:text-5xl">
+            <h2 className="mt-5 font-display font-bold text-4xl text-v2-navy leading-none tracking-[-1.35px] sm:text-5xl lg:text-[54px]">
               We are a fellowship of the{" "}
-              <span className="font-instrument-serif font-normal italic text-v2-accent">
+              <span className="font-instrument-serif font-normal italic text-v2-accent tracking-[-0.4px]">
                 young
               </span>
               .
             </h2>
-            <p className="mt-6 font-medium text-lg text-v2-navy">
+            <p className="mt-5 font-medium text-[20px] text-v2-navy leading-[1.6]">
               YEF is a group of proactive, outreaching Christians whose youth
               and passion are spent bringing glory to God&rsquo;s name.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mt-5 text-[15.5px] text-v2-muted-dark leading-[1.8]">
               It began in 2009 with a handful of students in New York City
               who wanted more than a Sunday faith. They opened their Bibles
               between classes, prayed in dorm rooms, and invited whoever
@@ -47,13 +47,13 @@ export default function AboutUs() {
               fellowship present in more than forty countries.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-10 border-t border-v2-border pt-8">
+            <div className="mt-6 flex flex-wrap gap-14 pb-3.5 pt-6">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <p className="font-display font-bold text-4xl text-v2-blue">
+                  <p className="font-display font-bold text-[44px] text-v2-accent tracking-[-1.32px]">
                     {stat.value}
                   </p>
-                  <p className="mt-2 font-medium text-[11px] text-v2-muted tracking-[1px] uppercase">
+                  <p className="mt-2 font-semibold text-xs text-v2-muted tracking-[1.56px] uppercase">
                     {stat.label}
                   </p>
                 </div>
@@ -62,7 +62,7 @@ export default function AboutUs() {
 
             <Link
               href="/who-we-are"
-              className="mt-10 inline-flex items-center justify-center rounded-full border border-v2-navy/20 px-7 py-3.5 font-semibold text-[13px] text-v2-navy tracking-[1px] uppercase transition-colors hover:bg-v2-navy hover:text-white"
+              className="mt-4 inline-flex items-center justify-center rounded-full border border-v2-navy px-8.5 py-4 font-semibold text-xs text-v2-navy tracking-[1.92px] uppercase transition-colors hover:bg-v2-navy hover:text-white"
             >
               Our Mission
             </Link>
