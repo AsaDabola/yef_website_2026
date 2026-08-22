@@ -76,7 +76,7 @@ export default function Header() {
 
           <Link
             href="/donate"
-            className="rounded-full border border-white px-7 py-3.5 font-semibold text-lg text-white transition-colors hover:bg-white hover:text-yef-primary"
+            className="rounded-full border border-white px-4 py-2 font-semibold text-sm text-white transition-colors hover:bg-white hover:text-yef-primary sm:px-7 sm:py-3.5 sm:text-lg"
           >
             Give
           </Link>

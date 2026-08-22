@@ -43,7 +43,7 @@ export default function HeaderV2() {
         <div className="flex items-center gap-3">
           <Link
             href="/donate"
-            className="rounded-full border border-white/50 px-6 py-2.5 font-semibold text-sm text-white tracking-[2.56px] transition-colors hover:bg-white hover:text-v2-navy"
+            className="rounded-full border border-white/50 px-3.5 py-1.5 font-semibold text-xs text-white tracking-[1.5px] transition-colors hover:bg-white hover:text-v2-navy sm:px-6 sm:py-2.5 sm:text-sm sm:tracking-[2.56px]"
           >
             GIVE
           </Link>
