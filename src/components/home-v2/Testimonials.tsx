@@ -65,7 +65,6 @@ export default function Testimonials() {
                       sizes="48px"
                       className="object-cover transition-transform duration-500 group-hover:scale-125"
                     />
-                    <div className="absolute inset-0 rounded-full bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/25" />
                   </div>
                   <div>
                     <p className="font-semibold text-[14.5px] text-v2-navy">

@@ -51,7 +51,6 @@ export default function AroundMovement() {
                   sizes="(min-width: 1024px) 33vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/20" />
                 {item.title && (
                   <>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

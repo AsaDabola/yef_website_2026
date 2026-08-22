@@ -56,7 +56,6 @@ export default function Giving() {
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/20" />
             <p className="absolute bottom-3.5 left-3.5 font-normal text-[10.5px] text-white tracking-[1.05px]">
               Donate YEF
             </p>

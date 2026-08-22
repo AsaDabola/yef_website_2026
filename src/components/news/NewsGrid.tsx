@@ -62,7 +62,6 @@ export default function NewsGrid() {
                 sizes="(min-width: 1024px) 25vw, 50vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/15" />
             </div>
             <p className="mt-6 font-semibold text-[13px] text-v2-blue">
               {article.tag}

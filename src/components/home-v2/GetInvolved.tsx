@@ -70,7 +70,6 @@ export default function GetInvolved() {
                     sizes="(min-width: 1024px) 25vw, 45vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/25" />
                   <span className="absolute bottom-3 left-3 rounded-[3px] bg-black/30 px-2 py-1 font-normal text-[9.5px] text-white/45 tracking-[0.95px] uppercase">
                     Video
                   </span>

@@ -72,7 +72,6 @@ export default function IntroCards() {
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0e1216] from-5% via-[#0e1216]/35 via-45% to-[#0e1216]/5" />
-                    <div className="absolute inset-0 bg-v2-accent/0 transition-colors duration-300 group-hover:bg-v2-accent/15" />
 
                     <p className="relative font-semibold text-[11px] text-white/85 tracking-[1.6px] uppercase">
                       {card.eyebrow.map((line) => (
