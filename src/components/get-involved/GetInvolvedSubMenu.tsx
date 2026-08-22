@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const links = [
   { label: "Bible Studies", href: "/get-involved#bible-studies" },
   { label: "Summer Training", href: "/get-involved#summer-training" },
-  { label: "Mission Trip", href: "/get-involved#mission-trip" },
+  { label: "Mission Trip", href: "/get-involved/mission-trip" },
   {
     label: "Volunteer/Short-term Projects",
     href: "/get-involved#short-term-mission",
@@ -26,7 +26,10 @@ export default function GetInvolvedSubMenu() {
       <p className="font-bold text-sm text-yef-primary">Get Involved</p>
       <ul className="mt-4">
         {links.map((link) => {
-          const active = pathname === "/get-involved" && link.href === "/get-involved";
+          const active =
+            link.href.startsWith("/get-involved/")
+              ? pathname === link.href
+              : pathname === "/get-involved" && link.href === "/get-involved";
           return (
             <li key={link.label}>
               <Link

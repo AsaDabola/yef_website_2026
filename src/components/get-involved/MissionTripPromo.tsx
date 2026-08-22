@@ -52,7 +52,7 @@ export default function MissionTripPromo() {
             </div>
           ))}
           <a
-            href="#"
+            href="/get-involved/mission-trip"
             className="inline-flex items-center gap-2 font-semibold text-yef-primary transition-opacity hover:opacity-80"
           >
             Learn more about Mission Trip
