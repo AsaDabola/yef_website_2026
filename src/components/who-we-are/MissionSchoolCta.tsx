@@ -9,8 +9,7 @@ const cards = [
     title: "Curriculum",
     cta: "SEE THE PROGRAM",
     href: "/yef-mission-school#curriculum",
-    image:
-      "https://www.figma.com/api/mcp/asset/aeea7846-bae9-4c22-880b-e6224b605808.png",
+    image: "/images/mission-school/curriculum.png",
     alt: "A student studying the Bible",
   },
   {
@@ -18,8 +17,7 @@ const cards = [
     title: "Apply Now",
     cta: "START YOUR APPLICATION",
     href: "/yef-mission-school#apply",
-    image:
-      "https://www.figma.com/api/mcp/asset/92309262-73f7-4f49-9633-ebdb8924b8f6.png",
+    image: "/images/mission-school/apply-now.png",
     alt: "Graduation caps thrown in the air",
   },
 ];
@@ -30,7 +28,7 @@ export default function MissionSchoolCta() {
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:items-center">
           <Reveal>
-            <h2 className="font-display font-extrabold text-4xl text-white tracking-[-0.8px] sm:text-5xl">
+            <h2 className="font-display font-extrabold text-4xl text-white tracking-[-0.8px] sm:text-5xl lg:text-[54px]">
               YEF Mission School
             </h2>
             <Link
@@ -72,7 +70,7 @@ export default function MissionSchoolCta() {
                   </p>
 
                   <div className="relative">
-                    <p className="font-display font-extrabold text-2xl text-white tracking-[-0.3px] sm:text-3xl">
+                    <p className="text-[34px] font-extrabold text-white tracking-[-0.29px]">
                       {card.title}
                     </p>
                     <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#6abbff] px-4 py-2.5 font-bold text-[11px] text-[#06222b] tracking-[0.72px] uppercase">

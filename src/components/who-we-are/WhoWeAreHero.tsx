@@ -53,7 +53,7 @@ export default function WhoWeAreHero() {
             className="object-cover"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pb-6 pt-16">
-            <p className="font-instrument-serif text-xl italic leading-snug text-white">
+            <p className="font-semibold text-[13px] uppercase leading-[1.27] tracking-[1.6px] text-white">
               &ldquo;God has a Great Calling for His people. Walk the journey
               with faith and you will find true joy and peace&rdquo;
             </p>
