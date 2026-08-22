@@ -17,7 +17,7 @@ export default function SharingTheGospelPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src="/images/get-involved/subpage-hero-bonfire.png"
             alt=""
             fill
             priority
@@ -61,16 +61,16 @@ export default function SharingTheGospelPage() {
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/get-involved/discipleship.png",
-                  alt: "YEF students gathered for a discipleship group",
+                  src: "/images/get-involved/gallery-bible-study-bench.png",
+                  alt: "YEF students gathered for a Bible study",
                 },
                 {
-                  src: "/images/get-involved/story-prayer.png",
-                  alt: "Team members praying together on outreach",
+                  src: "/images/get-involved/gallery-street-outreach.png",
+                  alt: "Team members sharing the gospel on the street",
                 },
                 {
-                  src: "/images/get-involved/volunteering.png",
-                  alt: "Volunteers serving together",
+                  src: "/images/get-involved/gallery-campus-chat.png",
+                  alt: "Team members talking on a university campus",
                 },
               ]}
             />
@@ -82,8 +82,8 @@ export default function SharingTheGospelPage() {
             </h2>
             <div className="mt-8">
               <TextPhotoBlock
-                image="/images/get-involved/story-teacher.png"
-                alt="A YEF volunteer teaching students"
+                image="/images/get-involved/photo-embrace-1.png"
+                alt="A missionary embracing a child on outreach"
                 body="We of the human race know a love for attractive people, for beautiful people, for those who love us. Christ's love is for sinners (Romans 5:8), a love which puts away sin and rebukes all our self-centeredness so that love becomes our mainspring. This means, in the first instance, that we love other believers. We see the church, the beloved community, as an integral part of the purpose of God. And in the second instance it means loving those outside. It means being loving people, for we are the followers of Him who died for sinners."
               />
             </div>

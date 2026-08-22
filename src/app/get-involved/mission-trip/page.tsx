@@ -19,7 +19,7 @@ export default function MissionTripPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src="/images/get-involved/subpage-hero-bonfire.png"
             alt=""
             fill
             priority
@@ -76,8 +76,8 @@ export default function MissionTripPage() {
                   </div>
 
                   <ResourceTeaserCard
-                    image="/images/home-v2/get-involved-bible-study.png"
-                    alt="A student holding a Bible study guide"
+                    image="/images/get-involved/teaser-bible-study-field.png"
+                    alt="Students gathered on a campus field"
                     title="Bible Studies"
                     href="/get-involved#bible-studies"
                   />
@@ -122,8 +122,8 @@ export default function MissionTripPage() {
                   </div>
 
                   <ResourceTeaserCard
-                    image="/images/get-involved/story-teacher.png"
-                    alt="A student practicing as a teacher"
+                    image="/images/get-involved/teaser-mission-trip-girls.png"
+                    alt="Students smiling together on a mission trip"
                     title="Bible Studies"
                     href="/get-involved#bible-studies"
                   />
@@ -208,16 +208,16 @@ export default function MissionTripPage() {
           <GalleryMosaic
             images={[
               {
-                src: "/images/get-involved/discipleship.png",
+                src: "/images/get-involved/gallery-bible-study-bench.png",
                 alt: "A YEF Bible study meeting indoors",
               },
               {
-                src: "/images/get-involved/story-prayer.png",
-                alt: "Team members praying together on outreach",
+                src: "/images/get-involved/gallery-street-outreach.png",
+                alt: "Team members sharing the gospel on the street",
               },
               {
-                src: "/images/get-involved/story-teacher.png",
-                alt: "Team members serving on a mission trip",
+                src: "/images/get-involved/gallery-campus-chat.png",
+                alt: "Team members talking on a university campus",
               },
             ]}
           />
@@ -363,7 +363,7 @@ export default function MissionTripPage() {
 
             <div className="relative min-h-[320px] w-full">
               <Image
-                src="/images/get-involved/story-teacher.png"
+                src="/images/get-involved/typical-day-portrait.png"
                 alt="A YEF mission trip participant"
                 fill
                 sizes="(min-width: 1024px) 25vw, 100vw"

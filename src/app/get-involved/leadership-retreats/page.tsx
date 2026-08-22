@@ -17,7 +17,7 @@ export default function LeadershipRetreatsPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src="/images/get-involved/subpage-hero-bonfire.png"
             alt=""
             fill
             priority
@@ -87,16 +87,16 @@ export default function LeadershipRetreatsPage() {
                 <GalleryMosaic
                   images={[
                     {
-                      src: "/images/home-v2/get-involved-leadership-training.png",
-                      alt: "Leaders gathered at a YEF retreat",
+                      src: "/images/get-involved/gallery-christmas-retreat.png",
+                      alt: "Leaders gathered at a YEF Christmas retreat",
                     },
                     {
-                      src: "/images/get-involved/leadership.png",
-                      alt: "YEF leaders in fellowship",
+                      src: "/images/get-involved/gallery-street-outreach.png",
+                      alt: "Team members sharing the gospel on the street",
                     },
                     {
-                      src: "/images/get-involved/discipleship.png",
-                      alt: "Leaders studying Scripture together",
+                      src: "/images/get-involved/gallery-campus-chat.png",
+                      alt: "Team members talking on a university campus",
                     },
                   ]}
                 />
@@ -129,8 +129,8 @@ export default function LeadershipRetreatsPage() {
                 </div>
                 <div className="relative aspect-[344/300] w-full overflow-hidden rounded-2xl sm:aspect-[344/400]">
                   <Image
-                    src="/images/get-involved/story-teacher.png"
-                    alt="A YEF leader teaching at a retreat"
+                    src="/images/get-involved/photo-embrace-2.png"
+                    alt="A missionary embracing a child on outreach"
                     fill
                     sizes="(min-width: 1024px) 25vw, 90vw"
                     className="object-cover"

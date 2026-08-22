@@ -17,7 +17,7 @@ export default function WhatIsEvangelicalPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src="/images/get-involved/subpage-hero-bonfire.png"
             alt=""
             fill
             priority
@@ -39,16 +39,16 @@ export default function WhatIsEvangelicalPage() {
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/get-involved/story-silhouette.png",
-                  alt: "A student raising their hands in worship",
+                  src: "/images/get-involved/gallery-bible-study-bench.png",
+                  alt: "YEF students gathered for a Bible study",
                 },
                 {
-                  src: "/images/home-v2/get-involved-leadership-training.png",
-                  alt: "Students in a leadership training session",
+                  src: "/images/get-involved/gallery-street-outreach.png",
+                  alt: "Team members sharing the gospel on the street",
                 },
                 {
-                  src: "/images/get-involved/leadership.png",
-                  alt: "YEF leaders gathered together",
+                  src: "/images/get-involved/gallery-campus-chat.png",
+                  alt: "Team members talking on a university campus",
                 },
               ]}
             />

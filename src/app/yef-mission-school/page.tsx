@@ -43,7 +43,7 @@ export default function YefMissionSchoolPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src="/images/get-involved/subpage-hero-bonfire.png"
             alt=""
             fill
             priority
@@ -65,16 +65,16 @@ export default function YefMissionSchoolPage() {
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/home-v2/get-involved-summer-training.png",
-                  alt: "Mission School students in training",
+                  src: "/images/get-involved/gallery-bible-study-bench.png",
+                  alt: "YEF students gathered for a Bible study",
                 },
                 {
-                  src: "/images/get-involved/discipleship.png",
-                  alt: "Students in a Bible study session",
+                  src: "/images/get-involved/gallery-street-outreach.png",
+                  alt: "Team members sharing the gospel on the street",
                 },
                 {
-                  src: "/images/get-involved/story-teacher.png",
-                  alt: "A student practicing teaching",
+                  src: "/images/get-involved/gallery-campus-chat.png",
+                  alt: "Team members talking on a university campus",
                 },
               ]}
             />
@@ -274,7 +274,7 @@ export default function YefMissionSchoolPage() {
 
               <div className="relative aspect-[531/369] w-full overflow-hidden rounded-2xl">
                 <Image
-                  src="/images/home-v2/get-involved-leadership-training.png"
+                  src="/images/get-involved/leadership-conference.png"
                   alt="YEF leadership conference"
                   fill
                   sizes="(min-width: 1024px) 40vw, 90vw"

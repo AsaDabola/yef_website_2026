@@ -16,7 +16,7 @@ export default function ReachingTheCampusPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src="/images/get-involved/subpage-hero-bonfire.png"
             alt=""
             fill
             priority
@@ -37,7 +37,7 @@ export default function ReachingTheCampusPage() {
           <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:items-center sm:gap-16">
             <div className="relative aspect-[1064/603] w-full overflow-hidden rounded-2xl">
               <Image
-                src="/images/home-v2/get-involved-summer-training.png"
+                src="/images/get-involved/campus-library-group.png"
                 alt="Students gathered on a university campus"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
@@ -56,16 +56,16 @@ export default function ReachingTheCampusPage() {
           <div className="mt-16 border-t border-black/10 pt-16">
             <TextPhotoBlock
               imageSide="left"
-              image="/images/get-involved/story-teacher.png"
-              alt="A young missionary teaching a Bible study"
+              image="/images/get-involved/photo-embrace-1.png"
+              alt="A missionary embracing a child on outreach"
               body="Hudson Taylor, who would become one of the most influential missionaries to China and the founder of the China Inland Mission, was only 21 years old when he first sailed for China. His willingness to answer God's call as a young man eventually contributed to a missionary movement that reached far beyond his own lifetime."
             />
           </div>
 
           <div className="mt-16 border-t border-black/10 pt-16">
             <TextPhotoBlock
-              image="/images/get-involved/discipleship.png"
-              alt="A student studying Scripture"
+              image="/images/get-involved/photo-embrace-2.png"
+              alt="A missionary embracing a child on outreach"
               body="John Calvin was also still a young man when he published the first edition of his influential Institutes of the Christian Religion at the age of 26. The work would continue to develop throughout his life and profoundly influence generations of Christian theology, ministry, and church leadership."
             />
           </div>
