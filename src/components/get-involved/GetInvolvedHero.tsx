@@ -46,7 +46,7 @@ export default function GetInvolvedHero() {
             className="object-cover"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-6 pb-6 pt-16">
-            <p className="font-semibold text-xs uppercase tracking-[1.6px] text-white">
+            <p className="font-semibold text-[13px] uppercase leading-[1.27] tracking-[1.6045px] text-white">
               &ldquo;YEF is a global movement empowering purpose-driven young
               leaders to ignite revival across campuses in 40+
               countries.&rdquo;
