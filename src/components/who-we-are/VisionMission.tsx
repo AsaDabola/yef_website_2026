@@ -75,7 +75,13 @@ export default function VisionMission() {
                 className="mt-8 inline-flex items-center gap-2 font-semibold text-[#1d46d8] transition-opacity hover:opacity-80"
               >
                 Learn more about how we&rsquo;re different
-                <span aria-hidden="true">&rarr;</span>
+                <Image
+                  src="/images/icons/icon-arrow-right-blue.svg"
+                  alt=""
+                  width={18}
+                  height={18}
+                  aria-hidden="true"
+                />
               </Link>
             </div>
           </div>

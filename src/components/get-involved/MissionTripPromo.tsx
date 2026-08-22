@@ -56,7 +56,13 @@ export default function MissionTripPromo() {
             className="inline-flex items-center gap-2 font-semibold text-yef-primary transition-opacity hover:opacity-80"
           >
             Learn more about Mission Trip
-            <span aria-hidden="true">&rarr;</span>
+            <Image
+              src="/images/icons/icon-arrow-right-blue.svg"
+              alt=""
+              width={18}
+              height={18}
+              aria-hidden="true"
+            />
           </a>
         </div>
       </div>

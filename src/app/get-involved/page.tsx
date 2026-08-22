@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
+import CarouselWhatWeDo from "@/components/get-involved/CarouselWhatWeDo";
 import GetInvolvedHero from "@/components/get-involved/GetInvolvedHero";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
+import InternshipSection from "@/components/get-involved/InternshipSection";
 import MinistrySection from "@/components/get-involved/MinistrySection";
 import MissionTripPromo from "@/components/get-involved/MissionTripPromo";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
@@ -49,6 +51,8 @@ export default function GetInvolvedPage() {
                 ]}
               />
 
+              <CarouselWhatWeDo />
+
               <StoriesTrio />
 
               <div className="border-t border-black/10 py-16">
@@ -88,13 +92,7 @@ export default function GetInvolvedPage() {
                 alt="A woman leading a classroom in prayer"
               />
 
-              <MinistrySection
-                id="internship"
-                title="Internship"
-                body="Work under a trained professional in any field and learn the ropes from them! Internships at YEF HQ are open to the YEF members from local chapters who have finished their leadership training and are willing to serve in building the ministry together. As with volunteering, you have the option to intern in video making, Web design, technology, event-planning, communication and more."
-                image="/images/get-involved/story-teacher.png"
-                alt="A student practicing as a teacher"
-              />
+              <InternshipSection />
 
               <MinistrySection
                 id="discipleship"
