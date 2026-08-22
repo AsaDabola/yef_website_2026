@@ -3,6 +3,7 @@ import {
   Bricolage_Grotesque,
   Inter,
   Instrument_Serif,
+  La_Belle_Aurore,
   Playfair_Display,
   Poppins,
 } from "next/font/google";
@@ -40,6 +41,12 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
+const laBelleAurore = La_Belle_Aurore({
+  variable: "--font-la-belle-aurore",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
   title: "Youth Evangelical Fellowship",
   description:
@@ -50,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${playfairDisplay.variable} ${bricolageGrotesque.variable} ${instrumentSerif.variable} ${inter.variable} antialiased`}
+      className={`${poppins.variable} ${playfairDisplay.variable} ${bricolageGrotesque.variable} ${instrumentSerif.variable} ${inter.variable} ${laBelleAurore.variable} antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>

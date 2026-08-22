@@ -42,8 +42,8 @@ export default function VisionMission() {
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start lg:pl-10">
             <div className="group relative aspect-[656/492] w-full cursor-pointer overflow-hidden rounded-2xl">
               <Image
-                src="https://www.figma.com/api/mcp/asset/a5305e18-8a19-4b85-9b44-2620deaecd64.png"
-                alt="An open Bible in front of a cross at sunset"
+                src="/images/who-we-are/vision-mission-bible.png"
+                alt="A wooden cross resting on an open Bible"
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"

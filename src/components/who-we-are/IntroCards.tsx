@@ -10,8 +10,7 @@ const cards = [
     title: "Welcome",
     cta: "START HERE",
     href: "/who-we-are/welcome",
-    image:
-      "https://www.figma.com/api/mcp/asset/852aad3b-8c8a-411c-9229-9f29eb88c78f.png",
+    image: "/images/who-we-are/intro-welcome.png",
     alt: "Youth Evangelical Fellowship building",
   },
   {
@@ -19,18 +18,16 @@ const cards = [
     title: "Membership",
     cta: "JOIN US",
     href: "/who-we-are/membership",
-    image:
-      "https://www.figma.com/api/mcp/asset/c99860a7-bbe0-4181-b564-3d6fbc0aa39e.png",
-    alt: "Students smiling together outdoors",
+    image: "/images/who-we-are/intro-membership.png",
+    alt: "A modern glass office building",
   },
   {
     eyebrow: ["WHAT WE", "BELIEVE AND", "TEACH"],
     title: "Statement of Faith",
     cta: "READ MORE",
     href: "/who-we-are/statement-of-faith",
-    image:
-      "https://www.figma.com/api/mcp/asset/0efb6c97-5175-4567-90d9-157233c1a8be.png",
-    alt: "An open Bible beside a wooden cross",
+    image: "/images/who-we-are/intro-statement-of-faith.png",
+    alt: "A modern cinema building",
   },
 ];
 

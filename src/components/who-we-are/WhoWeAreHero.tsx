@@ -6,7 +6,7 @@ export default function WhoWeAreHero() {
   return (
     <section className="font-body relative flex min-h-[560px] items-center overflow-hidden bg-v2-navy lg:min-h-[650px]">
       <Image
-        src="https://www.figma.com/api/mcp/asset/af8421b1-f6a1-4f03-a9f2-71f8f6b06a0e.png"
+        src="https://www.figma.com/api/mcp/asset/9d522f15-766c-4b95-997d-0b0baf91be2a.png"
         alt="Mountain range at dusk"
         fill
         priority
@@ -46,7 +46,7 @@ export default function WhoWeAreHero() {
 
         <div className="relative aspect-[4/3] w-full self-center overflow-hidden rounded-2xl lg:max-w-md lg:justify-self-end">
           <Image
-            src="https://www.figma.com/api/mcp/asset/a73a07ed-c92f-4924-a346-ede5c7b9910a.png"
+            src="https://www.figma.com/api/mcp/asset/853c6712-feed-4077-9e8e-0d5fe838eacd.png"
             alt="Dr. Mark Wagner, President of Youth Evangelical Fellowship"
             fill
             sizes="(min-width: 1024px) 35vw, 90vw"
@@ -57,9 +57,8 @@ export default function WhoWeAreHero() {
               &ldquo;God has a Great Calling for His people. Walk the journey
               with faith and you will find true joy and peace&rdquo;
             </p>
-            <p className="mt-3 font-medium text-sm text-white/85">
-              &ndash; Dr. Mark Wagner, President of Youth Evangelical
-              Fellowship
+            <p className="mt-2 font-signature text-2xl capitalize tracking-[0.6px] text-white/85">
+              - Dr. Mark Wagner, President of Youth Evangelical Fellowship
             </p>
           </div>
         </div>
