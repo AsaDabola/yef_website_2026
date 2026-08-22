@@ -24,12 +24,12 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Get involved",
     links: [
-      { label: "Bible Studies", href: "/get-involved/bible-studies" },
-      { label: "Summer Training", href: "/get-involved/summer-training" },
-      { label: "Mission Trip", href: "/get-involved/mission-trips" },
-      { label: "Volunteer", href: "/get-involved/volunteer" },
-      { label: "Internship", href: "/get-involved/internship" },
-      { label: "Discipleship", href: "/get-involved/discipleship" },
+      { label: "Bible Studies", href: "/get-involved#bible-studies" },
+      { label: "Summer Training", href: "/get-involved#summer-training" },
+      { label: "Mission Trip", href: "/get-involved/mission-trip" },
+      { label: "Volunteer", href: "/get-involved#volunteering" },
+      { label: "Internship", href: "/get-involved#internship" },
+      { label: "Discipleship", href: "/get-involved#discipleship" },
     ],
   },
   {
@@ -37,7 +37,7 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "Sharing the Gospel", href: "/sharing-the-gospel" },
       { label: "Reaching the Campus", href: "/reaching-the-campus" },
-      { label: "Raising Disciples", href: "/raising-disciples" },
+      { label: "Raising Disciples", href: "/what-is-evangelical" },
       { label: "YEF Mission School", href: "/yef-mission-school" },
     ],
   },

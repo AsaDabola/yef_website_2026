@@ -104,10 +104,13 @@ export default function WhatIsEvangelicalPage() {
             />
           </div>
 
-          <div className="mt-16 flex justify-center">
+          <div className="mt-16 border-t border-black/10 pt-16 text-center">
+            <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
+              Interested in Learning More? Here&rsquo;s How:
+            </h2>
             <a
               href="/get-involved/apply"
-              className="inline-flex items-center justify-center rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
+              className="mt-8 inline-flex items-center justify-center rounded-2xl bg-[#0066cf] px-10 py-5 font-semibold text-lg text-white transition-transform duration-200 hover:scale-105 hover:opacity-90"
             >
               Apply Bible Study
             </a>
