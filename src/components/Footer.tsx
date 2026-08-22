@@ -74,7 +74,7 @@ export default function Footer() {
 
           <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.7fr_1fr_1fr_1fr_1fr]">
             <div>
-              <p className="font-medium text-sm uppercase tracking-[0.7px] text-yef-gray">
+              <p className="font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
                 Subscribe for news, updates, and events
               </p>
               <form className="mt-6 flex max-w-xs flex-col items-start gap-3">
@@ -95,7 +95,7 @@ export default function Footer() {
                 </button>
               </form>
 
-              <p className="mt-10 font-medium text-sm uppercase tracking-[0.7px] text-yef-gray">
+              <p className="mt-10 font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
                 Follow us
               </p>
               <div className="mt-4 flex items-center gap-4">
@@ -114,7 +114,7 @@ export default function Footer() {
 
             {columns.map((column) => (
               <div key={column.title}>
-                <p className="font-medium text-sm uppercase tracking-[0.7px] text-yef-gray">
+                <p className="font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
                   {column.title}
                 </p>
                 <ul className="mt-4 space-y-3">

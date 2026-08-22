@@ -26,10 +26,10 @@ const items = [
 
 export default function AroundMovement() {
   return (
-    <section className="font-body bg-white">
+    <section className="font-body bg-[#f2f6fb]">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
-          <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
+          <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-0.4px] sm:text-5xl lg:text-[54px]">
             Around the{" "}
             <span className="font-instrument-serif font-normal italic text-v2-accent">
               Movement
@@ -59,7 +59,7 @@ export default function AroundMovement() {
                       <p className="font-semibold text-[11px] tracking-[2.42px] uppercase text-white/60">
                         {item.tag}
                       </p>
-                      <p className="mt-2 font-display font-bold text-2xl">
+                      <p className="mt-2 font-display font-bold text-[23px] tracking-[-0.46px]">
                         {item.title}
                       </p>
                     </div>
