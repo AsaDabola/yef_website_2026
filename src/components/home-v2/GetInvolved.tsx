@@ -38,7 +38,7 @@ export default function GetInvolved() {
             <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
               Get Involved
             </p>
-            <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl">
+            <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl lg:text-[58px] lg:leading-[55.1px]">
               Four ways in.
             </h2>
           </div>
