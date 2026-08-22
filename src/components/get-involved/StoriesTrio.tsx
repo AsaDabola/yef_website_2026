@@ -18,7 +18,7 @@ const stories = [
     title: "What is Evangelical?",
     body: "Grounded in the Gospel, the Bible, and personal faith — see what shapes everything we do.",
     image: "/images/get-involved/story-silhouette.png",
-    href: "/who-we-are/mission",
+    href: "/what-is-evangelical",
   },
 ];
 
