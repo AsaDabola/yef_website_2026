@@ -3,14 +3,14 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function SignUp() {
   return (
-    <section className="font-body relative overflow-hidden bg-gradient-to-br from-v2-navy to-v2-blue">
+    <section className="font-body relative overflow-hidden bg-v2-blue">
       <Image
         src="/images/home-v2/signup-bg.png"
         alt=""
         width={1964}
         height={833}
         sizes="100vw"
-        className="absolute inset-x-0 top-0 h-[833px] w-full max-w-full object-cover opacity-20"
+        className="absolute inset-x-0 top-0 h-[833px] w-full max-w-full object-cover opacity-45 mix-blend-screen"
       />
       <div className="relative mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
         <Reveal>
