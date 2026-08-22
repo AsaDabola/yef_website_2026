@@ -39,14 +39,14 @@ export default function GetInvolvedHero() {
 
         <div className="relative aspect-[4/3] w-full self-center overflow-hidden rounded-2xl lg:max-w-md lg:justify-self-end">
           <Image
-            src="https://www.figma.com/api/mcp/asset/25415170-f9aa-4169-9c56-f56556786626.png"
-            alt="A student laughing with friends outdoors"
+            src="/images/get-involved/hero-inset-boy.png"
+            alt="A young boy smiling for the camera"
             fill
             sizes="(min-width: 1024px) 35vw, 90vw"
             className="object-cover"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-6 pb-6 pt-16">
-            <p className="font-semibold text-[13px] uppercase leading-[1.27] tracking-[1.6045px] text-white">
+            <p className="font-semibold text-[13px] uppercase leading-[16.5px] tracking-[1.6px] text-white">
               &ldquo;YEF is a global movement empowering purpose-driven young
               leaders to ignite revival across campuses in 40+
               countries.&rdquo;
