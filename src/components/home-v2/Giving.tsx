@@ -11,34 +11,34 @@ export default function Giving() {
             <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
               Giving
             </p>
-            <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
+            <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy tracking-[-0.4px] sm:text-5xl lg:text-[54px]">
               Giving is{" "}
               <span className="font-instrument-serif font-normal italic text-v2-accent">
                 worship
               </span>
               .
             </h2>
-            <p className="mt-8 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mt-8 text-[16px] text-v2-muted-dark leading-[1.8]">
               Every Bible study, every plane ticket, every student who gets to
               spend a summer in the Word instead of a second job &mdash;
               someone gave so that could happen.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mt-4 text-[16px] text-v2-muted-dark leading-[1.8]">
               We do not think in percentages or obligations. We give because
               He gave first, and because a generation is waiting on the
               other side of it.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap gap-3.5">
               <Link
                 href="/donate"
-                className="inline-flex items-center justify-center rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
+                className="inline-flex items-center justify-center rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
               >
                 Give Now
               </Link>
               <Link
                 href="/donate#support-a-student"
-                className="inline-flex items-center justify-center rounded-full border border-v2-navy px-8 py-4 font-semibold text-xs text-v2-navy tracking-[1px] uppercase transition-all duration-200 hover:scale-105 hover:bg-v2-navy hover:text-white"
+                className="inline-flex items-center justify-center rounded-full border border-v2-navy px-8 py-4 font-semibold text-xs text-v2-navy tracking-[1.92px] uppercase transition-all duration-200 hover:scale-105 hover:bg-v2-navy hover:text-white"
               >
                 Support a Student
               </Link>

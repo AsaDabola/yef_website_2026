@@ -34,7 +34,7 @@ export default function Testimonials() {
           <p className="text-center font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
             Testimonials
           </p>
-          <h2 className="mt-4 text-center font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl">
+          <h2 className="mt-4 text-center font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl lg:text-[58px]">
             You are the Christ, the Son of the{" "}
             <span className="font-instrument-serif font-normal italic text-v2-accent">
               living God
@@ -48,15 +48,15 @@ export default function Testimonials() {
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.name}
-                className="bg-white px-10 pb-10 pt-11"
+                className="bg-white px-10 pb-10 pt-[46px]"
               >
-                <p className="font-instrument-serif text-4xl text-v2-blue">
+                <p className="font-instrument-serif text-4xl text-yef-primary">
                   &ldquo;
                 </p>
-                <p className="mt-4 text-base text-v2-navy leading-relaxed">
+                <p className="mt-4 text-base text-v2-navy leading-[1.7]">
                   {testimonial.quote}
                 </p>
-                <div className="mt-8 flex items-center gap-3.5 border-t border-v2-navy/15 pt-5">
+                <div className="mt-8 flex items-center gap-3.5 border-t border-v2-border pt-5">
                   <div className="group relative size-12 shrink-0 cursor-pointer overflow-hidden rounded-full">
                     <Image
                       src={testimonial.image}
