@@ -17,7 +17,7 @@ export default function HeaderV2() {
   return (
     <header className="font-body absolute inset-x-0 top-0 z-30">
       <div className="mx-auto flex max-w-[1920px] items-center justify-between px-6 py-6 sm:px-10 lg:px-19">
-        <Link href="/" className="relative h-[45px] w-32 shrink-0 sm:h-[60px] sm:w-42">
+        <Link href="/" className="relative h-8 w-[88px] shrink-0 sm:h-[60px] sm:w-42">
           <Image
             src="/images/icons/logo-yef-white-compact.svg"
             alt="Youth Evangelical Fellowship"

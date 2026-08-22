@@ -29,7 +29,7 @@ export default function Header() {
   return (
     <header className="absolute inset-x-0 top-0 z-30">
       <div className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 py-8 lg:px-16">
-        <Link href="/" className="relative h-16 w-44 shrink-0 sm:h-20 sm:w-52">
+        <Link href="/" className="relative h-9 w-24 shrink-0 sm:h-20 sm:w-52">
           <Image
             src="/images/icons/logo-yef-white.svg"
             alt="Youth Evangelical Fellowship"
