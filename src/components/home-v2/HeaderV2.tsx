@@ -28,7 +28,7 @@ export default function HeaderV2() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-9 font-medium text-base text-white/90 lg:flex">
+        <nav className="hidden items-center gap-[38px] font-medium text-base text-white/90 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.label}
@@ -43,7 +43,7 @@ export default function HeaderV2() {
         <div className="flex items-center gap-3">
           <Link
             href="/donate"
-            className="rounded-full border border-white/50 px-3.5 py-1.5 font-semibold text-xs text-white tracking-[1.5px] transition-colors hover:bg-white hover:text-v2-navy sm:px-6 sm:py-2.5 sm:text-sm sm:tracking-[2.56px]"
+            className="rounded-full border border-white/50 px-3.5 py-1.5 font-semibold text-xs text-white tracking-[1.5px] transition-colors hover:bg-white hover:text-v2-navy sm:px-[26px] sm:py-[11px] sm:text-base sm:tracking-[2.56px]"
           >
             GIVE
           </Link>
