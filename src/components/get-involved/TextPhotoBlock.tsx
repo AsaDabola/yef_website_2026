@@ -6,7 +6,7 @@ export default function TextPhotoBlock({
   alt,
   imageSide = "right",
 }: {
-  body: string;
+  body: React.ReactNode;
   image: string;
   alt: string;
   imageSide?: "left" | "right";
