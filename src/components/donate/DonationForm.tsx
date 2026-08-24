@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 
 type Frequency = "One-Time" | "Monthly" | "Yearly";
 
@@ -17,16 +18,11 @@ export default function DonationForm() {
 
   if (submitted) {
     return (
-      <div className="mx-auto max-w-2xl rounded-2xl bg-v2-bg p-10 text-center">
-        <p className="font-display font-extrabold text-3xl text-v2-navy">
-          Thank you!
-        </p>
-        <p className="mt-3 text-v2-muted-dark-2">
-          Your {frequency.toLowerCase()} gift of ${displayAmount} helps
-          students grow in faith, go on mission, and lead others closer to
-          Christ.
-        </p>
-      </div>
+      <SubmissionSuccess
+        className="mx-auto max-w-2xl"
+        title="Thank You!"
+        message={`Your ${frequency.toLowerCase()} gift of $${displayAmount} helps students grow in faith, go on mission, and lead others closer to Christ.`}
+      />
     );
   }
 

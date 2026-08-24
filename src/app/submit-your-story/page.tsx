@@ -49,7 +49,7 @@ export default function SubmitYourStoryPage() {
             </div>
             <div className="relative min-h-[320px] w-full">
               <Image
-                src="/images/submit-story/hudson-taylor.png"
+                src="/images/submit-story/hilltop-sunset.png"
                 alt="Three friends standing on a hilltop at sunset"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"

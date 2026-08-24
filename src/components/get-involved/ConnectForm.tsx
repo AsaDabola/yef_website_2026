@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import {
   LabeledCheckboxField,
   LabeledTextAreaField,
@@ -33,40 +33,11 @@ export default function ConnectForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-v2-border bg-white p-10 text-center sm:p-14">
-        <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-v2-bg">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="size-7 text-yef-primary"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-        </div>
-        <h2 className="mt-6 font-display font-extrabold text-3xl text-v2-navy">
-          You&rsquo;re All Set!
-        </h2>
-        <p className="mx-auto mt-4 max-w-md text-v2-muted-dark-2 leading-relaxed">
-          Thanks for reaching out to YEFI! We&rsquo;ve received your
-          information and a member of our team will be in touch with you soon
-          to help you find the right opportunity.
-        </p>
-        <div className="mx-auto mt-8 h-px w-48 bg-v2-border" />
-        <p className="mt-8 text-sm text-v2-muted-dark-2">
-          In the meantime, feel free to explore more ways to get involved.
-        </p>
-        <Link
-          href="/"
-          className="mt-8 inline-flex items-center justify-center rounded-full bg-yef-primary px-8 py-3.5 font-semibold text-xs text-white tracking-[1px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
-        >
-          Back to Home
-        </Link>
-      </div>
+      <SubmissionSuccess
+        title="You're All Set!"
+        message="Thanks for reaching out to YEFI! We've received your information and a member of our team will be in touch with you soon to help you find the right opportunity."
+        footnote="In the meantime, feel free to explore more ways to get involved."
+      />
     );
   }
 

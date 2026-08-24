@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import {
   LabeledCheckboxField,
   LabeledTextAreaField,
@@ -12,15 +13,11 @@ export default function TestimonySubmission() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-v2-border bg-white p-10 text-center sm:p-14">
-        <h2 className="font-display font-extrabold text-3xl text-v2-navy">
-          Thank You for Sharing
-        </h2>
-        <p className="mx-auto mt-4 max-w-md text-v2-muted-dark-2 leading-relaxed">
-          Your story has been received. We&rsquo;re grateful you took the
-          time to share what God has been doing in your life.
-        </p>
-      </div>
+      <SubmissionSuccess
+        title="Thank You for Sharing"
+        message="Your story has been received. We're grateful you took the time to share what God has been doing in your life."
+        footnote="In the meantime, feel free to explore more ways to get involved."
+      />
     );
   }
 

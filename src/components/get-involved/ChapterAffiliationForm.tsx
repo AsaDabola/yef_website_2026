@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import {
   CheckboxField,
   FileField,
@@ -22,15 +23,11 @@ export default function ChapterAffiliationForm() {
 
   if (submitted) {
     return (
-      <div className="mt-10 max-w-2xl rounded-2xl bg-v2-bg p-8">
-        <p className="font-display font-extrabold text-2xl text-v2-navy">
-          You&rsquo;re all set!
-        </p>
-        <p className="mt-3 text-v2-muted-dark-2">
-          Thanks for applying to affiliate your chapter with YEF. A regional
-          coordinator will follow up with your leadership team soon.
-        </p>
-      </div>
+      <SubmissionSuccess
+        className="mt-10 max-w-2xl"
+        title="You're All Set!"
+        message="Thanks for applying to affiliate your chapter with YEF. A regional coordinator will follow up with your leadership team soon."
+      />
     );
   }
 
