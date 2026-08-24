@@ -68,16 +68,19 @@ export default function WelcomePage() {
                     sizes="(min-width: 1024px) 25vw, 90vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e1216] from-5% via-[#0e1216]/35 via-45% to-[#0e1216]/5" />
-                  <div className="absolute inset-0 flex flex-col justify-between p-6">
-                    <p className="max-w-[110px] font-semibold text-[11px] text-white/85 tracking-[1.6px] uppercase leading-[1.5]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(14,18,22,0.94)] from-[4%] via-[rgba(14,18,22,0.35)] via-[46%] to-[rgba(14,18,22,0.05)]" />
+                  <div className="absolute inset-0 flex flex-col justify-between p-[26px]">
+                    <p className="w-[110px] font-semibold text-[11px] text-white/85 leading-[16.5px] tracking-[1.6045px] uppercase">
                       Thy kingdom come, thy will be done on earth as it is in
-                      heaven.{" "}
-                      <span className="font-normal">Matthew 6:10</span>
+                      heaven.
+                      <span className="block font-normal">Matthew 6:10</span>
                     </p>
-                    <p className="font-display font-extrabold text-3xl text-white tracking-[-0.3px]">
-                      Welcome
-                    </p>
+                    <div>
+                      <p className="font-extrabold text-[34px] text-white leading-[34px] tracking-[-0.2899px]">
+                        Welcome
+                      </p>
+                      <div className="h-[48.5px]" />
+                    </div>
                   </div>
                 </div>
               </div>
