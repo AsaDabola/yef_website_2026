@@ -20,7 +20,7 @@ const stories = [
     title: "Raising Disciples",
     body: "Evangelical means being centered on the Gospel of Jesus Christ, the Bible, personal faith, and sharing the Good News with others.",
     image: "/images/who-we-are/story-raising-disciples.png",
-    href: "/raising-disciples",
+    href: "/what-is-evangelical",
   },
 ];
 
