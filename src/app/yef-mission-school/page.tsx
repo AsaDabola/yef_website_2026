@@ -58,7 +58,7 @@ export default function YefMissionSchoolPage() {
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <Breadcrumb label="YEF Mission School" />
 
-          <h1 className="mt-6 text-center font-display font-extrabold text-4xl text-v2-navy tracking-[-0.8px] sm:text-5xl">
+          <h1 className="mt-10 text-center font-display font-extrabold text-4xl text-black leading-[1.15] tracking-[-0.96px] sm:text-5xl lg:text-[46px] lg:leading-[60px]">
             YEF Mission School
           </h1>
 
@@ -66,33 +66,33 @@ export default function YefMissionSchoolPage() {
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/get-involved/gallery-bible-study-bench.png",
-                  alt: "YEF students gathered for a Bible study",
+                  src: "/images/get-involved/mission-school-bible-study.png",
+                  alt: "A small group studying the Bible together around a table",
                 },
                 {
-                  src: "/images/get-involved/gallery-street-outreach.png",
-                  alt: "Team members sharing the gospel on the street",
+                  src: "/images/get-involved/mission-school-street-outreach.png",
+                  alt: "YEF members handing out tracts on a European street",
                 },
                 {
-                  src: "/images/get-involved/gallery-campus-chat.png",
-                  alt: "Team members talking on a university campus",
+                  src: "/images/get-involved/gospel-campus-conversation.png",
+                  alt: "Two students talking on a campus path",
                 },
               ]}
             />
           </div>
 
-          <div className="mt-16 max-w-3xl border-t border-black/10 pt-16">
-            <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
+          <div className="mx-auto mt-24 max-w-[1109px]">
+            <h2 className="text-center font-display font-extrabold text-3xl text-black leading-[1.15] tracking-[-0.8px] lg:text-[46px] lg:leading-[50px]">
               Know the Gospel. Live the Mission. Reach the World.
             </h2>
-            <p className="mt-6 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-10 max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               YEF Mission School is a series of courses of Youth Evangelical
               Fellowship designed to equip students, young adults, members,
               and emerging missionaries with the spiritual foundation and
               practical experience needed to participate in the Great
               Commission.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Jesus did not only call His disciples to believe. He called
               them to follow Him, trained them through life together, and
               eventually sent them into the world to proclaim the Gospel.
@@ -100,7 +100,7 @@ export default function YefMissionSchoolPage() {
               together the Word of God, spiritual formation, practical
               ministry training, and real mission experience.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               The goal is not simply to produce knowledgeable students, but
               to raise disciples who understand the Gospel, love God&rsquo;s
               Word, care for people, and are prepared to serve wherever God
@@ -108,23 +108,23 @@ export default function YefMissionSchoolPage() {
             </p>
           </div>
 
-          <div className="mt-16 max-w-3xl border-t border-black/10 pt-16">
-            <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
+          <div className="mx-auto mt-24 max-w-[1109px]">
+            <h2 className="text-center font-display font-extrabold text-3xl text-black leading-[1.15] tracking-[-0.8px] lg:text-[46px] lg:leading-[50px]">
               From Students to Missionaries
             </h2>
-            <p className="mt-6 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-10 max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Before someone can faithfully carry the Gospel to others, the
               Gospel must first take deep root within his or her own life.
               For this reason, YEF Mission School places Bible study and
               spiritual formation at the center of the training experience.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Participants are encouraged to examine their faith, deepen
               their understanding of Scripture, develop a consistent prayer
               life, and learn what it means to follow Jesus not only during
               ministry activities but throughout everyday life.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               As this foundation develops, students are gradually introduced
               to the practical work of mission. They learn how to approach
               others, share the Gospel, invite someone to Bible study, teach
@@ -132,27 +132,27 @@ export default function YefMissionSchoolPage() {
               members, and participate responsibly in the life of a mission
               community.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               YEF Mission School therefore seeks to connect two things that
               should never be separated: growing as a disciple and learning
               to make disciples.
             </p>
           </div>
 
-          <div className="mt-16 max-w-3xl border-t border-black/10 pt-16">
-            <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
+          <div className="mx-auto mt-24 max-w-[1109px]">
+            <h2 className="text-center font-display font-extrabold text-3xl text-black leading-[1.15] tracking-[-0.8px] lg:text-[46px] lg:leading-[50px]">
               Learning Mission by Doing Mission
             </h2>
-            <p className="mt-6 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-10 max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Mission cannot be learned only in a classroom.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               An important part of YEF Mission School is practical
               experience. Participants are given opportunities to serve
               alongside active missionaries and ministry leaders, allowing
               them to experience the daily reality of mission firsthand.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Depending on the location and program, practical training may
               include campus evangelism, online evangelism, Bible study
               invitations, follow-up, student outreach, preparing fellowship
@@ -160,7 +160,7 @@ export default function YefMissionSchoolPage() {
               preparation, media ministry, administrative service, and other
               areas of mission.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Through these experiences, participants begin learning how
               ministry actually develops from day to day.
             </p>
@@ -227,15 +227,15 @@ export default function YefMissionSchoolPage() {
         </section>
 
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
-          <div className="mx-auto max-w-3xl border-t border-black/10 pt-16">
-            <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
+          <div className="mx-auto max-w-[1109px]">
+            <h2 className="text-center font-display font-extrabold text-3xl text-black leading-[1.15] tracking-[-0.8px] lg:text-[46px] lg:leading-[50px]">
               A Global Vision
             </h2>
-            <p className="mt-6 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-10 max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               YEF Mission School seeks to give participants a vision that
               reaches beyond their immediate surroundings.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               A student may begin by evangelizing on one campus, but the
               Gospel belongs to every nation. Participants are therefore
               encouraged to learn about mission fields around the world,
@@ -243,7 +243,7 @@ export default function YefMissionSchoolPage() {
               consider how their lives might participate in the worldwide
               advancement of the Gospel.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Some may return to their universities with a stronger desire
               to build campus ministry. Others may help establish new YEF
               chapters, participate in short-term mission trips, serve
@@ -261,24 +261,24 @@ export default function YefMissionSchoolPage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-16 max-w-3xl border-t border-black/10 pt-16">
-            <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
+          <div className="mx-auto mt-24 max-w-[1109px]">
+            <h2 className="text-center font-display font-extrabold text-3xl text-black leading-[1.15] tracking-[-0.8px] lg:text-[46px] lg:leading-[50px]">
               Who Is Mission School For?
             </h2>
-            <p className="mt-6 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-10 max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               YEF Mission School is designed especially for university
               students, young adults, YEF members, Bible students seeking
               deeper training, emerging leaders, interns, prospective
               missionaries, and those prayerfully considering greater
               involvement in ministry.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Previous ministry experience is not always necessary. What is
               most important is a willingness to learn, grow, serve, and
               seriously consider how God may use one&rsquo;s life for His
               Kingdom.
             </p>
-            <p className="mt-4 text-v2-muted-dark-2 leading-relaxed">
+            <p className="mx-auto mt-[30px] max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
               Different Mission School programs may have specific
               eligibility requirements according to their location and
               level of training.
