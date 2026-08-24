@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Image from "next/image";
+import Link from "next/link";
+import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import TextPhotoBlock from "@/components/get-involved/TextPhotoBlock";
@@ -17,7 +18,7 @@ export default function SharingTheGospelPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/subpage-hero-bonfire.png"
+            src="/images/get-involved/banner-sharing-the-gospel.png"
             alt=""
             fill
             priority
@@ -28,45 +29,29 @@ export default function SharingTheGospelPage() {
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
+        <section className="mx-auto max-w-[1440px] px-6 py-16 lg:px-12">
           <Breadcrumb label="Why Do We Evangelize?" />
 
-          <h1 className="mt-6 font-display font-extrabold text-4xl text-v2-navy tracking-[-0.8px] sm:text-5xl">
+          <h1 className="mt-6 font-display font-extrabold text-4xl text-black tracking-[-0.8px] sm:text-5xl">
             Sharing the Gospel
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-v2-muted-dark-2 leading-relaxed">
-            We join together for the betterment of this world through the
-            Word of God, evangelism, and the deep study of the Word and
-            constant prayer. It is part of the outworking of the love we see
-            on the cross.
-          </p>
-          <p className="mt-6 max-w-3xl text-v2-muted-dark-2 leading-relaxed">
-            So if Christ has done everything, what do I need to do once I
-            accept His truth? The Apostle John writes, &ldquo;Herein is love,
-            not that we love God, but that he loved us and sent his Son to
-            be the propitiation for our sins.&rdquo; Then he goes on,
-            &ldquo;Beloved, if God so loved us we ought to love one another,
-            too&rdquo; (1 John 4:10&ndash;11). Notice John&rsquo;s verb. We
-            ought; we &lsquo;owe it&rsquo; to love one another. Love is not
-            just an abstract concept or feeling, but it is a demand made on
-            all God&rsquo;s people as their response to His great love, and
-            it is love that overflows in activity for others, as 1
-            Corinthians 13 makes clear for all time. Love is demanding.
-            Christ did not die for the flim-flam of respectable Christianity.
-            Christ died for our sins, died to put them away, so that we
-            become loving people.
+          <p className="mt-6 max-w-[849px] font-medium text-[19.2px] text-[#4b5565] leading-[30px]">
+            We join together for the betterment of this world through the Word
+            of God, evangelism, and the deep study of the Word and constant
+            prayer. It is part of the outworking of the love we see on the
+            cross.
           </p>
 
-          <div className="mt-12">
+          <div className="mt-14">
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/get-involved/gallery-bible-study-bench.png",
-                  alt: "YEF students gathered for a Bible study",
+                  src: "/images/get-involved/gospel-outreach-table.png",
+                  alt: "YEF students at an outreach table on campus",
                 },
                 {
-                  src: "/images/get-involved/gallery-street-outreach.png",
-                  alt: "Team members sharing the gospel on the street",
+                  src: "/images/get-involved/gospel-campus-conversation.png",
+                  alt: "Two students talking on a campus path",
                 },
                 {
                   src: "/images/get-involved/gallery-campus-chat.png",
@@ -76,40 +61,91 @@ export default function SharingTheGospelPage() {
             />
           </div>
 
-          <div className="mt-16 border-t border-black/10 pt-16">
-            <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
-              The Love That Compels Us
-            </h2>
-            <div className="mt-8">
-              <TextPhotoBlock
-                image="/images/get-involved/photo-embrace-1.png"
-                alt="A missionary embracing a child on outreach"
-                body="We of the human race know a love for attractive people, for beautiful people, for those who love us. Christ's love is for sinners (Romans 5:8), a love which puts away sin and rebukes all our self-centeredness so that love becomes our mainspring. This means, in the first instance, that we love other believers. We see the church, the beloved community, as an integral part of the purpose of God. And in the second instance it means loving those outside. It means being loving people, for we are the followers of Him who died for sinners."
-              />
-            </div>
+          <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[849fr_477fr] lg:gap-[17px]">
+            <p className="font-medium text-[19px] text-[#4b5565] leading-[30px]">
+              So if Christ has done everything, what do I need to do once I
+              accept His truth? The Apostle John writes, &ldquo;Herein is
+              love, not that we love God (we will never understand love if we
+              start from the human end), but that he loved us and sent his Son
+              to be the propitiation for our sins.&rdquo; Then he goes on,
+              &ldquo;Beloved, if God so loved us we ought to love one another,
+              too&rdquo; (1 John 4:10&ndash;11). Notice John&rsquo;s verb. We
+              ought; we &lsquo;owe it&rsquo; to love one another. Love is not
+              just an abstract concept or feeling, but it is a demand made on
+              all God&rsquo;s people as their response to His great love, and
+              it is love that overflows in activities for others as 1
+              Corinthians 13 makes clear for all time. Love is demanding.
+              Christ did not die, as someone has put it, &ldquo;for the
+              flim-flam of respectable Christianity&rdquo;. Christ died for
+              our sins, died to put them away so that we become loving people.
+            </p>
+            <p className="self-center text-center font-semibold text-[26px] text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:text-[33px] lg:leading-[50px]">
+              Having received God&rsquo;s love, we are called to share that
+              love with others through His Word, evangelism, prayer, and
+              service.
+            </p>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 gap-10 rounded-2xl border border-v2-border bg-v2-bg p-8 sm:grid-cols-[1fr_auto] sm:items-center sm:p-12">
-            <div>
-              <h3 className="font-display font-extrabold text-2xl text-v2-navy sm:text-3xl">
-                Walking in the Spirit
-              </h3>
-              <p className="mt-4 max-w-xl text-v2-muted-dark-2 leading-relaxed">
-                The standard set before us is one we cannot reach on our own.
-                The indwelling and empowering of the Holy Spirit is an
-                integral part of the Christian life. Words like
-                &lsquo;sanctification&rsquo; and &lsquo;holiness&rsquo; speak
-                of a standard we can never reach for ourselves, and of what
-                the Spirit does in the believer &mdash; and in you, as you
-                study His Word with us.
-              </p>
-            </div>
-            <a
+          <h2 className="mx-auto mt-24 max-w-[695px] text-center font-semibold text-[28px] text-[#4b5565] leading-[40px] tracking-[-0.8px] lg:text-[38px] lg:leading-[50px]">
+            Loving means spreading the truth and love of Christ. If
+            we&rsquo;ve found the cure to the ills of this world, we want to
+            share it, because we want others to be healed, as well.
+          </h2>
+
+          <div className="mt-16">
+            <TextPhotoBlock
+              card
+              image="/images/get-involved/gospel-campus-walk.png"
+              alt="Students walking together outside a campus building"
+              body="We of the human race know a love for attractive people, for beautiful people, for those who love us. Christ's love is for sinners (Rom. 5:8), a love which puts away sin and rebukes all our self-centeredness so that love becomes our mainspring. This means in the first instance that we love other believers. The evangelical sees the church, the beloved community, as an integral part of the purpose of God. And in the second instance it means loving those outside. It means being loving people, for we are the followers of Him who died for sinners."
+            />
+          </div>
+
+          <h2 className="mx-auto mt-24 max-w-[695px] text-center font-semibold text-[28px] text-[#4b5565] leading-[40px] tracking-[-0.8px] lg:text-[36px] lg:leading-[50px]">
+            It means in evangelism, we bring to sinners the best gift we have.
+          </h2>
+
+          <div className="mx-auto mt-12 max-w-[849px] space-y-[30px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
+            <p>
+              So if Christ has done everything, what do I need to do once I
+              accept His truth? The Apostle John writes, &ldquo;Herein is
+              love, not that we love God (we will never understand love if we
+              start from the human end), but that he loved us and sent his Son
+              to be the propitiation for our sins.&rdquo; Then he goes on,
+              &ldquo;Beloved, if God so loved us we ought to love one another,
+              too&rdquo; (1 John 4:10&ndash;11). Notice John&rsquo;s verb. We
+              ought; we &lsquo;owe it&rsquo; to love one another.
+            </p>
+            <p>
+              Love is not just an abstract concept or feeling, but it is a
+              demand made on all God&rsquo;s people as their response to His
+              great love and it is love that overflows in activities for
+              others as 1 Corinthians 13 makes clear for all time. Love is
+              demanding. Christ did not die, as someone has put it, &ldquo;for
+              the flim-flam of respectable Christianity&rdquo;. Christ died
+              for our sins, died to put them away so that we become loving
+              people.
+            </p>
+          </div>
+
+          <div className="mt-16">
+            <TextPhotoBlock
+              card
+              imageSide="left"
+              image="/images/get-involved/gospel-hq-group.png"
+              alt="The YEF fellowship gathered outside the headquarters sign"
+              heading="How Can We Do All Of This?"
+              body="The standard set before us is one we cannot reach on our own. The indwelling and empowering of the Holy Spirit is an integral part of the Christian life as the evangelical understands it. Words like 'sanctification' and 'holiness' speak of the need for a standard we can never reach for ourselves and speaks also of what the Spirit does in the believer."
+            />
+          </div>
+
+          <div className="mt-20 flex justify-center">
+            <Link
               href="/get-involved/apply"
-              className="inline-flex shrink-0 items-center justify-center rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
+              className="flex h-[158px] w-full max-w-[515px] items-center justify-center rounded-[16px] bg-[#0066cf] px-8 text-center font-semibold text-[24px] text-white leading-[28.8px] transition-transform duration-200 hover:scale-[1.02] lg:text-[28px]"
             >
-              Apply Bible Study
-            </a>
+              Apply Bible study
+            </Link>
           </div>
         </section>
 
