@@ -48,7 +48,7 @@ export default function Testimonials() {
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.name}
-                className="h-full bg-white px-10 pb-10 pt-[46px]"
+                className="bg-white px-10 pb-10 pt-[46px]"
               >
                 <p className="font-instrument-serif text-4xl text-yef-primary">
                   &ldquo;
