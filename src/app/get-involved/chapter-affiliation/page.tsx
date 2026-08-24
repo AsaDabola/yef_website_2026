@@ -13,7 +13,10 @@ export default function ChapterAffiliationPage() {
   return (
     <>
       <main>
-        <SubPageHero />
+        <SubPageHero
+          image="/images/get-involved/banner-chapter-affiliation.png"
+          alt="Hands raised and joined together against green foliage"
+        />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
             <div className="shrink-0 lg:w-[237px]">
@@ -22,20 +25,20 @@ export default function ChapterAffiliationPage() {
 
             <div className="flex-1">
               <Breadcrumb label="Chapter Affiliation" />
-              <h1 className="mt-6 font-semibold text-4xl text-black sm:text-5xl">
+              <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
                 Chapter Affiliation
               </h1>
-              <p className="mt-4 font-medium text-lg text-[#4b5565]">
+              <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px] uppercase">
                 Bring YEF to Your Campus
               </p>
-              <p className="mt-6 max-w-2xl text-lg text-black">
+              <p className="mt-[38px] max-w-[760px] text-[20px] text-black leading-[27.2px]">
                 Every YEF chapter is a seedbed&mdash;a witnessing community
                 planted on one campus, connected to a movement spanning 40+
                 countries. Affiliating your chapter is a three-step process:
                 chapter information, leadership contact, and agreement.
               </p>
 
-              <h2 className="mt-12 font-semibold text-2xl text-black">
+              <h2 className="mt-11 font-display font-extrabold text-[30px] text-black tracking-[-0.5px]">
                 Chapter application
               </h2>
               <ChapterAffiliationForm />

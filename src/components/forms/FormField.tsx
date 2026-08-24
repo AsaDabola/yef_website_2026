@@ -75,10 +75,10 @@ export function FileField({
   name: string;
 }) {
   return (
-    <label className="block cursor-pointer rounded-2xl border border-dashed border-v2-border bg-white px-5 py-6 text-center transition-colors hover:border-v2-accent">
+    <label className="flex h-[90px] cursor-pointer flex-col items-center justify-center gap-[5px] rounded-[16px] border-[1.5px] border-black/20 border-dashed bg-[#fafaf7] px-5 py-[22px] text-center transition-colors hover:border-v2-accent">
       <input type="file" name={name} className="sr-only" />
-      <span className="block font-medium text-v2-navy">{label}</span>
-      <span className="mt-1 block text-sm text-v2-muted">{hint}</span>
+      <span className="font-semibold text-[14px] text-black/75">{label}</span>
+      <span className="text-[12.5px] text-black/40">{hint}</span>
     </label>
   );
 }

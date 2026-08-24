@@ -12,8 +12,10 @@ import {
 function StepHeader({ number, title }: { number: string; title: string }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="font-semibold text-v2-blue">{number}</span>
-      <h3 className="font-semibold text-xl text-black">{title}</h3>
+      <span className="font-semibold text-[14px] text-[#0066cf] tracking-[2.24px]">
+        {number}
+      </span>
+      <h3 className="font-semibold text-[19px] text-black">{title}</h3>
     </div>
   );
 }
@@ -24,7 +26,7 @@ export default function ChapterAffiliationForm() {
   if (submitted) {
     return (
       <SubmissionSuccess
-        className="mt-10 max-w-2xl"
+        className="mt-6 max-w-[700px]"
         title="You're All Set!"
         message="Thanks for applying to affiliate your chapter with YEF. A regional coordinator will follow up with your leadership team soon."
       />
@@ -37,12 +39,12 @@ export default function ChapterAffiliationForm() {
         event.preventDefault();
         setSubmitted(true);
       }}
-      className="mt-10 max-w-2xl space-y-10"
+      className="mt-6 max-w-[700px] space-y-10"
     >
-      <div className="space-y-4">
+      <div className="space-y-5">
         <StepHeader number="01" title="Chapter information" />
         <TextField label="Chapter name" name="chapterName" required />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <TextField label="Country" name="country" required />
           <TextField label="City" name="city" required />
         </div>
@@ -50,7 +52,7 @@ export default function ChapterAffiliationForm() {
           label="University or church affiliated with"
           name="affiliation"
         />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <TextField
             label="Estimated members interested"
             name="estimatedMembers"
@@ -59,7 +61,7 @@ export default function ChapterAffiliationForm() {
         </div>
         <a
           href="#"
-          className="inline-flex items-center gap-2 font-semibold text-v2-blue hover:underline"
+          className="block font-medium text-[14px] text-[#0066cf] underline"
         >
           &darr; Download the Chapter Application info pack (PDF)
         </a>
@@ -70,26 +72,26 @@ export default function ChapterAffiliationForm() {
         />
       </div>
 
-      <div className="border-t border-v2-border" />
+      <div className="border-black/10 border-t" />
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         <StepHeader number="02" title="Leadership contact" />
         <TextField label="Leader full name" name="leaderName" required />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <TextField label="Email" type="email" name="leaderEmail" required />
           <TextField label="Phone" type="tel" name="leaderPhone" />
         </div>
         <TextField label="Role or title (optional)" name="leaderRole" />
       </div>
 
-      <div className="border-t border-v2-border" />
+      <div className="border-black/10 border-t" />
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         <StepHeader number="03" title="Agreement" />
         <TextAreaField label="Anything else we should know?" name="notes" />
         <a
           href="#"
-          className="inline-flex items-center gap-2 font-semibold text-v2-blue hover:underline"
+          className="block font-medium text-[14px] text-[#0066cf] underline"
         >
           &darr; Download the Leadership Agreement form (PDF)
         </a>
@@ -102,7 +104,7 @@ export default function ChapterAffiliationForm() {
           label="Our chapter agrees to affiliate under the YEF statement of faith and chapter guidelines, and to remain in contact with a regional YEF coordinator."
           name="agreement"
         />
-        <p className="text-sm text-v2-muted">
+        <p className="text-[13px] text-black/45 leading-[18px]">
           YEF collects the information in this form only to process your
           chapter&rsquo;s affiliation request and to stay in contact with
           your chapter&rsquo;s leadership. We do not sell, rent, or share
@@ -113,7 +115,7 @@ export default function ChapterAffiliationForm() {
         </p>
         <button
           type="submit"
-          className="rounded-full bg-v2-blue px-8 py-4 font-semibold text-sm text-white tracking-[0.5px] uppercase transition-transform duration-200 hover:scale-105"
+          className="w-[358px] max-w-full rounded-full bg-[#0066cf] px-10 py-[18px] font-semibold text-[14px] text-white tracking-[2.24px] uppercase transition-transform duration-200 hover:scale-105"
         >
           Submit Chapter Application
         </button>
