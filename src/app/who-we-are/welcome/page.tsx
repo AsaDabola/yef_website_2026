@@ -61,7 +61,7 @@ export default function WelcomePage() {
                 </div>
 
                 <FeatureCard
-                  image="https://www.figma.com/api/mcp/asset/b8e34bde-e9bb-4a6c-853c-71147a428f3c.png"
+                  image="/images/who-we-are/card-welcome-sunset.png"
                   alt="The sun setting over the ocean"
                   eyebrow={
                     <>

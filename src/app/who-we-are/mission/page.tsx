@@ -63,7 +63,7 @@ export default function OurMissionPage() {
                 </p>
 
                 <FeatureCard
-                  image="https://www.figma.com/api/mcp/asset/f5861c9a-6956-4447-9726-3e7c2f05fd6f.png"
+                  image="/images/who-we-are/card-mission-cross.png"
                   alt="A wooden cross resting on an open Bible"
                   eyebrow="To Know Christ and Make Him Known"
                   title="Our Mission"
