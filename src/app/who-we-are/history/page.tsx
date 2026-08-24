@@ -13,7 +13,10 @@ export default function HistoryPage() {
   return (
     <>
       <main>
-        <SubPageHero />
+        <SubPageHero
+          image="/images/who-we-are/banner-history.png"
+          alt="Hands holding an open world map on a forest path"
+        />
         <HistoryIntro />
         <HistoryTimeline />
         <ContinuingMission />

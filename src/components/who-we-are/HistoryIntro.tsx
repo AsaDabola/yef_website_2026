@@ -12,43 +12,52 @@ export default function HistoryIntro() {
 
         <div className="flex-1">
           <Breadcrumb label="History" />
-          <h1 className="mt-6 font-semibold text-4xl text-black sm:text-5xl">
+          <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
             History
           </h1>
-          <p className="mt-4 font-medium text-lg text-[#4b5565]">
+          <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px]">
             Our Story So Far
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="relative aspect-[849/637] w-full overflow-hidden rounded-2xl sm:row-span-2">
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[849fr_477fr]">
+            <div className="relative aspect-[849/637] w-full overflow-hidden rounded-2xl">
               <Image
                 src="/images/history/hero-large.png"
                 alt="Youth Evangelical Fellowship headquarters building"
                 fill
-                sizes="(min-width: 1024px) 35vw, 100vw"
+                sizes="(min-width: 640px) 45vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
-              <Image
-                src="/images/history/hero-small-top.png"
-                alt="YEF international staff gathered together"
-                fill
-                sizes="(min-width: 1024px) 35vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="group relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
-              <Image
-                src="/images/history/hero-small-bottom.png"
-                alt="Students on a campus mission trip"
-                fill
-                sizes="(min-width: 1024px) 35vw, 100vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/60 font-medium text-lg text-white transition-opacity group-hover:bg-black/70">
-                See More
-                <span aria-hidden="true">&rarr;</span>
+
+            <div className="flex flex-col gap-4">
+              <div className="relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
+                <Image
+                  src="/images/history/hero-small-top.png"
+                  alt="YEF international staff gathered together"
+                  fill
+                  sizes="(min-width: 640px) 26vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="group relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
+                <Image
+                  src="/images/history/hero-small-bottom.png"
+                  alt="Students on a campus mission trip"
+                  fill
+                  sizes="(min-width: 640px) 26vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/60 font-medium text-lg text-white transition-opacity group-hover:bg-black/70">
+                  See More
+                  <Image
+                    src="/images/icons/icon-arrow-right-24-white.svg"
+                    alt=""
+                    width={28}
+                    height={28}
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
             </div>
           </div>
