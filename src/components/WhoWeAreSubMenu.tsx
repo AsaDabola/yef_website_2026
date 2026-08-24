@@ -19,19 +19,24 @@ export default function WhoWeAreSubMenu() {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Who We Are section navigation" className="w-full max-w-[237px]">
-      <p className="font-bold text-sm text-yef-primary">Who We Are</p>
-      <ul className="mt-4">
+    <nav
+      aria-label="Who We Are section navigation"
+      className="font-body w-full max-w-[237px]"
+    >
+      <p className="font-bold text-[15px] leading-[16.62px] text-yef-primary">
+        Who We Are
+      </p>
+      <ul className="mt-[47px] space-y-[30px]">
         {links.map((link) => {
           const active = pathname === link.href;
           return (
             <li key={link.label}>
               <Link
                 href={link.href}
-                className={`block border-b py-3 text-lg transition-colors ${
+                className={`block border-b border-yef-primary pb-[5px] text-xl leading-[20.8px] transition-colors ${
                   active
-                    ? "border-yef-primary font-medium text-yef-primary"
-                    : "border-black/10 text-black hover:border-yef-primary hover:text-yef-primary"
+                    ? "font-medium text-yef-primary"
+                    : "text-black hover:text-yef-primary"
                 }`}
               >
                 {link.label}

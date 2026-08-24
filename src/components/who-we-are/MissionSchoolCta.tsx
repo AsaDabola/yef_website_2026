@@ -25,20 +25,20 @@ const cards = [
 export default function MissionSchoolCta() {
   return (
     <section className="font-body bg-gradient-to-b from-yef-primary to-yef-primary-light">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:items-center">
-          <Reveal>
-            <h2 className="font-display font-extrabold text-4xl text-white tracking-[-0.8px] sm:text-5xl lg:text-[54px]">
+      <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 lg:px-12 xl:pt-[79px] xl:pb-[52px]">
+        <div className="flex flex-col gap-14 xl:flex-row xl:items-center xl:justify-between xl:gap-0">
+          <Reveal className="xl:w-[35.3%]">
+            <h2 className="font-display font-extrabold text-4xl text-white leading-[50px] tracking-[-0.8px] sm:text-5xl lg:text-[54.4px]">
               YEF Mission School
             </h2>
             <Link
               href="/yef-mission-school"
-              className="mt-4 inline-flex items-center gap-2 font-semibold text-white transition-opacity hover:opacity-80"
+              className="mt-6 inline-flex items-center gap-2 font-semibold text-[15px] text-white leading-[20px] transition-opacity hover:opacity-80 lg:mt-[31px]"
             >
               Learn about the Mission School
               <span aria-hidden="true">&rarr;</span>
             </Link>
-            <p className="mt-6 max-w-xl text-lg text-white leading-relaxed">
+            <p className="mt-6 font-medium text-lg text-white leading-[30px] lg:mt-[23px] lg:text-[19.2px]">
               We strive to equip young believers to know the Gospel, grow as
               disciples, and participate in mission. Through Bible study,
               prayer, evangelism, and practical ministry training,
@@ -47,33 +47,33 @@ export default function MissionSchoolCta() {
             </p>
           </Reveal>
 
-          <Reveal delay={150}>
-            <HoverGroup className="grid grid-cols-2 gap-5">
+          <Reveal delay={150} className="xl:w-[49.4%]">
+            <HoverGroup className="grid grid-cols-2 gap-6">
               {cards.map((card) => (
                 <Link
                   key={card.title}
                   href={card.href}
-                  className="group relative flex aspect-[320/533] flex-col justify-between overflow-hidden rounded-[20px] bg-[#1a1e22] p-6"
+                  className="group relative flex aspect-[320/533] flex-col justify-between overflow-hidden rounded-[20px] bg-[#1a1e22] p-[26px]"
                 >
                   <Image
                     src={card.image}
                     alt={card.alt}
                     fill
-                    sizes="(min-width: 1024px) 20vw, 45vw"
+                    sizes="(min-width: 1024px) 320px, 45vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e1216] from-5% via-[#0e1216]/35 via-45% to-[#0e1216]/5" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(14,18,22,0.94)] from-[4%] via-[rgba(14,18,22,0.35)] via-[46%] to-[rgba(14,18,22,0.05)]" />
                   <div className="absolute inset-0 bg-white/0 transition-colors duration-300 group-hover:bg-white/10" />
 
-                  <p className="relative font-semibold text-[11px] text-white/85 tracking-[1.6px] uppercase">
+                  <p className="relative max-w-[110px] font-semibold text-[11px] text-white/85 leading-[16.5px] tracking-[1.6045px] uppercase">
                     {card.eyebrow}
                   </p>
 
                   <div className="relative">
-                    <p className="text-[34px] font-extrabold text-white tracking-[-0.29px]">
+                    <p className="font-extrabold text-[34px] text-white leading-[34px] tracking-[-0.2899px]">
                       {card.title}
                     </p>
-                    <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#6abbff] px-4 py-2.5 font-bold text-[11px] text-[#06222b] tracking-[0.72px] uppercase">
+                    <span className="mt-[39px] inline-flex items-center gap-[7px] rounded-full bg-[#6abbff] px-[18px] py-2.5 font-bold text-xs text-[#06222b] leading-[18px] tracking-[0.72px] uppercase">
                       {card.cta}
                       <span aria-hidden="true">&rarr;</span>
                     </span>

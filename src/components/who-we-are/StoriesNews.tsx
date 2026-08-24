@@ -30,9 +30,9 @@ const stories = [
 export default function StoriesNews() {
   return (
     <section className="font-body bg-white">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+      <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 lg:px-12 lg:py-[154px]">
         <Reveal>
-          <HoverGroup className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <HoverGroup className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-[25px] lg:grid-cols-3">
             {stories.map((story) => (
               <Link key={story.title} href={story.href} className="group">
                 <div className="relative aspect-[432/243] w-full overflow-hidden rounded-2xl">
@@ -45,7 +45,7 @@ export default function StoriesNews() {
                   />
                 </div>
                 <div className="mt-6 flex items-start justify-between gap-4">
-                  <h3 className="font-semibold text-2xl text-black">
+                  <h3 className="font-semibold text-[22.6px] text-black leading-[30px]">
                     {story.title}
                   </h3>
                   <span
@@ -55,7 +55,9 @@ export default function StoriesNews() {
                     &#8599;
                   </span>
                 </div>
-                <p className="mt-4 text-[#4b5565]">{story.body}</p>
+                <p className="mt-4 font-medium text-[15.2px] text-[#4b5565] leading-[24px]">
+                  {story.body}
+                </p>
               </Link>
             ))}
           </HoverGroup>
