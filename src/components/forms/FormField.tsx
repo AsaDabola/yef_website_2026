@@ -17,7 +17,7 @@ export function TextField({
         name={name}
         placeholder={label}
         required={required}
-        className="w-full rounded-full border border-v2-border bg-white px-5 py-4 text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/30"
+        className="h-[54px] w-full rounded-full border border-black/14 bg-white px-[22px] text-[14.5px] text-black placeholder:text-black/38 focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/30"
       />
     </label>
   );
@@ -39,7 +39,7 @@ export function TextAreaField({
         name={name}
         placeholder={label}
         rows={rows}
-        className="w-full rounded-2xl border border-v2-border bg-white px-5 py-4 text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/30"
+        className="min-h-[120px] w-full rounded-[24px] border border-black/14 bg-white px-[22px] py-[18px] text-[14.5px] text-black placeholder:text-black/38 focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/30"
       />
     </label>
   );
@@ -53,12 +53,12 @@ export function CheckboxField({
   name: string;
 }) {
   return (
-    <label className="flex items-start gap-3 text-sm text-v2-muted-dark-2">
+    <label className="flex items-start gap-3 text-[13.5px] text-[#4b5565] leading-[20px]">
       <input
         type="checkbox"
         name={name}
         required
-        className="mt-1 size-4 shrink-0 rounded border-v2-border text-v2-blue focus:ring-v2-accent"
+        className="size-5 shrink-0 rounded-[5px] border-[1.5px] border-black/30 text-v2-blue focus:ring-v2-accent"
       />
       <span>{label}</span>
     </label>

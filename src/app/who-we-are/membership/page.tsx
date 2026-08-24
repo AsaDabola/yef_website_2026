@@ -13,7 +13,10 @@ export default function MembershipPage() {
   return (
     <>
       <main>
-        <SubPageHero />
+        <SubPageHero
+          image="/images/who-we-are/banner-membership.png"
+          alt="Friends running together through a sunlit park"
+        />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
             <div className="shrink-0 lg:w-[237px]">
@@ -22,13 +25,13 @@ export default function MembershipPage() {
 
             <div className="flex-1">
               <Breadcrumb label="Membership" />
-              <h1 className="mt-6 font-semibold text-4xl text-black sm:text-5xl">
+              <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
                 Membership
               </h1>
-              <p className="mt-4 font-medium text-lg text-[#4b5565]">
+              <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px] uppercase">
                 A Global Movement of Purpose-Driven Young Leaders
               </p>
-              <p className="mt-6 max-w-2xl text-lg text-black">
+              <p className="mt-[38px] max-w-[760px] text-[20px] text-black leading-[27.2px]">
                 YEF exists to raise up a generation who follow the
                 passionate life of Jesus Christ and carry that fire into the
                 lives of others. By joining, you become part of a witnessing
@@ -37,7 +40,7 @@ export default function MembershipPage() {
                 kingdom-building work together.
               </p>
 
-              <h2 className="mt-12 font-semibold text-2xl text-black">
+              <h2 className="mt-11 font-display font-extrabold text-[30px] text-black tracking-[-0.5px]">
                 Apply to join
               </h2>
               <MembershipForm />
