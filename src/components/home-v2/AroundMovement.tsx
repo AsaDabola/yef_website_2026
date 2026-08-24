@@ -6,8 +6,7 @@ const items = [
   {
     tag: "Bible Study",
     title: "Summer Training 2027",
-    image:
-      "https://www.figma.com/api/mcp/asset/f297bc2e-9ed4-4eba-99f4-1df6bd8c20fd.png",
+    image: "/images/home-v2/get-involved-summer-training.png",
     alt: "Students gathered together for Summer Training 2027",
   },
   {

@@ -39,7 +39,7 @@ export default function GetInvolved() {
               Get Involved
             </p>
             <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl lg:text-[58px] lg:leading-[55.1px]">
-              Four ways in.
+              Join the Movement
             </h2>
           </div>
           <div className="hidden gap-3 sm:flex">

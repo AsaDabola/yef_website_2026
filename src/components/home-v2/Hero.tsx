@@ -19,8 +19,7 @@ const slides = [
     body: "Join YEF Campus Chapter, Fellowship in Christ",
   },
   {
-    image:
-      "https://www.figma.com/api/mcp/asset/c5e5b4cc-1ceb-4295-a020-3625a39bbf8f.png",
+    image: "/images/who-we-are/intro-welcome.png",
     alt: "Youth Evangelical Fellowship building",
     heading: ["Join Us", "Today"],
     body: "Be part of YEF, Become True Disciples of Christ.",
@@ -40,7 +39,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="font-body relative flex min-h-[640px] items-center overflow-hidden bg-v2-navy lg:min-h-screen">
+    <section className="font-body relative flex min-h-[640px] items-center overflow-hidden bg-v2-navy lg:min-h-[61vw]">
       {slides.map((slide, index) => (
         <div
           key={slide.image}
