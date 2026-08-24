@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
+import FeatureCard from "@/components/who-we-are/FeatureCard";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -60,29 +60,19 @@ export default function WelcomePage() {
                   </p>
                 </div>
 
-                <div className="relative aspect-[344/573] w-full max-w-[344px] justify-self-center overflow-hidden rounded-[20px] bg-[#1a1e22] lg:justify-self-end">
-                  <Image
-                    src="https://www.figma.com/api/mcp/asset/b8e34bde-e9bb-4a6c-853c-71147a428f3c.png"
-                    alt="Sunset over the ocean"
-                    fill
-                    sizes="(min-width: 1024px) 25vw, 90vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(14,18,22,0.94)] from-[4%] via-[rgba(14,18,22,0.35)] via-[46%] to-[rgba(14,18,22,0.05)]" />
-                  <div className="absolute inset-0 flex flex-col justify-between p-[26px]">
-                    <p className="w-[110px] font-semibold text-[11px] text-white/85 leading-[16.5px] tracking-[1.6045px] uppercase">
+                <FeatureCard
+                  image="https://www.figma.com/api/mcp/asset/b8e34bde-e9bb-4a6c-853c-71147a428f3c.png"
+                  alt="The sun setting over the ocean"
+                  eyebrow={
+                    <>
                       Thy kingdom come, thy will be done on earth as it is in
                       heaven.
                       <span className="block font-normal">Matthew 6:10</span>
-                    </p>
-                    <div>
-                      <p className="font-extrabold text-[34px] text-white leading-[34px] tracking-[-0.2899px]">
-                        Welcome
-                      </p>
-                      <div className="h-[48.5px]" />
-                    </div>
-                  </div>
-                </div>
+                    </>
+                  }
+                  title="Welcome"
+                  className="justify-self-center lg:justify-self-end"
+                />
               </div>
             </div>
           </div>

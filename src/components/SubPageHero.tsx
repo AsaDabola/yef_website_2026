@@ -1,12 +1,21 @@
 import Image from "next/image";
 import Header from "@/components/Header";
 
-export default function SubPageHero() {
+type SubPageHeroProps = {
+  /** Banner photo. Defaults to the shared sailboat banner. */
+  image?: string;
+  alt?: string;
+};
+
+export default function SubPageHero({
+  image = "/images/shared/subpage-hero-bg.png",
+  alt = "",
+}: SubPageHeroProps) {
   return (
     <section className="relative h-[220px] overflow-hidden bg-yef-navy-deep sm:h-[320px] lg:h-[450px]">
       <Image
-        src="/images/shared/subpage-hero-bg.png"
-        alt=""
+        src={image}
+        alt={alt}
         fill
         priority
         sizes="100vw"
