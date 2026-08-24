@@ -36,7 +36,13 @@ export default function MissionSchoolCta() {
               className="mt-6 inline-flex items-center gap-2 font-semibold text-[15px] text-white leading-[20px] transition-opacity hover:opacity-80 lg:mt-[31px]"
             >
               Learn about the Mission School
-              <span aria-hidden="true">&rarr;</span>
+              <Image
+                src="/images/icons/icon-arrow-right-24-white.svg"
+                alt=""
+                width={24}
+                height={24}
+                aria-hidden="true"
+              />
             </Link>
             <p className="mt-6 font-medium text-lg text-white leading-[30px] lg:mt-[23px] lg:text-[19.2px]">
               We strive to equip young believers to know the Gospel, grow as
@@ -75,7 +81,13 @@ export default function MissionSchoolCta() {
                     </p>
                     <span className="mt-[39px] inline-flex items-center gap-[7px] rounded-full bg-[#6abbff] px-[18px] py-2.5 font-bold text-xs text-[#06222b] leading-[18px] tracking-[0.72px] uppercase">
                       {card.cta}
-                      <span aria-hidden="true">&rarr;</span>
+                      <Image
+                src="/images/icons/icon-arrow-right-24-white.svg"
+                alt=""
+                width={24}
+                height={24}
+                aria-hidden="true"
+              />
                     </span>
                   </div>
                 </Link>

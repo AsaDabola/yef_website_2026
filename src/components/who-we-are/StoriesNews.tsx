@@ -48,12 +48,14 @@ export default function StoriesNews() {
                   <h3 className="font-semibold text-[22.6px] text-black leading-[30px]">
                     {story.title}
                   </h3>
-                  <span
+                  <Image
+                    src="/images/icons/icon-arrow-up-right.svg"
+                    alt=""
+                    width={23}
+                    height={24}
                     aria-hidden="true"
-                    className="mt-1 text-2xl text-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                  >
-                    &#8599;
-                  </span>
+                    className="mt-[7px] shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                  />
                 </div>
                 <p className="mt-4 font-medium text-[15.2px] text-[#4b5565] leading-[24px]">
                   {story.body}

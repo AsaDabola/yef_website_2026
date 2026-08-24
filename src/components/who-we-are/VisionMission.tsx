@@ -78,7 +78,7 @@ export default function VisionMission() {
               >
                 Learn more about how we&rsquo;re different
                 <Image
-                  src="/images/icons/icon-arrow-right-blue.svg"
+                  src="/images/icons/icon-arrow-right-24-blue.svg"
                   alt=""
                   width={24}
                   height={24}
