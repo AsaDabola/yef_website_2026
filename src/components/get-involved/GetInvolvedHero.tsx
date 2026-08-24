@@ -12,7 +12,7 @@ export default function GetInvolvedHero() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/65 from-[14%] to-transparent to-[46%]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/63 from-[14.5%] to-transparent to-[46.2%]" />
 
       <HeaderV2 />
 

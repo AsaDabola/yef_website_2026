@@ -43,8 +43,8 @@ export default function GetInvolvedPage() {
                   ],
                   ["Acts", "1 & 2 Corinthians", "The Sermon on the Mount"],
                 ]}
-                image="/images/get-involved/bible-study-large-group.png"
-                alt="A YEF leader teaching a room of students"
+                image="/images/get-involved/bible-studies-sunset.png"
+                alt="The sun setting over a calm ocean"
                 ctas={[
                   { label: "More Info", href: "#bible-studies", primary: true },
                   { label: "Apply Bible Study", href: "/get-involved/apply" },
@@ -71,8 +71,8 @@ export default function GetInvolvedPage() {
                     "Support Letter Template",
                   ],
                 ]}
-                image="/images/home-v2/get-involved-summer-training.png"
-                alt="Students at YEF summer training"
+                image="/images/get-involved/summer-training-campus.png"
+                alt="YEF students setting up an outreach table on campus"
               />
 
               <MinistrySection
