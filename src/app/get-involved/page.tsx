@@ -43,8 +43,8 @@ export default function GetInvolvedPage() {
                   ],
                   ["Acts", "1 & 2 Corinthians", "The Sermon on the Mount"],
                 ]}
-                image="/images/home-v2/get-involved-bible-study.png"
-                alt="A student holding a Bible study guide"
+                image="/images/get-involved/bible-study-large-group.png"
+                alt="A YEF leader teaching a room of students"
                 ctas={[
                   { label: "More Info", href: "#bible-studies", primary: true },
                   { label: "Apply Bible Study", href: "/get-involved/apply" },
@@ -126,8 +126,8 @@ export default function GetInvolvedPage() {
                     "Ongoing Support",
                   ],
                 ]}
-                image="/images/home-v2/get-involved-leadership-training.png"
-                alt="Students in leadership training"
+                image="/images/get-involved/leadership-retreat-team.png"
+                alt="YEF leaders with arms raised at a leadership retreat"
               />
 
               <MinistrySection
@@ -142,8 +142,8 @@ export default function GetInvolvedPage() {
                     "Volunteer Stories",
                   ],
                 ]}
-                image="/images/get-involved/volunteering.png"
-                alt="A volunteer serving alongside a student"
+                image="/images/get-involved/volunteering-donation-drive.png"
+                alt="Volunteers sorting clothing at a donation drive"
               />
             </div>
           </div>
