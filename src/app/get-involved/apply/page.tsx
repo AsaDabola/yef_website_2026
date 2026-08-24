@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import ConnectForm from "@/components/get-involved/ConnectForm";
+import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
 
@@ -16,7 +17,7 @@ export default function ApplyPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/subpage-hero-bonfire.png"
+            src="/images/get-involved/banner-crowd.png"
             alt=""
             fill
             priority
@@ -27,20 +28,27 @@ export default function ApplyPage() {
           <HeaderV2 />
         </section>
 
-        {/* The frame runs the breadcrumb down the form column rather than the
-            page gutter, so both share the 922px card width. */}
-        <section className="mx-auto max-w-[922px] pt-[116px] pb-[110px]">
-          <div className="px-6 lg:px-[9px]">
-            <Breadcrumb label="Get Involved" />
-          </div>
-          <div className="mt-10">
-            <ConnectForm />
+        {/* The frame insets the sub-menu 80px from the left and opens the form
+            column at 482px, then runs the stories trio out to a 42px right
+            margin, aligned with the form card's inner edge. */}
+        <section className="mx-auto max-w-[1920px] px-6 pt-[115px] lg:pr-[42px] lg:pl-20">
+          <div className="flex flex-col gap-12 lg:flex-row lg:gap-[165px]">
+            <div className="shrink-0 lg:w-[237px]">
+              <GetInvolvedSubMenu />
+            </div>
+
+            <div className="min-w-0 flex-1">
+              <Breadcrumb label="Get Involved" />
+              <div className="mt-[41px] max-w-[922px]">
+                <ConnectForm />
+              </div>
+
+              <div className="mt-[133px] lg:pl-12">
+                <StoriesTrio divider={false} />
+              </div>
+            </div>
           </div>
         </section>
-
-        <div className="mx-auto max-w-[1391px] px-6">
-          <StoriesTrio divider={false} />
-        </div>
       </main>
       <Footer />
     </>

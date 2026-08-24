@@ -76,3 +76,25 @@ export function LabeledCheckboxField({
     </label>
   );
 }
+
+export function LabeledRadioField({
+  label,
+  name,
+  value,
+}: {
+  label: string;
+  name: string;
+  value: string;
+}) {
+  return (
+    <label className="flex items-center gap-2.5 text-[14px] leading-[18px] text-[#1b1d21]">
+      <input
+        type="radio"
+        name={name}
+        value={value}
+        className="size-[18px] shrink-0 border-[1.5px] border-[#bfc4cc] text-v2-blue focus:ring-v2-accent"
+      />
+      <span>{label}</span>
+    </label>
+  );
+}

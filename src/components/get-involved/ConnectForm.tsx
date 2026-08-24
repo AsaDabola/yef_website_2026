@@ -4,9 +4,22 @@ import { useState } from "react";
 import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import {
   LabeledCheckboxField,
+  LabeledRadioField,
   LabeledTextAreaField,
   LabeledTextField,
 } from "@/components/forms/LabeledField";
+
+const interests = [
+  "Bible Studies",
+  "Discipleship",
+  "Mission Trip",
+  "Summer Training",
+  "Internship",
+  "Leadership Training",
+  "Volunteer / Short-term Projects",
+  "Large Group",
+  "Vision Trip",
+];
 
 const growthAreas = [
   "Bible & Faith",
@@ -16,8 +29,33 @@ const growthAreas = [
   "Christian Community",
 ];
 
-export default function ConnectForm() {
+/**
+ * Two frames share this form. The Get Involved page leads with the display-face
+ * "CONNECT WITH YEFI" and asks the interest and Bible-study questions; the
+ * Mission School page drops both and titles the card in the body face.
+ */
+const variants = {
+  connect: {
+    title: "Connect With YEFI",
+    titleClassName:
+      "font-display font-extrabold text-[32px] text-[#2b4c7e] uppercase leading-[38px] sm:text-[46px] sm:leading-[55px]",
+    askInterests: true,
+  },
+  "mission-school": {
+    title: "Apply YEF Mission School",
+    titleClassName:
+      "font-bold text-[22px] text-[#2b4c7e] leading-[27px] sm:text-[26px] sm:leading-[31px]",
+    askInterests: false,
+  },
+} as const;
+
+export default function ConnectForm({
+  variant = "connect",
+}: {
+  variant?: keyof typeof variants;
+}) {
   const [submitted, setSubmitted] = useState(false);
+  const { title, titleClassName, askInterests } = variants[variant];
 
   if (submitted) {
     return (
@@ -38,9 +76,7 @@ export default function ConnectForm() {
       className="flex flex-col gap-8 rounded-2xl bg-white p-8 sm:p-12"
     >
       <div className="space-y-2.5">
-        <h1 className="font-bold text-[22px] leading-[27px] text-[#2b4c7e] sm:text-[26px] sm:leading-[31px]">
-          Apply YEF Mission School
-        </h1>
+        <h1 className={titleClassName}>{title}</h1>
         <p className="text-[14px] leading-[17px] text-[#6b737d]">
           Interested in studying the Bible or getting involved with YEFI?
           <br />
@@ -50,6 +86,38 @@ export default function ConnectForm() {
       </div>
 
       <div className="h-px w-full bg-[#dbdee3]" />
+
+      {askInterests && (
+        <>
+          <div className="space-y-3.5">
+            <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
+              What are you interested in?
+            </p>
+            <p className="text-[12px] leading-[15px] text-[#6b737d]">
+              Select all that apply.
+            </p>
+            <div className="space-y-2.5">
+              {interests.map((interest) => (
+                <LabeledCheckboxField
+                  key={interest}
+                  label={interest}
+                  name="interests"
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-3.5">
+            <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
+              Have you participated in a Bible study before?
+            </p>
+            <div className="flex gap-7">
+              <LabeledRadioField label="Yes" name="bibleStudy" value="yes" />
+              <LabeledRadioField label="No" name="bibleStudy" value="no" />
+            </div>
+          </div>
+        </>
+      )}
 
       <div className="space-y-3.5">
         <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">

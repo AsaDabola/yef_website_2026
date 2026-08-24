@@ -324,7 +324,7 @@ export default function YefMissionSchoolPage() {
                     Explore Mission School
                   </a>
                   <a
-                    href="/get-involved/apply"
+                    href="/yef-mission-school/apply"
                     className="inline-flex items-center justify-center rounded-2xl bg-white px-8 py-4 font-semibold text-yef-primary transition-transform duration-200 hover:scale-105 hover:opacity-90"
                   >
                     Apply for Mission School
