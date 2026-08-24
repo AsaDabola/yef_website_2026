@@ -13,10 +13,13 @@ export default function DonatePage() {
   return (
     <>
       <main>
-        <SubPageHero />
+        <SubPageHero
+          image="/images/shared/banner-donate.png"
+          alt="Turquoise surf breaking on a sunlit beach"
+        />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <Breadcrumb label="Donate" />
-          <h1 className="mt-6 text-center font-semibold text-4xl text-black sm:text-5xl">
+          <h1 className="mt-10 text-center font-display font-extrabold text-4xl text-black leading-[1.15] tracking-[-0.96px] sm:text-5xl lg:text-[46px] lg:leading-[60px]">
             Donate
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-center text-xl text-v2-muted-dark-2 leading-relaxed">
@@ -43,8 +46,8 @@ export default function DonatePage() {
             </div>
             <div className="relative min-h-[280px] w-full">
               <Image
-                src="/images/home-v2/get-involved-leadership-training.png"
-                alt="Students supporting one another"
+                src="/images/shared/donate-praying.png"
+                alt="Two students praying together at a YEF fellowship conference"
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"

@@ -19,7 +19,7 @@ export default function DonationForm() {
   if (submitted) {
     return (
       <SubmissionSuccess
-        className="mx-auto max-w-2xl"
+        className="mx-auto max-w-[900px]"
         title="Thank You!"
         message={`Your ${frequency.toLowerCase()} gift of $${displayAmount} helps students grow in faith, go on mission, and lead others closer to Christ.`}
       />
@@ -32,7 +32,7 @@ export default function DonationForm() {
         event.preventDefault();
         setSubmitted(true);
       }}
-      className="mx-auto max-w-2xl rounded-2xl border border-v2-border bg-white p-10"
+      className="mx-auto max-w-[900px] rounded-2xl border border-v2-border bg-white p-8 sm:p-12"
     >
       <h2 className="font-display font-extrabold text-2xl text-v2-navy">
         SUPPORT Youth Evangelical Fellowship
@@ -86,10 +86,10 @@ export default function DonationForm() {
           ))}
         </div>
         <label className="mt-4 block">
-          <span className="text-sm text-v2-muted-dark-2">
+          <span className="font-medium text-[13px] text-[#1b1d21]">
             Or enter a custom amount
           </span>
-          <div className="mt-2 flex items-center rounded-xl border border-v2-border px-4 py-3">
+          <div className="mt-1.5 flex items-center rounded-[8px] border border-[#d1d6de] bg-[#fafafb] px-3 py-2.5">
             <span className="text-v2-muted">$</span>
             <input
               type="number"
@@ -97,7 +97,7 @@ export default function DonationForm() {
               placeholder="Enter amount"
               value={customAmount}
               onChange={(event) => setCustomAmount(event.target.value)}
-              className="ml-2 w-full bg-transparent text-v2-navy placeholder:text-v2-muted focus:outline-none"
+              className="ml-2 w-full bg-transparent text-[13px] text-[#1b1d21] placeholder:text-[#9ea3ab] focus:outline-none"
             />
           </div>
         </label>
@@ -107,7 +107,7 @@ export default function DonationForm() {
         <p className="font-semibold text-black">Your Information</p>
         <div className="mt-4 space-y-4">
           <label className="block">
-            <span className="text-sm text-v2-muted-dark-2">Full Name</span>
+            <span className="font-medium text-[13px] text-[#1b1d21]">Full Name</span>
             <input
               type="text"
               required
@@ -116,7 +116,7 @@ export default function DonationForm() {
             />
           </label>
           <label className="block">
-            <span className="text-sm text-v2-muted-dark-2">Email</span>
+            <span className="font-medium text-[13px] text-[#1b1d21]">Email</span>
             <input
               type="email"
               required
@@ -131,7 +131,7 @@ export default function DonationForm() {
         <p className="font-semibold text-black">Payment Information</p>
         <div className="mt-4 space-y-4">
           <label className="block">
-            <span className="text-sm text-v2-muted-dark-2">Card Number</span>
+            <span className="font-medium text-[13px] text-[#1b1d21]">Card Number</span>
             <input
               type="text"
               required
@@ -141,7 +141,7 @@ export default function DonationForm() {
           </label>
           <div className="grid grid-cols-2 gap-4">
             <label className="block">
-              <span className="text-sm text-v2-muted-dark-2">Expiry</span>
+              <span className="font-medium text-[13px] text-[#1b1d21]">Expiry</span>
               <input
                 type="text"
                 required
@@ -150,7 +150,7 @@ export default function DonationForm() {
               />
             </label>
             <label className="block">
-              <span className="text-sm text-v2-muted-dark-2">CVC</span>
+              <span className="font-medium text-[13px] text-[#1b1d21]">CVC</span>
               <input
                 type="text"
                 required
@@ -167,7 +167,7 @@ export default function DonationForm() {
 
       <button
         type="submit"
-        className="mt-8 w-full rounded-xl bg-v2-blue py-4 font-semibold text-white tracking-[0.5px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+        className="mt-8 w-full rounded-[8px] bg-[#0066cf] py-3.5 font-bold text-[14px] text-white uppercase transition-opacity hover:opacity-90"
       >
         Donate ${displayAmount}
       </button>
