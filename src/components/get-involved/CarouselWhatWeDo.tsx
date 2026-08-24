@@ -32,7 +32,7 @@ export default function CarouselWhatWeDo() {
 
   const scrollByCard = (direction: 1 | -1) => {
     scrollerRef.current?.scrollBy({
-      left: direction * 320,
+      left: direction * 426,
       behavior: "smooth",
     });
   };
@@ -51,14 +51,14 @@ export default function CarouselWhatWeDo() {
       <Reveal delay={120}>
         <div
           ref={scrollerRef}
-          className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-10 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {cards.map((card) => (
             <div
               key={card.title}
-              className="w-[280px] shrink-0 snap-start rounded-2xl border border-v2-border bg-[#f6f7f9] p-6 transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02]"
+              className="w-[280px] shrink-0 snap-start rounded-[16px] border border-[#dcdfe5] bg-[#f6f7f9] p-6 transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] sm:w-[394px]"
             >
-              <div className="flex size-10 items-center justify-center rounded-2xl bg-white">
+              <div className="flex h-[56px] w-[40px] items-start justify-center rounded-[16px] bg-white pt-4">
                 <Image
                   src={card.icon}
                   alt=""
@@ -67,10 +67,10 @@ export default function CarouselWhatWeDo() {
                   aria-hidden="true"
                 />
               </div>
-              <p className="mt-8 font-semibold text-lg text-v2-navy">
+              <p className="mt-[64px] font-semibold text-[22.7px] text-black leading-[30px]">
                 {card.title}
               </p>
-              <p className="mt-3 text-[15px] text-v2-muted-dark-2 leading-relaxed">
+              <p className="mt-[7px] text-[15.3px] text-[#4b5565] leading-[24px]">
                 {card.body}
               </p>
             </div>
@@ -83,7 +83,7 @@ export default function CarouselWhatWeDo() {
           type="button"
           onClick={() => scrollByCard(-1)}
           aria-label="Previous"
-          className="flex size-[46px] items-center justify-center rounded-full border border-v2-border bg-white transition-colors hover:border-v2-navy"
+          className="flex size-[46px] items-center justify-center rounded-full border border-[#d0d5dc] bg-white transition-colors hover:border-v2-navy"
         >
           <Image
             src="/images/icons/icon-chevron-left.svg"

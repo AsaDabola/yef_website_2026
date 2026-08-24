@@ -26,7 +26,7 @@ export default function GetInvolvedPage() {
               <GetInvolvedSubMenu />
             </div>
 
-            <div className="flex-1">
+            <div className="min-w-0 flex-1">
               <Breadcrumb label="Get Involved" />
 
               <MinistrySection
