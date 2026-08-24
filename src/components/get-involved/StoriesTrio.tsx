@@ -3,21 +3,24 @@ import HoverGroup from "@/components/ui/HoverGroup";
 
 const stories = [
   {
-    title: "Why Do We Evangelize?",
-    body: "Explore hope-filled stories of how God is working through students on campuses around the world.",
-    image: "/images/get-involved/story-prayer.png",
+    title: "Sharing the Gospel",
+    body: "Through evangelism, we hope to help people encounter God's love, discover the truth of His Word, and begin a life of faith and discipleship.",
+    image: "/images/get-involved/mission-school-street-outreach.png",
+    alt: "YEF members handing out tracts on a European street",
     href: "/sharing-the-gospel",
   },
   {
-    title: "Why Campus Mission?",
-    body: "Every gift and hour given helps a new fellowship take root. See how we steward what's entrusted to us.",
-    image: "/images/get-involved/story-teacher.png",
+    title: "Reaching the Campus",
+    body: "The university years shape a person's future. Through campus mission, YEF shares the Gospel, nurtures students in God's Word, and raises disciples who can impact the world.",
+    image: "/images/get-involved/trio-reaching-the-campus.png",
+    alt: "A campus fellowship group gathered in a study lounge",
     href: "/reaching-the-campus",
   },
   {
-    title: "What is Evangelical?",
-    body: "Grounded in the Gospel, the Bible, and personal faith — see what shapes everything we do.",
-    image: "/images/get-involved/story-silhouette.png",
+    title: "Raising Disciples",
+    body: "Evangelical means being centered on the Gospel of Jesus Christ, the Bible, personal faith, and sharing the Good News with others.",
+    image: "/images/get-involved/trio-raising-disciples.png",
+    alt: "Two students swapping contact details outside a campus building",
     href: "/what-is-evangelical",
   },
 ];
@@ -25,30 +28,34 @@ const stories = [
 export default function StoriesTrio() {
   return (
     <section className="border-t border-black/10 py-16">
-      <HoverGroup className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+      <HoverGroup className="grid grid-cols-1 gap-[25px] sm:grid-cols-3">
         {stories.map((story) => (
           <a key={story.title} href={story.href} className="group block">
             <div className="relative aspect-[431/242] w-full overflow-hidden rounded-2xl">
               <Image
                 src={story.image}
-                alt={story.title}
+                alt={story.alt}
                 fill
                 sizes="(min-width: 1024px) 33vw, 100vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
             <div className="mt-6 flex items-start justify-between gap-4">
-              <h3 className="font-semibold text-2xl text-v2-navy">
+              <h3 className="font-semibold text-[22.6px] text-black leading-[30px]">
                 {story.title}
               </h3>
-              <span
+              <Image
+                src="/images/icons/icon-arrow-up-right.svg"
+                alt=""
+                width={23}
+                height={24}
                 aria-hidden="true"
-                className="mt-1 text-2xl text-v2-navy transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-              >
-                &#8599;
-              </span>
+                className="mt-[7px] shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
             </div>
-            <p className="mt-4 text-v2-muted-dark-2">{story.body}</p>
+            <p className="mt-4 font-medium text-[15.2px] text-[#4b5565] leading-[24px]">
+              {story.body}
+            </p>
           </a>
         ))}
       </HoverGroup>

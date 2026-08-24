@@ -15,7 +15,7 @@ export function LabeledTextField({
 }) {
   return (
     <label className={`block ${half ? "flex-1" : ""}`}>
-      <span className="mb-2 block font-medium text-sm text-v2-navy">
+      <span className="mb-1.5 block font-medium text-[13px] text-[#1b1d21]">
         {label}
       </span>
       <input
@@ -23,7 +23,7 @@ export function LabeledTextField({
         name={name}
         placeholder={placeholder}
         required={required}
-        className="w-full rounded-lg border border-v2-border bg-white px-3 py-2.5 text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/20"
+        className="w-full rounded-[8px] border border-[#d1d6de] bg-[#fafafb] px-3 py-2.5 text-[13px] text-[#1b1d21] placeholder:text-[#9ea3ab] focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/20"
       />
     </label>
   );
@@ -44,15 +44,15 @@ export function LabeledTextAreaField({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block font-medium text-sm text-v2-navy">
+      <span className="mb-1.5 block font-medium text-[13px] text-[#1b1d21]">
         {label}
       </span>
-      {hint && <span className="mb-2 block text-sm text-v2-muted">{hint}</span>}
+      {hint && <span className="mb-1.5 block text-[13px] text-[#6b737d]">{hint}</span>}
       <textarea
         name={name}
         placeholder={placeholder}
         rows={rows}
-        className="w-full rounded-lg border border-v2-border bg-white px-3 py-2.5 text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/20"
+        className="w-full rounded-[8px] border border-[#d1d6de] bg-[#fafafb] px-3 py-2.5 text-[13px] text-[#1b1d21] placeholder:text-[#9ea3ab] focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/20"
       />
     </label>
   );
@@ -66,11 +66,11 @@ export function LabeledCheckboxField({
   name: string;
 }) {
   return (
-    <label className="flex items-start gap-2.5 text-sm text-v2-muted-dark-2">
+    <label className="flex items-center gap-2.5 text-[14px] text-[#1b1d21]">
       <input
         type="checkbox"
         name={name}
-        className="mt-0.5 size-[18px] shrink-0 rounded border-v2-border text-v2-blue focus:ring-v2-accent"
+        className="size-[18px] shrink-0 rounded-[4px] border-[1.5px] border-[#bfc4cc] text-v2-blue focus:ring-v2-accent"
       />
       <span>{label}</span>
     </label>

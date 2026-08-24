@@ -8,18 +8,6 @@ import {
   LabeledTextField,
 } from "@/components/forms/LabeledField";
 
-const interests = [
-  "Bible Studies",
-  "Discipleship",
-  "Mission Trip",
-  "Summer Training",
-  "Internship",
-  "Leadership Training",
-  "Volunteer / Short-term Projects",
-  "Large Group",
-  "Vision Trip",
-];
-
 const growthAreas = [
   "Bible & Faith",
   "Discipleship",
@@ -47,72 +35,37 @@ export default function ConnectForm() {
         event.preventDefault();
         setSubmitted(true);
       }}
+      className="flex flex-col gap-8 rounded-2xl bg-white p-8 sm:p-12"
     >
-      <h1 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
-        Connect With YEFI
-      </h1>
-      <p className="mt-3 max-w-xl text-v2-muted-dark-2 leading-relaxed">
-        Interested in studying the Bible or getting involved with YEFI? Tell
-        us what you&rsquo;re interested in, and we&rsquo;ll help you find the
-        right opportunity.
-      </p>
-
-      <div className="mt-8 border-t border-v2-border pt-8">
-        <p className="font-semibold text-black">
-          What are you interested in?
+      <div className="space-y-2.5">
+        <h1 className="font-bold text-[22px] text-[#2b4c7e] sm:text-[26px]">
+          Apply YEF Mission School
+        </h1>
+        <p className="text-[14px] text-[#6b737d]">
+          Interested in studying the Bible or getting involved with YEFI? Tell
+          us what you&rsquo;re interested in, and we&rsquo;ll help you find the
+          right opportunity.
         </p>
-        <p className="mt-1 text-sm text-v2-muted">Select all that apply.</p>
-        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {interests.map((interest) => (
-            <LabeledCheckboxField
-              key={interest}
-              label={interest}
-              name="interests"
-            />
-          ))}
-        </div>
       </div>
 
-      <div className="mt-8 border-t border-v2-border pt-8">
-        <p className="font-semibold text-black">
-          Have you participated in a Bible study before?
-        </p>
-        <div className="mt-4 flex gap-8">
-          <label className="flex items-center gap-2.5 text-v2-muted-dark-2">
-            <input
-              type="radio"
-              name="bibleStudyExperience"
-              value="yes"
-              className="size-[18px] text-v2-blue focus:ring-v2-accent"
-            />
-            Yes
-          </label>
-          <label className="flex items-center gap-2.5 text-v2-muted-dark-2">
-            <input
-              type="radio"
-              name="bibleStudyExperience"
-              value="no"
-              className="size-[18px] text-v2-blue focus:ring-v2-accent"
-            />
-            No
-          </label>
-        </div>
-      </div>
+      <div className="h-px w-full bg-[#dbdee3]" />
 
-      <div className="mt-8 border-t border-v2-border pt-8">
-        <p className="font-semibold text-black">
+      <div className="space-y-3.5">
+        <p className="font-semibold text-[16px] text-[#1b1d21]">
           What would you like to learn or grow in?
         </p>
-        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="space-y-2.5">
           {growthAreas.map((area) => (
             <LabeledCheckboxField key={area} label={area} name="growthAreas" />
           ))}
         </div>
       </div>
 
-      <div className="mt-8 border-t border-v2-border pt-8">
-        <p className="font-semibold text-black">Your Information</p>
-        <div className="mt-5 space-y-5">
+      <div className="space-y-3.5">
+        <p className="font-semibold text-[16px] text-[#1b1d21]">
+          Your Information
+        </p>
+        <div className="space-y-4">
           <LabeledTextField
             label="Name"
             placeholder="First & Last Name"
@@ -136,13 +89,14 @@ export default function ConnectForm() {
             label="Message"
             placeholder="Tell us how we can help you"
             name="message"
+            rows={4}
           />
         </div>
       </div>
 
       <button
         type="submit"
-        className="mt-8 w-full rounded-full bg-yef-primary py-4 font-semibold text-xs text-white tracking-[1.5px] uppercase transition-transform duration-200 hover:scale-[1.01] hover:opacity-90"
+        className="w-full rounded-[8px] bg-[#0066cf] px-7 py-3.5 font-bold text-[14px] text-white uppercase transition-opacity hover:opacity-90"
       >
         Connect With YEFI
       </button>
