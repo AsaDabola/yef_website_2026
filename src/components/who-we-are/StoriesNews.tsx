@@ -7,22 +7,19 @@ const stories = [
   {
     title: "Sharing the Gospel",
     body: "Through evangelism, we hope to help people encounter God's love, discover the truth of His Word, and begin a life of faith and discipleship.",
-    image:
-      "https://www.figma.com/api/mcp/asset/871bd08d-5798-4c41-97b1-195076236fc7.png",
+    image: "/images/who-we-are/story-sharing-the-gospel.png",
     href: "/sharing-the-gospel",
   },
   {
     title: "Reaching the Campus",
     body: "The university years shape a person's future. Through campus mission, YEF shares the Gospel, nurtures students in God's Word, and raises disciples who can impact the world.",
-    image:
-      "https://www.figma.com/api/mcp/asset/efc3559b-711d-48a8-b628-6921819d790c.png",
+    image: "/images/who-we-are/story-reaching-the-campus.png",
     href: "/reaching-the-campus",
   },
   {
     title: "Raising Disciples",
     body: "Evangelical means being centered on the Gospel of Jesus Christ, the Bible, personal faith, and sharing the Good News with others.",
-    image:
-      "https://www.figma.com/api/mcp/asset/29d88f9d-6030-4578-9aee-ba7af6583dfc.png",
+    image: "/images/who-we-are/story-raising-disciples.png",
     href: "/raising-disciples",
   },
 ];

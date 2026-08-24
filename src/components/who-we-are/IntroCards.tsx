@@ -19,7 +19,7 @@ const cards = [
     cta: "JOIN US",
     href: "/who-we-are/membership",
     image: "/images/who-we-are/intro-membership.png",
-    alt: "A modern glass office building",
+    alt: "Three students smiling together outdoors on a mission trip",
   },
   {
     eyebrow: ["WHAT WE", "BELIEVE AND", "TEACH"],
@@ -27,7 +27,7 @@ const cards = [
     cta: "READ MORE",
     href: "/who-we-are/statement-of-faith",
     image: "/images/who-we-are/intro-statement-of-faith.png",
-    alt: "A modern cinema building",
+    alt: "A wooden cross resting on an open Bible before a world map",
   },
 ];
 

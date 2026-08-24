@@ -7,7 +7,7 @@ export default function WhoWeAreHero() {
     <section className="font-body relative min-h-[760px] overflow-hidden bg-v2-navy lg:min-h-[61vw]">
       <div className="absolute inset-0 bg-gradient-to-b from-v2-navy via-v2-blue via-55% to-[#00142a]" />
       <Image
-        src="https://www.figma.com/api/mcp/asset/9d522f15-766c-4b95-997d-0b0baf91be2a.png"
+        src="/images/who-we-are/hero-mountains.png"
         alt="Mountain range at dusk"
         fill
         priority
@@ -47,7 +47,7 @@ export default function WhoWeAreHero() {
         <div className="xl:pt-5">
           <div className="relative aspect-[655/492] w-full overflow-hidden rounded-2xl">
             <Image
-              src="https://www.figma.com/api/mcp/asset/853c6712-feed-4077-9e8e-0d5fe838eacd.png"
+              src="/images/who-we-are/hero-president-portrait.png"
               alt="Dr. Mark Wagner, President of Youth Evangelical Fellowship"
               fill
               sizes="(min-width: 1280px) 43vw, 90vw"
