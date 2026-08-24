@@ -38,20 +38,21 @@ export default function ConnectForm() {
       className="flex flex-col gap-8 rounded-2xl bg-white p-8 sm:p-12"
     >
       <div className="space-y-2.5">
-        <h1 className="font-bold text-[22px] text-[#2b4c7e] sm:text-[26px]">
+        <h1 className="font-bold text-[22px] leading-[27px] text-[#2b4c7e] sm:text-[26px] sm:leading-[31px]">
           Apply YEF Mission School
         </h1>
-        <p className="text-[14px] text-[#6b737d]">
-          Interested in studying the Bible or getting involved with YEFI? Tell
-          us what you&rsquo;re interested in, and we&rsquo;ll help you find the
-          right opportunity.
+        <p className="text-[14px] leading-[17px] text-[#6b737d]">
+          Interested in studying the Bible or getting involved with YEFI?
+          <br />
+          Tell us what you&rsquo;re interested in, and we&rsquo;ll help you find
+          the right opportunity.
         </p>
       </div>
 
       <div className="h-px w-full bg-[#dbdee3]" />
 
       <div className="space-y-3.5">
-        <p className="font-semibold text-[16px] text-[#1b1d21]">
+        <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
           What would you like to learn or grow in?
         </p>
         <div className="space-y-2.5">
@@ -62,7 +63,7 @@ export default function ConnectForm() {
       </div>
 
       <div className="space-y-3.5">
-        <p className="font-semibold text-[16px] text-[#1b1d21]">
+        <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
           Your Information
         </p>
         <div className="space-y-4">
@@ -96,7 +97,7 @@ export default function ConnectForm() {
 
       <button
         type="submit"
-        className="w-full rounded-[8px] bg-[#0066cf] px-7 py-3.5 font-bold text-[14px] text-white uppercase transition-opacity hover:opacity-90"
+        className="w-full rounded-[8px] bg-[#0066cf] px-7 py-3.5 font-bold text-[14px] leading-[17px] text-white uppercase transition-opacity hover:opacity-90"
       >
         Connect With YEFI
       </button>

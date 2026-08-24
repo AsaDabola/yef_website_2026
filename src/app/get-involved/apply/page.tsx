@@ -16,7 +16,7 @@ export default function ApplyPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src="/images/get-involved/subpage-hero-bonfire.png"
             alt=""
             fill
             priority
@@ -27,15 +27,19 @@ export default function ApplyPage() {
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1440px] px-6 py-16 lg:px-12">
-          <Breadcrumb label="Get Involved" />
-          <div className="mx-auto mt-10 max-w-[922px]">
+        {/* The frame runs the breadcrumb down the form column rather than the
+            page gutter, so both share the 922px card width. */}
+        <section className="mx-auto max-w-[922px] pt-[116px] pb-[110px]">
+          <div className="px-6 lg:px-[9px]">
+            <Breadcrumb label="Get Involved" />
+          </div>
+          <div className="mt-10">
             <ConnectForm />
           </div>
         </section>
 
-        <div className="mx-auto max-w-[1800px] px-6 lg:px-16">
-          <StoriesTrio />
+        <div className="mx-auto max-w-[1391px] px-6">
+          <StoriesTrio divider={false} />
         </div>
       </main>
       <Footer />

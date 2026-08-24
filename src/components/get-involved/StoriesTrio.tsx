@@ -25,9 +25,11 @@ const stories = [
   },
 ];
 
-export default function StoriesTrio() {
+export default function StoriesTrio({ divider = true }: { divider?: boolean }) {
   return (
-    <section className="border-t border-black/10 py-16">
+    <section
+      className={`py-16 ${divider ? "border-t border-black/10" : ""}`}
+    >
       <HoverGroup className="grid grid-cols-1 gap-[25px] sm:grid-cols-3">
         {stories.map((story) => (
           <a key={story.title} href={story.href} className="group block">
