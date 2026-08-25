@@ -58,8 +58,8 @@ export default function NetworkPage() {
 
               <div className="relative aspect-[653/492] w-full overflow-hidden rounded-2xl shadow-[0_30px_80px_rgba(2,8,16,0.55)]">
                 <Image
-                  src="/images/get-involved/photo-embrace-1.png"
-                  alt="YEF members gathered in a circle, arms around one another in prayer"
+                  src="/images/network/hero-global-network.png"
+                  alt="A circle of YEF members with their arms around one another in prayer"
                   fill
                   priority
                   sizes="(min-width: 1024px) 653px, 100vw"
