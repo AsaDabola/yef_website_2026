@@ -3,13 +3,20 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import NewsGrid from "@/components/news/NewsGrid";
+import { getNewsArticles } from "@/lib/posts";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "News | Youth Evangelical Fellowship",
 };
 
-export default function NewsPage() {
+// Editors publish through /admin, so re-read the CMS rather than baking the
+// list in at deploy time.
+export const revalidate = 60;
+
+export default async function NewsPage() {
+  const posts = await getNewsArticles();
+
   return (
     <>
       <main>
@@ -27,7 +34,7 @@ export default function NewsPage() {
         </section>
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <Breadcrumb label="News" />
-          <NewsGrid />
+          <NewsGrid posts={posts} />
         </section>
       </main>
       <Footer />

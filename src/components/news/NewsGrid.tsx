@@ -3,18 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { newsArticles } from "@/lib/news";
+import type { NewsArticle } from "@/lib/news";
 import HoverGroup from "@/components/ui/HoverGroup";
 
 const tabs = ["View All", "News", "Story", "Event"];
 
-export default function NewsGrid() {
+export default function NewsGrid({ posts }: { posts: NewsArticle[] }) {
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const articles =
     activeTab === "View All"
-      ? newsArticles
-      : newsArticles.filter((article) => article.tag === activeTab);
+      ? posts
+      : posts.filter((article) => article.tag === activeTab);
 
   return (
     <div>

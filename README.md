@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Editing news and events
+
+The News page and the home page's "Around the Movement" strip are edited through
+a Payload admin that runs inside this site at `/admin`. See
+[docs/cms.md](docs/cms.md) for editor and setup instructions.
+
 ## Getting Started
 
 First, run the development server:

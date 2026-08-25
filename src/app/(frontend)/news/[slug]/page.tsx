@@ -5,13 +5,15 @@ import { notFound } from "next/navigation";
 import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
-import { getArticleBySlug, newsArticles } from "@/lib/news";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+import { getArticle, getNewsArticles } from "@/lib/posts";
 import { forgivenessArticleBody } from "@/lib/articleContent";
 import { ShareIcon } from "@/components/ui/SocialIcons";
 
-export function generateStaticParams() {
-  return newsArticles.map((article) => ({ slug: article.slug }));
-}
+// Editors publish through /admin, so re-read the CMS rather than baking each
+// article in at deploy time.
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -19,8 +21,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
-  return { title: article ? `${article.title} | Youth Evangelical Fellowship` : "News" };
+  const found = await getArticle(slug);
+  return {
+    title: found
+      ? `${found.article.title} | Youth Evangelical Fellowship`
+      : "News",
+  };
 }
 
 export default async function NewsArticlePage({
@@ -29,10 +35,11 @@ export default async function NewsArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
-  if (!article) notFound();
+  const found = await getArticle(slug);
+  if (!found) notFound();
+  const { article, body } = found;
 
-  const related = newsArticles
+  const related = (await getNewsArticles())
     .filter((item) => item.slug !== slug)
     .slice(0, 3);
 
@@ -86,7 +93,9 @@ export default async function NewsArticlePage({
 
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_320px]">
             <div className="max-w-2xl space-y-6 text-lg text-black leading-relaxed">
-              {isForgiveness ? (
+              {body ? (
+                <RichText data={body as SerializedEditorState} />
+              ) : isForgiveness ? (
                 <>
                   <p>
                     We&rsquo;ve all said the words &ldquo;I forgive

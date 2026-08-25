@@ -1,0 +1,159 @@
+import type { Where } from "payload";
+import { newsArticles, type NewsArticle } from "@/lib/news";
+
+export type MovementItem = {
+  tag: string;
+  title: string;
+  image: string;
+  alt: string;
+  href?: string;
+};
+
+/**
+ * The strip and the news grid fall back to the copy that shipped with the site
+ * whenever the CMS is not configured, so the marketing pages keep building and
+ * deploying before anyone has provisioned a database.
+ */
+const fallbackMovementItems: MovementItem[] = [
+  {
+    tag: "Bible Study",
+    title: "Summer Training 2027",
+    image: "/images/home-v2/slide-2-students.png",
+    alt: "Students gathered together for Summer Training 2027",
+  },
+  {
+    tag: "FIELD REPORT",
+    title: "YEF Africa Grows",
+    image: "/images/home-v2/movement-africa.png",
+    alt: "YEF Africa field team",
+  },
+  {
+    tag: "NEW CHAPTER",
+    title: "YEF Europe Summer Camp",
+    image: "/images/home-v2/movement-europe.png",
+    alt: "YEF Europe summer camp students jumping for a photo",
+  },
+];
+
+export const cmsConfigured = Boolean(
+  process.env.DATABASE_URI && process.env.PAYLOAD_SECRET,
+);
+
+type MediaValue = {
+  url?: string | null;
+  alt?: string | null;
+  sizes?: Record<string, { url?: string | null } | undefined>;
+};
+
+type PostDoc = {
+  slug: string;
+  title: string;
+  category: string;
+  excerpt: string;
+  publishedAt: string;
+  homeEyebrow?: string | null;
+  image?: MediaValue | string | null;
+  body?: unknown;
+};
+
+function mediaUrl(image: PostDoc["image"], size?: "card" | "tile") {
+  if (!image || typeof image === "string") return null;
+  return image.sizes?.[size ?? ""]?.url || image.url || null;
+}
+
+function mediaAlt(image: PostDoc["image"]) {
+  if (!image || typeof image === "string") return "";
+  return image.alt ?? "";
+}
+
+function formatDate(value: string) {
+  return new Date(value).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+async function findPosts(where?: Where, limit = 100) {
+  const [{ getPayload }, { default: config }] = await Promise.all([
+    import("payload"),
+    import("@payload-config"),
+  ]);
+  const payload = await getPayload({ config });
+  const { docs } = await payload.find({
+    collection: "posts",
+    depth: 1,
+    limit,
+    sort: "-publishedAt",
+    where,
+  });
+  return docs as unknown as PostDoc[];
+}
+
+export async function getNewsArticles(): Promise<NewsArticle[]> {
+  if (!cmsConfigured) return newsArticles;
+  try {
+    const docs = await findPosts();
+    if (docs.length === 0) return newsArticles;
+    return docs.map((doc) => ({
+      slug: doc.slug,
+      tag: doc.category,
+      title: doc.title,
+      excerpt: doc.excerpt,
+      image: mediaUrl(doc.image, "card") ?? "/images/news/article-philippines.png",
+      date: formatDate(doc.publishedAt),
+    }));
+  } catch (error) {
+    console.error("Falling back to bundled news: ", error);
+    return newsArticles;
+  }
+}
+
+export async function getMovementItems(): Promise<MovementItem[]> {
+  if (!cmsConfigured) return fallbackMovementItems;
+  try {
+    const docs = await findPosts({ showOnHome: { equals: true } }, 3);
+    if (docs.length === 0) return fallbackMovementItems;
+    return docs.map((doc) => ({
+      tag: doc.homeEyebrow || doc.category,
+      title: doc.title,
+      image: mediaUrl(doc.image, "tile") ?? "/images/home-v2/movement-africa.png",
+      alt: mediaAlt(doc.image) || doc.title,
+      href: `/news/${doc.slug}`,
+    }));
+  } catch (error) {
+    console.error("Falling back to bundled movement items: ", error);
+    return fallbackMovementItems;
+  }
+}
+
+export type ArticleWithBody = { article: NewsArticle; body: unknown | null };
+
+export async function getArticle(
+  slug: string,
+): Promise<ArticleWithBody | null> {
+  if (cmsConfigured) {
+    try {
+      const docs = await findPosts({ slug: { equals: slug } }, 1);
+      const doc = docs[0];
+      if (doc) {
+        return {
+          article: {
+            slug: doc.slug,
+            tag: doc.category,
+            title: doc.title,
+            excerpt: doc.excerpt,
+            image:
+              mediaUrl(doc.image) ?? "/images/news/article-philippines.png",
+            date: formatDate(doc.publishedAt),
+          },
+          body: doc.body ?? null,
+        };
+      }
+    } catch (error) {
+      console.error("Falling back to the bundled article: ", error);
+    }
+  }
+  const bundled = newsArticles.find((item) => item.slug === slug);
+  return bundled ? { article: bundled, body: null } : null;
+}
