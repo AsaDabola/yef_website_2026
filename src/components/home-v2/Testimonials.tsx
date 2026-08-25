@@ -44,11 +44,13 @@ export default function Testimonials() {
         </Reveal>
 
         <Reveal delay={120}>
-          <HoverGroup className="mt-16 grid grid-cols-1 gap-px overflow-hidden bg-v2-border sm:grid-cols-3">
+          <HoverGroup className="mt-16 grid grid-cols-1 divide-y divide-v2-border overflow-hidden sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {/* h-full keeps every card the height of its cell so the rules
+                between them run the full height whatever the quotes reflow to. */}
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.name}
-                className="bg-white px-10 pb-10 pt-[46px]"
+                className="h-full bg-white px-10 pt-[46px] pb-10"
               >
                 <p className="font-instrument-serif text-4xl text-yef-primary">
                   &ldquo;
