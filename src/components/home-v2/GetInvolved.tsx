@@ -28,27 +28,27 @@ const cards = [
   },
   {
     tag: "Short Term",
-    title: "Mission Trips",
-    body: "Local and overseas. The fastest way to learn what mission actually costs — and what it is actually worth.",
-    image: "/images/home-v2/get-involved-mission-trips.png",
-  },
-  {
-    tag: "Weekly",
     title: "Mission Trip",
-    body: "One-on-one and in groups. A teacher meets you where your schedule allows and walks the text with you — no prior background assumed.",
-    image: "/images/who-we-are/hero-mountains.png",
+    body: "Local and overseas. The fastest way to learn what mission actually costs — and what it is actually worth.",
+    image: "/images/home-v2/get-involved-mission-trip.png",
   },
   {
     tag: "Each Summer",
     title: "Short-term Mission",
     body: "Three to seven days in the US and Korea. Word, prayer, and long meals with students who came from the other side of the world.",
-    image: "/images/get-involved/summer-training-campus.png",
+    image: "/images/home-v2/get-involved-short-term-mission.png",
   },
   {
     tag: "By Invitation",
     title: "Discipleship Training",
     body: "For those who have finished discipleship and are ready to teach. You become a missionary to the campus you already attend.",
-    image: "/images/get-involved/bible-studies-sunset.png",
+    image: "/images/home-v2/get-involved-discipleship-training.png",
+  },
+  {
+    tag: "Year Round",
+    title: "Volunteering",
+    body: "Help build the movement in your local chapter with the talents you already have — video, design, tech, events, and more.",
+    image: "/images/home-v2/get-involved-volunteering.png",
   },
 ];
 
