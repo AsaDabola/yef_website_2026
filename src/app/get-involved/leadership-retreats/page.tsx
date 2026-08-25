@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
-import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
@@ -17,7 +16,7 @@ export default function LeadershipRetreatsPage() {
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/subpage-hero-bonfire.png"
+            src="/images/get-involved/banner-worship-crowd.png"
             alt=""
             fill
             priority
@@ -28,120 +27,133 @@ export default function LeadershipRetreatsPage() {
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
-          <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
-            <div className="shrink-0 lg:w-[237px]">
-              <GetInvolvedSubMenu />
-            </div>
+        {/* The frame drops the Get Involved sub-menu here and runs one 1344px
+            column down the middle of the page. */}
+        <section className="mx-auto max-w-[1392px] px-6 pt-[111px]">
+          <Breadcrumb label="Leadership Training" />
 
-            <div className="flex-1">
-              <Breadcrumb label="Leadership Training" />
+          <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
+            International Leadership Retreats
+          </h1>
+          <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
+            Strengthening Leaders. Building the Mission. Preparing the Next
+            Generation.
+          </p>
 
-              <h1 className="mt-6 font-display font-extrabold text-4xl text-v2-navy tracking-[-0.8px] sm:text-5xl">
-                International Leadership Retreats
-              </h1>
-              <p className="mt-4 max-w-2xl font-medium text-lg text-yef-primary">
-                Strengthening Leaders. Building the Mission. Preparing the
-                Next Generation.
-              </p>
+          <div className="mt-[84px]">
+            <GalleryMosaic
+              images={[
+                {
+                  src: "/images/get-involved/retreat-team-jump.png",
+                  alt: "YEF leaders leaping on the lawn outside the retreat house",
+                },
+                {
+                  src: "/images/get-involved/gallery-street-outreach.png",
+                  alt: "Team members sharing the gospel on the street",
+                },
+                {
+                  src: "/images/get-involved/gallery-campus-chat.png",
+                  alt: "Team members talking on a university campus",
+                },
+              ]}
+            />
+          </div>
 
-              <p className="mt-6 max-w-3xl text-v2-muted-dark-2 leading-relaxed">
-                YEF International Leadership Retreats bring together
-                ministers, chapter leaders, missionaries, staff, and
-                emerging leaders from around the world for concentrated
-                times of spiritual renewal, leadership training, fellowship,
-                and mission planning.
+          {/* The body column stops at 849px and the Mark 10:45 pull-quote sits
+              beside it, dropped 81px below the first paragraph. */}
+          <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
+            <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
+              <p>
+                YEF International Leadership Retreats bring together ministers,
+                chapter leaders, missionaries, staff, and emerging leaders from
+                around the world for concentrated times of spiritual renewal,
+                leadership training, fellowship, and mission planning.
               </p>
-              <p className="mt-4 max-w-3xl text-v2-muted-dark-2 leading-relaxed">
-                Leadership in YEF begins with faith. Before we can lead
-                others, we must continually allow ourselves to be led by
-                God through His Word. For this reason, the Leadership
-                Retreat is not simply a conference about methods,
-                strategies, or organizational development. It is first a
-                time for leaders to gather before God, examine their faith
-                and mission, strengthen their spiritual foundation, and
-                renew their calling to serve the Gospel.
+              <p>
+                Leadership in YEF begins with faith. Before we can lead others,
+                we must continually allow ourselves to be led by God through
+                His Word. For this reason, the Leadership Retreat is not simply
+                a conference about methods, strategies, or organizational
+                development. It is first a time for leaders to gather before
+                God, examine their faith and mission, strengthen their
+                spiritual foundation, and renew their calling to serve the
+                Gospel.
               </p>
-              <p className="mt-4 max-w-3xl text-v2-muted-dark-2 leading-relaxed">
-                The retreat also provides an important opportunity for
-                leaders serving in different nations and regions to meet
-                one another personally. Although each mission field faces
-                different circumstances, YEF leaders share one calling: to
-                reach the younger generation with the Gospel, raise
-                disciples through the Word of God, and establish strong
-                mission communities that can continue carrying the Gospel
-                forward.
+              <p>
+                The retreat also provides an important opportunity for leaders
+                serving in different nations and regions to meet one another
+                personally. Although each mission field faces different
+                circumstances, YEF leaders share one calling: to reach the
+                younger generation with the Gospel, raise disciples through the
+                Word of God, and establish strong mission communities that can
+                continue carrying the Gospel forward.
               </p>
-              <p className="mt-4 max-w-3xl text-v2-muted-dark-2 leading-relaxed">
+              <p>
                 Above all, the retreat seeks to remind every leader that
-                Christian leadership is ultimately service. Jesus taught
-                His disciples that greatness in the Kingdom of God is not
-                found in position or recognition, but in becoming a servant
-                of others. Through International Leadership Retreats, YEF
-                seeks to strengthen this foundation and build a worldwide
-                network of leaders who share the same Gospel, the same
-                mission, and the same hope for the next generation.
+                Christian leadership is ultimately service. Jesus taught His
+                disciples that greatness in the Kingdom of God is not found in
+                position or recognition, but in becoming a servant of others.
               </p>
-
-              <div className="mt-12">
-                <GalleryMosaic
-                  images={[
-                    {
-                      src: "/images/get-involved/gallery-christmas-retreat.png",
-                      alt: "Leaders gathered at a YEF Christmas retreat",
-                    },
-                    {
-                      src: "/images/get-involved/gallery-street-outreach.png",
-                      alt: "Team members sharing the gospel on the street",
-                    },
-                    {
-                      src: "/images/get-involved/gallery-campus-chat.png",
-                      alt: "Team members talking on a university campus",
-                    },
-                  ]}
-                />
-              </div>
-
-              <div className="mt-16 grid grid-cols-1 items-center gap-10 rounded-2xl border border-v2-border bg-v2-bg p-8 sm:grid-cols-[1fr_344px] sm:p-12">
-                <div>
-                  <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
-                    Join an Upcoming Retreat
-                  </h2>
-                  <p className="mt-4 max-w-lg text-v2-muted-dark-2 leading-relaxed">
-                    Join YEF leaders from around the world for a time of
-                    spiritual renewal, training, fellowship, and preparation
-                    for the mission ahead.
-                  </p>
-                  <div className="mt-8 flex flex-wrap gap-4">
-                    <a
-                      href="/get-involved/apply"
-                      className="inline-flex items-center justify-center rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
-                    >
-                      View Upcoming Retreats
-                    </a>
-                    <a
-                      href="/get-involved/apply"
-                      className="inline-flex items-center justify-center rounded-full border border-v2-border px-8 py-4 font-semibold text-xs text-v2-navy tracking-[1px] uppercase transition-all duration-200 hover:scale-105 hover:border-v2-navy"
-                    >
-                      Apply to Attend
-                    </a>
-                  </div>
-                </div>
-                <div className="relative aspect-[344/300] w-full overflow-hidden rounded-2xl sm:aspect-[344/400]">
-                  <Image
-                    src="/images/get-involved/photo-embrace-2.png"
-                    alt="A missionary embracing a child on outreach"
-                    fill
-                    sizes="(min-width: 1024px) 25vw, 90vw"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+              <p>
+                Through International Leadership Retreats, YEF seeks to
+                strengthen this foundation and build a worldwide network of
+                leaders who share the same Gospel, the same mission, and the
+                same hope for the next generation.
+              </p>
             </div>
+
+            <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
+              &ldquo;For even the Son of Man came not to be served but to serve,
+              and to give his life as a ransom for many.&rdquo;
+              <br />&mdash; Mark 10:45
+            </p>
+          </div>
+
+          <div className="mt-[132px] grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
+            <div className="relative min-h-[320px] w-full lg:min-h-[640px]">
+              <Image
+                src="/images/get-involved/leadership-retreat-team.png"
+                alt="YEF leaders gathered together at an international retreat"
+                fill
+                sizes="(min-width: 1024px) 672px, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col justify-center px-8 py-12 lg:py-0 lg:pr-[108px] lg:pl-12">
+              <h2 className="font-display font-semibold text-3xl text-black tracking-[-0.64px] lg:text-[46px] lg:leading-[46px]">
+                Upcoming
+                <br />
+                Leadership Retreats
+              </h2>
+              <p className="mt-4 font-medium text-[#4b5565] text-base leading-[30px] lg:text-[18.9px]">
+                Join YEF leaders from around the world for a time of spiritual
+                renewal, training, fellowship, and preparation for the mission
+                ahead.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-[122px] flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-[83px]">
+            <a
+              href="/get-involved/apply"
+              className="flex w-full max-w-[515px] items-center justify-center rounded-2xl border border-[#0066cf] bg-[#0066cf] px-6 py-8 text-center font-sans font-semibold text-white text-xl leading-[28.8px] transition-opacity hover:opacity-90 lg:h-[158px] lg:py-0 lg:text-[28px]"
+            >
+              View Upcoming
+              <br />
+              Leadership Retreats
+            </a>
+            <a
+              href="/get-involved/apply"
+              className="flex w-full max-w-[515px] items-center justify-center rounded-2xl border border-[#b1b1b1] bg-white px-6 py-8 text-center font-sans font-semibold text-[#0066cf] text-xl leading-[28.8px] transition-colors hover:border-[#0066cf] lg:h-[158px] lg:py-0 lg:text-[28px]"
+            >
+              Apply to Attend
+            </a>
           </div>
         </section>
 
-        <MissionSchoolCta />
+        <div className="mt-[178px]">
+          <MissionSchoolCta />
+        </div>
       </main>
       <Footer />
     </>
