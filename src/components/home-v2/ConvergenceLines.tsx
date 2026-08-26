@@ -16,7 +16,12 @@ const W = 1440;
 const H = 620;
 /** Right of centre, clear of the copy column. */
 const CX = W * 0.72;
-const CY = H / 2;
+/**
+ * Low enough that the lines meet on the rule dividing the verse from the two
+ * columns below it, rather than floating in the middle of the headline. The
+ * fraction is measured against the band's rendered height at desktop width.
+ */
+const CY = H * 0.68;
 
 /** One line from an edge into the meeting point, flat before it sweeps in. */
 function path(y: number, fromLeft: boolean): string {
@@ -27,11 +32,13 @@ function path(y: number, fromLeft: boolean): string {
 }
 
 export default function ConvergenceLines() {
-  // Lines crowd toward the middle, keeping the fan dense at the waist and airy
-  // at the top and bottom rather than evenly striped.
+  // Lines crowd toward the waist, keeping the fan dense where they meet and
+  // airy at the top and bottom rather than evenly striped. The spread reaches
+  // past the band on both sides so the fan still fills it now that the
+  // meeting point sits low.
   const ys = Array.from({ length: LINES }, (_, i) => {
     const t = (i / (LINES - 1)) * 2 - 1; // -1 … 1
-    return CY + Math.sign(t) * Math.abs(t) ** 1.4 * (H / 2) * 1.05;
+    return CY + Math.sign(t) * Math.abs(t) ** 1.4 * (H / 2) * 1.45;
   });
 
   const lines = [true, false].flatMap((fromLeft) =>
@@ -71,7 +78,7 @@ export default function ConvergenceLines() {
             fill="none"
             stroke="white"
             strokeWidth={0.5 + l.near * 0.5}
-            opacity={0.1 + l.near * 0.2}
+            opacity={0.05 + l.near * 0.1}
           />
         ))}
         {lines.map((l) => (
@@ -81,19 +88,19 @@ export default function ConvergenceLines() {
             fill="none"
             stroke="white"
             strokeWidth={0.9 + l.near * 0.9}
-            opacity={0.3 + l.near * 0.35}
+            opacity={0.15 + l.near * 0.175}
             className="yef-flow"
             style={{ animationDelay: `${l.delay}s` }}
           />
         ))}
-        <circle cx={CX} cy={CY} r="3" fill="white" opacity="0.8" />
+        <circle cx={CX} cy={CY} r="3" fill="white" opacity="0.4" />
         <circle
           cx={CX}
           cy={CY}
           r="11"
           fill="none"
           stroke="white"
-          opacity="0.22"
+          opacity="0.11"
         />
       </g>
     </svg>

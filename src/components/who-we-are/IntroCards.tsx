@@ -43,20 +43,13 @@ export default async function IntroCards() {
           </div>
 
           <div className="min-w-0 flex-1 lg:max-w-[1120px] lg:px-6">
-            <Reveal className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
-              <div>
-                <p className="font-semibold text-xs text-[#626973] leading-[18px] tracking-[2.64px] uppercase">
-                  {t("Who we are")}
-                </p>
-                <h2 className="mt-3.5 font-display font-extrabold text-4xl text-[#0e1216] leading-[1] tracking-[-1.5906px] sm:text-5xl lg:text-[54.4px] 2xl:whitespace-nowrap">
-                  {t("Youth Evangelical Fellowship")}
-                </h2>
-              </div>
-              <p className="max-w-[352px] text-[15px] text-[#626973] leading-[22.5px] tracking-[-0.2344px]">
-                {t(
-                  "YEF exists to bring the Gospel into daily life, transform communities, and reach the world with the good news.",
-                )}
+            <Reveal>
+              <p className="font-semibold text-xs text-[#626973] leading-[18px] tracking-[2.64px] uppercase">
+                {t("Who we are")}
               </p>
+              <h2 className="mt-3.5 font-display font-extrabold text-4xl text-[#0e1216] leading-[1] tracking-[-1.5906px] sm:text-5xl lg:text-[54.4px] 2xl:whitespace-nowrap">
+                {t("Youth Evangelical Fellowship")}
+              </h2>
             </Reveal>
 
             <Reveal delay={120}>
