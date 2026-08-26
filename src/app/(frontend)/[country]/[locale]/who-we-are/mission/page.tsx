@@ -5,6 +5,7 @@ import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import FeatureCard from "@/components/who-we-are/FeatureCard";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Our Mission | Youth Evangelical Fellowship",
@@ -17,7 +18,8 @@ const beliefs = [
   "A strong commitment to sharing the gospel and spreading Christ’s message. (Romans 1:16)",
 ];
 
-export default async function OurMissionPage() {
+export default async function OurMissionPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

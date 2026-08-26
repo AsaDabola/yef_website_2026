@@ -9,8 +9,10 @@ import Giving from "@/components/home-v2/Giving";
 import AroundMovement from "@/components/home-v2/AroundMovement";
 import SignUp from "@/components/home-v2/SignUp";
 import Footer from "@/components/Footer";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
-export default function Home() {
+export default async function Home({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   return (
     <>
       <main>

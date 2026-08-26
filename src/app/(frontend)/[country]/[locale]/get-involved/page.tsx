@@ -10,12 +10,14 @@ import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Get Involved | Youth Evangelical Fellowship",
 };
 
-export default async function GetInvolvedPage() {
+export default async function GetInvolvedPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

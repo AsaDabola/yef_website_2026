@@ -8,12 +8,14 @@ import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Raising Disciples | Youth Evangelical Fellowship",
 };
 
-export default async function RaisingDisciplesPage() {
+export default async function RaisingDisciplesPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

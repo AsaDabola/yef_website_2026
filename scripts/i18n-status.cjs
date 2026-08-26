@@ -13,7 +13,9 @@ const rows = locales.map((l) => {
   if (l.code === "en") return { ...l, done: keys.length };
   if (!fs.existsSync(file)) return { ...l, done: 0 };
   const cat = JSON.parse(fs.readFileSync(file, "utf8"));
-  const done = keys.filter((k) => cat[k] && cat[k] !== k).length;
+  // A value identical to the English is often correct (proper nouns,
+  // "Facebook"), so completeness is measured by presence, not difference.
+  const done = keys.filter((k) => cat[k] !== undefined).length;
   return { ...l, done };
 });
 

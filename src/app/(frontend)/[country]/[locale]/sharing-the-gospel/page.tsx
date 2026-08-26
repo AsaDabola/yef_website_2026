@@ -8,12 +8,14 @@ import TextPhotoBlock from "@/components/get-involved/TextPhotoBlock";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Sharing the Gospel | Youth Evangelical Fellowship",
 };
 
-export default async function SharingTheGospelPage() {
+export default async function SharingTheGospelPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

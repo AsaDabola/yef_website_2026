@@ -7,12 +7,14 @@ import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Connect With YEFI | Youth Evangelical Fellowship",
 };
 
-export default async function ApplyPage() {
+export default async function ApplyPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

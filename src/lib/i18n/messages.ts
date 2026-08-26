@@ -15,7 +15,8 @@ export async function loadMessages(locale: string): Promise<Messages> {
   let messages: Messages = {};
   if (locale !== defaultLocale) {
     try {
-      messages = (await import(`@/messages/${locale}.json`)).default as Messages;
+      messages = (await import(`@/messages/${locale}.json`))
+        .default as Messages;
     } catch {
       // No catalog yet for this language — English is the fallback.
       messages = {};
@@ -23,6 +24,20 @@ export async function loadMessages(locale: string): Promise<Messages> {
   }
   catalogs.set(locale, messages);
   return messages;
+}
+
+/**
+ * The subset of the catalog that client components need. Sending the whole
+ * catalog would put every page's prose into the HTML of every page.
+ */
+export async function loadClientMessages(locale: string): Promise<Messages> {
+  const [messages, keys] = await Promise.all([
+    loadMessages(locale),
+    import("@/messages/_client-keys.json").then((m) => m.default as string[]),
+  ]);
+  const subset: Messages = {};
+  for (const key of keys) if (messages[key]) subset[key] = messages[key];
+  return subset;
 }
 
 export function translate(messages: Messages, english: string): string {

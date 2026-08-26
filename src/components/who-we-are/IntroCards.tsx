@@ -7,7 +7,7 @@ import { getT } from "@/lib/i18n/server";
 
 const cards = [
   {
-    eyebrow: ["NEW TO YEF?", "START YOUR", "JOURNEY HERE"],
+    eyebrow: "NEW TO YEF?\nSTART YOUR\nJOURNEY HERE",
     title: "Welcome",
     cta: "START HERE",
     href: "/who-we-are/welcome",
@@ -15,7 +15,7 @@ const cards = [
     alt: "Youth Evangelical Fellowship building",
   },
   {
-    eyebrow: ["READY TO", "JOIN THE", "FELLOWSHIP"],
+    eyebrow: "READY TO\nJOIN THE\nFELLOWSHIP",
     title: "Membership",
     cta: "JOIN US",
     href: "/who-we-are/membership",
@@ -23,7 +23,7 @@ const cards = [
     alt: "Three students smiling together outdoors on a mission trip",
   },
   {
-    eyebrow: ["WHAT WE", "BELIEVE AND", "TEACH"],
+    eyebrow: "WHAT WE\nBELIEVE AND\nTEACH",
     title: "Statement of Faith",
     cta: "READ MORE",
     href: "/who-we-are/statement-of-faith",
@@ -76,12 +76,8 @@ export default async function IntroCards() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[rgba(14,18,22,0.94)] from-[4%] via-[rgba(14,18,22,0.35)] via-[46%] to-[rgba(14,18,22,0.05)]" />
 
-                    <p className="relative max-w-[110px] font-semibold text-[11px] text-white/85 leading-[16.5px] tracking-[1.6045px] uppercase">
-                      {card.eyebrow.map((line) => (
-                        <span key={line} className="block">
-                          {line}
-                        </span>
-                      ))}
+                    <p className="relative max-w-[110px] whitespace-pre-line font-semibold text-[11px] text-white/85 leading-[16.5px] tracking-[1.6045px] uppercase">
+                      {t(card.eyebrow)}
                     </p>
 
                     <div className="relative">

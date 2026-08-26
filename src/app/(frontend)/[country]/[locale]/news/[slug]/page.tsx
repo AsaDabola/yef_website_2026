@@ -11,6 +11,7 @@ import { getArticle, getNewsArticles } from "@/lib/posts";
 import { forgivenessArticleBody } from "@/lib/articleContent";
 import { ShareIcon } from "@/components/ui/SocialIcons";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale } from "@/lib/i18n/request";
 
 // Editors publish through /admin, so re-read the CMS rather than baking each
 // article in at deploy time.
@@ -19,7 +20,7 @@ export const revalidate = 60;
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ country: string; locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const found = await getArticle(slug);
@@ -33,8 +34,9 @@ export async function generateMetadata({
 export default async function NewsArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ country: string; locale: string; slug: string }>;
 }) {
+  await applyRequestLocale(params);
   const t = await getT();
   const { slug } = await params;
   const found = await getArticle(slug);

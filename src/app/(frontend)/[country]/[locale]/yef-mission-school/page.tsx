@@ -6,6 +6,7 @@ import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import ArrowRightIcon from "@/components/ui/ArrowRightIcon";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "YEF Mission School | Youth Evangelical Fellowship",
@@ -39,7 +40,8 @@ const nextSteps = [
   "Discover how your life can participate in God’s work throughout the world.",
 ];
 
-export default async function YefMissionSchoolPage() {
+export default async function YefMissionSchoolPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

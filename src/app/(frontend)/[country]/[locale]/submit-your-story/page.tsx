@@ -6,12 +6,14 @@ import TestimonySubmission from "@/components/get-involved/TestimonySubmission";
 import Testimonials from "@/components/home-v2/Testimonials";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Submit Your Story | Youth Evangelical Fellowship",
 };
 
-export default async function SubmitYourStoryPage() {
+export default async function SubmitYourStoryPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

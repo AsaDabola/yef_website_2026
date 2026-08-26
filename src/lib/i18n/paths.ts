@@ -6,7 +6,11 @@ import { INTERNATIONAL } from "./constants";
  *
  *   localePath("/news", "kr", "ko")  ->  "/kr/ko/news"
  */
-export function localePath(path: string, country: string, locale: string): string {
+export function localePath(
+  path: string,
+  country: string,
+  locale: string,
+): string {
   if (!path.startsWith("/")) return path;
   if (path.startsWith("//")) return path;
   const rest = path === "/" ? "" : path;

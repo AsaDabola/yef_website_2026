@@ -6,6 +6,7 @@ import NewsGrid from "@/components/news/NewsGrid";
 import { getNewsArticles } from "@/lib/posts";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "News | Youth Evangelical Fellowship",
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
 // list in at deploy time.
 export const revalidate = 60;
 
-export default async function NewsPage() {
+export default async function NewsPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   const posts = await getNewsArticles();
 

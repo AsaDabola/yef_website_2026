@@ -6,12 +6,14 @@ import ConnectForm from "@/components/get-involved/ConnectForm";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Apply YEF Mission School | Youth Evangelical Fellowship",
 };
 
-export default async function MissionSchoolApplyPage() {
+export default async function MissionSchoolApplyPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

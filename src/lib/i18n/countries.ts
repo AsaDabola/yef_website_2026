@@ -37,8 +37,20 @@ export type Region =
 
 export const countries: Country[] = [
   // G20 mission countries
-  { code: "br", name: "Brazil", region: "South America", locales: ["pt"], g20: true },
-  { code: "ca", name: "Canada", region: "North America", locales: ["en", "fr"], g20: true },
+  {
+    code: "br",
+    name: "Brazil",
+    region: "South America",
+    locales: ["pt"],
+    g20: true,
+  },
+  {
+    code: "ca",
+    name: "Canada",
+    region: "North America",
+    locales: ["en", "fr"],
+    g20: true,
+  },
   {
     code: "co",
     name: "Colombia",
@@ -49,10 +61,28 @@ export const countries: Country[] = [
   },
   { code: "fr", name: "France", region: "Europe", locales: ["fr"], g20: true },
   { code: "de", name: "Germany", region: "Europe", locales: ["de"], g20: true },
-  { code: "in", name: "India", region: "South Asia", locales: ["hi", "en"], g20: true },
-  { code: "id", name: "Indonesia", region: "Southeast Asia", locales: ["id"], g20: true },
+  {
+    code: "in",
+    name: "India",
+    region: "South Asia",
+    locales: ["hi", "en"],
+    g20: true,
+  },
+  {
+    code: "id",
+    name: "Indonesia",
+    region: "Southeast Asia",
+    locales: ["id"],
+    g20: true,
+  },
   { code: "it", name: "Italy", region: "Europe", locales: ["it"], g20: true },
-  { code: "jp", name: "Japan", region: "Asia-Pacific", locales: ["ja"], g20: true },
+  {
+    code: "jp",
+    name: "Japan",
+    region: "Asia-Pacific",
+    locales: ["ja"],
+    g20: true,
+  },
   {
     code: "ke",
     name: "East Africa Federation",
@@ -61,21 +91,62 @@ export const countries: Country[] = [
     alsoServes: ["tz", "ug", "rw", "bi", "ss"],
     g20: true,
   },
-  { code: "kr", name: "South Korea", region: "Asia-Pacific", locales: ["ko"], g20: true },
-  { code: "mx", name: "Mexico", region: "North America", locales: ["es"], g20: true },
+  {
+    code: "kr",
+    name: "South Korea",
+    region: "Asia-Pacific",
+    locales: ["ko"],
+    g20: true,
+  },
+  {
+    code: "mx",
+    name: "Mexico",
+    region: "North America",
+    locales: ["es"],
+    g20: true,
+  },
   { code: "ng", name: "Nigeria", region: "Africa", locales: ["en"], g20: true },
-  { code: "au", name: "Australia", region: "Oceania", locales: ["en"], g20: true },
+  {
+    code: "au",
+    name: "Australia",
+    region: "Oceania",
+    locales: ["en"],
+    g20: true,
+  },
   { code: "ru", name: "Russia", region: "Europe", locales: ["ru"], g20: true },
-  { code: "za", name: "South Africa", region: "Africa", locales: ["en", "af", "zu", "xh"], g20: true },
+  {
+    code: "za",
+    name: "South Africa",
+    region: "Africa",
+    locales: ["en", "af", "zu", "xh"],
+    g20: true,
+  },
   { code: "es", name: "Spain", region: "Europe", locales: ["es"], g20: true },
   { code: "tr", name: "Türkiye", region: "Europe", locales: ["tr"], g20: true },
-  { code: "gb", name: "United Kingdom", region: "Europe", locales: ["en"], g20: true },
-  { code: "us", name: "United States", region: "North America", locales: ["en"], g20: true },
+  {
+    code: "gb",
+    name: "United Kingdom",
+    region: "Europe",
+    locales: ["en"],
+    g20: true,
+  },
+  {
+    code: "us",
+    name: "United States",
+    region: "North America",
+    locales: ["en"],
+    g20: true,
+  },
 
   // M40 — Africa
   { code: "ao", name: "Angola", region: "Africa", locales: ["pt"] },
   { code: "cm", name: "Cameroon", region: "Africa", locales: ["fr", "en"] },
-  { code: "cd", name: "Democratic Republic of the Congo", region: "Africa", locales: ["fr"] },
+  {
+    code: "cd",
+    name: "Democratic Republic of the Congo",
+    region: "Africa",
+    locales: ["fr"],
+  },
   { code: "et", name: "Ethiopia", region: "Africa", locales: ["am", "en"] },
   { code: "gh", name: "Ghana", region: "Africa", locales: ["en"] },
   { code: "ci", name: "Côte d’Ivoire", region: "Africa", locales: ["fr"] },
@@ -85,7 +156,12 @@ export const countries: Country[] = [
 
   // M40 — Europe
   { code: "at", name: "Austria", region: "Europe", locales: ["de"] },
-  { code: "be", name: "Belgium", region: "Europe", locales: ["nl", "fr", "de"] },
+  {
+    code: "be",
+    name: "Belgium",
+    region: "Europe",
+    locales: ["nl", "fr", "de"],
+  },
   { code: "cz", name: "Czechia", region: "Europe", locales: ["cs"] },
   { code: "sk", name: "Slovakia", region: "Europe", locales: ["sk"] },
   { code: "gr", name: "Greece", region: "Europe", locales: ["el"] },
@@ -95,12 +171,27 @@ export const countries: Country[] = [
   { code: "pt", name: "Portugal", region: "Europe", locales: ["pt"] },
   { code: "ro", name: "Romania", region: "Europe", locales: ["ro"] },
   { code: "se", name: "Sweden", region: "Europe", locales: ["sv"] },
-  { code: "ch", name: "Switzerland", region: "Europe", locales: ["de", "fr", "it", "rm"] },
+  {
+    code: "ch",
+    name: "Switzerland",
+    region: "Europe",
+    locales: ["de", "fr", "it", "rm"],
+  },
   { code: "ua", name: "Ukraine", region: "Europe", locales: ["uk"] },
 
   // M40 — Central America & the Caribbean
-  { code: "do", name: "Dominican Republic", region: "Central America & Caribbean", locales: ["es"] },
-  { code: "ht", name: "Haiti", region: "Central America & Caribbean", locales: ["fr", "ht"] },
+  {
+    code: "do",
+    name: "Dominican Republic",
+    region: "Central America & Caribbean",
+    locales: ["es"],
+  },
+  {
+    code: "ht",
+    name: "Haiti",
+    region: "Central America & Caribbean",
+    locales: ["fr", "ht"],
+  },
 
   // M40 — South America
   { code: "ar", name: "Argentina", region: "South America", locales: ["es"] },
@@ -116,9 +207,24 @@ export const countries: Country[] = [
   },
 
   // M40 — Middle East & North Africa
-  { code: "eg", name: "Egypt", region: "Middle East & North Africa", locales: ["ar"] },
-  { code: "il", name: "Israel", region: "Middle East & North Africa", locales: ["he", "ar"] },
-  { code: "ae", name: "United Arab Emirates", region: "Middle East & North Africa", locales: ["ar"] },
+  {
+    code: "eg",
+    name: "Egypt",
+    region: "Middle East & North Africa",
+    locales: ["ar"],
+  },
+  {
+    code: "il",
+    name: "Israel",
+    region: "Middle East & North Africa",
+    locales: ["he", "ar"],
+  },
+  {
+    code: "ae",
+    name: "United Arab Emirates",
+    region: "Middle East & North Africa",
+    locales: ["ar"],
+  },
 
   // M40 — Oceania
   { code: "nz", name: "New Zealand", region: "Oceania", locales: ["en"] },
@@ -132,8 +238,18 @@ export const countries: Country[] = [
   // M40 — Southeast Asia
   { code: "my", name: "Malaysia", region: "Southeast Asia", locales: ["ms"] },
   { code: "mm", name: "Myanmar", region: "Southeast Asia", locales: ["my"] },
-  { code: "ph", name: "Philippines", region: "Southeast Asia", locales: ["fil", "en"] },
-  { code: "sg", name: "Singapore", region: "Southeast Asia", locales: ["en", "ms", "zh", "ta"] },
+  {
+    code: "ph",
+    name: "Philippines",
+    region: "Southeast Asia",
+    locales: ["fil", "en"],
+  },
+  {
+    code: "sg",
+    name: "Singapore",
+    region: "Southeast Asia",
+    locales: ["en", "ms", "zh", "ta"],
+  },
   { code: "th", name: "Thailand", region: "Southeast Asia", locales: ["th"] },
   { code: "vn", name: "Vietnam", region: "Southeast Asia", locales: ["vi"] },
 
@@ -142,17 +258,39 @@ export const countries: Country[] = [
   { code: "tw", name: "Taiwan", region: "Asia-Pacific", locales: ["zh"] },
 
   // Additional priority / replacement countries
-  { code: "rw", name: "Rwanda", region: "Africa", locales: ["rw", "en", "fr", "sw"] },
-  { code: "gt", name: "Guatemala", region: "Central America & Caribbean", locales: ["es"] },
-  { code: "hn", name: "Honduras", region: "Central America & Caribbean", locales: ["es"] },
-  { code: "lk", name: "Sri Lanka", region: "South Asia", locales: ["si", "ta"] },
+  {
+    code: "rw",
+    name: "Rwanda",
+    region: "Africa",
+    locales: ["rw", "en", "fr", "sw"],
+  },
+  {
+    code: "gt",
+    name: "Guatemala",
+    region: "Central America & Caribbean",
+    locales: ["es"],
+  },
+  {
+    code: "hn",
+    name: "Honduras",
+    region: "Central America & Caribbean",
+    locales: ["es"],
+  },
+  {
+    code: "lk",
+    name: "Sri Lanka",
+    region: "South Asia",
+    locales: ["si", "ta"],
+  },
 ];
 
 export const countryCodes = countries.map((c) => c.code);
 
 const byCode = new Map(countries.map((c) => [c.code, c]));
 
-export function getCountry(code: string | undefined | null): Country | undefined {
+export function getCountry(
+  code: string | undefined | null,
+): Country | undefined {
   return code ? byCode.get(code) : undefined;
 }
 
@@ -170,6 +308,12 @@ export function countriesByRegion(): [Region, Country[]][] {
     groups.set(c.region, list);
   }
   return [...groups.entries()]
-    .map(([region, list]) => [region, [...list].sort((a, b) => a.name.localeCompare(b.name))] as [Region, Country[]])
+    .map(
+      ([region, list]) =>
+        [region, [...list].sort((a, b) => a.name.localeCompare(b.name))] as [
+          Region,
+          Country[],
+        ],
+    )
     .sort((a, b) => a[0].localeCompare(b[0]));
 }

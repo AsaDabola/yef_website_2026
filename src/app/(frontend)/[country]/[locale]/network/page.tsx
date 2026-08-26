@@ -6,12 +6,14 @@ import ChapterMap from "@/components/network/ChapterMap";
 import GlobalPulse from "@/components/network/GlobalPulse";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Network | Youth Evangelical Fellowship",
 };
 
-export default async function NetworkPage() {
+export default async function NetworkPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Staff/Executive Committee | Youth Evangelical Fellowship",
@@ -64,7 +65,8 @@ const people = [
   },
 ];
 
-export default async function StaffExecutiveCommitteePage() {
+export default async function StaffExecutiveCommitteePage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

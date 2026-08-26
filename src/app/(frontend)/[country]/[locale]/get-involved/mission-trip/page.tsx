@@ -9,6 +9,7 @@ import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Mission Trips | Youth Evangelical Fellowship",
@@ -29,7 +30,8 @@ function HeadingRule() {
   return <div className="-mt-px h-[3px] w-[55px] bg-yef-primary" />;
 }
 
-export default async function MissionTripPage() {
+export default async function MissionTripPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

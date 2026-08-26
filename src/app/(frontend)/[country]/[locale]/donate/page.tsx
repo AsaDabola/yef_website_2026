@@ -5,12 +5,14 @@ import Breadcrumb from "@/components/Breadcrumb";
 import DonationForm from "@/components/donate/DonationForm";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Donate | Youth Evangelical Fellowship",
 };
 
-export default async function DonatePage() {
+export default async function DonatePage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

@@ -10,20 +10,20 @@ const slides = [
   {
     image: "/images/home-v2/hero-fire.png",
     alt: "Youth gathered around a bonfire at dusk",
-    heading: ["To Know Christ.", "To Make Him Known."],
+    heading: "To Know Christ.\nTo Make Him Known.",
     body: "For we do not preach ourselves but Jesus Christ as Lord",
   },
   {
     image: "/images/home-v2/slide-2-students.png",
     alt: "Students smiling together on a mission trip",
-    heading: ["Grow Together", "in Christ."],
+    heading: "Grow Together\nin Christ.",
     body: "Join YEF Campus Chapter, Fellowship in Christ",
   },
   {
     image:
       "https://www.figma.com/api/mcp/asset/c5e5b4cc-1ceb-4295-a020-3625a39bbf8f.png",
     alt: "Youth Evangelical Fellowship building",
-    heading: ["Join Us", "Today"],
+    heading: "Join Us\nToday",
     body: "Be part of YEF, Become True Disciples of Christ.",
   },
 ];
@@ -75,12 +75,8 @@ export default function Hero() {
               }`}
               aria-hidden={index !== active}
             >
-              <h1 className="font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl lg:text-8xl">
-                {slide.heading.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
+              <h1 className="whitespace-pre-line font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl lg:text-8xl">
+                {t(slide.heading)}
               </h1>
               <p className="mt-8 max-w-lg text-lg text-white/85 leading-relaxed">
                 {t(slide.body)}

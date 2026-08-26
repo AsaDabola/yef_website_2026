@@ -9,7 +9,7 @@ import {
   Poppins,
 } from "next/font/google";
 import { I18nProvider } from "@/lib/i18n/client";
-import { loadMessages } from "@/lib/i18n/messages";
+import { loadClientMessages } from "@/lib/i18n/messages";
 import { isRtl } from "@/lib/i18n/locales";
 import {
   INTERNATIONAL,
@@ -81,7 +81,7 @@ export default async function FrontendLayout({
 
   const locale = resolveLocale(country, requested);
   setRequestLocale(country, locale);
-  const messages = await loadMessages(locale);
+  const messages = await loadClientMessages(locale);
 
   return (
     <html

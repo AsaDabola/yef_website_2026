@@ -34,12 +34,16 @@ for (const root of ["src/app/(frontend)", "src/components", "src/lib"]) {
 }
 
 const catalog = new Set();
+/** Strings reached from "use client" components, which must be sent to the browser. */
+const clientKeys = new Set();
 const literal = (e) =>
   e && (ts.isStringLiteral(e) || ts.isNoSubstitutionTemplateLiteral(e)) ? e.text : null;
 
 for (const file of files) {
+  const text = fs.readFileSync(file, "utf8");
+  const isClient = /^\s*["']use client["']/.test(text);
   const src = ts.createSourceFile(
-    file, fs.readFileSync(file, "utf8"), ts.ScriptTarget.Latest, true,
+    file, text, ts.ScriptTarget.Latest, true,
     file.endsWith(".tsx") ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
   );
   (function visit(n) {
@@ -50,12 +54,18 @@ for (const file of files) {
     ) {
       for (const arg of n.arguments) {
         const direct = literal(arg);
-        if (direct) catalog.add(direct);
+        if (direct) {
+          catalog.add(direct);
+          if (isClient) clientKeys.add(direct);
+        }
         // t(cond ? "a" : "b")
         else if (ts.isConditionalExpression(arg)) {
           for (const branch of [arg.whenTrue, arg.whenFalse]) {
             const s = literal(branch);
-            if (s) catalog.add(s);
+            if (s) {
+              catalog.add(s);
+              if (isClient) clientKeys.add(s);
+            }
           }
         }
       }
@@ -64,7 +74,12 @@ for (const file of files) {
       PROSE_FIELDS.has(n.name.getText().replace(/['"]/g, ""))
     ) {
       const s = literal(n.initializer);
-      if (s && /[A-Za-z]{2}/.test(s) && !/^(https?:|\/|#|mailto:)/.test(s)) catalog.add(s);
+      if (s && /[A-Za-z]{2}/.test(s) && !/^(https?:|\/|#|mailto:)/.test(s)) {
+        catalog.add(s);
+        // Data arrays are rendered as t(item.title); if the file is a client
+        // component, the browser needs those strings too.
+        if (isClient) clientKeys.add(s);
+      }
     }
     ts.forEachChild(n, visit);
   })(src);
@@ -75,4 +90,8 @@ fs.writeFileSync(
   "src/messages/en.json",
   JSON.stringify(Object.fromEntries(keys.map((k) => [k, k])), null, 2) + "\n",
 );
-console.log(`${keys.length} strings`);
+fs.writeFileSync(
+  "src/messages/_client-keys.json",
+  JSON.stringify([...clientKeys].filter((k) => catalog.has(k)).sort((a, b) => a.localeCompare(b)), null, 2) + "\n",
+);
+console.log(`${keys.length} strings, ${clientKeys.size} of them needed in the browser`);

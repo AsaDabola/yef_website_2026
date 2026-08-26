@@ -5,12 +5,14 @@ import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import MembershipForm from "@/components/who-we-are/MembershipForm";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
+import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
   title: "Membership | Youth Evangelical Fellowship",
 };
 
-export default async function MembershipPage() {
+export default async function MembershipPage({ params }: { params: LocaleParams }) {
+  await applyRequestLocale(params);
   const t = await getT();
   return (
     <>

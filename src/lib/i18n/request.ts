@@ -22,6 +22,21 @@ const store = cache((): RequestLocale => ({
   locale: defaultLocale,
 }));
 
+/** The route params every page under [country]/[locale] receives. */
+export type LocaleParams = Promise<{ country: string; locale: string }>;
+
+/**
+ * Publishes a page's country and language for the rest of its render.
+ *
+ * The layout does this too, but React may start rendering a page before its
+ * layout has resolved, so each page sets it as well rather than depending on
+ * that ordering. Both write the same value, so the duplication is harmless.
+ */
+export async function applyRequestLocale(params: LocaleParams): Promise<void> {
+  const { country, locale } = await params;
+  setRequestLocale(country, resolveLocale(country, locale));
+}
+
 export function setRequestLocale(country: string, locale: string): void {
   const s = store();
   s.country = country;
@@ -55,7 +70,9 @@ export function isLocaleSegment(value: string): boolean {
  */
 export function resolveLocale(country: string, locale: string): string {
   if (!isLocaleSegment(locale)) {
-    return country === INTERNATIONAL ? defaultLocale : defaultLocaleFor(country);
+    return country === INTERNATIONAL
+      ? defaultLocale
+      : defaultLocaleFor(country);
   }
   return locale;
 }
