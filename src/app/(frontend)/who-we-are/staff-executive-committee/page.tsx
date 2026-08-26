@@ -37,14 +37,29 @@ const people = [
     image: "/images/staff/Deborah_Lan.jpg",
   },
   {
-    name: "Emmanuel Reid",
+    name: "Bridaija Jones",
     title: "YEF HQ Mission Staff",
-    image: "/images/staff/Emmanual_Reid-1.jpg",
+    image: "/images/staff/Bridaija_Jones.jpg",
+  },
+  {
+    name: "Emmanual Reid",
+    title: "YEF HQ Mission Staff",
+    image: "/images/staff/Emmanual_Reid.jpg",
   },
   {
     name: "Olivia Lin",
     title: "Director of Chinese Mission",
     image: "/images/staff/olivia-1.jpg",
+  },
+  {
+    name: "Andrea Li",
+    title: "YEF Hong Kong",
+    image: "/images/staff/Andrea_Li.jpg",
+  },
+  {
+    name: "Ilinca",
+    title: "YEF Romania",
+    image: "/images/staff/Ilinca.jpg",
   },
 ];
 
