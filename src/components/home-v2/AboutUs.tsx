@@ -6,7 +6,6 @@ import { getT } from "@/lib/i18n/server";
 const stats = [
   { value: "40+", label: "COUNTRIES REACHED" },
   { value: "2009", label: "FOUNDED IN NYC" },
-  { value: "1", label: "NAME WE CARRY" },
 ];
 
 export default async function AboutUs() {

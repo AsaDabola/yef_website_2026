@@ -78,8 +78,12 @@ const trigger = (tone: Tone) =>
     : "border-black/15 text-v2-navy hover:bg-black/5";
 
 /**
- * Country picker. Choosing a country moves the visitor to that country's site
- * at the same page, in that country's own language.
+ * Country picker, shown only on the headquarters site.
+ *
+ * Each country site is presented as its own entity: from inside one there is
+ * no country switch, only a language switch. Choosing a country opens it in a
+ * new tab rather than navigating away, so the reader keeps the site they were
+ * on and lands on the new one fresh.
  */
 export function CountryPicker({
   tone = "light",
@@ -90,18 +94,18 @@ export function CountryPicker({
 }) {
   const t = useT();
   const { country, locale } = useI18n();
-  const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const ref = useDismiss(() => setOpen(false));
 
-  const current = getCountry(country);
   const rest = stripLocalePath(pathname);
 
-  const go = (code: string) => {
-    setOpen(false);
-    const locale = code === INTERNATIONAL ? "en" : defaultLocaleFor(code);
-    router.push(`/${code}/${locale}${rest === "/" ? "" : rest}`);
+  // A country site never offers other countries.
+  if (country !== INTERNATIONAL) return null;
+
+  const href = (code: string) => {
+    const target = code === INTERNATIONAL ? "en" : defaultLocaleFor(code);
+    return `/${code}/${target}${rest === "/" ? "" : rest}`;
   };
 
   return (
@@ -113,14 +117,8 @@ export function CountryPicker({
         aria-haspopup="menu"
         className={`flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-medium text-sm transition-colors ${trigger(tone)}`}
       >
-        {current ? (
-          <span aria-hidden="true">{flag(current.code)}</span>
-        ) : (
-          <Globe />
-        )}
-        <span className="hidden sm:inline">
-          {current ? countryName(current, locale) : t("International")}
-        </span>
+        <Globe />
+        <span className="hidden sm:inline">{t("International")}</span>
         <Chevron />
       </button>
 
@@ -129,19 +127,10 @@ export function CountryPicker({
           role="menu"
           className={`absolute end-0 z-50 max-h-[70vh] w-[min(92vw,640px)] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl ${menu(placement)}`}
         >
-          <button
-            type="button"
-            role="menuitem"
-            onClick={() => go(INTERNATIONAL)}
-            className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start text-sm hover:bg-black/5 ${
-              country === INTERNATIONAL
-                ? "font-semibold text-yef-primary"
-                : "text-v2-navy"
-            }`}
-          >
+          <p className="flex w-full items-center gap-2 rounded-lg px-3 py-2 font-semibold text-sm text-yef-primary">
             <Globe />
             {t("International")}
-          </button>
+          </p>
 
           {countriesByRegion().map(([region, list]) => (
             <div key={region} className="mt-2">
@@ -150,20 +139,18 @@ export function CountryPicker({
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2">
                 {list.map((c) => (
-                  <button
+                  <a
                     key={c.code}
-                    type="button"
                     role="menuitem"
-                    onClick={() => go(c.code)}
-                    className={`flex items-center gap-2 rounded-lg px-3 py-2 text-start text-sm hover:bg-black/5 ${
-                      c.code === country
-                        ? "font-semibold text-yef-primary"
-                        : "text-v2-navy"
-                    }`}
+                    href={href(c.code)}
+                    target="_blank"
+                    rel="noopener"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-start text-sm text-v2-navy hover:bg-black/5"
                   >
                     <span aria-hidden="true">{flag(c.code)}</span>
                     <span className="truncate">{countryName(c, locale)}</span>
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>

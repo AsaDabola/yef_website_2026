@@ -1,11 +1,13 @@
+import ConvergenceLines from "./ConvergenceLines";
 import Reveal from "@/components/ui/Reveal";
 import { getT } from "@/lib/i18n/server";
 
 export default async function MissionStatement() {
   const t = await getT();
   return (
-    <section className="font-body bg-gradient-to-br from-v2-navy via-v2-blue to-v2-navy">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+    <section className="font-body relative overflow-hidden bg-gradient-to-br from-v2-navy via-v2-blue to-v2-navy">
+      <ConvergenceLines />
+      <div className="relative mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <p className="font-semibold text-[11px] text-white/50 tracking-[2.42px] uppercase">
             {t("Mission Statement")}

@@ -2,7 +2,7 @@ import Reveal from "@/components/ui/Reveal";
 import { countriesByRegion, countries } from "@/lib/i18n/countries";
 import { countryName, flag } from "@/lib/i18n/display";
 import { defaultLocaleFor } from "@/lib/i18n/countries";
-import { getRequestLocale } from "@/lib/i18n/request";
+import { getRequestLocale, INTERNATIONAL } from "@/lib/i18n/request";
 import { getT } from "@/lib/i18n/server";
 
 /**
@@ -12,7 +12,12 @@ import { getT } from "@/lib/i18n/server";
  */
 export default async function CountryDirectory() {
   const t = await getT();
-  const { locale } = getRequestLocale();
+  const { country, locale } = getRequestLocale();
+
+  // The directory is the headquarters site's hub. A country site presents
+  // itself as its own entity, so it does not list the others.
+  if (country !== INTERNATIONAL) return null;
+
   const groups = countriesByRegion();
 
   return (
@@ -44,19 +49,21 @@ export default async function CountryDirectory() {
                   {t(region)}
                 </h3>
                 <ul className="mt-5 space-y-1">
-                  {list.map((country) => (
-                    <li key={country.code}>
+                  {list.map((c) => (
+                    <li key={c.code}>
                       <a
-                        href={`/${country.code}/${defaultLocaleFor(country.code)}`}
+                        href={`/${c.code}/${defaultLocaleFor(c.code)}`}
+                        target="_blank"
+                        rel="noopener"
                         className="-mx-3 flex items-center gap-3 rounded-lg px-3 py-2 text-[15px] text-v2-muted-dark transition-colors hover:bg-v2-bg hover:text-yef-primary"
                       >
                         <span
                           aria-hidden="true"
                           className="w-6 shrink-0 text-base leading-none"
                         >
-                          {flag(country.code)}
+                          {flag(c.code)}
                         </span>
-                        <span>{countryName(country, locale)}</span>
+                        <span>{countryName(c, locale)}</span>
                       </a>
                     </li>
                   ))}
