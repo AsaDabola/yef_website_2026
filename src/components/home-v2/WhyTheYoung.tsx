@@ -2,7 +2,7 @@ import Reveal from "@/components/ui/Reveal";
 import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
 
-const proof = [
+const defaultItems = [
   {
     number: "21",
     name: "Hudson Taylor",
@@ -20,20 +20,35 @@ const proof = [
   },
 ];
 
-export default async function WhyTheYoung() {
+const defaults = {
+  eyebrow: "Why The Young",
+  // ** ** marks the phrase that is set in the italic serif accent.
+  heading:
+    "Revival has always arrived early — carried by people the world called **too young**.",
+};
+
+export type ProofContent = Partial<typeof defaults> & {
+  items?: { number: string; name: string; body: string }[];
+};
+
+export default async function WhyTheYoung({
+  content,
+}: {
+  content?: ProofContent;
+}) {
   const t = await getT();
+  const c = { ...defaults, ...content };
+  const proof = content?.items?.length ? content.items : defaultItems;
   return (
     <section className="font-body bg-[#f2f6fb]">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
-            {t("Why The Young")}
+            {t(c.eyebrow)}
           </p>
           <h2 className="mt-4 max-w-3xl font-display font-bold text-4xl text-v2-navy leading-[1.05] tracking-[-1.3px] sm:text-5xl lg:text-[52px]">
             <Rich
-              text={t(
-                "Revival has always arrived early — carried by people the world called **too young**.",
-              )}
+              text={t(c.heading)}
               emphasis="font-serif font-normal italic text-v2-accent"
             />
           </h2>

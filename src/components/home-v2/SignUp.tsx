@@ -2,8 +2,22 @@ import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
 import { getT } from "@/lib/i18n/server";
 
-export default async function SignUp() {
+const defaults = {
+  eyebrow: "Stay Up to Date",
+  heading: "News from the campuses.",
+  body: "Field reports, training dates, and stories from students around the world.",
+  buttonLabel: "Sign Up",
+};
+
+export type SignUpContent = Partial<typeof defaults>;
+
+export default async function SignUp({
+  content,
+}: {
+  content?: SignUpContent;
+}) {
   const t = await getT();
+  const c = { ...defaults, ...content };
   return (
     <section
       id="signup"
@@ -24,15 +38,13 @@ export default async function SignUp() {
       <div className="relative mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
         <Reveal>
           <p className="font-semibold text-[11px] text-white/45 tracking-[2.42px] uppercase">
-            {t("Stay Up to Date")}
+            {t(c.eyebrow)}
           </p>
           <h2 className="mt-4 font-display font-bold text-4xl text-[#f2f6fb] tracking-[-1px] sm:text-5xl">
-            {t("News from the campuses.")}
+            {t(c.heading)}
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-white/60">
-            {t(
-              "Field reports, training dates, and stories from students around the world.",
-            )}
+            {t(c.body)}
           </p>
 
           <form className="mx-auto mt-8 flex max-w-lg flex-col items-center gap-3 sm:flex-row sm:justify-center">
@@ -49,7 +61,7 @@ export default async function SignUp() {
               type="submit"
               className="shrink-0 rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
             >
-              {t("Sign Up")}
+              {t(c.buttonLabel)}
             </button>
           </form>
         </Reveal>

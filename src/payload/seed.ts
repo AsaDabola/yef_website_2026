@@ -30,7 +30,8 @@ const run = async () => {
     const filePath = path.join(process.cwd(), "public", article.image);
     const media = await payload.create({
       collection: "media",
-      data: { alt: article.title },
+      // Seeded content belongs to the headquarters site.
+      data: { alt: article.title, country: "int" },
       file: {
         data: await fs.readFile(filePath),
         name: path.basename(filePath),
@@ -42,6 +43,7 @@ const run = async () => {
     await payload.create({
       collection: "posts",
       data: {
+        country: "int",
         title: article.title,
         slug: article.slug,
         category: article.tag as "News" | "Story" | "Event",

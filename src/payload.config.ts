@@ -6,6 +6,7 @@ import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { Media } from "@/payload/collections/Media";
+import { Pages } from "@/payload/collections/Pages";
 import { Posts } from "@/payload/collections/Posts";
 import { Users } from "@/payload/collections/Users";
 
@@ -24,8 +25,17 @@ export default buildConfig({
     meta: {
       titleSuffix: " — YEF",
     },
+    // Live preview renders the real site beside the editor, through a route
+    // that turns on Payload's draft mode so unpublished work shows.
+    livePreview: {
+      breakpoints: [
+        { label: "Phone", name: "phone", width: 390, height: 844 },
+        { label: "Tablet", name: "tablet", width: 834, height: 1112 },
+        { label: "Desktop", name: "desktop", width: 1440, height: 900 },
+      ],
+    },
   },
-  collections: [Posts, Media, Users],
+  collections: [Pages, Posts, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

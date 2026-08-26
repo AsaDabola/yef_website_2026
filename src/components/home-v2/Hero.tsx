@@ -7,7 +7,14 @@ import HeaderV2 from "./HeaderV2";
 import { useT } from "@/lib/i18n/client";
 import SiteName from "@/components/ui/SiteName";
 
-const slides = [
+export type HeroSlide = {
+  image: string;
+  alt: string;
+  heading: string;
+  body: string;
+};
+
+const defaultSlides: HeroSlide[] = [
   {
     image: "/images/home-v2/hero-headquarters.webp",
     alt: "Youth Evangelical Fellowship headquarters building",
@@ -30,7 +37,8 @@ const slides = [
 
 const SLIDE_DURATION = 6500;
 
-export default function Hero() {
+export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
+  const slides = fromCms?.length ? fromCms : defaultSlides;
   const t = useT();
   const [active, setActive] = useState(0);
 

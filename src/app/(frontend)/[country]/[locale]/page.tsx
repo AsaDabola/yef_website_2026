@@ -1,31 +1,20 @@
-import Hero from "@/components/home-v2/Hero";
-import FindYourCampus from "@/components/home-v2/FindYourCampus";
-import AboutUs from "@/components/home-v2/AboutUs";
-import MissionStatement from "@/components/home-v2/MissionStatement";
-import WhyTheYoung from "@/components/home-v2/WhyTheYoung";
-import GetInvolved from "@/components/home-v2/GetInvolved";
-import Testimonials from "@/components/home-v2/Testimonials";
-import Giving from "@/components/home-v2/Giving";
-import AroundMovement from "@/components/home-v2/AroundMovement";
-import SignUp from "@/components/home-v2/SignUp";
+import { draftMode } from "next/headers";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
+import { getLayout } from "@/lib/pages";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export default async function Home({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
+  // Draft mode is only ever on inside the admin's live preview frame, so the
+  // public page stays statically rendered.
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("home", draft);
+
   return (
     <>
       <main>
-        <Hero />
-        <FindYourCampus />
-        <AboutUs />
-        <MissionStatement />
-        <WhyTheYoung />
-        <GetInvolved />
-        <Testimonials />
-        <Giving />
-        <AroundMovement />
-        <SignUp />
+        <RenderBlocks layout={layout} />
       </main>
       <Footer />
     </>

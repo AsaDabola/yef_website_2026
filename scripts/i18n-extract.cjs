@@ -20,6 +20,10 @@ const PROSE_FIELDS = new Set([
   "label", "title", "body", "text", "name", "excerpt", "quote", "caption",
   "heading", "description", "eyebrow", "alt", "cta", "answer", "question",
   "subtitle", "kicker", "note", "role", "time", "tag", "paragraphs",
+  // Field names the page blocks standardise on, so a section's bundled
+  // defaults stay visible to the catalog once its copy moves into an object.
+  "imageAlt", "headingAccent", "lead", "verse", "verseAccent", "reference",
+  "buttonLabel", "columns",
 ]);
 
 const files = [];

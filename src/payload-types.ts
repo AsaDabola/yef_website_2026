@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    pages: Page;
     posts: Post;
     media: Media;
     users: User;
@@ -77,6 +78,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -120,6 +122,326 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Build a page by stacking sections. Drag a section by its handle to reorder it.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  /**
+   * For the admin list only; not shown on the site.
+   */
+  title: string;
+  /**
+   * Which page of the country's site this lays out.
+   */
+  route: 'home';
+  country:
+    | 'int'
+    | 'ao'
+    | 'ar'
+    | 'au'
+    | 'at'
+    | 'bd'
+    | 'be'
+    | 'br'
+    | 'cm'
+    | 'ca'
+    | 'cl'
+    | 'co'
+    | 'ci'
+    | 'cz'
+    | 'cd'
+    | 'do'
+    | 'ke'
+    | 'eg'
+    | 'et'
+    | 'fj'
+    | 'fr'
+    | 'de'
+    | 'gh'
+    | 'gr'
+    | 'gt'
+    | 'ht'
+    | 'hn'
+    | 'hu'
+    | 'in'
+    | 'id'
+    | 'il'
+    | 'it'
+    | 'jp'
+    | 'kz'
+    | 'mg'
+    | 'my'
+    | 'mx'
+    | 'mn'
+    | 'mz'
+    | 'mm'
+    | 'np'
+    | 'nl'
+    | 'nz'
+    | 'ng'
+    | 'pk'
+    | 'pe'
+    | 'ph'
+    | 'pl'
+    | 'pt'
+    | 'ro'
+    | 'ru'
+    | 'rw'
+    | 'sg'
+    | 'sk'
+    | 'za'
+    | 'kr'
+    | 'es'
+    | 'lk'
+    | 'se'
+    | 'ch'
+    | 'tw'
+    | 'th'
+    | 'tr'
+    | 'ua'
+    | 'ae'
+    | 'gb'
+    | 'us'
+    | 'vn'
+    | 'zm';
+  /**
+   * Sections render top to bottom in this order. Removing one falls back to nothing — leave it in place to keep it.
+   */
+  layout?:
+    | (
+        | {
+            /**
+             * Shown in this order, cycling automatically.
+             */
+            slides?:
+              | {
+                  image: number | Media;
+                  /**
+                   * A line break here breaks the headline.
+                   */
+                  heading: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            image?: (number | null) | Media;
+            eyebrow?: string | null;
+            heading?: string | null;
+            /**
+             * Set in the italic serif, e.g. “young”.
+             */
+            headingAccent?: string | null;
+            lead?: string | null;
+            body?: string | null;
+            stats?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'about';
+          }
+        | {
+            eyebrow?: string | null;
+            verse?: string | null;
+            /**
+             * The closing phrase, set in the italic serif.
+             */
+            verseAccent?: string | null;
+            reference?: string | null;
+            columns?:
+              | {
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mission';
+          }
+        | {
+            eyebrow?: string | null;
+            /**
+             * Wrap a phrase in **double asterisks** to set it in the italic serif.
+             */
+            heading?: string | null;
+            items?:
+              | {
+                  number: string;
+                  name: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'proof';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            body?: string | null;
+            buttonLabel?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'signup';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'campusFinder';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'getInvolved';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonials';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'giving';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'movement';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Which country site owns this file.
+   */
+  country:
+    | 'int'
+    | 'ao'
+    | 'ar'
+    | 'au'
+    | 'at'
+    | 'bd'
+    | 'be'
+    | 'br'
+    | 'cm'
+    | 'ca'
+    | 'cl'
+    | 'co'
+    | 'ci'
+    | 'cz'
+    | 'cd'
+    | 'do'
+    | 'ke'
+    | 'eg'
+    | 'et'
+    | 'fj'
+    | 'fr'
+    | 'de'
+    | 'gh'
+    | 'gr'
+    | 'gt'
+    | 'ht'
+    | 'hn'
+    | 'hu'
+    | 'in'
+    | 'id'
+    | 'il'
+    | 'it'
+    | 'jp'
+    | 'kz'
+    | 'mg'
+    | 'my'
+    | 'mx'
+    | 'mn'
+    | 'mz'
+    | 'mm'
+    | 'np'
+    | 'nl'
+    | 'nz'
+    | 'ng'
+    | 'pk'
+    | 'pe'
+    | 'ph'
+    | 'pl'
+    | 'pt'
+    | 'ro'
+    | 'ru'
+    | 'rw'
+    | 'sg'
+    | 'sk'
+    | 'za'
+    | 'kr'
+    | 'es'
+    | 'lk'
+    | 'se'
+    | 'ch'
+    | 'tw'
+    | 'th'
+    | 'tr'
+    | 'ua'
+    | 'ae'
+    | 'gb'
+    | 'us'
+    | 'vn'
+    | 'zm';
+  /**
+   * Describe the photo for screen readers and for when it fails to load.
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
  * Posts appear on the News page. Tick “Show on the home page” to also put one in the Around the Movement strip.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -127,6 +449,79 @@ export interface UserAuthOperations {
  */
 export interface Post {
   id: number;
+  /**
+   * Which country site this post belongs to.
+   */
+  country:
+    | 'int'
+    | 'ao'
+    | 'ar'
+    | 'au'
+    | 'at'
+    | 'bd'
+    | 'be'
+    | 'br'
+    | 'cm'
+    | 'ca'
+    | 'cl'
+    | 'co'
+    | 'ci'
+    | 'cz'
+    | 'cd'
+    | 'do'
+    | 'ke'
+    | 'eg'
+    | 'et'
+    | 'fj'
+    | 'fr'
+    | 'de'
+    | 'gh'
+    | 'gr'
+    | 'gt'
+    | 'ht'
+    | 'hn'
+    | 'hu'
+    | 'in'
+    | 'id'
+    | 'il'
+    | 'it'
+    | 'jp'
+    | 'kz'
+    | 'mg'
+    | 'my'
+    | 'mx'
+    | 'mn'
+    | 'mz'
+    | 'mm'
+    | 'np'
+    | 'nl'
+    | 'nz'
+    | 'ng'
+    | 'pk'
+    | 'pe'
+    | 'ph'
+    | 'pl'
+    | 'pt'
+    | 'ro'
+    | 'ru'
+    | 'rw'
+    | 'sg'
+    | 'sk'
+    | 'za'
+    | 'kr'
+    | 'es'
+    | 'lk'
+    | 'se'
+    | 'ch'
+    | 'tw'
+    | 'th'
+    | 'tr'
+    | 'ua'
+    | 'ae'
+    | 'gb'
+    | 'us'
+    | 'vn'
+    | 'zm';
   title: string;
   /**
    * The web address for this post, e.g. yef-tonga-romans.
@@ -167,52 +562,95 @@ export interface Post {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  /**
-   * Describe the photo for screen readers and for when it fails to load.
-   */
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    card?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    tile?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
+ * Who can sign in, which country sites they are responsible for, and which parts of those sites they may edit.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
   name?: string | null;
+  role: 'super' | 'country-admin' | 'editor';
+  /**
+   * The country sites this person may edit. Ignored for super admins, who reach every country.
+   */
+  countries?:
+    | (
+        | 'int'
+        | 'ao'
+        | 'ar'
+        | 'au'
+        | 'at'
+        | 'bd'
+        | 'be'
+        | 'br'
+        | 'cm'
+        | 'ca'
+        | 'cl'
+        | 'co'
+        | 'ci'
+        | 'cz'
+        | 'cd'
+        | 'do'
+        | 'ke'
+        | 'eg'
+        | 'et'
+        | 'fj'
+        | 'fr'
+        | 'de'
+        | 'gh'
+        | 'gr'
+        | 'gt'
+        | 'ht'
+        | 'hn'
+        | 'hu'
+        | 'in'
+        | 'id'
+        | 'il'
+        | 'it'
+        | 'jp'
+        | 'kz'
+        | 'mg'
+        | 'my'
+        | 'mx'
+        | 'mn'
+        | 'mz'
+        | 'mm'
+        | 'np'
+        | 'nl'
+        | 'nz'
+        | 'ng'
+        | 'pk'
+        | 'pe'
+        | 'ph'
+        | 'pl'
+        | 'pt'
+        | 'ro'
+        | 'ru'
+        | 'rw'
+        | 'sg'
+        | 'sk'
+        | 'za'
+        | 'kr'
+        | 'es'
+        | 'lk'
+        | 'se'
+        | 'ch'
+        | 'tw'
+        | 'th'
+        | 'tr'
+        | 'ua'
+        | 'ae'
+        | 'gb'
+        | 'us'
+        | 'vn'
+        | 'zm'
+      )[]
+    | null;
+  /**
+   * The parts of those sites this person may edit. Country admins reach every section, so this applies to editors.
+   */
+  sections?: ('home' | 'who-we-are' | 'get-involved' | 'news' | 'network' | 'resources' | 'donate' | 'media')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -256,6 +694,10 @@ export interface PayloadKv {
 export interface PayloadLockedDocument {
   id: number;
   document?:
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
     | ({
         relationTo: 'posts';
         value: number | Post;
@@ -312,9 +754,131 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  route?: T;
+  country?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              slides?:
+                | T
+                | {
+                    image?: T;
+                    heading?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        about?:
+          | T
+          | {
+              image?: T;
+              eyebrow?: T;
+              heading?: T;
+              headingAccent?: T;
+              lead?: T;
+              body?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        mission?:
+          | T
+          | {
+              eyebrow?: T;
+              verse?: T;
+              verseAccent?: T;
+              reference?: T;
+              columns?:
+                | T
+                | {
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        proof?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    number?: T;
+                    name?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        signup?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              body?: T;
+              buttonLabel?: T;
+              id?: T;
+              blockName?: T;
+            };
+        campusFinder?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        getInvolved?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        giving?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        movement?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
+  country?: T;
   title?: T;
   slug?: T;
   category?: T;
@@ -333,6 +897,7 @@ export interface PostsSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
+  country?: T;
   alt?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -376,6 +941,9 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  role?: T;
+  countries?: T;
+  sections?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
