@@ -88,8 +88,11 @@ export default function ChapterMap() {
           </div>
 
           <p className="text-sm text-v2-muted">
-            {t("Showing")} {filtered.length} {t(" chapter")}
-            {filtered.length === 1 ? "" : "s"}
+            {t(
+              filtered.length === 1
+                ? "Showing {count} chapter"
+                : "Showing {count} chapters",
+            ).replace("{count}", String(filtered.length))}
           </p>
         </div>
 

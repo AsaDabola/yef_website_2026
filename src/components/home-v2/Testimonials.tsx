@@ -1,6 +1,7 @@
 import Image from "next/image";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
+import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
 
 const testimonials = [
@@ -37,11 +38,10 @@ export default async function Testimonials() {
             {t("Testimonials")}
           </p>
           <h2 className="mt-4 text-center font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl lg:text-[58px]">
-            {t("You are the Christ, the Son of the")}{" "}
-            <span className="font-instrument-serif font-normal italic text-v2-accent">
-              {t("living God")}
-            </span>
-            .
+            <Rich
+              text={t("You are the Christ, the Son of the **living God**.")}
+              emphasis="font-instrument-serif font-normal italic text-v2-accent"
+            />
           </h2>
         </Reveal>
 

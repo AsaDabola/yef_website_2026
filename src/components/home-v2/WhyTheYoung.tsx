@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
 
 const proof = [
@@ -29,13 +30,12 @@ export default async function WhyTheYoung() {
             {t("Why The Young")}
           </p>
           <h2 className="mt-4 max-w-3xl font-display font-bold text-4xl text-v2-navy leading-[1.05] tracking-[-1.3px] sm:text-5xl lg:text-[52px]">
-            {t(
-              "Revival has always arrived early — carried by people the world called",
-            )}{" "}
-            <span className="font-serif font-normal italic text-v2-accent">
-              {t("too young")}
-            </span>
-            .
+            <Rich
+              text={t(
+                "Revival has always arrived early — carried by people the world called **too young**.",
+              )}
+              emphasis="font-serif font-normal italic text-v2-accent"
+            />
           </h2>
         </Reveal>
 

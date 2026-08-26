@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
+import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
@@ -63,18 +64,11 @@ export default async function RaisingDisciplesPage() {
 </h2>
 
           <p className="mx-auto mt-10 max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
-            
-{t("“Evangelical” derives from ‘evangel’: “")}<strong className="font-bold">{t("gospel”")}</strong>{t(". By definition an evangelical is someone")}{" "}
-            <strong className="font-bold">
-              
-{t("concerned for the Gospel.")}
-</strong>{" "}
-            
-{t("This means more than just preaching the Gospel and reading the Word now and then. Of course, we do preach and teach, however it means much more than just that. It means that")}{" "}
-            <strong className="font-bold">
-              
-{t("the Gospel of Christ is central.")}
-</strong>
+            <Rich
+              text={t(
+                "“Evangelical” derives from ‘evangel’: “**gospel**”. By definition an evangelical is someone **concerned for the Gospel.** This means more than just preaching the Gospel and reading the Word now and then. Of course, we do preach and teach, however it means much more than just that. It means that **the Gospel of Christ is central.**",
+              )}
+            />
           </p>
 
           <h3 className="mx-auto mt-16 max-w-[695px] text-center font-semibold text-[24px] text-black leading-[38px] tracking-[-0.8px] lg:text-[30.3px] lg:leading-[50px]">
@@ -84,74 +78,32 @@ export default async function RaisingDisciplesPage() {
 
           <div className="mx-auto mt-12 max-w-[849px] space-y-[30px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
             <p>
-              
-{t("Our highest commandment is to")}{" "}
-              <strong className="font-bold">
-                
-{t("love God, and to love our neighbor as we do ourselves.")}
-</strong>{" "}
-              
-{t("Through")}{" "}
-              <strong className="font-bold">
-                
-{t("life obedience of the Word")}
-</strong>{" "}
-              
-{t("and with the")}{" "}
-              <strong className="font-bold">{t("power of prayer")}</strong>{t(", we believe that the individual, as well as this whole world, will change.")}
+              <Rich
+                text={t(
+                  "Our highest commandment is to **love God, and to love our neighbor as we do ourselves.** Through **life obedience of the Word** and with the **power of prayer**, we believe that the individual, as well as this whole world, will change.",
+                )}
+              />
 </p>
             <p>
-              
-{t("The importance of an")}{" "}
-              <strong className="font-bold">
-                
-{t("individual and personal relationship with God")}
-</strong>{" "}
-              
-{t("that is not defined by any political, cultural or social association, nor automatically given by way of nominal membership of any specific denomination. We recognize ourselves by our high regard for")}{" "}
-              <strong className="font-bold">
-                
-{t("the Bible as the Word of God that guides our daily lives;")}
-</strong>{" "}
-              
-{t("the conviction that")}{" "}
-              <strong className="font-bold">
-                
-{t("salvation is only received by faith through Jesus Christ who died on the cross and was resurrected to life;")}
-</strong>{" "}
-              
-{t("that God is triune as Father, Son and Holy Spirit; and a few other core beliefs as found in our Statement of Faith.")}
+              <Rich
+                text={t(
+                  "The importance of an **individual and personal relationship with God** that is not defined by any political, cultural or social association, nor automatically given by way of nominal membership of any specific denomination. We recognize ourselves by our high regard for **the Bible as the Word of God that guides our daily lives;** the conviction that **salvation is only received by faith through Jesus Christ who died on the cross and was resurrected to life;** that God is triune as Father, Son and Holy Spirit; and a few other core beliefs as found in our Statement of Faith.",
+                )}
+              />
 </p>
             <p>
-              
-{t("Christianity is a historical religion in a way that no other religion is. Unless we have access to the facts we are cut off from our roots. And our access is by way of")}{" "}
-              <strong className="font-bold">{t("“the Scriptures”")}</strong>
-              
-{t(". They are the means God has given us to bring us the Gospel. So evangelicals have always thankfully received this good gift of God and have regarded it as of the utmost importance that")}{" "}
-              <strong className="font-bold">
-                
-{t("we have a Bible on which we can rely.")}
-</strong>{" "}
-              
-{t("They point to the express teaching of our Lord Himself and to that of the apostles. And they point to")}{" "}
-              <strong className="font-bold">
-                
-{t("the necessity for the facts of the gospel to be reliably attested.")}
-</strong>
+              <Rich
+                text={t(
+                  "Christianity is a historical religion in a way that no other religion is. Unless we have access to the facts we are cut off from our roots. And our access is by way of **“the Scriptures”**. They are the means God has given us to bring us the Gospel. So evangelicals have always thankfully received this good gift of God and have regarded it as of the utmost importance that **we have a Bible on which we can rely.** They point to the express teaching of our Lord Himself and to that of the apostles. And they point to **the necessity for the facts of the gospel to be reliably attested.**",
+                )}
+              />
             </p>
             <p>
-              
-{t("There are other things that evangelicals hold, though we will not give an exhaustive list of evangelical convictions.")}{" "}
-              <strong className="font-bold">
-                
-{t("They all stem from the evangel (the Good News)")}
-</strong>
-              
-{t(". The whole system of the evangelical is")}{" "}
-              <strong className="font-bold">
-                
-{t("the outworking of the Gospel.")}
-</strong>
+              <Rich
+                text={t(
+                  "There are other things that evangelicals hold, though we will not give an exhaustive list of evangelical convictions. **They all stem from the evangel (the Good News)**. The whole system of the evangelical is **the outworking of the Gospel.**",
+                )}
+              />
             </p>
           </div>
         </section>

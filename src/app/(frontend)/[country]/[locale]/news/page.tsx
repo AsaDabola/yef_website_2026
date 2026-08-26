@@ -40,23 +40,12 @@ export default async function NewsPage() {
           <div className="relative mx-auto flex w-full max-w-[1920px] flex-1 items-center px-6 pt-32 pb-24 sm:px-10 lg:px-[196px] lg:pt-[118px] lg:pb-0">
             <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[572px_653px] lg:justify-between lg:gap-0">
               <div>
-                <h1 className="font-display font-extrabold text-5xl text-white leading-[1.1] tracking-[-1.5px] sm:text-6xl lg:text-[86px] lg:leading-[96px]">
-                  
-{t("Welcome")}
-<br />
-                  
-{t("News")}
-<br />
-                  
-{t("from Afar")}
-</h1>
-                <p className="mt-6 text-[17px] text-white/85 leading-[38px] lg:text-[20px]">
-                  
-{t("“to a weary soul, so is good news from a distant land.”")}
-<br />
-                  
-{t("— Proverbs 25:25")}
-</p>
+                <h1 className="font-display font-extrabold text-5xl whitespace-pre-line text-white leading-[1.1] tracking-[-1.5px] sm:text-6xl lg:text-[86px] lg:leading-[96px]">
+                  {t("Welcome\nNews\nfrom Afar")}
+                </h1>
+                <p className="mt-6 whitespace-pre-line text-[17px] text-white/85 leading-[38px] lg:text-[20px]">
+                  {t("“to a weary soul, so is good news from a distant land.”\n— Proverbs 25:25")}
+                </p>
                 <p className="mt-8 max-w-[572px] text-[17px] text-white/80 leading-[40px] lg:text-[20px]">
                   
 {t("From city campuses to mission fields far away, God is at work. Every testimony and every new chapter is a small taste of that same refreshment — good news carried across the distance. Here, we gather those stories.")}
