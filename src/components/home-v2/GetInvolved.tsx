@@ -31,7 +31,7 @@ const cards = [
     tag: "Short Term",
     title: "Mission Trip",
     body: "Local and overseas. The fastest way to learn what mission actually costs — and what it is actually worth.",
-    image: "/images/home-v2/get-involved-mission-trip.png",
+    image: "/images/home-v2/get-involved-mission-trip-cross-map.jpg",
   },
   {
     tag: "Each Summer",

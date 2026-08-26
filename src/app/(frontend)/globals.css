@@ -172,3 +172,171 @@ body {
     animation: none;
   }
 }
+
+/*
+ * The flowing blue field behind The Call. A rotating conic wash, drifting
+ * blobs, a sweeping shine and a fine grain, stacked over the section's own
+ * pale ground.
+ */
+@property --yef-flow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.yef-flow-wash {
+  position: absolute;
+  inset: -30%;
+  background: conic-gradient(
+    from var(--yef-flow-angle) at 35% 30%,
+    #f6f9fd 0deg,
+    #cfe0f8 60deg,
+    #9dbeef 130deg,
+    #6f96e8 190deg,
+    #9dbeef 250deg,
+    #e2edfb 320deg,
+    #f6f9fd 360deg
+  );
+  filter: blur(85px);
+  animation: yef-flow-spin 60s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes yef-flow-spin {
+  to {
+    --yef-flow-angle: 360deg;
+  }
+}
+
+.yef-flow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  mix-blend-mode: soft-light;
+  will-change: transform;
+}
+
+.yef-flow-b1 {
+  width: 44%;
+  height: 44%;
+  top: 8%;
+  left: 12%;
+  background: radial-gradient(circle, #ffffff, transparent 70%);
+  opacity: 0.55;
+  animation: yef-flow-drift1 20s ease-in-out infinite;
+}
+
+.yef-flow-b2 {
+  width: 36%;
+  height: 36%;
+  right: 10%;
+  bottom: 10%;
+  background: radial-gradient(circle, #a5c4f6, transparent 70%);
+  opacity: 0.45;
+  animation: yef-flow-drift2 26s ease-in-out infinite;
+}
+
+.yef-flow-b3 {
+  width: 30%;
+  height: 30%;
+  top: 38%;
+  left: 52%;
+  background: radial-gradient(circle, #6f96e8, transparent 72%);
+  opacity: 0.32;
+  animation: yef-flow-drift3 23s ease-in-out infinite;
+}
+
+@keyframes yef-flow-drift1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(6%, 8%) scale(1.1);
+  }
+}
+
+@keyframes yef-flow-drift2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, -5%) scale(0.92);
+  }
+}
+
+@keyframes yef-flow-drift3 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-4%, 6%) scale(1.06);
+  }
+}
+
+.yef-flow-shine {
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.7) 47%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.7) 53%,
+    transparent 70%
+  );
+  background-size: 300% 300%;
+  mix-blend-mode: soft-light;
+  animation: yef-flow-shine 9s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+@keyframes yef-flow-shine {
+  0%,
+  100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+}
+
+.yef-flow-glow {
+  position: absolute;
+  width: 38%;
+  height: 38%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.85),
+    rgba(160, 200, 255, 0.35) 45%,
+    transparent 72%
+  );
+  filter: blur(50px);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: left, top;
+}
+
+.yef-flow-grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-flow-wash,
+  .yef-flow-blob,
+  .yef-flow-shine {
+    animation: none !important;
+  }
+}

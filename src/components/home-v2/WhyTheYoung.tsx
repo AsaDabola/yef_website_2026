@@ -1,3 +1,4 @@
+import FlowingBackground from "./FlowingBackground";
 import Reveal from "@/components/ui/Reveal";
 import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
@@ -40,8 +41,9 @@ export default async function WhyTheYoung({
   const c = { ...defaults, ...content };
   const proof = content?.items?.length ? content.items : defaultItems;
   return (
-    <section className="font-body bg-[#f2f6fb]">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+    <section className="font-body relative overflow-hidden bg-[#eef1f7]">
+      <FlowingBackground />
+      <div className="relative mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
             {t(c.eyebrow)}

@@ -67,19 +67,6 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
             sizes="100vw"
             className="object-cover"
           />
-          {/* The frame's scrim: a radial wash that stays light at the centre
-              and deepens toward the edges. */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(89.23% 77.16% at 65.1% 43.88%, rgba(14,18,22,0.02) 0%, rgba(14,18,22,0.11) 35.1%, rgba(14,18,22,0.28) 82.69%)",
-            }}
-          />
-          {/* That wash alone tops out at 0.28, which leaves the white heading
-              close to unreadable on a bright slide. The copy sits in the left
-              column, so that side is shaded separately to carry it. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
         </div>
       ))}
 
