@@ -56,12 +56,17 @@ const people = [
   {
     name: "Andrea Li",
     title: "YEF Hong Kong",
-    image: "/images/staff/Andrea_Li.jpg",
+    image: "/images/staff/Andrea_Li.webp",
   },
   {
     name: "Ilinca",
     title: "YEF Romania",
-    image: "/images/staff/Ilinca.jpg",
+    image: "/images/staff/Ilinca.webp",
+  },
+  {
+    name: "Josiah Kim",
+    title: "Broadcaster",
+    image: "/images/staff/Josiah.webp",
   },
 ];
 

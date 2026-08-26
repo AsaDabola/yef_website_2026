@@ -3,6 +3,7 @@
 import Link from "@/components/ui/LocaleLink";
 import { usePathname } from "next/navigation";
 import { useT } from "@/lib/i18n/client";
+import { stripLocalePath } from "@/lib/i18n/paths";
 
 const links = [
   { label: "Welcome", href: "/who-we-are/welcome" },
@@ -11,6 +12,10 @@ const links = [
   { label: "History", href: "/who-we-are/history" },
   { label: "Membership", href: "/who-we-are/membership" },
   {
+    label: "Chapter Affiliation",
+    href: "/get-involved/chapter-affiliation",
+  },
+  {
     label: "Staff/Executive Committee",
     href: "/who-we-are/staff-executive-committee",
   },
@@ -18,7 +23,9 @@ const links = [
 
 export default function WhoWeAreSubMenu() {
   const t = useT();
-  const pathname = usePathname();
+  // usePathname() keeps the /<country>/<locale> prefix; the hrefs below do
+  // not, so compare the stripped path or nothing is ever marked active.
+  const pathname = stripLocalePath(usePathname());
 
   return (
     <nav

@@ -16,22 +16,23 @@ export type MovementItem = {
  */
 const fallbackMovementItems: MovementItem[] = [
   {
-    tag: "Bible Study",
-    title: "Summer Training 2027",
-    image: "/images/home-v2/slide-2-students.png",
-    alt: "Students gathered together for Summer Training 2027",
+    tag: "PIONEERING MISSIONS",
+    title: "YEF Tonga Begins Romans Bible Study with Six Nursing Students at TNU",
+    image: "/images/home-v2/movement-tonga.jpg",
+    alt: "YEF Tonga nursing students studying Romans around a picnic table",
   },
   {
-    tag: "FIELD REPORT",
-    title: "YEF Africa Grows",
-    image: "/images/home-v2/movement-africa.png",
-    alt: "YEF Africa field team",
+    tag: "CONFERENCES",
+    title:
+      "YEF Hong Kong Members Renewed by God's Love and Mission at Mission Conference",
+    image: "/images/home-v2/movement-hong-kong.jpg",
+    alt: "YEF Hong Kong members at the Great Commission Mission Conference",
   },
   {
     tag: "NEW CHAPTER",
-    title: "YEF Europe Summer Camp",
-    image: "/images/home-v2/movement-europe.png",
-    alt: "YEF Europe summer camp students jumping for a photo",
+    title: "YEF Holds Fellowship Gathering Near Washington University in St. Louis",
+    image: "/images/home-v2/movement-st-louis.jpg",
+    alt: "Students seated together at a YEF fellowship gathering in St. Louis",
   },
 ];
 
