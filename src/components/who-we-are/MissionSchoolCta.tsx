@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
 

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 
 export default function Breadcrumb({ label }: { label: string }) {
   return (

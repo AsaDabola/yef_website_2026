@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
+import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -74,6 +75,11 @@ export default function Header() {
             <SearchIcon className="size-[15px]" />
           </button>
 
+          <div className="hidden items-center gap-2 lg:flex">
+            <CountryPicker />
+            <LanguagePicker />
+          </div>
+
           <Link
             href="/donate"
             className="rounded-full border border-white px-4 py-2 font-semibold text-sm text-white transition-colors hover:bg-white hover:text-yef-primary sm:px-7 sm:py-3.5 sm:text-lg"
@@ -119,7 +125,11 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <div className="mt-2 flex items-center gap-4 border-t border-white/15 px-3 pt-4">
+          <div className="mt-2 flex flex-wrap items-center gap-2 border-t border-white/15 px-3 pt-4">
+            <CountryPicker />
+            <LanguagePicker />
+          </div>
+          <div className="flex items-center gap-4 px-3 pt-2">
             {socialLinks.map(({ label, href, Icon }) => (
               <Link
                 key={label}

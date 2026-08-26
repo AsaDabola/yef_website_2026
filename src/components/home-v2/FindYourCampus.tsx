@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { useState } from "react";
 import Reveal from "@/components/ui/Reveal";
 

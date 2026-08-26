@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
+import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
 
 const navLinks = [
   { label: "Who we are", href: "/who-we-are" },
@@ -48,6 +49,11 @@ export default function HeaderV2() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <div className="hidden items-center gap-2 lg:flex">
+              <CountryPicker />
+              <LanguagePicker />
+            </div>
+
             <Link
               href="/donate"
               className="rounded-full border border-white/50 px-3.5 py-1.5 font-semibold text-xs text-white tracking-[1.5px] transition-colors hover:bg-white hover:text-v2-navy sm:px-[26px] sm:py-[11px] sm:text-base sm:tracking-[2.56px]"
@@ -94,6 +100,10 @@ export default function HeaderV2() {
               {link.label}
             </Link>
           ))}
+          <div className="mt-2 flex flex-wrap items-center gap-2 border-white/15 border-t pt-3">
+            <CountryPicker />
+            <LanguagePicker />
+          </div>
         </nav>
       )}
     </header>

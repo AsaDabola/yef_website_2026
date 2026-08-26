@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { useState } from "react";
 import type { NewsArticle } from "@/lib/news";
 import HoverGroup from "@/components/ui/HoverGroup";

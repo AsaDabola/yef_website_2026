@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 
 export default function WhoWeAreHero() {

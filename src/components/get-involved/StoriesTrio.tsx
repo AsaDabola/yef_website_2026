@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "@/components/ui/LocaleLink";
 import HoverGroup from "@/components/ui/HoverGroup";
 
 const stories = [
@@ -32,7 +33,7 @@ export default function StoriesTrio({ divider = true }: { divider?: boolean }) {
     >
       <HoverGroup className="grid grid-cols-1 gap-[25px] sm:grid-cols-3">
         {stories.map((story) => (
-          <a key={story.title} href={story.href} className="group block">
+          <Link key={story.title} href={story.href} className="group block">
             <div className="relative aspect-[431/242] w-full overflow-hidden rounded-2xl">
               <Image
                 src={story.image}
@@ -58,7 +59,7 @@ export default function StoriesTrio({ divider = true }: { divider?: boolean }) {
             <p className="mt-4 font-medium text-[15.2px] text-[#4b5565] leading-[24px]">
               {story.body}
             </p>
-          </a>
+          </Link>
         ))}
       </HoverGroup>
     </section>

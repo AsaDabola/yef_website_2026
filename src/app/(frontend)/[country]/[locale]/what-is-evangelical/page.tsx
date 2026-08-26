@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
