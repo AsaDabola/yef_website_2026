@@ -31,6 +31,33 @@ export async function generateMetadata({
   };
 }
 
+function ShareButton({ label }: { label: string }) {
+  return (
+    <button
+      type="button"
+      className="flex items-center gap-2 rounded-lg border border-[#8996a7] px-3.5 py-2 font-semibold text-[13px] text-[#353b45] shadow-sm"
+    >
+      <ShareIcon className="size-[18px]" />
+      {label}
+    </button>
+  );
+}
+
+function TagRow({ tags }: { tags: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <span
+          key={tag}
+          className="rounded-full border border-[#8996a7] px-3.5 py-1.5 font-semibold text-[13px] text-[#353b45]"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default async function NewsArticlePage({
   params,
 }: {
@@ -48,6 +75,7 @@ export default async function NewsArticlePage({
     .slice(0, 3);
 
   const isForgiveness = slug === "forgiveness-in-the-bible";
+  const tags = article.tags ?? [article.tag, "Christian Faith", "Discipleship"];
 
   return (
     <>
@@ -61,28 +89,12 @@ export default async function NewsArticlePage({
             {t(article.title)}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-v2-muted-dark-2">
-            {t(article.excerpt)}
+            {t(article.subtitle ?? article.excerpt)}
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-2">
-              {[article.tag, "Christian Faith", "Discipleship"].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-[#8996a7] px-3.5 py-1.5 font-semibold text-[13px] text-[#353b45]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <button
-              type="button"
-              className="flex items-center gap-2 rounded-lg border border-[#8996a7] px-3.5 py-2 font-semibold text-[13px] text-[#353b45] shadow-sm"
-            >
-              <ShareIcon className="size-[18px]" />
-              
-{t("Share")}
-</button>
+            <TagRow tags={tags} />
+            <ShareButton label={t("Share")} />
           </div>
 
           <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-2xl">
@@ -190,6 +202,10 @@ export default async function NewsArticlePage({
 {t("Forgiveness is a life-changing practice that mirrors God’s heart. As we remember how he has forgiven us, bring our hurts to him and choose to release others again and again, we step into the freedom we have in Jesus.")}
 </div>
                 </>
+              ) : article.paragraphs ? (
+                article.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{t(paragraph)}</p>
+                ))
               ) : (
                 <>
                   <p>{t(article.excerpt)}</p>
@@ -200,6 +216,10 @@ export default async function NewsArticlePage({
                 </>
               )}
 
+              <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#dcdfe5] pt-6">
+                <TagRow tags={tags} />
+                <ShareButton label={t("Share")} />
+              </div>
             </div>
 
             <aside className="h-fit">

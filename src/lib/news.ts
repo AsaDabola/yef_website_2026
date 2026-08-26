@@ -5,6 +5,12 @@ export type NewsArticle = {
   excerpt: string;
   image: string;
   date: string;
+  /** Shown under the title in place of the excerpt — e.g. a chapter byline. */
+  subtitle?: string;
+  /** Overrides the default three-tag row when a story carries a single label. */
+  tags?: string[];
+  /** Plain-prose body for stories that are not built from a bespoke layout. */
+  paragraphs?: string[];
 };
 
 export const newsArticles: NewsArticle[] = [
@@ -106,6 +112,22 @@ export const newsArticles: NewsArticle[] = [
       "What does it mean to truly forgive? Here, we explore forgiveness in the Bible and what it looks like to forgive those who hurt us.",
     image: "/images/news/forgiveness-hero.png",
     date: "Jul 1 2026",
+  },
+  {
+    slug: "my-experience-with-yef",
+    tag: "Testimonial",
+    tags: ["Testimonial"],
+    title: "My Experience with YOUTH EVANGELICAL FELLOWSHIP.",
+    subtitle: "YEF Burundi \u2013 Bujumbura Chapter",
+    excerpt:
+      "Amil of Bujumbura Emmanuel Church shares how YEF Bible studies deepened his understanding of Scripture, salvation, and sharing the Gospel.",
+    image: "/images/news/article-uganda-refuge.png",
+    date: "Jul 1 2026",
+    paragraphs: [
+      "My name is Amil, and I am part of Bujumbura Emmanuel Church. YEF has helped me grow in my relationship with God and understand the Bible more deeply. Through the Bible studies, I have learned not only to listen to God\u2019s Word but also to apply it in my daily life.",
+      "One thing that has really impacted me is learning about salvation and how we are justified by faith in Jesus Christ. It reminded me that my relationship with God is not based on my own strength or good works, but on what Jesus has done for me.",
+      "YEF has also encouraged me to share the Gospel with others and become more active in serving God. I am thankful for the people I have met, the lessons I have learned, and the opportunity to continue growing in faith through YEF.",
+    ],
   },
   {
     slug: "creation-care-is-christlike-love",

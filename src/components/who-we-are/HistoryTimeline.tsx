@@ -274,7 +274,7 @@ async function EntryCard({ entry }: { entry: Entry }) {
       )}
       <div className="mt-3 space-y-3 text-base text-[#4f4f4f]">
         {entry.body.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <p key={paragraph}>{t(paragraph)}</p>
         ))}
       </div>
     </div>

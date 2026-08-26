@@ -19,7 +19,7 @@ const path = require("path");
 const PROSE_FIELDS = new Set([
   "label", "title", "body", "text", "name", "excerpt", "quote", "caption",
   "heading", "description", "eyebrow", "alt", "cta", "answer", "question",
-  "subtitle", "kicker", "note", "role", "time", "tag",
+  "subtitle", "kicker", "note", "role", "time", "tag", "paragraphs",
 ]);
 
 const files = [];
@@ -74,12 +74,18 @@ for (const file of files) {
       ts.isPropertyAssignment(n) &&
       PROSE_FIELDS.has(n.name.getText().replace(/['"]/g, ""))
     ) {
-      const s = literal(n.initializer);
-      if (s && /[A-Za-z]{2}/.test(s) && !/^(https?:|\/|#|mailto:)/.test(s)) {
-        catalog.add(s);
-        // Data arrays are rendered as t(item.title); if the file is a client
-        // component, the browser needs those strings too.
-        if (isClient) clientKeys.add(s);
+      // A prose field is usually one string, but some hold an array of
+      // paragraphs; both reach the page through t(), so collect either shape.
+      const values = ts.isArrayLiteralExpression(n.initializer)
+        ? n.initializer.elements.map(literal)
+        : [literal(n.initializer)];
+      for (const s of values) {
+        if (s && /[A-Za-z]{2}/.test(s) && !/^(https?:|\/|#|mailto:)/.test(s)) {
+          catalog.add(s);
+          // Data arrays are rendered as t(item.title); if the file is a client
+          // component, the browser needs those strings too.
+          if (isClient) clientKeys.add(s);
+        }
       }
     }
     ts.forEachChild(n, visit);
