@@ -147,3 +147,28 @@ body {
     transition: none;
   }
 }
+
+/*
+ * The Get Involved hero's surf. A still photograph cannot move, so it is
+ * given a slow swell instead: a gentle scale and drift over half a minute,
+ * reversing rather than looping so there is never a jump back to the start.
+ */
+@keyframes yef-tide {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.09) translate3d(-0.8%, -1.4%, 0);
+  }
+}
+
+.yef-tide {
+  animation: yef-tide 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-tide {
+    animation: none;
+  }
+}

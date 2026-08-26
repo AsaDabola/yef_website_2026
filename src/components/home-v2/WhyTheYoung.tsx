@@ -2,33 +2,33 @@ import Reveal from "@/components/ui/Reveal";
 import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
 
-const defaultItems = [
+type ProofItem = { number?: string; name: string; body: string };
+
+const defaultItems: ProofItem[] = [
   {
-    number: "21",
-    name: "Hudson Taylor",
-    body: "Left for China at twenty-one and became the father of modern Chinese mission.",
+    name: "The Best of\nTimes",
+    body: "The days of youth are when we can meet God first, and meet Him deepest.",
   },
   {
-    number: "26",
-    name: "John Calvin",
-    body: "Wrote the Institutes of the Christian Religion at twenty-six, reshaping Christian thought.",
+    name: "A Calling That\nComes Now",
+    body: "God does not wait for the perfect moment. He is calling, right now, in the midst of this youth.",
   },
   {
-    number: "20s",
-    name: "The Disciples",
-    body: "Most were in their twenties when they began the movement that reached the world.",
+    name: "Grace for\nThose Who Seek",
+    body: "For those who sought Him in their youth, revival has always come in abundance.",
   },
 ];
 
 const defaults = {
-  eyebrow: "Why The Young",
+  eyebrow: "The Call",
   // ** ** marks the phrase that is set in the italic serif accent.
   heading:
-    "Revival has always arrived early — carried by people the world called **too young**.",
+    "In the days of your youth, before the days of trouble come, **remember your Creator**.",
 };
 
 export type ProofContent = Partial<typeof defaults> & {
-  items?: { number: string; name: string; body: string }[];
+  /** `number` is optional — the columns carry a title alone in this design. */
+  items?: ProofItem[];
 };
 
 export default async function WhyTheYoung({
@@ -55,23 +55,25 @@ export default async function WhyTheYoung({
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="mt-12 grid grid-cols-1 border-t border-v2-border pt-10 sm:grid-cols-3">
+          <div className="mt-14 grid grid-cols-1 gap-y-10 border-t border-v2-border pt-12 sm:grid-cols-3 sm:gap-y-0">
             {proof.map((item, index) => (
               <div
                 key={item.name}
                 className={
-                  index < proof.length - 1
-                    ? "border-v2-border pb-8 pr-8 sm:border-r"
-                    : "pb-8"
+                  index > 0
+                    ? "border-v2-border pb-8 sm:border-l sm:pl-10"
+                    : "pb-8 sm:pr-10"
                 }
               >
-                <p className="font-display font-bold text-5xl text-yef-primary tracking-[-1.92px] lg:text-[64px]">
-                  {item.number}
-                </p>
-                <p className="mt-4 font-display font-bold text-lg text-v2-navy">
+                {item.number && (
+                  <p className="font-display font-bold text-5xl text-yef-primary tracking-[-1.92px] lg:text-[64px]">
+                    {item.number}
+                  </p>
+                )}
+                <p className="whitespace-pre-line font-display font-bold text-[21px] text-v2-navy leading-[1.24]">
                   {t(item.name)}
                 </p>
-                <p className="mt-2 text-[14px] text-v2-muted-dark leading-[1.65]">
+                <p className="mt-4 text-[14px] text-v2-muted-dark leading-[1.65]">
                   {t(item.body)}
                 </p>
               </div>

@@ -13,7 +13,10 @@ export default async function GetInvolvedHero() {
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        // The photograph is still, so the water is given a very slow drift
+        // and swell — enough that the surf reads as moving, slow enough that
+        // it never pulls the eye off the copy.
+        className="yef-tide object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/63 from-[14.5%] to-transparent to-[46.2%]" />
 
