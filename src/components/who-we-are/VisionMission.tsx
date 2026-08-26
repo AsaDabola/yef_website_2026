@@ -41,7 +41,7 @@ export default async function VisionMission() {
           <div className="mt-12 grid grid-cols-1 gap-10 lg:mt-[47px] lg:grid-cols-[655fr_627fr] lg:items-start lg:gap-[33px]">
             <div className="group relative aspect-[655/492] w-full cursor-pointer overflow-hidden rounded-2xl">
               <Image
-                src="/images/who-we-are/vision-mission-bible.png"
+                src="/images/who-we-are/vision-cross-bible.jpg"
                 alt={t("A wooden cross resting on an open Bible")}
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"

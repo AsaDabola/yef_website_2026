@@ -34,8 +34,10 @@ export default function HoverGroup({
             style={
               isHovered
                 ? {
+                    // A soft black lift rather than the blue glow this used to
+                    // cast, so the card's own photography carries the colour.
                     filter:
-                      "drop-shadow(0 18px 30px rgba(61,155,233,0.4)) drop-shadow(0 4px 10px rgba(0,32,63,0.25))",
+                      "drop-shadow(0 18px 30px rgba(0,0,0,0.34)) drop-shadow(0 4px 10px rgba(0,0,0,0.22))",
                   }
                 : undefined
             }

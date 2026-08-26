@@ -2,13 +2,13 @@ import Image from "next/image";
 import Header from "@/components/Header";
 
 type SubPageHeroProps = {
-  /** Banner photo. Defaults to the shared sailboat banner. */
+  /** Banner photo. Defaults to the shared sunrise banner. */
   image?: string;
   alt?: string;
 };
 
 export default function SubPageHero({
-  image = "/images/shared/subpage-hero-bg.png",
+  image = "/images/shared/banner-sunrise-ridges.jpg",
   alt = "",
 }: SubPageHeroProps) {
   return (

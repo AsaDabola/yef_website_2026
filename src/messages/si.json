@@ -38,7 +38,6 @@
   "A letter, a care package, a simple message — small gestures go a long way for students serving far from home. Here's how to support them well.": "ලිපියක්, කුඩා පාර්සලයක්, සරල පණිවුඩයක් — නිවසින් දුරින් සේවය කරන සිසුන්ට කුඩා ක්‍රියා බෙහෙවින් වැදගත්ය. ඔවුන්ට හොඳින් සහාය දෙන ආකාරය මෙන්න.",
   "A mission trip is more than traveling somewhere new. It is an opportunity to see people, cities, and nations through the eyes of Christ.\n\nJesus said:": "මෙහෙවර ගමනක් යනු නව තැනකට යාමට වඩා දෙයකි. එය මිනිසුන්, නගර හා ජාතීන් ක්‍රිස්තුස්ගේ ඇස්වලින් දැකීමේ අවස්ථාවකි.\n\nයේසුස් වහන්සේ මෙසේ වදාළහ:",
   "A New Chapter in International Campus Mission": "ජාත්‍යන්තර කැම්පස් මෙහෙවරේ නව පරිච්ඡේදයක්",
-  "A seedling growing from soil on an open Bible": "විවෘත බයිබලයක් මත පසෙන් වැඩෙන පැළයක්",
   "A significant milestone in YEF's international development came in 2020 with the acquisition of YEF Headquarters in Orlando, Florida. The headquarters provided a permanent base for international mission coordination, leadership development, training, worship, fellowship, and missionary preparation.": "YEF හි ජාත්‍යන්තර සංවර්ධනයේ වැදගත් සන්ධිස්ථානයක් 2020 දී ෆ්ලොරිඩාවේ ඕර්ලන්ඩෝ හි YEF මූලස්ථානය ලබා ගැනීමත් සමඟ පැමිණියේය. මූලස්ථානය ජාත්‍යන්තර මෙහෙවර සම්බන්ධීකරණය, නායකත්ව සංවර්ධනය, පුහුණුව, නමස්කාරය, සහභාගිත්වය සහ මිෂනාරි සූදානම සඳහා ස්ථිර පදනමක් සැපයීය.",
   "A significant new chapter began in New York City in 2009, when YEF was inaugurated with students from Columbia University who were moved by the Holy Spirit to gather for small-group Bible studies and share the gospel of Jesus Christ with their fellow students. From these early gatherings, YEF developed with a clear focus: to reach university students who are thirsty for the Word of God, help them grow as disciples of Jesus Christ, and raise a young generation willing to participate in God’s mission.": "වැදගත් නව පරිච්ඡේදයක් 2009 දී නිව්යෝර්ක් නගරයේ ආරම්භ විය; ශුද්ධාත්මයාණන් විසින් කුඩා කණ්ඩායම්වල බයිබල් අධ්‍යයනයට රැස්වීමටත්, තම සගයන් සමඟ යේසුස් ක්‍රිස්තුස්ගේ ශුභාරංචිය බෙදාගැනීමටත් පොළඹවන ලද කොලොම්බියා විශ්වවිද්‍යාලයේ සිසුන් සමඟ YEF ආරම්භ විය. මෙම මුල් රැස්වීම්වලින් YEF පැහැදිලි අරමුණක් සමඟ වර්ධනය විය: දෙවියන්ගේ වචනයට පිපාසිත විශ්වවිද්‍යාල සිසුන් වෙත ළඟාවීම, යේසුස් ක්‍රිස්තුස්ගේ ගෝලයන් ලෙස ඔවුන් වැඩීමට උදව් කිරීම, සහ දෙවියන්ගේ මෙහෙවරට සහභාගී වීමට කැමති තරුණ පරපුරක් නංවාලීම.",
   "A small group studying the Bible together around a table": "මේසයක් වටා එකට බයිබලය අධ්‍යයනය කරන කුඩා කණ්ඩායමක්",
@@ -520,6 +519,7 @@
   "Subscribe for news, updates, and events": "පුවත්, යාවත්කාලීන හා උත්සව සඳහා දායක වන්න",
   "Summer Training": "ගිම්හාන පුහුණුව",
   "Sunlit mountain ridges receding into morning haze": "උදෑසන මීදුමේ මැකී යන හිරු එළිය පිරි කඳු මුදුන්",
+  "Sunrise over layered mountain ridges": "තට්ටු ගැසුණු කඳු මුදුන් මත හිරු උදාව",
   "Support a Student": "සිසුවෙකුට සහාය දෙන්න",
   "SUPPORT Youth Evangelical Fellowship": "Youth Evangelical Fellowship ට සහාය දෙන්න",
   "Table of Contents": "පටුන",
@@ -757,8 +757,6 @@
   "Youth Evangelical Fellowship building": "Youth Evangelical Fellowship ගොඩනැගිල්ල",
   "Youth Evangelical Fellowship headquarters building": "Youth Evangelical Fellowship මූලස්ථාන ගොඩනැගිල්ල",
   "Youth Evangelical Fellowship International": "Youth Evangelical Fellowship International",
-  "YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL": "YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL",
-  "Youth Evangelical Fellowship International. All Rights Reserved.": "Youth Evangelical Fellowship International. සියලු හිමිකම් ඇවිරිණි.",
   "Youth Evangelical Fellowship is a group of proactive, outreaching Christians, whose youth and passion are spent on bringing glory to God’s name. We want to see the Great Commission of Jesus fulfilled in each and every major city in the world as he promised in his prayer, “thy kingdom come, thy will be done on earth as it is in heaven.” (Matthew 6:10) YEF has been a symbol of revival in urban mission since its establishment, working to redeem college campuses for the greater cause of Jesus Christ.": "Youth Evangelical Fellowship යනු තම තාරුණ්‍යයත් ආශාවත් දෙවියන්ගේ නාමයට තේජස ගෙන ඒමට වැය කරන, ක්‍රියාශීලී, පිටතට ළඟාවන ක්‍රිස්තියානීන්ගේ කණ්ඩායමකි. යේසුස්ගේ මහත් නියෝගය ලෝකයේ සෑම මහ නගරයකම ඉටුවනු දැකීමට අපි කැමතියි, උන්වහන්සේ තම යාච්ඤාවේ පොරොන්දු වූ ලෙස: “ඔබගේ රාජ්‍යය පැමිණේවා; ඔබගේ කැමැත්ත ස්වර්ගයේ මෙන් පොළොවේද සිදුවේවා.” (මතෙව් 6:10) පිහිටුවීමේ සිට YEF නාගරික මෙහෙවරේ පුනර්ජීවනයේ සංකේතයක් වී ඇති අතර, යේසුස් ක්‍රිස්තුස්ගේ මහත් අරමුණ සඳහා විශ්වවිද්‍යාල කැම්පස් යළි ලබාගැනීමට වැඩ කරමින් සිටී.",
   "Youth gathered around a bonfire at dusk": "සන්ධ්‍යාවේ ගිනිමැළයක් වටා රැස්වූ තරුණයන්"
 }

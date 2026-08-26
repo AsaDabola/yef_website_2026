@@ -1,6 +1,7 @@
 import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import { getT } from "@/lib/i18n/server";
+import SiteName from "@/components/ui/SiteName";
 
 export default async function GetInvolvedHero() {
   const t = await getT();
@@ -52,8 +53,8 @@ export default async function GetInvolvedHero() {
         </div>
       </div>
 
-      <p className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap text-center text-[11px] tracking-[2.2px] text-white lg:bottom-[5.5%]">
-        {t("YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL")}
+      <p className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap text-center text-[11px] tracking-[2.2px] text-white uppercase lg:bottom-[5.5%]">
+        <SiteName />
       </p>
     </section>
   );

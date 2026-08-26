@@ -83,3 +83,67 @@ body {
     opacity: 0.14;
   }
 }
+
+/*
+ * The sign-up band's world map breathes rather than sitting flat — a slow
+ * swell in brightness and scale, far enough under the copy not to distract.
+ */
+@keyframes yef-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.035);
+  }
+}
+
+.yef-pulse {
+  animation: yef-pulse 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-pulse {
+    animation: none;
+  }
+}
+
+/*
+ * History timeline. Entries rise into place as the rail's fill reaches them,
+ * and their dot lights up at the same moment, so the line reads as drawing
+ * the history rather than sitting there finished.
+ */
+.yef-timeline-ready .yef-timeline-entry {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.yef-timeline-ready .yef-timeline-entry.is-active {
+  opacity: 1;
+  transform: none;
+}
+
+.yef-timeline-dot {
+  background: rgba(0, 0, 0, 0.22);
+  transition:
+    background-color 0.45s ease-out,
+    box-shadow 0.45s ease-out;
+}
+
+.is-active .yef-timeline-dot {
+  background: var(--color-yef-primary);
+  box-shadow: 0 0 0 5px rgba(0, 102, 207, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-timeline-ready .yef-timeline-entry {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

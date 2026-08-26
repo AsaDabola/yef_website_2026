@@ -7,6 +7,7 @@ import { getNewsArticles } from "@/lib/posts";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import SiteName from "@/components/ui/SiteName";
 
 export const metadata: Metadata = {
   title: "News | Youth Evangelical Fellowship",
@@ -69,7 +70,7 @@ export default async function NewsPage({ params }: { params: LocaleParams }) {
 
           <p className="relative pb-8 text-center font-semibold text-[11px] text-white/40 tracking-[3px] uppercase">
             
-{t("Youth Evangelical Fellowship International")}
+<SiteName />
 </p>
         </section>
 

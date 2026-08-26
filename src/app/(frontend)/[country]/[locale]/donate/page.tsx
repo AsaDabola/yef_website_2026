@@ -33,7 +33,7 @@ export default async function DonatePage({ params }: { params: LocaleParams }) {
 </p>
 
           <div className="mt-16 grid grid-cols-1 overflow-hidden rounded-2xl border border-v2-border lg:grid-cols-2">
-            <div className="flex flex-col justify-center p-10">
+            <div className="flex flex-col justify-center p-10 lg:px-16">
               <p className="text-lg text-v2-navy leading-relaxed">
                 
 {t("You will be enriched in every way so that you can be generous on every occasion, and through us your generosity will result in thanksgiving to God. This service that you perform is not only supplying the needs of the Lord’s people but is also overflowing in many expressions of thanks to God.")}
@@ -43,7 +43,9 @@ export default async function DonatePage({ params }: { params: LocaleParams }) {
 {t("2 Corinthians 9:11-12")}
 </p>
             </div>
-            <div className="relative min-h-[280px] w-full">
+            {/* The frame's card is 1343x640, so the photo column carries the
+                height rather than collapsing to the text. */}
+            <div className="relative min-h-[320px] w-full lg:min-h-[560px]">
               <Image
                 src="/images/shared/donate-praying.png"
                 alt={t("Two students praying together at a YEF fellowship conference")}

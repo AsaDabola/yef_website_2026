@@ -5,6 +5,7 @@ import Link from "@/components/ui/LocaleLink";
 import { useEffect, useState } from "react";
 import HeaderV2 from "./HeaderV2";
 import { useT } from "@/lib/i18n/client";
+import SiteName from "@/components/ui/SiteName";
 
 const slides = [
   {
@@ -108,8 +109,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs tracking-[2.2px] text-white/80">
-        {t("YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL")}
+      <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs tracking-[2.2px] text-white/80 uppercase">
+        <SiteName />
       </p>
     </section>
   );

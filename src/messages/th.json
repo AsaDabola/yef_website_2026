@@ -38,7 +38,6 @@
   "A letter, a care package, a simple message — small gestures go a long way for students serving far from home. Here's how to support them well.": "จดหมายหนึ่งฉบับ ของฝากหนึ่งชิ้น ข้อความสั้นๆ — การกระทำเล็กๆ มีความหมายมากสำหรับนักศึกษาที่รับใช้อยู่ไกลบ้าน นี่คือวิธีสนับสนุนพวกเขาอย่างดี",
   "A mission trip is more than traveling somewhere new. It is an opportunity to see people, cities, and nations through the eyes of Christ.\n\nJesus said:": "การเดินทางเพื่อพันธกิจเป็นมากกว่าการไปยังที่ใหม่ๆ มันเป็นโอกาสที่จะมองผู้คน เมือง และประชาชาติผ่านสายพระเนตรของพระคริสต์\n\nพระเยซูตรัสว่า:",
   "A New Chapter in International Campus Mission": "บทใหม่ในพันธกิจมหาวิทยาลัยนานาชาติ",
-  "A seedling growing from soil on an open Bible": "ต้นกล้าที่งอกจากดินบนพระคัมภีร์ที่เปิดอยู่",
   "A significant milestone in YEF's international development came in 2020 with the acquisition of YEF Headquarters in Orlando, Florida. The headquarters provided a permanent base for international mission coordination, leadership development, training, worship, fellowship, and missionary preparation.": "หมุดหมายสำคัญในการพัฒนาระดับนานาชาติของ YEF มาถึงในปี 2020 ด้วยการได้มาซึ่งสำนักงานใหญ่ YEF ในเมืองออร์แลนโด รัฐฟลอริดา สำนักงานใหญ่เป็นฐานถาวรสำหรับการประสานงานพันธกิจนานาชาติ การพัฒนาผู้นำ การฝึกอบรม การนมัสการ การสามัคคีธรรม และการเตรียมมิชชันนารี",
   "A significant new chapter began in New York City in 2009, when YEF was inaugurated with students from Columbia University who were moved by the Holy Spirit to gather for small-group Bible studies and share the gospel of Jesus Christ with their fellow students. From these early gatherings, YEF developed with a clear focus: to reach university students who are thirsty for the Word of God, help them grow as disciples of Jesus Christ, and raise a young generation willing to participate in God’s mission.": "บทใหม่ที่สำคัญเริ่มต้นขึ้นในนครนิวยอร์กในปี 2009 เมื่อ YEF ได้รับการสถาปนาขึ้นพร้อมกับนักศึกษาจากมหาวิทยาลัยโคลัมเบียที่ได้รับการดลใจจากพระวิญญาณบริสุทธิ์ให้มารวมตัวกันศึกษาพระคัมภีร์เป็นกลุ่มย่อยและแบ่งปันข่าวประเสริฐของพระเยซูคริสต์กับเพื่อนนักศึกษา จากการรวมตัวในช่วงแรกนี้ YEF ได้พัฒนาขึ้นด้วยจุดมุ่งหมายที่ชัดเจน คือการเข้าถึงนักศึกษามหาวิทยาลัยที่กระหายพระวจนะของพระเจ้า ช่วยพวกเขาเติบโตเป็นสาวกของพระเยซูคริสต์ และเลี้ยงดูคนรุ่นใหม่ที่เต็มใจมีส่วนร่วมในพันธกิจของพระเจ้า",
   "A small group studying the Bible together around a table": "กลุ่มย่อยที่ศึกษาพระคัมภีร์ด้วยกันรอบโต๊ะ",
@@ -520,6 +519,7 @@
   "Subscribe for news, updates, and events": "สมัครรับข่าวสาร อัปเดต และกิจกรรม",
   "Summer Training": "การอบรมภาคฤดูร้อน",
   "Sunlit mountain ridges receding into morning haze": "สันเขาที่มีแสงแดดค่อยๆ จางหายไปในหมอกยามเช้า",
+  "Sunrise over layered mountain ridges": "อาทิตย์ขึ้นเหนือทิวเขาซ้อนชั้น",
   "Support a Student": "สนับสนุนนักศึกษาหนึ่งคน",
   "SUPPORT Youth Evangelical Fellowship": "สนับสนุน Youth Evangelical Fellowship",
   "Table of Contents": "สารบัญ",
@@ -757,8 +757,6 @@
   "Youth Evangelical Fellowship building": "อาคาร Youth Evangelical Fellowship",
   "Youth Evangelical Fellowship headquarters building": "อาคารสำนักงานใหญ่ Youth Evangelical Fellowship",
   "Youth Evangelical Fellowship International": "Youth Evangelical Fellowship International",
-  "YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL": "YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL",
-  "Youth Evangelical Fellowship International. All Rights Reserved.": "Youth Evangelical Fellowship International สงวนลิขสิทธิ์",
   "Youth Evangelical Fellowship is a group of proactive, outreaching Christians, whose youth and passion are spent on bringing glory to God’s name. We want to see the Great Commission of Jesus fulfilled in each and every major city in the world as he promised in his prayer, “thy kingdom come, thy will be done on earth as it is in heaven.” (Matthew 6:10) YEF has been a symbol of revival in urban mission since its establishment, working to redeem college campuses for the greater cause of Jesus Christ.": "Youth Evangelical Fellowship เป็นกลุ่มคริสเตียนที่กระตือรือร้นและออกไปหาผู้อื่น ผู้ซึ่งใช้ความเยาว์วัยและความกระตือรือร้นเพื่อนำเกียรติมาสู่พระนามของพระเจ้า เราต้องการเห็นพระมหาบัญชาของพระเยซูสำเร็จในทุกเมืองใหญ่ของโลก ดังที่พระองค์ทรงสัญญาไว้ในคำอธิษฐานของพระองค์ “ขอให้แผ่นดินของพระองค์มาตั้งอยู่ ขอให้เป็นไปตามพระทัยของพระองค์ในสวรรค์เป็นอย่างไร ก็ให้เป็นไปอย่างนั้นในแผ่นดินโลก” (มัทธิว 6:10) YEF เป็นสัญลักษณ์แห่งการฟื้นฟูในพันธกิจเมืองนับตั้งแต่ก่อตั้ง โดยทำงานเพื่อไถ่มหาวิทยาลัยเพื่อเหตุผลอันยิ่งใหญ่ของพระเยซูคริสต์",
   "Youth gathered around a bonfire at dusk": "เยาวชนรวมตัวกันรอบกองไฟยามพลบค่ำ"
 }

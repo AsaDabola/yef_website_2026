@@ -1,4 +1,5 @@
 import Image from "next/image";
+import TimelineScroll from "./TimelineScroll";
 import { getT } from "@/lib/i18n/server";
 
 type Entry = {
@@ -290,21 +291,17 @@ export default async function HistoryTimeline() {
           {t("YEF Through the Years")}
         </h2>
 
-        <div className="relative mt-16">
-          <div
-            aria-hidden="true"
-            className="absolute top-0 bottom-0 left-4 w-px bg-black/15 sm:left-1/2 sm:-translate-x-1/2"
-          />
-
+        <TimelineScroll>
           <div className="space-y-16">
             {timeline.map((entry) => (
               <div
                 key={entry.year}
-                className="relative sm:grid sm:grid-cols-2 sm:gap-x-16"
+                data-timeline-entry
+                className="yef-timeline-entry relative sm:grid sm:grid-cols-2 sm:gap-x-16"
               >
                 <span
                   aria-hidden="true"
-                  className="absolute top-2 left-4 size-3 -translate-x-1/2 rounded-full bg-black sm:left-1/2"
+                  className="yef-timeline-dot absolute top-2 left-4 size-3 -translate-x-1/2 rounded-full sm:left-1/2"
                 />
                 {entry.side === "left" ? (
                   <>
@@ -324,7 +321,7 @@ export default async function HistoryTimeline() {
               </div>
             ))}
           </div>
-        </div>
+        </TimelineScroll>
       </div>
     </section>
   );

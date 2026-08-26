@@ -19,7 +19,7 @@ export default async function SignUp() {
         height={1738}
         sizes="100vw"
         priority={false}
-        className="absolute inset-0 size-full object-cover opacity-75 mix-blend-screen"
+        className="yef-pulse absolute inset-0 size-full object-cover opacity-75 mix-blend-screen"
       />
       <div className="relative mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
         <Reveal>
