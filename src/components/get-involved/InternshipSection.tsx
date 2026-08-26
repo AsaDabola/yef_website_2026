@@ -1,4 +1,5 @@
 import GetInvolvedFeature from "@/components/get-involved/GetInvolvedFeature";
+import { getT } from "@/lib/i18n/server";
 
 const pillars = [
   {
@@ -18,14 +19,15 @@ const pillars = [
   },
 ];
 
-export default function InternshipSection() {
+export default async function InternshipSection() {
+  const t = await getT();
   return (
     <GetInvolvedFeature
       id="internship"
-      title="Internship"
+      title={t("Internship")}
       intro="Work under a trained professional in any field and learn the ropes from them! Internships at YEF HQ are open to the YEF members from local chapters who have finished their leadership training and are willing to serve in building the ministry together. As with volunteering, you have the option to intern in video making, Web design, technology, event-planning, communication and more."
       image="/images/get-involved/internship-cross-bible.png"
-      alt="A cross silhouetted above an open Bible at sunset"
+      alt={t("A cross silhouetted above an open Bible at sunset")}
       items={pillars}
       inlineItems
       link={{

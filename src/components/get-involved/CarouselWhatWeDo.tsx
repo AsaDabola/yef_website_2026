@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
+import { useT } from "@/lib/i18n/client";
 
 const cards = [
   {
@@ -28,6 +29,7 @@ const cards = [
 ];
 
 export default function CarouselWhatWeDo() {
+  const t = useT();
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   const scrollByCard = (direction: 1 | -1) => {
@@ -44,7 +46,7 @@ export default function CarouselWhatWeDo() {
     >
       <Reveal>
         <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
-          What We Do
+          {t("What We Do")}
         </h2>
       </Reveal>
 
@@ -68,10 +70,10 @@ export default function CarouselWhatWeDo() {
                 />
               </div>
               <p className="mt-[64px] font-semibold text-[22.7px] text-black leading-[30px]">
-                {card.title}
+                {t(card.title)}
               </p>
               <p className="mt-[7px] text-[15.3px] text-[#4b5565] leading-[24px]">
-                {card.body}
+                {t(card.body)}
               </p>
             </div>
           ))}
@@ -82,7 +84,7 @@ export default function CarouselWhatWeDo() {
         <button
           type="button"
           onClick={() => scrollByCard(-1)}
-          aria-label="Previous"
+          aria-label={t("Previous")}
           className="flex size-[46px] items-center justify-center rounded-full border border-[#d0d5dc] bg-white transition-colors hover:border-v2-navy"
         >
           <Image
@@ -96,7 +98,7 @@ export default function CarouselWhatWeDo() {
         <button
           type="button"
           onClick={() => scrollByCard(1)}
-          aria-label="Next"
+          aria-label={t("Next")}
           className="flex size-[46px] items-center justify-center rounded-full border border-[#8996a7] bg-white transition-colors hover:border-v2-navy"
         >
           <Image

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
+import { getT } from "@/lib/i18n/server";
 
 type FeatureItem = {
   icon: string;
@@ -23,7 +24,7 @@ type GetInvolvedFeatureProps = {
  * The two-column band the Get Involved sections share: heading and intro over a
  * photo on the left, icon-led points and a text link on the right.
  */
-export default function GetInvolvedFeature({
+export default async function GetInvolvedFeature({
   id,
   title,
   intro,
@@ -33,6 +34,7 @@ export default function GetInvolvedFeature({
   inlineItems = false,
   link,
 }: GetInvolvedFeatureProps) {
+  const t = await getT();
   return (
     <section id={id} className="scroll-mt-32 rounded-[24px] bg-[#f1f6ff]">
       <div className="px-8 py-12 sm:px-12 sm:py-16 lg:px-12 lg:py-24">
@@ -69,10 +71,10 @@ export default function GetInvolvedFeature({
                   </div>
                   <p className="text-[15.1px] text-[#4b5565] leading-[24px]">
                     <span className="font-semibold text-black">
-                      {item.title}
+                      {t(item.title)}
                     </span>
                     {inlineItems ? " " : <br />}
-                    {item.body}
+                    {typeof item.body === "string" ? t(item.body) : item.body}
                   </p>
                 </div>
               ))}
@@ -82,7 +84,7 @@ export default function GetInvolvedFeature({
               href={link.href}
               className="mt-12 ml-[72px] inline-flex items-center gap-2 font-semibold text-[15.3px] text-[#1d46d8] leading-[20px] transition-opacity hover:opacity-80"
             >
-              {link.label}
+              {t(link.label)}
               <Image
                 src="/images/icons/icon-arrow-right-24-blue.svg"
                 alt=""

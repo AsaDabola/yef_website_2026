@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useI18n } from "@/lib/i18n/client";
-import { countriesByRegion, defaultLocaleFor, getCountry } from "@/lib/i18n/countries";
+import {
+  countriesByRegion,
+  defaultLocaleFor,
+  getCountry,
+} from "@/lib/i18n/countries";
 import { getLocale, locales } from "@/lib/i18n/locales";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 import { stripLocalePath } from "@/lib/i18n/paths";
@@ -107,7 +111,9 @@ export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
         ) : (
           <Globe />
         )}
-        <span className="hidden sm:inline">{current?.name ?? "International"}</span>
+        <span className="hidden sm:inline">
+          {current?.name ?? "International"}
+        </span>
         <Chevron />
       </button>
 
@@ -121,7 +127,9 @@ export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
             role="menuitem"
             onClick={() => go(INTERNATIONAL)}
             className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start text-sm hover:bg-black/5 ${
-              country === INTERNATIONAL ? "font-semibold text-yef-primary" : "text-v2-navy"
+              country === INTERNATIONAL
+                ? "font-semibold text-yef-primary"
+                : "text-v2-navy"
             }`}
           >
             <Globe />
@@ -141,7 +149,9 @@ export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
                     role="menuitem"
                     onClick={() => go(c.code)}
                     className={`flex items-center gap-2 rounded-lg px-3 py-2 text-start text-sm hover:bg-black/5 ${
-                      c.code === country ? "font-semibold text-yef-primary" : "text-v2-navy"
+                      c.code === country
+                        ? "font-semibold text-yef-primary"
+                        : "text-v2-navy"
                     }`}
                   >
                     <span aria-hidden="true">{flag(c.code)}</span>
@@ -208,7 +218,9 @@ export function LanguagePicker({ tone = "light" }: { tone?: Tone }) {
                 lang={l.code}
                 dir={l.dir}
                 className={`rounded-lg px-3 py-2 text-start text-sm hover:bg-black/5 ${
-                  l.code === locale ? "font-semibold text-yef-primary" : "text-v2-navy"
+                  l.code === locale
+                    ? "font-semibold text-yef-primary"
+                    : "text-v2-navy"
                 }`}
               >
                 {l.name}

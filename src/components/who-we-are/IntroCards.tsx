@@ -3,6 +3,7 @@ import Link from "@/components/ui/LocaleLink";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
+import { getT } from "@/lib/i18n/server";
 
 const cards = [
   {
@@ -31,7 +32,8 @@ const cards = [
   },
 ];
 
-export default function IntroCards() {
+export default async function IntroCards() {
+  const t = await getT();
   return (
     <section className="font-body bg-white">
       <div className="mx-auto max-w-[1920px] px-6 pt-20 pb-16 sm:px-10 lg:px-[4.27%] lg:pt-[155px] lg:pb-[116px]">
@@ -44,15 +46,16 @@ export default function IntroCards() {
             <Reveal className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
               <div>
                 <p className="font-semibold text-xs text-[#626973] leading-[18px] tracking-[2.64px] uppercase">
-                  Who we are
+                  {t("Who we are")}
                 </p>
                 <h2 className="mt-3.5 font-display font-extrabold text-4xl text-[#0e1216] leading-[1] tracking-[-1.5906px] sm:text-5xl lg:text-[54.4px] 2xl:whitespace-nowrap">
-                  Youth Evangelical Fellowship
+                  {t("Youth Evangelical Fellowship")}
                 </h2>
               </div>
               <p className="max-w-[352px] text-[15px] text-[#626973] leading-[22.5px] tracking-[-0.2344px]">
-                YEF exists to bring the Gospel into daily life, transform
-                communities, and reach the world with the good news.
+                {t(
+                  "YEF exists to bring the Gospel into daily life, transform communities, and reach the world with the good news.",
+                )}
               </p>
             </Reveal>
 
@@ -83,10 +86,10 @@ export default function IntroCards() {
 
                     <div className="relative">
                       <p className="font-extrabold text-[34px] text-white leading-[34px] tracking-[-0.2899px]">
-                        {card.title}
+                        {t(card.title)}
                       </p>
                       <span className="mt-[48.5px] inline-flex items-center gap-[7px] rounded-full bg-[#6abbff] px-[18px] py-2.5 font-bold text-xs text-[#06222b] leading-[18px] tracking-[0.72px] uppercase">
-                        {card.cta}
+                        {t(card.cta)}
                         <span aria-hidden="true">&rarr;</span>
                       </span>
                     </div>

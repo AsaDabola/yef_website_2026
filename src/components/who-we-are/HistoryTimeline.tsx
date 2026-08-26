@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getT } from "@/lib/i18n/server";
 
 type Entry = {
   year: string;
@@ -252,12 +253,13 @@ const timeline: Entry[] = [
   },
 ];
 
-function EntryCard({ entry }: { entry: Entry }) {
+async function EntryCard({ entry }: { entry: Entry }) {
+  const t = await getT();
   return (
     <div>
       <p className="font-normal text-base text-[#4f4f4f]">{entry.year}</p>
       <h3 className="mt-2 font-black text-2xl leading-tight text-[#0a0500] sm:text-3xl">
-        {entry.title}
+        {t(entry.title)}
       </h3>
       {entry.image && (
         <div className="relative mt-4 aspect-[16/10] w-full overflow-hidden rounded-xl">
@@ -279,12 +281,13 @@ function EntryCard({ entry }: { entry: Entry }) {
   );
 }
 
-export default function HistoryTimeline() {
+export default async function HistoryTimeline() {
+  const t = await getT();
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-5xl px-6 py-20 lg:px-16">
         <h2 className="text-center font-black text-4xl text-[#0a0500] sm:text-5xl">
-          YEF Through the Years
+          {t("YEF Through the Years")}
         </h2>
 
         <div className="relative mt-16">
@@ -295,7 +298,10 @@ export default function HistoryTimeline() {
 
           <div className="space-y-16">
             {timeline.map((entry) => (
-              <div key={entry.year} className="relative sm:grid sm:grid-cols-2 sm:gap-x-16">
+              <div
+                key={entry.year}
+                className="relative sm:grid sm:grid-cols-2 sm:gap-x-16"
+              >
                 <span
                   aria-hidden="true"
                   className="absolute top-2 left-4 size-3 -translate-x-1/2 rounded-full bg-black sm:left-1/2"

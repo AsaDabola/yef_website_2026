@@ -5,6 +5,7 @@ import {
   LinkArrowIcon,
   PinIcon,
 } from "@/components/ui/SocialIcons";
+import { getT } from "@/lib/i18n/server";
 
 const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -57,7 +58,8 @@ const socialLinks = [
   { label: "Instagram", href: "#", Icon: InstagramIcon },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getT();
   return (
     <footer className="bg-black">
       <div className="bg-yef-navy">
@@ -65,7 +67,7 @@ export default function Footer() {
           <Link href="/" className="relative block h-[60px] w-[170px]">
             <Image
               src="/images/icons/logo-yef-white-compact.svg"
-              alt="Youth Evangelical Fellowship"
+              alt={t("Youth Evangelical Fellowship")}
               fill
               sizes="170px"
               className="object-contain object-left"
@@ -75,28 +77,28 @@ export default function Footer() {
           <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.7fr_1fr_1fr_1fr_1fr]">
             <div>
               <p className="font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
-                Subscribe for news, updates, and events
+                {t("Subscribe for news, updates, and events")}
               </p>
               <form className="mt-6 flex max-w-xs flex-col items-start gap-3">
                 <label className="sr-only" htmlFor="footer-email">
-                  Email address
+                  {t("Email address")}
                 </label>
                 <input
                   id="footer-email"
                   type="email"
-                  placeholder="Email address"
+                  placeholder={t("Email address")}
                   className="w-full rounded-full border border-white/20 bg-transparent px-6 py-4 text-sm text-white placeholder:text-white/40 focus:border-white/50 focus:outline-none"
                 />
                 <button
                   type="submit"
                   className="shrink-0 rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
                 >
-                  Sign Up
+                  {t("Sign Up")}
                 </button>
               </form>
 
               <p className="mt-10 font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
-                Follow us
+                {t("Follow us")}
               </p>
               <div className="mt-4 flex items-center gap-4">
                 {socialLinks.map(({ label, href, Icon }) => (
@@ -115,7 +117,7 @@ export default function Footer() {
             {columns.map((column) => (
               <div key={column.title}>
                 <p className="font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
-                  {column.title}
+                  {t(column.title)}
                 </p>
                 <ul className="mt-4 space-y-3">
                   {column.links.map((link) => (
@@ -124,7 +126,7 @@ export default function Footer() {
                         href={link.href}
                         className="font-medium text-base text-white transition-opacity hover:opacity-80"
                       >
-                        {link.label}
+                        {t(link.label)}
                       </Link>
                     </li>
                   ))}
@@ -136,8 +138,10 @@ export default function Footer() {
       </div>
       <div className="bg-yef-footer-strip">
         <p className="mx-auto max-w-[1800px] px-6 py-6 text-center font-normal text-base leading-[1.6] text-yef-gray lg:px-16">
-          Copyright © {new Date().getFullYear()} Youth Evangelical Fellowship
-          International. All Rights Reserved.
+          {t("Copyright ©")} {new Date().getFullYear()}{" "}
+          {t(
+            "Youth Evangelical Fellowship International. All Rights Reserved.",
+          )}
         </p>
       </div>
     </footer>

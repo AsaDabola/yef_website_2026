@@ -3,6 +3,7 @@ import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import Footer from "@/components/Footer";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Statement of Faith | Youth Evangelical Fellowship",
@@ -18,13 +19,14 @@ const beliefs = [
   "We believe in the Resurrection of both the saved and the lost; they that are saved unto the resurrection of life, they that are lost unto the resurrection of damnation.",
 ];
 
-export default function StatementOfFaithPage() {
+export default async function StatementOfFaithPage() {
+  const t = await getT();
   return (
     <>
       <main>
         <SubPageHero
           image="/images/who-we-are/banner-statement-of-faith.png"
-          alt="A seedling growing from soil on an open Bible"
+          alt={t("A seedling growing from soil on an open Bible")}
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
@@ -33,13 +35,15 @@ export default function StatementOfFaithPage() {
             </div>
 
             <div className="flex-1">
-              <Breadcrumb label="Statement of Faith" />
+              <Breadcrumb label={t("Statement of Faith")} />
               <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
-                Statement of Faith
-              </h1>
+                
+{t("Statement of Faith")}
+</h1>
               <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px]">
-                WE BELIEVE:
-              </p>
+                
+{t("WE BELIEVE:")}
+</p>
 
               <div className="mt-[96px] max-w-[1126px] space-y-[27.2px] text-[20px] text-black leading-[27.2px]">
                 {beliefs.map((belief) => (

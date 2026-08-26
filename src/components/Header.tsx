@@ -10,6 +10,7 @@ import {
   SearchIcon,
   XIcon,
 } from "@/components/ui/SocialIcons";
+import { useT } from "@/lib/i18n/client";
 
 const navLinks = [
   { label: "Who We Are", href: "/who-we-are" },
@@ -25,6 +26,7 @@ const socialLinks = [
 ];
 
 export default function Header() {
+  const t = useT();
   const [open, setOpen] = useState(false);
 
   return (
@@ -33,7 +35,7 @@ export default function Header() {
         <Link href="/" className="relative h-9 w-24 shrink-0 sm:h-20 sm:w-52">
           <Image
             src="/images/icons/logo-yef-white.svg"
-            alt="Youth Evangelical Fellowship"
+            alt={t("Youth Evangelical Fellowship")}
             fill
             sizes="208px"
             className="object-contain object-left"
@@ -49,7 +51,7 @@ export default function Header() {
                 href={link.href}
                 className="font-medium text-lg text-white transition-opacity hover:opacity-80"
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             ))}
           </nav>
@@ -71,7 +73,7 @@ export default function Header() {
             type="button"
             className="hidden items-center gap-2 border-b border-white/0 font-medium text-lg text-white transition-opacity hover:opacity-80 md:flex"
           >
-            Search
+            {t("Search")}
             <SearchIcon className="size-[15px]" />
           </button>
 
@@ -84,14 +86,14 @@ export default function Header() {
             href="/donate"
             className="rounded-full border border-white px-4 py-2 font-semibold text-sm text-white transition-colors hover:bg-white hover:text-yef-primary sm:px-7 sm:py-3.5 sm:text-lg"
           >
-            Give
+            {t("Give")}
           </Link>
 
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
-            aria-label="Toggle menu"
+            aria-label={t("Toggle menu")}
             className="flex size-12 shrink-0 items-center justify-center rounded-full border border-white text-white lg:hidden"
           >
             <svg
@@ -122,7 +124,7 @@ export default function Header() {
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-3 font-medium text-lg text-white transition-colors hover:bg-white/10"
             >
-              {link.label}
+              {t(link.label)}
             </Link>
           ))}
           <div className="mt-2 flex flex-wrap items-center gap-2 border-t border-white/15 px-3 pt-4">

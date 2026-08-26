@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
+import { useT } from "@/lib/i18n/client";
 
 const CARD_GAP = 26;
 
@@ -53,6 +54,7 @@ const cards = [
 ];
 
 export default function GetInvolved() {
+  const t = useT();
   const trackRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -86,10 +88,10 @@ export default function GetInvolved() {
         <Reveal className="flex items-end justify-between">
           <div>
             <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
-              Get Involved
+              {t("Get Involved")}
             </p>
             <h2 className="mt-4 font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl lg:text-[58px] lg:leading-[55.1px]">
-              Join the Movement
+              {t("Join the Movement")}
             </h2>
           </div>
           <div className="hidden gap-0 sm:flex">
@@ -97,7 +99,7 @@ export default function GetInvolved() {
               type="button"
               onClick={() => page(-1)}
               disabled={atStart}
-              aria-label="Previous ways to get involved"
+              aria-label={t("Previous ways to get involved")}
               className="flex size-[50px] items-center justify-center rounded-full border border-[rgba(0,42,85,0.13)] text-[15px] text-black transition-opacity disabled:opacity-35"
             >
               &larr;
@@ -106,7 +108,7 @@ export default function GetInvolved() {
               type="button"
               onClick={() => page(1)}
               disabled={atEnd}
-              aria-label="More ways to get involved"
+              aria-label={t("More ways to get involved")}
               className="flex size-[50px] items-center justify-center rounded-full border border-[rgba(0,42,85,0.13)] text-[15px] text-black transition-opacity disabled:opacity-35"
             >
               &rarr;
@@ -134,17 +136,17 @@ export default function GetInvolved() {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <span className="absolute bottom-3 left-3 rounded-[3px] bg-black/30 px-2 py-1 font-normal text-[9.5px] text-white/45 tracking-[0.95px] uppercase">
-                    Video
+                    {t("Video")}
                   </span>
                 </div>
                 <p className="mt-[22px] font-normal text-[11px] text-v2-muted tracking-[1.98px] uppercase">
-                  {card.tag}
+                  {t(card.tag)}
                 </p>
                 <h3 className="mt-2.5 font-display font-bold text-[25px] text-v2-navy leading-[23.75px] tracking-[-0.625px]">
-                  {card.title}
+                  {t(card.title)}
                 </h3>
                 <p className="mt-3 text-[14.5px] text-[#4a6076] leading-[24.65px]">
-                  {card.body}
+                  {t(card.body)}
                 </p>
               </div>
             ))}

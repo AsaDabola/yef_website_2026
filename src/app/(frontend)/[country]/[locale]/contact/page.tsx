@@ -4,12 +4,14 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Contact Us | Youth Evangelical Fellowship",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const t = await getT();
   return (
     <>
       <main>
@@ -27,7 +29,7 @@ export default function ContactPage() {
         </section>
 
         <section className="mx-auto max-w-3xl px-6 py-16 lg:px-0">
-          <Breadcrumb label="Contact Us" />
+          <Breadcrumb label={t("Contact Us")} />
           <div className="mt-6">
             <ContactForm />
           </div>

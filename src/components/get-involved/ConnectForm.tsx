@@ -8,6 +8,7 @@ import {
   LabeledTextAreaField,
   LabeledTextField,
 } from "@/components/forms/LabeledField";
+import { useT } from "@/lib/i18n/client";
 
 const interests = [
   "Bible Studies",
@@ -54,13 +55,14 @@ export default function ConnectForm({
 }: {
   variant?: keyof typeof variants;
 }) {
+  const t = useT();
   const [submitted, setSubmitted] = useState(false);
   const { title, titleClassName, askInterests } = variants[variant];
 
   if (submitted) {
     return (
       <SubmissionSuccess
-        title="You're All Set!"
+        title={t("You're All Set!")}
         message="Thanks for reaching out to YEFI! We've received your information and a member of our team will be in touch with you soon to help you find the right opportunity."
         footnote="In the meantime, feel free to explore more ways to get involved."
       />
@@ -78,10 +80,12 @@ export default function ConnectForm({
       <div className="space-y-2.5">
         <h1 className={titleClassName}>{title}</h1>
         <p className="text-[14px] leading-[17px] text-[#6b737d]">
-          Interested in studying the Bible or getting involved with YEFI?
+          {t("Interested in studying the Bible or getting involved with YEFI?")}
           <br />
-          Tell us what you&rsquo;re interested in, and we&rsquo;ll help you find
-          the right opportunity.
+
+          {t(
+            "Tell us what you’re interested in, and we’ll help you find the right opportunity.",
+          )}
         </p>
       </div>
 
@@ -91,10 +95,10 @@ export default function ConnectForm({
         <>
           <div className="space-y-3.5">
             <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
-              What are you interested in?
+              {t("What are you interested in?")}
             </p>
             <p className="text-[12px] leading-[15px] text-[#6b737d]">
-              Select all that apply.
+              {t("Select all that apply.")}
             </p>
             <div className="space-y-2.5">
               {interests.map((interest) => (
@@ -109,11 +113,15 @@ export default function ConnectForm({
 
           <div className="space-y-3.5">
             <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
-              Have you participated in a Bible study before?
+              {t("Have you participated in a Bible study before?")}
             </p>
             <div className="flex gap-7">
-              <LabeledRadioField label="Yes" name="bibleStudy" value="yes" />
-              <LabeledRadioField label="No" name="bibleStudy" value="no" />
+              <LabeledRadioField
+                label={t("Yes")}
+                name="bibleStudy"
+                value="yes"
+              />
+              <LabeledRadioField label={t("No")} name="bibleStudy" value="no" />
             </div>
           </div>
         </>
@@ -121,7 +129,7 @@ export default function ConnectForm({
 
       <div className="space-y-3.5">
         <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
-          What would you like to learn or grow in?
+          {t("What would you like to learn or grow in?")}
         </p>
         <div className="space-y-2.5">
           {growthAreas.map((area) => (
@@ -132,31 +140,31 @@ export default function ConnectForm({
 
       <div className="space-y-3.5">
         <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
-          Your Information
+          {t("Your Information")}
         </p>
         <div className="space-y-4">
           <LabeledTextField
-            label="Name"
-            placeholder="First & Last Name"
+            label={t("Name")}
+            placeholder={t("First & Last Name")}
             name="name"
             required
           />
           <LabeledTextField
-            label="Email"
-            placeholder="Email Address"
+            label={t("Email")}
+            placeholder={t("Email Address")}
             type="email"
             name="email"
             required
           />
           <LabeledTextField
-            label="Phone"
-            placeholder="Phone Number"
+            label={t("Phone")}
+            placeholder={t("Phone Number")}
             type="tel"
             name="phone"
           />
           <LabeledTextAreaField
-            label="Message"
-            placeholder="Tell us how we can help you"
+            label={t("Message")}
+            placeholder={t("Tell us how we can help you")}
             name="message"
             rows={4}
           />
@@ -167,7 +175,7 @@ export default function ConnectForm({
         type="submit"
         className="w-full rounded-[8px] bg-[#0066cf] px-7 py-3.5 font-bold text-[14px] leading-[17px] text-white uppercase transition-opacity hover:opacity-90"
       >
-        Connect With YEFI
+        {t("Connect With YEFI")}
       </button>
     </form>
   );

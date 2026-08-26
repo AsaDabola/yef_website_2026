@@ -6,12 +6,14 @@ import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Raising Disciples | Youth Evangelical Fellowship",
 };
 
-export default function RaisingDisciplesPage() {
+export default async function RaisingDisciplesPage() {
+  const t = await getT();
   return (
     <>
       <main>
@@ -29,11 +31,12 @@ export default function RaisingDisciplesPage() {
         </section>
 
         <section className="mx-auto max-w-[1440px] px-6 pt-16 lg:px-12">
-          <Breadcrumb label="What is Evangelical?" />
+          <Breadcrumb label={t("What is Evangelical?")} />
 
           <h1 className="mt-10 font-display font-extrabold text-4xl text-black leading-[1.15] tracking-[-0.96px] sm:text-5xl lg:text-[46px] lg:leading-[60px]">
-            Raising Disciples
-          </h1>
+            
+{t("Raising Disciples")}
+</h1>
 
           <div className="mt-10">
             <GalleryMosaic
@@ -55,91 +58,100 @@ export default function RaisingDisciplesPage() {
           </div>
 
           <h2 className="mx-auto mt-24 max-w-[933px] text-center font-display font-extrabold text-3xl text-black leading-[1.15] tracking-[-0.8px] lg:text-[46px] lg:leading-[50px]">
-            Why Do We Call Ourselves Evangelical?
-          </h2>
+            
+{t("Why Do We Call Ourselves Evangelical?")}
+</h2>
 
           <p className="mx-auto mt-10 max-w-[849px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
-            &ldquo;Evangelical&rdquo; derives from &lsquo;evangel&rsquo;:
-            &ldquo;<strong className="font-bold">gospel&rdquo;</strong>. By
-            definition an evangelical is someone{" "}
+            
+{t("“Evangelical” derives from ‘evangel’: “")}<strong className="font-bold">{t("gospel”")}</strong>{t(". By definition an evangelical is someone")}{" "}
             <strong className="font-bold">
-              concerned for the Gospel.
-            </strong>{" "}
-            This means more than just preaching the Gospel and reading the Word
-            now and then. Of course, we do preach and teach, however it means
-            much more than just that. It means that{" "}
+              
+{t("concerned for the Gospel.")}
+</strong>{" "}
+            
+{t("This means more than just preaching the Gospel and reading the Word now and then. Of course, we do preach and teach, however it means much more than just that. It means that")}{" "}
             <strong className="font-bold">
-              the Gospel of Christ is central.
-            </strong>
+              
+{t("the Gospel of Christ is central.")}
+</strong>
           </p>
 
           <h3 className="mx-auto mt-16 max-w-[695px] text-center font-semibold text-[24px] text-black leading-[38px] tracking-[-0.8px] lg:text-[30.3px] lg:leading-[50px]">
-            The Gospel is at the center of our thinking and living.
-          </h3>
+            
+{t("The Gospel is at the center of our thinking and living.")}
+</h3>
 
           <div className="mx-auto mt-12 max-w-[849px] space-y-[30px] font-medium text-[19px] text-[#4b5565] leading-[30px]">
             <p>
-              Our highest commandment is to{" "}
+              
+{t("Our highest commandment is to")}{" "}
               <strong className="font-bold">
-                love God, and to love our neighbor as we do ourselves.
-              </strong>{" "}
-              Through{" "}
+                
+{t("love God, and to love our neighbor as we do ourselves.")}
+</strong>{" "}
+              
+{t("Through")}{" "}
               <strong className="font-bold">
-                life obedience of the Word
-              </strong>{" "}
-              and with the{" "}
-              <strong className="font-bold">power of prayer</strong>, we
-              believe that the individual, as well as this whole world, will
-              change.
+                
+{t("life obedience of the Word")}
+</strong>{" "}
+              
+{t("and with the")}{" "}
+              <strong className="font-bold">{t("power of prayer")}</strong>{t(", we believe that the individual, as well as this whole world, will change.")}
+</p>
+            <p>
+              
+{t("The importance of an")}{" "}
+              <strong className="font-bold">
+                
+{t("individual and personal relationship with God")}
+</strong>{" "}
+              
+{t("that is not defined by any political, cultural or social association, nor automatically given by way of nominal membership of any specific denomination. We recognize ourselves by our high regard for")}{" "}
+              <strong className="font-bold">
+                
+{t("the Bible as the Word of God that guides our daily lives;")}
+</strong>{" "}
+              
+{t("the conviction that")}{" "}
+              <strong className="font-bold">
+                
+{t("salvation is only received by faith through Jesus Christ who died on the cross and was resurrected to life;")}
+</strong>{" "}
+              
+{t("that God is triune as Father, Son and Holy Spirit; and a few other core beliefs as found in our Statement of Faith.")}
+</p>
+            <p>
+              
+{t("Christianity is a historical religion in a way that no other religion is. Unless we have access to the facts we are cut off from our roots. And our access is by way of")}{" "}
+              <strong className="font-bold">{t("“the Scriptures”")}</strong>
+              
+{t(". They are the means God has given us to bring us the Gospel. So evangelicals have always thankfully received this good gift of God and have regarded it as of the utmost importance that")}{" "}
+              <strong className="font-bold">
+                
+{t("we have a Bible on which we can rely.")}
+</strong>{" "}
+              
+{t("They point to the express teaching of our Lord Himself and to that of the apostles. And they point to")}{" "}
+              <strong className="font-bold">
+                
+{t("the necessity for the facts of the gospel to be reliably attested.")}
+</strong>
             </p>
             <p>
-              The importance of an{" "}
+              
+{t("There are other things that evangelicals hold, though we will not give an exhaustive list of evangelical convictions.")}{" "}
               <strong className="font-bold">
-                individual and personal relationship with God
-              </strong>{" "}
-              that is not defined by any political, cultural or social
-              association, nor automatically given by way of nominal
-              membership of any specific denomination. We recognize ourselves
-              by our high regard for{" "}
+                
+{t("They all stem from the evangel (the Good News)")}
+</strong>
+              
+{t(". The whole system of the evangelical is")}{" "}
               <strong className="font-bold">
-                the Bible as the Word of God that guides our daily lives;
-              </strong>{" "}
-              the conviction that{" "}
-              <strong className="font-bold">
-                salvation is only received by faith through Jesus Christ who
-                died on the cross and was resurrected to life;
-              </strong>{" "}
-              that God is triune as Father, Son and Holy Spirit; and a few
-              other core beliefs as found in our Statement of Faith.
-            </p>
-            <p>
-              Christianity is a historical religion in a way that no other
-              religion is. Unless we have access to the facts we are cut off
-              from our roots. And our access is by way of{" "}
-              <strong className="font-bold">&ldquo;the Scriptures&rdquo;</strong>
-              . They are the means God has given us to bring us the Gospel. So
-              evangelicals have always thankfully received this good gift of
-              God and have regarded it as of the utmost importance that{" "}
-              <strong className="font-bold">
-                we have a Bible on which we can rely.
-              </strong>{" "}
-              They point to the express teaching of our Lord Himself and to
-              that of the apostles. And they point to{" "}
-              <strong className="font-bold">
-                the necessity for the facts of the gospel to be reliably
-                attested.
-              </strong>
-            </p>
-            <p>
-              There are other things that evangelicals hold, though we will
-              not give an exhaustive list of evangelical convictions.{" "}
-              <strong className="font-bold">
-                They all stem from the evangel (the Good News)
-              </strong>
-              . The whole system of the evangelical is{" "}
-              <strong className="font-bold">
-                the outworking of the Gospel.
-              </strong>
+                
+{t("the outworking of the Gospel.")}
+</strong>
             </p>
           </div>
         </section>
@@ -147,45 +159,31 @@ export default function RaisingDisciplesPage() {
         <section className="mt-20 bg-[#eff5ff] py-20">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             <h2 className="mx-auto max-w-[939px] text-center font-display font-extrabold text-3xl text-black leading-[1.15] tracking-[-0.8px] lg:text-[46px] lg:leading-[50px]">
-              Why Do We Need the Gospel?
-            </h2>
+              
+{t("Why Do We Need the Gospel?")}
+</h2>
 
             <div className="mt-16 grid grid-cols-1 gap-[33px] lg:grid-cols-2">
               <div className="space-y-6 rounded-[16px] border border-[#dcdfe5] bg-white p-8 font-medium text-[15px] text-[#4b5565] leading-[24px] sm:p-12">
                 <p>
-                  We do not put our trust in human endeavors. Dictatorships of
-                  the left and dictatorships of the right alike end up in
-                  oppression. Democracies all too often end up in muddled and
-                  soulless bureaucracy. Every system has to work on the raw
-                  material of sinners. Because we are sinners, no matter how
-                  good the intent, there&rsquo;s a firm limit on
-                  Mankind&rsquo;s ability to do good.
-                </p>
+                  
+{t("We do not put our trust in human endeavors. Dictatorships of the left and dictatorships of the right alike end up in oppression. Democracies all too often end up in muddled and soulless bureaucracy. Every system has to work on the raw material of sinners. Because we are sinners, no matter how good the intent, there’s a firm limit on Mankind’s ability to do good.")}
+</p>
                 <p>
-                  Therefore, we cannot work out our own salvation. Sin leaves
-                  its mark on life here and has consequences for the
-                  hereafter. But the great, wonderful truth is that
-                  &ldquo;Christ died for our sins.&rdquo; What was impossible
-                  for Mankind, God in Christ has perfectly accomplished. He
-                  has defeated sin now and for eternity. The evangel (Good
-                  News) is a message about a salvation with both temporal and
-                  eternal results.
-                </p>
+                  
+{t("Therefore, we cannot work out our own salvation. Sin leaves its mark on life here and has consequences for the hereafter. But the great, wonderful truth is that “Christ died for our sins.” What was impossible for Mankind, God in Christ has perfectly accomplished. He has defeated sin now and for eternity. The evangel (Good News) is a message about a salvation with both temporal and eternal results.")}
+</p>
                 <p>
-                  Salvation and atonement means for individuals, as well as
-                  this whole world. The significant thing is that Christ died
-                  for our sins. Whatever needed to be done He has done.
-                  Nothing can be added to that perfect divine work. For that
-                  reason we testify salvation by grace. It is a gift. Good
-                  deeds, liturgical observances or anything else cannot save
-                  or ultimately change us or this world.
-                </p>
+                  
+{t("Salvation and atonement means for individuals, as well as this whole world. The significant thing is that Christ died for our sins. Whatever needed to be done He has done. Nothing can be added to that perfect divine work. For that reason we testify salvation by grace. It is a gift. Good deeds, liturgical observances or anything else cannot save or ultimately change us or this world.")}
+</p>
               </div>
 
               <div className="rounded-[16px] border border-[#dcdfe5] bg-white p-8 sm:p-12">
                 <h3 className="font-semibold text-[20px] text-black leading-[30px] lg:text-[22.7px]">
-                  Confronted with the truth of the cross, we have two choices :
-                </h3>
+                  
+{t("Confronted with the truth of the cross, we have two choices :")}
+</h3>
                 <ul className="mt-6 space-y-4 font-medium text-[15.1px] text-[#4b5565] leading-[24px]">
                   <li className="flex gap-3">
                     <Image
@@ -196,8 +194,9 @@ export default function RaisingDisciplesPage() {
                       aria-hidden="true"
                       className="mt-[3px] shrink-0"
                     />
-                    Respond and turn to Christ in faith and love
-                  </li>
+                    
+{t("Respond and turn to Christ in faith and love")}
+</li>
                   <li className="flex gap-3">
                     <Image
                       src="/images/icons/icon-arrow-right-blue.svg"
@@ -207,19 +206,14 @@ export default function RaisingDisciplesPage() {
                       aria-hidden="true"
                       className="mt-[3px] shrink-0"
                     />
-                    Or harden our hearts and turn away
-                  </li>
+                    
+{t("Or harden our hearts and turn away")}
+</li>
                 </ul>
                 <p className="mt-8 font-medium text-[15.1px] text-[#4b5565] leading-[24px]">
-                  To respond to Christ&rsquo;s love in the former way is to
-                  become a different person. The whole set of the life is
-                  changed. This may happen in one sudden, blinding experience
-                  (as with Saul of Tarsus). Or it may happen gradually (as
-                  with Timothy). The time is immaterial. The turning and
-                  changing is everything. And it happens to all who come to
-                  Christ. In this way, this free gift of salvation can be
-                  accepted by all people.
-                </p>
+                  
+{t("To respond to Christ’s love in the former way is to become a different person. The whole set of the life is changed. This may happen in one sudden, blinding experience (as with Saul of Tarsus). Or it may happen gradually (as with Timothy). The time is immaterial. The turning and changing is everything. And it happens to all who come to Christ. In this way, this free gift of salvation can be accepted by all people.")}
+</p>
               </div>
             </div>
           </div>
@@ -227,15 +221,17 @@ export default function RaisingDisciplesPage() {
 
         <section className="mx-auto max-w-[1440px] px-6 py-20 lg:px-12">
           <h2 className="mx-auto max-w-[933px] text-center font-display font-extrabold text-3xl text-black leading-[1.15] tracking-[-0.8px] lg:text-[46px] lg:leading-[50px]">
-            Interested in Learning More? Here&rsquo;s How :
-          </h2>
+            
+{t("Interested in Learning More? Here’s How :")}
+</h2>
           <div className="mt-12 flex justify-center">
             <Link
               href="/get-involved/apply"
               className="flex h-[158px] w-full max-w-[515px] items-center justify-center rounded-[16px] bg-[#0066cf] px-8 text-center font-semibold text-[24px] text-white leading-[28.8px] transition-transform duration-200 hover:scale-[1.02] lg:text-[28px]"
             >
-              Apply Bible study
-            </Link>
+              
+{t("Apply Bible study")}
+</Link>
           </div>
         </section>
 

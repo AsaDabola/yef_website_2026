@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import HoverGroup from "@/components/ui/HoverGroup";
+import { getT } from "@/lib/i18n/server";
 
 const stories = [
   {
@@ -26,11 +27,14 @@ const stories = [
   },
 ];
 
-export default function StoriesTrio({ divider = true }: { divider?: boolean }) {
+export default async function StoriesTrio({
+  divider = true,
+}: {
+  divider?: boolean;
+}) {
+  const t = await getT();
   return (
-    <section
-      className={`py-16 ${divider ? "border-t border-black/10" : ""}`}
-    >
+    <section className={`py-16 ${divider ? "border-t border-black/10" : ""}`}>
       <HoverGroup className="grid grid-cols-1 gap-[25px] sm:grid-cols-3">
         {stories.map((story) => (
           <Link key={story.title} href={story.href} className="group block">
@@ -45,7 +49,7 @@ export default function StoriesTrio({ divider = true }: { divider?: boolean }) {
             </div>
             <div className="mt-6 flex items-start justify-between gap-4">
               <h3 className="font-semibold text-[22.6px] text-black leading-[30px]">
-                {story.title}
+                {t(story.title)}
               </h3>
               <Image
                 src="/images/icons/icon-arrow-up-right.svg"
@@ -57,7 +61,7 @@ export default function StoriesTrio({ divider = true }: { divider?: boolean }) {
               />
             </div>
             <p className="mt-4 font-medium text-[15.2px] text-[#4b5565] leading-[24px]">
-              {story.body}
+              {t(story.body)}
             </p>
           </Link>
         ))}

@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import { getT } from "@/lib/i18n/server";
 
 const proof = [
   {
@@ -18,19 +19,21 @@ const proof = [
   },
 ];
 
-export default function WhyTheYoung() {
+export default async function WhyTheYoung() {
+  const t = await getT();
   return (
     <section className="font-body bg-[#f2f6fb]">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
-            Why The Young
+            {t("Why The Young")}
           </p>
           <h2 className="mt-4 max-w-3xl font-display font-bold text-4xl text-v2-navy leading-[1.05] tracking-[-1.3px] sm:text-5xl lg:text-[52px]">
-            Revival has always arrived early &mdash; carried by people the
-            world called{" "}
+            {t(
+              "Revival has always arrived early — carried by people the world called",
+            )}{" "}
             <span className="font-serif font-normal italic text-v2-accent">
-              too young
+              {t("too young")}
             </span>
             .
           </h2>
@@ -51,10 +54,10 @@ export default function WhyTheYoung() {
                   {item.number}
                 </p>
                 <p className="mt-4 font-display font-bold text-lg text-v2-navy">
-                  {item.name}
+                  {t(item.name)}
                 </p>
                 <p className="mt-2 text-[14px] text-v2-muted-dark leading-[1.65]">
-                  {item.body}
+                  {t(item.body)}
                 </p>
               </div>
             ))}

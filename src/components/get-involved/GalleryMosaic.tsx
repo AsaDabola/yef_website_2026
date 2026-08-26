@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { getT } from "@/lib/i18n/server";
 
-export default function GalleryMosaic({
+export default async function GalleryMosaic({
   images,
 }: {
   images: [
@@ -9,6 +10,7 @@ export default function GalleryMosaic({
     { src: string; alt: string },
   ];
 }) {
+  const t = await getT();
   const [main, topRight, bottomRight] = images;
 
   return (
@@ -49,7 +51,7 @@ export default function GalleryMosaic({
             className="object-cover"
           />
           <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/60 font-medium text-[19px] text-white transition-opacity group-hover:bg-black/70">
-            See More
+            {t("See More")}
             <Image
               src="/images/icons/icon-arrow-right-24-white.svg"
               alt=""

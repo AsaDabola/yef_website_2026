@@ -15,5 +15,10 @@ type Props = Omit<ComponentProps<typeof NextLink>, "href"> & { href: string };
 export default function LocaleLink({ href, ...props }: Props) {
   const { country, locale } = useI18n();
   const isInternal = href.startsWith("/") && !href.startsWith("//");
-  return <NextLink href={isInternal ? localePath(href, country, locale) : href} {...props} />;
+  return (
+    <NextLink
+      href={isInternal ? localePath(href, country, locale) : href}
+      {...props}
+    />
+  );
 }

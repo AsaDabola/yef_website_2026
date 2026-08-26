@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
+import { useT } from "@/lib/i18n/client";
 
 const navLinks = [
   { label: "Who we are", href: "/who-we-are" },
@@ -13,6 +14,7 @@ const navLinks = [
 ];
 
 export default function HeaderV2() {
+  const t = useT();
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,7 +29,7 @@ export default function HeaderV2() {
         >
           <Image
             src="/images/icons/logo-yef-white-compact.svg"
-            alt="Youth Evangelical Fellowship"
+            alt={t("Youth Evangelical Fellowship")}
             fill
             sizes="168px"
             className="object-contain object-left"
@@ -43,7 +45,7 @@ export default function HeaderV2() {
                 href={link.href}
                 className="transition-colors hover:text-white"
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             ))}
           </nav>
@@ -58,14 +60,14 @@ export default function HeaderV2() {
               href="/donate"
               className="rounded-full border border-white/50 px-3.5 py-1.5 font-semibold text-xs text-white tracking-[1.5px] transition-colors hover:bg-white hover:text-v2-navy sm:px-[26px] sm:py-[11px] sm:text-base sm:tracking-[2.56px]"
             >
-              GIVE
+              {t("GIVE")}
             </Link>
 
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
-              aria-label="Toggle menu"
+              aria-label={t("Toggle menu")}
               className="flex size-11 shrink-0 items-center justify-center rounded-full border border-white/50 text-white lg:hidden"
             >
               <svg
@@ -97,7 +99,7 @@ export default function HeaderV2() {
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-3 transition-colors hover:bg-white/10 hover:text-white"
             >
-              {link.label}
+              {t(link.label)}
             </Link>
           ))}
           <div className="mt-2 flex flex-wrap items-center gap-2 border-white/15 border-t pt-3">

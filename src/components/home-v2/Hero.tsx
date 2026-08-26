@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import { useEffect, useState } from "react";
 import HeaderV2 from "./HeaderV2";
+import { useT } from "@/lib/i18n/client";
 
 const slides = [
   {
@@ -30,6 +31,7 @@ const slides = [
 const SLIDE_DURATION = 6500;
 
 export default function Hero() {
+  const t = useT();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -81,13 +83,13 @@ export default function Hero() {
                 ))}
               </h1>
               <p className="mt-8 max-w-lg text-lg text-white/85 leading-relaxed">
-                {slide.body}
+                {t(slide.body)}
               </p>
               <Link
                 href="/who-we-are"
                 className="mt-10 inline-flex items-center justify-center rounded-full border border-white/55 px-8 py-4 font-semibold text-xs tracking-[1.92px] text-white transition-colors hover:bg-white hover:text-v2-navy"
               >
-                LEARN MORE
+                {t("LEARN MORE")}
               </Link>
             </div>
           ))}
@@ -109,7 +111,7 @@ export default function Hero() {
       </div>
 
       <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs tracking-[2.2px] text-white/80">
-        YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL
+        {t("YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL")}
       </p>
     </section>
   );

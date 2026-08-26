@@ -3,8 +3,10 @@ import Link from "@/components/ui/LocaleLink";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
 import { getMovementItems } from "@/lib/posts";
+import { getT } from "@/lib/i18n/server";
 
 export default async function AroundMovement() {
+  const t = await getT();
   const items = await getMovementItems();
 
   return (
@@ -12,9 +14,9 @@ export default async function AroundMovement() {
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
         <Reveal>
           <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-0.4px] sm:text-5xl lg:text-[54px]">
-            Around the{" "}
+            {t("Around the")}{" "}
             <span className="font-instrument-serif font-normal italic text-v2-accent">
-              Movement
+              {t("Movement")}
             </span>
           </h2>
         </Reveal>
@@ -36,10 +38,10 @@ export default async function AroundMovement() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                       <div className="absolute right-8 bottom-8 left-8 text-white">
                         <p className="font-semibold text-[11px] text-white/60 tracking-[2.42px] uppercase">
-                          {item.tag}
+                          {t(item.tag)}
                         </p>
                         <p className="mt-2 font-display font-bold text-[23px] tracking-[-0.46px]">
-                          {item.title}
+                          {t(item.title)}
                         </p>
                       </div>
                     </>

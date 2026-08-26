@@ -5,12 +5,14 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ChapterMap from "@/components/network/ChapterMap";
 import GlobalPulse from "@/components/network/GlobalPulse";
 import Footer from "@/components/Footer";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Network | Youth Evangelical Fellowship",
 };
 
-export default function NetworkPage() {
+export default async function NetworkPage() {
+  const t = await getT();
   return (
     <>
       <main>
@@ -30,36 +32,32 @@ export default function NetworkPage() {
             <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[572px_653px] lg:justify-between lg:gap-0">
               <div>
                 <h1 className="font-display font-extrabold text-5xl text-white leading-[1.05] tracking-[-1.5px] sm:text-6xl lg:text-[72px]">
-                  Our Global
-                  <br />
-                  Network
-                </h1>
+                  
+{t("Our Global")}
+<br />
+                  
+{t("Network")}
+</h1>
                 <div className="mt-8 max-w-[572px] space-y-6 text-[17px] text-white/80 leading-[30px] lg:text-[19px]">
                   <p>
-                    YEF is a growing global fellowship of young people who are
-                    seeking to know Christ, grow together in His Word, and make
-                    Him known in their communities.
-                  </p>
+                    
+{t("YEF is a growing global fellowship of young people who are seeking to know Christ, grow together in His Word, and make Him known in their communities.")}
+</p>
                   <p>
-                    From college campuses to cities around the world, each YEF
-                    chapter is a local expression of the same vision: to raise a
-                    generation of young people who live for Christ and bring the
-                    Gospel to others.
-                  </p>
+                    
+{t("From college campuses to cities around the world, each YEF chapter is a local expression of the same vision: to raise a generation of young people who live for Christ and bring the Gospel to others.")}
+</p>
                   <p>
-                    Our chapters connect students and young adults through Bible
-                    study, fellowship, discipleship, prayer, leadership training,
-                    and mission. While every chapter has its own local culture
-                    and community, we are united by one faith, one hope, and one
-                    mission.
-                  </p>
+                    
+{t("Our chapters connect students and young adults through Bible study, fellowship, discipleship, prayer, leadership training, and mission. While every chapter has its own local culture and community, we are united by one faith, one hope, and one mission.")}
+</p>
                 </div>
               </div>
 
               <div className="relative aspect-[653/492] w-full overflow-hidden rounded-2xl shadow-[0_30px_80px_rgba(2,8,16,0.55)]">
                 <Image
                   src="/images/network/hero-global-network.png"
-                  alt="A circle of YEF members with their arms around one another in prayer"
+                  alt={t("A circle of YEF members with their arms around one another in prayer")}
                   fill
                   priority
                   sizes="(min-width: 1024px) 653px, 100vw"
@@ -70,20 +68,21 @@ export default function NetworkPage() {
           </div>
 
           <p className="relative pb-8 text-center font-semibold text-[11px] text-white/40 tracking-[3px] uppercase">
-            Youth Evangelical Fellowship International
-          </p>
+            
+{t("Youth Evangelical Fellowship International")}
+</p>
         </section>
 
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
-          <Breadcrumb label="Network" />
+          <Breadcrumb label={t("Network")} />
           <h1 className="mt-6 max-w-2xl font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
-            Find a chapter near you.
-          </h1>
+            
+{t("Find a chapter near you.")}
+</h1>
           <p className="mt-4 max-w-xl text-v2-muted-dark leading-relaxed">
-            YEF chapters meet on campuses in more than 40 countries. Search
-            the list or drop a pin to see who&rsquo;s leading a fellowship
-            near you.
-          </p>
+            
+{t("YEF chapters meet on campuses in more than 40 countries. Search the list or drop a pin to see who’s leading a fellowship near you.")}
+</p>
 
           <div className="mt-10">
             <ChapterMap />

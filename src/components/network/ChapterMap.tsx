@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { chapters } from "@/lib/chapters";
+import { useT } from "@/lib/i18n/client";
 
 export default function ChapterMap() {
+  const t = useT();
   const [selectedId, setSelectedId] = useState(chapters[0].id);
   const [query, setQuery] = useState("");
   const [country, setCountry] = useState("All");
@@ -40,20 +42,20 @@ export default function ChapterMap() {
       <div className="max-h-[640px] overflow-y-auto border-b border-v2-border bg-white lg:max-h-[640px] lg:border-b-0 lg:border-r">
         <div className="sticky top-0 z-10 space-y-3 border-b border-v2-border bg-white p-4">
           <label className="sr-only" htmlFor="chapter-search">
-            Search chapters
+            {t("Search chapters")}
           </label>
           <input
             id="chapter-search"
             type="text"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search chapters"
+            placeholder={t("Search chapters")}
             className="w-full rounded-full border border-v2-border px-4 py-2.5 text-sm text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none"
           />
 
           <div className="grid grid-cols-2 gap-2">
             <label className="block">
-              <span className="sr-only">Country</span>
+              <span className="sr-only">{t("Country")}</span>
               <select
                 value={country}
                 onChange={(event) => {
@@ -70,7 +72,7 @@ export default function ChapterMap() {
               </select>
             </label>
             <label className="block">
-              <span className="sr-only">City</span>
+              <span className="sr-only">{t("City")}</span>
               <select
                 value={city}
                 onChange={(event) => setCity(event.target.value)}
@@ -86,7 +88,8 @@ export default function ChapterMap() {
           </div>
 
           <p className="text-sm text-v2-muted">
-            Showing {filtered.length} chapter{filtered.length === 1 ? "" : "s"}
+            {t("Showing")} {filtered.length} {t(" chapter")}
+            {filtered.length === 1 ? "" : "s"}
           </p>
         </div>
 
@@ -110,7 +113,9 @@ export default function ChapterMap() {
                   />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-semibold text-v2-navy">{chapter.name}</p>
+                  <p className="font-semibold text-v2-navy">
+                    {t(chapter.name)}
+                  </p>
                   <p className="truncate text-[13px] text-v2-muted">
                     {chapter.address}
                   </p>
@@ -120,7 +125,7 @@ export default function ChapterMap() {
           ))}
           {filtered.length === 0 && (
             <li className="p-6 text-center text-sm text-v2-muted">
-              No chapters match that search.
+              {t("No chapters match that search.")}
             </li>
           )}
         </ul>
@@ -138,7 +143,7 @@ export default function ChapterMap() {
           />
         ) : (
           <div className="flex size-full items-center justify-center bg-v2-bg text-sm text-v2-muted">
-            Select a chapter to see it on the map.
+            {t("Select a chapter to see it on the map.")}
           </div>
         )}
 
@@ -151,7 +156,7 @@ export default function ChapterMap() {
                     {selected.country}
                   </p>
                   <p className="mt-1 font-display font-bold text-xl text-v2-navy">
-                    {selected.name}
+                    {t(selected.name)}
                   </p>
                 </div>
               </div>
@@ -182,7 +187,7 @@ export default function ChapterMap() {
                     {selected.leader}
                   </p>
                   <p className="text-[12.5px] text-v2-muted">
-                    {selected.role}
+                    {t(selected.role)}
                   </p>
                 </div>
               </div>

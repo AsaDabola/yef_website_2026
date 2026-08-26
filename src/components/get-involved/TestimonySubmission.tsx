@@ -3,14 +3,16 @@
 import { useState } from "react";
 import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import { LabeledTextField } from "@/components/forms/LabeledField";
+import { useT } from "@/lib/i18n/client";
 
 export default function TestimonySubmission() {
+  const t = useT();
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {
     return (
       <SubmissionSuccess
-        title="Thank You for Sharing"
+        title={t("Thank You for Sharing")}
         message="Your story has been received. We're grateful you took the time to share what God has been doing in your life."
         footnote="In the meantime, feel free to explore more ways to get involved."
       />
@@ -28,15 +30,15 @@ export default function TestimonySubmission() {
       <div className="space-y-4">
         <div className="flex flex-col gap-3 sm:flex-row">
           <LabeledTextField
-            label="Name"
-            placeholder="First & Last Name"
+            label={t("Name")}
+            placeholder={t("First & Last Name")}
             name="name"
             required
             half
           />
           <LabeledTextField
-            label="Email"
-            placeholder="Email Address"
+            label={t("Email")}
+            placeholder={t("Email Address")}
             type="email"
             name="email"
             required
@@ -44,8 +46,8 @@ export default function TestimonySubmission() {
           />
         </div>
         <LabeledTextField
-          label="Testimony Title"
-          placeholder="Give your story a short title"
+          label={t("Testimony Title")}
+          placeholder={t("Give your story a short title")}
           name="title"
           required
         />
@@ -56,26 +58,27 @@ export default function TestimonySubmission() {
           htmlFor="testimony"
           className="block font-semibold text-[16px] leading-[19px] text-[#1b1d21]"
         >
-          Your Testimony
+          {t("Your Testimony")}
         </label>
         <p className="text-[13px] leading-[16px] text-[#6b737d]">
-          What has God been teaching you? How have you seen His grace at work in
-          your life recently?
+          {t(
+            "What has God been teaching you? How have you seen His grace at work in your life recently?",
+          )}
         </p>
         <textarea
           id="testimony"
           name="testimony"
-          placeholder="Share your story here..."
+          placeholder={t("Share your story here...")}
           className="block h-[220px] w-full rounded-[8px] border border-[#d1d6de] bg-[#fafafb] p-[14px] text-[13px] leading-[16px] text-[#1b1d21] placeholder:text-[#9ea3ab] focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/20"
         />
         <p className="text-right text-[11px] leading-[13px] text-[#9ea3ab]">
-          Minimum 100 words
+          {t("Minimum 100 words")}
         </p>
       </div>
 
       <div className="space-y-3.5">
         <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
-          Sharing Permission
+          {t("Sharing Permission")}
         </p>
         <label className="flex items-center gap-2.5 text-[13px] leading-[18px] text-[#1b1d21]">
           <input
@@ -85,8 +88,9 @@ export default function TestimonySubmission() {
             className="size-[18px] shrink-0 rounded-[4px] border-[1.5px] border-[#bfc4cc] text-[#2b4c7e] focus:ring-v2-accent"
           />
           <span>
-            I give YEFI permission to share my testimony (website, social media,
-            newsletter).
+            {t(
+              "I give YEFI permission to share my testimony (website, social media, newsletter).",
+            )}
           </span>
         </label>
       </div>
@@ -95,7 +99,7 @@ export default function TestimonySubmission() {
         type="submit"
         className="w-full rounded-[8px] bg-[#2b4c7e] px-7 py-3.5 font-bold text-[14px] leading-[17px] text-white uppercase transition-opacity hover:opacity-90"
       >
-        Submit My Testimony
+        {t("Submit My Testimony")}
       </button>
     </form>
   );

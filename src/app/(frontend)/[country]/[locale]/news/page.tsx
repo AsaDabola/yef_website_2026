@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import NewsGrid from "@/components/news/NewsGrid";
 import { getNewsArticles } from "@/lib/posts";
 import Footer from "@/components/Footer";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "News | Youth Evangelical Fellowship",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function NewsPage() {
+  const t = await getT();
   const posts = await getNewsArticles();
 
   return (
@@ -39,30 +41,32 @@ export default async function NewsPage() {
             <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[572px_653px] lg:justify-between lg:gap-0">
               <div>
                 <h1 className="font-display font-extrabold text-5xl text-white leading-[1.1] tracking-[-1.5px] sm:text-6xl lg:text-[86px] lg:leading-[96px]">
-                  Welcome
-                  <br />
-                  News
-                  <br />
-                  from Afar
-                </h1>
+                  
+{t("Welcome")}
+<br />
+                  
+{t("News")}
+<br />
+                  
+{t("from Afar")}
+</h1>
                 <p className="mt-6 text-[17px] text-white/85 leading-[38px] lg:text-[20px]">
-                  &ldquo;to a weary soul, so is good news from a distant
-                  land.&rdquo;
-                  <br />
-                  &mdash; Proverbs 25:25
-                </p>
+                  
+{t("“to a weary soul, so is good news from a distant land.”")}
+<br />
+                  
+{t("— Proverbs 25:25")}
+</p>
                 <p className="mt-8 max-w-[572px] text-[17px] text-white/80 leading-[40px] lg:text-[20px]">
-                  From city campuses to mission fields far away, God is at work.
-                  Every testimony and every new chapter is a small taste of that
-                  same refreshment &mdash; good news carried across the distance.
-                  Here, we gather those stories.
-                </p>
+                  
+{t("From city campuses to mission fields far away, God is at work. Every testimony and every new chapter is a small taste of that same refreshment — good news carried across the distance. Here, we gather those stories.")}
+</p>
               </div>
 
               <div className="relative aspect-[653/492] w-full overflow-hidden rounded-2xl shadow-[0_30px_80px_rgba(2,8,16,0.55)]">
                 <Image
                   src="/images/news/hero-high-five.jpg"
-                  alt="Students laughing as they meet in a high five"
+                  alt={t("Students laughing as they meet in a high five")}
                   fill
                   priority
                   sizes="(min-width: 1024px) 653px, 100vw"
@@ -73,12 +77,13 @@ export default async function NewsPage() {
           </div>
 
           <p className="relative pb-8 text-center font-semibold text-[11px] text-white/40 tracking-[3px] uppercase">
-            Youth Evangelical Fellowship International
-          </p>
+            
+{t("Youth Evangelical Fellowship International")}
+</p>
         </section>
 
         <section className="mx-auto max-w-[1392px] px-6 pt-[74px] pb-16">
-          <Breadcrumb label="News" />
+          <Breadcrumb label={t("News")} />
           <div className="mt-[98px]">
             <NewsGrid posts={posts} />
           </div>

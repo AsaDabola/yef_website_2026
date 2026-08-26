@@ -5,12 +5,14 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ConnectForm from "@/components/get-involved/ConnectForm";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Apply YEF Mission School | Youth Evangelical Fellowship",
 };
 
-export default function MissionSchoolApplyPage() {
+export default async function MissionSchoolApplyPage() {
+  const t = await getT();
   return (
     <>
       <main>
@@ -31,7 +33,7 @@ export default function MissionSchoolApplyPage() {
             page gutter, so both share the 922px card width. */}
         <section className="mx-auto max-w-[922px] pt-[116px] pb-[110px]">
           <div className="px-6 lg:px-[9px]">
-            <Breadcrumb label="Get Involved" />
+            <Breadcrumb label={t("Get Involved")} />
           </div>
           <div className="mt-10">
             <ConnectForm variant="mission-school" />

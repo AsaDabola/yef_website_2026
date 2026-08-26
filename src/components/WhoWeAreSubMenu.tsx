@@ -2,6 +2,7 @@
 
 import Link from "@/components/ui/LocaleLink";
 import { usePathname } from "next/navigation";
+import { useT } from "@/lib/i18n/client";
 
 const links = [
   { label: "Welcome", href: "/who-we-are/welcome" },
@@ -16,15 +17,16 @@ const links = [
 ];
 
 export default function WhoWeAreSubMenu() {
+  const t = useT();
   const pathname = usePathname();
 
   return (
     <nav
-      aria-label="Who We Are section navigation"
+      aria-label={t("Who We Are section navigation")}
       className="font-body w-full max-w-[237px]"
     >
       <p className="font-bold text-[15px] leading-[16.62px] text-yef-primary">
-        Who We Are
+        {t("Who We Are")}
       </p>
       <ul className="mt-[47px] space-y-[30px]">
         {links.map((link) => {
@@ -39,7 +41,7 @@ export default function WhoWeAreSubMenu() {
                     : "text-black hover:text-yef-primary"
                 }`}
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             </li>
           );

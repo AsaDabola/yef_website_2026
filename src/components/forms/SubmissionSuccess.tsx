@@ -1,6 +1,9 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
+import { useT } from "@/lib/i18n/client";
 
 type SubmissionSuccessProps = {
   title: string;
@@ -22,13 +25,14 @@ export default function SubmissionSuccess({
   cta = { label: "Back to Home", href: "/" },
   className,
 }: SubmissionSuccessProps) {
+  const t = useT();
   return (
     <div
       className={`flex flex-col items-center justify-center gap-6 rounded-2xl bg-[#0066cf] px-8 py-16 text-center sm:px-12 sm:py-20 ${className ?? ""}`}
     >
       <Image
         src="/images/icons/logo-yef-white-compact.svg"
-        alt="Youth Evangelical Fellowship"
+        alt={t("Youth Evangelical Fellowship")}
         width={138}
         height={50}
         className="h-[50px] w-[138px] object-contain"
@@ -61,7 +65,7 @@ export default function SubmissionSuccess({
         href={cta.href}
         className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3.5 font-bold text-[14px] text-[#0066cf] uppercase transition-transform duration-200 hover:scale-105"
       >
-        {cta.label}
+        {t(cta.label)}
       </Link>
     </div>
   );

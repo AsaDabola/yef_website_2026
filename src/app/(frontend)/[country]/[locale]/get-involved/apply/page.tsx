@@ -6,12 +6,14 @@ import ConnectForm from "@/components/get-involved/ConnectForm";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Connect With YEFI | Youth Evangelical Fellowship",
 };
 
-export default function ApplyPage() {
+export default async function ApplyPage() {
+  const t = await getT();
   return (
     <>
       <main>
@@ -38,7 +40,7 @@ export default function ApplyPage() {
             </div>
 
             <div className="min-w-0 flex-1">
-              <Breadcrumb label="Get Involved" />
+              <Breadcrumb label={t("Get Involved")} />
               <div className="mt-[41px] max-w-[922px]">
                 <ConnectForm />
               </div>

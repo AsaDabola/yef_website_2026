@@ -1,7 +1,8 @@
 import Image from "next/image";
 import FeatureCard from "@/components/who-we-are/FeatureCard";
+import { getT } from "@/lib/i18n/server";
 
-export default function MinistrySection({
+export default async function MinistrySection({
   id,
   title,
   body,
@@ -18,6 +19,7 @@ export default function MinistrySection({
   alt: string;
   ctas?: { label: string; href: string; primary?: boolean }[];
 }) {
+  const t = await getT();
   return (
     <section
       id={id}
@@ -48,7 +50,7 @@ export default function MinistrySection({
                       : "inline-flex items-center justify-center rounded-full border border-[#00203f] px-[34px] py-4 font-semibold text-[12px] text-[#00203f] tracking-[1.92px] transition-transform duration-200 hover:scale-105"
                   }
                 >
-                  {cta.label}
+                  {t(cta.label)}
                 </a>
               ))}
             </div>
@@ -57,7 +59,7 @@ export default function MinistrySection({
           {resourceColumns && resourceColumns.length > 0 && (
             <div className="mt-12">
               <p className="font-semibold text-[15.1px] text-black leading-[16.62px]">
-                YEF Resources
+                {t("YEF Resources")}
               </p>
               <div className="mt-6 flex flex-wrap gap-x-16 gap-y-2">
                 {resourceColumns.map((column, i) => (
@@ -92,7 +94,7 @@ export default function MinistrySection({
         <FeatureCard
           image={image}
           alt={alt}
-          eyebrow="Get Involved"
+          eyebrow={t("Get Involved")}
           title={title}
           className="justify-self-center lg:justify-self-end"
         />

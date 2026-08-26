@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
+import { getT } from "@/lib/i18n/server";
 
 const stories = [
   {
@@ -24,7 +25,8 @@ const stories = [
   },
 ];
 
-export default function StoriesNews() {
+export default async function StoriesNews() {
+  const t = await getT();
   return (
     <section className="font-body bg-white">
       <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 lg:px-12 lg:py-[154px]">
@@ -43,7 +45,7 @@ export default function StoriesNews() {
                 </div>
                 <div className="mt-6 flex items-start justify-between gap-4">
                   <h3 className="font-semibold text-[22.6px] text-black leading-[30px]">
-                    {story.title}
+                    {t(story.title)}
                   </h3>
                   <Image
                     src="/images/icons/icon-arrow-up-right.svg"
@@ -55,7 +57,7 @@ export default function StoriesNews() {
                   />
                 </div>
                 <p className="mt-4 font-medium text-[15.2px] text-[#4b5565] leading-[24px]">
-                  {story.body}
+                  {t(story.body)}
                 </p>
               </Link>
             ))}

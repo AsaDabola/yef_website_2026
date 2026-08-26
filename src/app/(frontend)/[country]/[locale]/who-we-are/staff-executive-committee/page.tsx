@@ -4,6 +4,7 @@ import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import Footer from "@/components/Footer";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Staff/Executive Committee | Youth Evangelical Fellowship",
@@ -63,13 +64,14 @@ const people = [
   },
 ];
 
-export default function StaffExecutiveCommitteePage() {
+export default async function StaffExecutiveCommitteePage() {
+  const t = await getT();
   return (
     <>
       <main>
         <SubPageHero
           image="/images/who-we-are/banner-staff.jpg"
-          alt="Sunlit mountain ridges receding into morning haze"
+          alt={t("Sunlit mountain ridges receding into morning haze")}
         />
         {/* The frame insets the sub-menu 92px from the left and opens the
             people grid at 451px. */}
@@ -80,11 +82,12 @@ export default function StaffExecutiveCommitteePage() {
             </div>
 
             <div className="min-w-0 flex-1">
-              <Breadcrumb label="Staff/Executive Committee" />
+              <Breadcrumb label={t("Staff/Executive Committee")} />
 
               <h1 className="mt-6 font-display font-extrabold text-4xl text-black tracking-[-0.5px] sm:text-[40px]">
-                Staff/Executive Committee
-              </h1>
+                
+{t("Staff/Executive Committee")}
+</h1>
 
               <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
                 {people.map((person) => (
@@ -99,10 +102,10 @@ export default function StaffExecutiveCommitteePage() {
                       />
                     </div>
                     <p className="mt-4 font-sans font-extrabold text-[16px] text-black leading-[24px]">
-                      {person.name}
+                      {t(person.name)}
                     </p>
                     <p className="font-sans text-[16px] text-black/70 italic leading-[24px]">
-                      {person.title}
+                      {t(person.title)}
                     </p>
                   </div>
                 ))}

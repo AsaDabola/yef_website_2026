@@ -1,4 +1,5 @@
 import GetInvolvedFeature from "@/components/get-involved/GetInvolvedFeature";
+import { getT } from "@/lib/i18n/server";
 
 const steps = [
   {
@@ -18,14 +19,15 @@ const steps = [
   },
 ];
 
-export default function MissionTripPromo() {
+export default async function MissionTripPromo() {
+  const t = await getT();
   return (
     <GetInvolvedFeature
       id="mission-trip"
-      title="Mission Trips"
+      title={t("Mission Trips")}
       intro="Youth Evangelical Fellowship (YEF) is dedicated to revealing the Gospel of Jesus Christ in our daily lives, transforming our communities, and bringing the good news to all people. As creative and committed Christians, we work daily to quench the spiritual drought in our cities and restore the hearts of many worldwide."
       image="/images/get-involved/mission-trip-street-evangelism.png"
-      alt="YEF members handing out tracts on a busy street"
+      alt={t("YEF members handing out tracts on a busy street")}
       items={steps}
       link={{
         label: "Learn more about Mission Trip",
