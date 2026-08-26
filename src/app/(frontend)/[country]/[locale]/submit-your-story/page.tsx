@@ -57,11 +57,13 @@ export default async function SubmitYourStoryPage({ params }: { params: LocalePa
             </div>
             <div className="relative min-h-[320px] w-full lg:min-h-[640px]">
               <Image
-                src="/images/submit-story/hilltop-sunset.png"
-                alt={t("Three friends standing on a hilltop at sunset")}
+                src="/images/submit-story/hudson-taylor.jpg"
+                alt={t("Hudson Taylor")}
                 fill
                 sizes="(min-width: 1024px) 673px, 100vw"
-                className="object-cover"
+                // The engraving is a portrait bust on white, so it sits in the
+                // card rather than filling it the way a photo would.
+                className="object-contain object-bottom"
               />
             </div>
           </div>
