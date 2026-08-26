@@ -8,10 +8,10 @@ import { useT } from "@/lib/i18n/client";
 
 const slides = [
   {
-    image: "/images/home-v2/hero-fire.png",
-    alt: "Youth gathered around a bonfire at dusk",
-    heading: "To Know Christ.\nTo Make Him Known.",
-    body: "For we do not preach ourselves but Jesus Christ as Lord",
+    image: "/images/history/hero-large.png",
+    alt: "Youth Evangelical Fellowship building",
+    heading: "Join Us\nToday",
+    body: "Be part of YEF, Become True Disciples of Christ.",
   },
   {
     image: "/images/home-v2/slide-2-students.png",
@@ -20,11 +20,10 @@ const slides = [
     body: "Join YEF Campus Chapter, Fellowship in Christ",
   },
   {
-    image:
-      "https://www.figma.com/api/mcp/asset/c5e5b4cc-1ceb-4295-a020-3625a39bbf8f.png",
-    alt: "Youth Evangelical Fellowship building",
-    heading: "Join Us\nToday",
-    body: "Be part of YEF, Become True Disciples of Christ.",
+    image: "/images/home-v2/hero-fire.png",
+    alt: "Youth gathered around a bonfire at dusk",
+    heading: "To Know Christ.\nTo Make Him Known.",
+    body: "For we do not preach ourselves but Jesus Christ as Lord",
   },
 ];
 
