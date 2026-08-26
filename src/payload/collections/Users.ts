@@ -1,13 +1,90 @@
 import type { CollectionConfig } from "payload";
+import {
+  countryOptions,
+  isSuper,
+  sectionOptions,
+  superOnlyField,
+  usersAccess,
+  type AdminUser,
+} from "@/payload/access";
 
 export const Users: CollectionConfig = {
   slug: "users",
   auth: true,
-  admin: { useAsTitle: "email" },
+  labels: { singular: "Person", plural: "People & permissions" },
+  admin: {
+    useAsTitle: "email",
+    defaultColumns: ["email", "name", "role", "countries"],
+    description:
+      "Who can sign in, which country sites they are responsible for, and which parts of those sites they may edit.",
+  },
+  access: {
+    read: usersAccess,
+    // Handing out accounts is how permissions are granted, so it stays with
+    // super admins rather than following the country scope.
+    create: ({ req: { user } }) => isSuper(user as AdminUser | null),
+    delete: ({ req: { user } }) => isSuper(user as AdminUser | null),
+    update: usersAccess,
+  },
+  hooks: {
+    beforeChange: [
+      async ({ req, operation, data }) => {
+        // Payload lets the very first account be created without a session.
+        // Without this it would land as an editor with no countries and be
+        // locked out of everything, including this collection.
+        if (operation !== "create") return data;
+        const { totalDocs } = await req.payload.count({ collection: "users" });
+        return totalDocs === 0 ? { ...data, role: "super" } : data;
+      },
+    ],
+  },
   fields: [
     {
       name: "name",
       type: "text",
+    },
+    {
+      name: "role",
+      type: "select",
+      required: true,
+      defaultValue: "editor",
+      options: [
+        { label: "Super admin — every country, every section", value: "super" },
+        {
+          label: "Country admin — their countries, every section",
+          value: "country-admin",
+        },
+        {
+          label: "Editor — their countries, listed sections only",
+          value: "editor",
+        },
+      ],
+      access: { create: superOnlyField, update: superOnlyField },
+      admin: { position: "sidebar" },
+    },
+    {
+      name: "countries",
+      type: "select",
+      hasMany: true,
+      options: countryOptions,
+      access: { create: superOnlyField, update: superOnlyField },
+      admin: {
+        description:
+          "The country sites this person may edit. Ignored for super admins, who reach every country.",
+        condition: (data) => data?.role !== "super",
+      },
+    },
+    {
+      name: "sections",
+      type: "select",
+      hasMany: true,
+      options: sectionOptions,
+      access: { create: superOnlyField, update: superOnlyField },
+      admin: {
+        description:
+          "The parts of those sites this person may edit. Country admins reach every section, so this applies to editors.",
+        condition: (data) => data?.role === "editor",
+      },
     },
   ],
 };

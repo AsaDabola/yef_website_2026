@@ -1,5 +1,6 @@
 import type { Where } from "payload";
 import { newsArticles, type NewsArticle } from "@/lib/news";
+import { getCountryCode } from "@/lib/i18n/request";
 
 export type MovementItem = {
   tag: string;
@@ -75,6 +76,16 @@ function formatDate(value: string) {
   });
 }
 
+/**
+ * Posts belong to one country site, so every read is scoped to the site the
+ * request is on. Without this the headquarters site would list every
+ * country's news alongside its own.
+ */
+function forThisCountry(where?: Where): Where {
+  const country = { country: { equals: getCountryCode() } };
+  return where ? { and: [country, where] } : country;
+}
+
 async function findPosts(where?: Where, limit = 100) {
   const [{ getPayload }, { default: config }] = await Promise.all([
     import("payload"),
@@ -86,7 +97,7 @@ async function findPosts(where?: Where, limit = 100) {
     depth: 1,
     limit,
     sort: "-publishedAt",
-    where,
+    where: forThisCountry(where),
   });
   return docs as unknown as PostDoc[];
 }

@@ -1,4 +1,13 @@
 import type { CollectionConfig } from "payload";
+import {
+  canCreateIn,
+  countryOptions,
+  countryScoped,
+  hasSection,
+  isSuper,
+  scopeOf,
+  type AdminUser,
+} from "@/payload/access";
 
 /**
  * One collection behind both the News page and the home page's "Around the
@@ -13,10 +22,36 @@ export const Posts: CollectionConfig = {
     defaultColumns: ["title", "category", "publishedAt", "showOnHome"],
     description:
       "Posts appear on the News page. Tick “Show on the home page” to also put one in the Around the Movement strip.",
+    hidden: ({ user }) => !hasSection(user as AdminUser | null, "news"),
   },
-  access: { read: () => true },
+  access: {
+    // The site itself reads posts unauthenticated; editing is scoped to the
+    // countries a person is responsible for.
+    read: () => true,
+    create: canCreateIn("news"),
+    update: countryScoped("news"),
+    delete: countryScoped("news"),
+  },
   versions: { drafts: true },
   fields: [
+    {
+      name: "country",
+      type: "select",
+      required: true,
+      options: countryOptions,
+      index: true,
+      defaultValue: ({ user }: { user?: AdminUser | null }) =>
+        scopeOf(user)[0] ?? "int",
+      admin: {
+        position: "sidebar",
+        description: "Which country site this post belongs to.",
+      },
+      access: {
+        // An editor must not be able to move a post out of their own scope,
+        // or claim one from another country by retyping this field.
+        update: ({ req: { user } }) => isSuper(user as AdminUser | null),
+      },
+    },
     {
       name: "title",
       type: "text",
