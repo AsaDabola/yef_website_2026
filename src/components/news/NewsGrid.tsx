@@ -33,7 +33,7 @@ export default function NewsGrid({ posts }: { posts: NewsArticle[] }) {
                   : "border-transparent text-v2-muted-dark-2 hover:text-v2-navy"
               }`}
             >
-              {tab}
+              {t(tab)}
             </button>
           ))}
         </div>
