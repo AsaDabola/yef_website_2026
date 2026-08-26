@@ -8,8 +8,8 @@ import { useT } from "@/lib/i18n/client";
 
 const slides = [
   {
-    image: "/images/history/hero-large.png",
-    alt: "Youth Evangelical Fellowship building",
+    image: "/images/home-v2/hero-headquarters.webp",
+    alt: "Youth Evangelical Fellowship headquarters building",
     heading: "Join Us\nToday",
     body: "Be part of YEF, Become True Disciples of Christ.",
   },
@@ -59,6 +59,9 @@ export default function Hero() {
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/10 to-black/50" />
+          {/* The copy sits in the left column, and a bright slide leaves the
+              white heading barely legible against it, so shade that side. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
         </div>
       ))}
 
