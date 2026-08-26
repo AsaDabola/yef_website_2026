@@ -1,9 +1,27 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import { chapters } from "@/lib/chapters";
 import { useT } from "@/lib/i18n/client";
+
+/** Marks each row in the list, standing in for the thumbnails. */
+function PinIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
 
 export default function ChapterMap() {
   const t = useT();
@@ -102,19 +120,17 @@ export default function ChapterMap() {
               <button
                 type="button"
                 onClick={() => setSelectedId(chapter.id)}
-                className={`flex w-full items-center gap-3 p-4 text-left transition-colors ${
+                className={`flex w-full items-start gap-3 p-4 text-left transition-colors ${
                   chapter.id === selectedId ? "bg-v2-bg" : "hover:bg-v2-bg/60"
                 }`}
               >
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-lg">
-                  <Image
-                    src={chapter.image}
-                    alt={chapter.name}
-                    fill
-                    sizes="56px"
-                    className="object-cover"
-                  />
-                </div>
+                <PinIcon
+                  className={`mt-0.5 size-4 shrink-0 ${
+                    chapter.id === selectedId
+                      ? "text-v2-accent"
+                      : "text-v2-muted"
+                  }`}
+                />
                 <div className="min-w-0">
                   <p className="font-semibold text-v2-navy">
                     {t(chapter.name)}
@@ -139,7 +155,7 @@ export default function ChapterMap() {
           <iframe
             key={selected.id}
             title={`Map showing ${selected.name}`}
-            src={`https://www.google.com/maps?q=${encodeURIComponent(selected.address)}&output=embed`}
+            src={`https://www.google.com/maps?q=${selected.lat},${selected.lng}&z=16&output=embed`}
             className="absolute inset-0 size-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -163,28 +179,10 @@ export default function ChapterMap() {
                   </p>
                 </div>
               </div>
-              <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl">
-                <Image
-                  src={selected.image}
-                  alt={selected.name}
-                  fill
-                  sizes="320px"
-                  className="object-cover"
-                />
-              </div>
-              <p className="mt-4 text-sm text-v2-muted-dark">
+              <p className="mt-3 text-sm text-v2-muted-dark">
                 {selected.address}
               </p>
               <div className="mt-4 flex items-center gap-3 border-t border-v2-border pt-4">
-                <div className="relative size-10 shrink-0 overflow-hidden rounded-full">
-                  <Image
-                    src={selected.image}
-                    alt={selected.leader}
-                    fill
-                    sizes="40px"
-                    className="object-cover"
-                  />
-                </div>
                 <div>
                   <p className="font-semibold text-[14.5px] text-v2-navy">
                     {selected.leader}

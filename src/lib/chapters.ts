@@ -4,7 +4,12 @@ export type Chapter = {
   country: string;
   city: string;
   address: string;
-  image: string;
+  /**
+   * The campus itself, so the embed drops its pin on the building rather than
+   * wherever Google's geocoder lands on the address string.
+   */
+  lat: number;
+  lng: number;
   leader: string;
   role: string;
 };
@@ -16,7 +21,8 @@ export const chapters: Chapter[] = [
     country: "United States",
     city: "Orlando",
     address: "University of Central Florida, Orlando, FL, USA",
-    image: "/images/home-v2/testimonial-tamara.png",
+    lat: 28.6024,
+    lng: -81.2001,
     leader: "Tamara Hollis",
     role: "Campus Leader",
   },
@@ -26,7 +32,8 @@ export const chapters: Chapter[] = [
     country: "United States",
     city: "Philadelphia",
     address: "Temple University, Philadelphia, PA, USA",
-    image: "/images/home-v2/get-involved-bible-study.png",
+    lat: 39.9812,
+    lng: -75.1554,
     leader: "James Carter",
     role: "Campus Leader",
   },
@@ -36,7 +43,8 @@ export const chapters: Chapter[] = [
     country: "Korea",
     city: "Seoul",
     address: "Yonsei University, Seoul, South Korea",
-    image: "/images/home-v2/get-involved-summer-training.png",
+    lat: 37.5665,
+    lng: 126.9387,
     leader: "Grace Kim",
     role: "Regional Director",
   },
@@ -46,7 +54,8 @@ export const chapters: Chapter[] = [
     country: "Hong Kong",
     city: "Kowloon",
     address: "Hong Kong Baptist University, Kowloon, Hong Kong",
-    image: "/images/home-v2/testimonial-james.png",
+    lat: 22.3383,
+    lng: 114.182,
     leader: "James Wong",
     role: "Campus Leader",
   },
@@ -56,7 +65,8 @@ export const chapters: Chapter[] = [
     country: "Burundi",
     city: "Bujumbura",
     address: "University of Burundi, Bujumbura, Burundi",
-    image: "/images/home-v2/testimonial-esther.png",
+    lat: -3.3838,
+    lng: 29.3644,
     leader: "Esther Niyonzima",
     role: "Campus Leader",
   },
@@ -66,7 +76,8 @@ export const chapters: Chapter[] = [
     country: "Ethiopia",
     city: "Addis Ababa",
     address: "Addis Ababa University, Addis Ababa, Ethiopia",
-    image: "/images/home-v2/movement-africa.png",
+    lat: 9.0405,
+    lng: 38.7626,
     leader: "Daniel Bekele",
     role: "Regional Director",
   },
@@ -76,7 +87,8 @@ export const chapters: Chapter[] = [
     country: "Tonga",
     city: "Nuku'alofa",
     address: "Tupou Tertiary Institute, Nuku'alofa, Tonga",
-    image: "/images/home-v2/get-involved-mission-trips.png",
+    lat: -21.1394,
+    lng: -175.2018,
     leader: "Sione Taufa",
     role: "Campus Leader",
   },

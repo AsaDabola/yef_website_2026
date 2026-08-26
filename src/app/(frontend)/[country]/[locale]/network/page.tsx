@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import ChapterMap from "@/components/network/ChapterMap";
+import CountryDirectory from "@/components/network/CountryDirectory";
 import GlobalPulse from "@/components/network/GlobalPulse";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
@@ -90,6 +91,8 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
             <ChapterMap />
           </div>
         </section>
+
+        <CountryDirectory />
       </main>
       <Footer />
     </>

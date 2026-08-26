@@ -5,14 +5,21 @@ import { getT } from "@/lib/i18n/server";
 export default async function SignUp() {
   const t = await getT();
   return (
-    <section className="font-body relative overflow-hidden bg-v2-blue">
+    <section
+      id="signup"
+      className="font-body relative overflow-hidden bg-v2-blue"
+    >
+      {/* The map is light line-art on a navy ground, so it screens onto the
+          band: the ground drops out and only the lines carry over, keeping
+          the section's blue instead of turning it navy. */}
       <Image
-        src="/images/home-v2/signup-bg.png"
+        src="/images/home-v2/signup-world-map.jpg"
         alt=""
-        width={1964}
-        height={833}
+        width={4096}
+        height={1738}
         sizes="100vw"
-        className="absolute inset-x-0 top-0 h-[833px] w-full max-w-full object-cover opacity-45 mix-blend-screen"
+        priority={false}
+        className="absolute inset-0 size-full object-cover opacity-75 mix-blend-screen"
       />
       <div className="relative mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
         <Reveal>
