@@ -16,20 +16,26 @@ for (const file of fs.readdirSync("src/messages")) {
   const stale = Object.keys(catalog).filter((k) => !known.has(k));
   const missing = keys.filter((k) => catalog[k] === undefined);
   // A dropped or duplicated entry shifts every translation after it onto the
-  // wrong key. That shows up as a wild length mismatch, which is much easier
-  // to spot mechanically than by reading 679 strings.
-  const shifted = keys.filter((k) => {
-    const v = catalog[k];
-    if (typeof v !== "string" || k.length <= 25) return false;
-    const ratio = v.length / k.length;
-    return ratio < 0.45 || ratio > 2.4;
-  });
+  // wrong key. That shows up as a wild length mismatch — but "wild" depends on
+  // the language: Korean renders the same sentence in half the characters of
+  // English, so the test is against this catalog's own median ratio rather
+  // than an absolute one.
+  const measured = keys
+    .filter((k) => k.length > 25 && typeof catalog[k] === "string")
+    .map((k) => ({ key: k, ratio: catalog[k].length / k.length }));
+  const sorted = measured.map((m) => m.ratio).sort((a, b) => a - b);
+  const median = sorted[Math.floor(sorted.length / 2)] || 1;
+  const shifted = measured.filter(
+    (m) => m.ratio < median * 0.4 || m.ratio > median * 2.5,
+  );
   if (shifted.length) {
     problems += 1;
-    console.log(`${file}: ${shifted.length} entries look misaligned`);
-    for (const k of shifted.slice(0, 3)) {
-      console.log(`  ${JSON.stringify(k).slice(0, 60)}`);
-      console.log(`    => ${JSON.stringify(catalog[k]).slice(0, 60)}`);
+    console.log(
+      `${file}: ${shifted.length} entries look misaligned (median ratio ${median.toFixed(2)})`,
+    );
+    for (const { key } of shifted.slice(0, 3)) {
+      console.log(`  ${JSON.stringify(key).slice(0, 60)}`);
+      console.log(`    => ${JSON.stringify(catalog[key]).slice(0, 60)}`);
     }
   }
   if (stale.length || missing.length) {
