@@ -44,6 +44,7 @@ const run = async () => {
       collection: "posts",
       data: {
         country: "int",
+        audience: "own",
         title: article.title,
         slug: article.slug,
         category: article.tag as "News" | "Story" | "Event",

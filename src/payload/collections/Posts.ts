@@ -3,6 +3,7 @@ import {
   canCreateIn,
   countryOptions,
   countryScoped,
+  distributedRead,
   hasSection,
   isSuper,
   scopeOf,
@@ -25,9 +26,11 @@ export const Posts: CollectionConfig = {
     hidden: ({ user }) => !hasSection(user as AdminUser | null, "news"),
   },
   access: {
-    // The site itself reads posts unauthenticated; editing is scoped to the
-    // countries a person is responsible for.
-    read: () => true,
+    // The site itself reads through the local API, which bypasses this and
+    // scopes by country; for a signed-in editor this narrows the admin list
+    // to what they own plus what has been distributed to them. Editing stays
+    // with the owning country either way.
+    read: distributedRead(),
     create: canCreateIn("news"),
     update: countryScoped("news"),
     delete: countryScoped("news"),
@@ -44,12 +47,41 @@ export const Posts: CollectionConfig = {
         scopeOf(user)[0] ?? "int",
       admin: {
         position: "sidebar",
-        description: "Which country site this post belongs to.",
+        description:
+          "The country site this post belongs to. Its editors own it wherever else it appears.",
       },
       access: {
         // An editor must not be able to move a post out of their own scope,
         // or claim one from another country by retyping this field.
         update: ({ req: { user } }) => isSuper(user as AdminUser | null),
+      },
+    },
+    {
+      name: "audience",
+      type: "select",
+      required: true,
+      defaultValue: "own",
+      options: [
+        { label: "This country only", value: "own" },
+        { label: "Chosen countries", value: "some" },
+        { label: "Every country", value: "all" },
+      ],
+      admin: {
+        position: "sidebar",
+        description:
+          "Where this post is published. A post shown elsewhere is still edited here, by this country's team.",
+      },
+    },
+    {
+      name: "distributeTo",
+      type: "select",
+      hasMany: true,
+      options: countryOptions,
+      index: true,
+      admin: {
+        position: "sidebar",
+        description: "The other country sites that also show this post.",
+        condition: (data) => data?.audience === "some",
       },
     },
     {

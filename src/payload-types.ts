@@ -450,7 +450,7 @@ export interface Media {
 export interface Post {
   id: number;
   /**
-   * Which country site this post belongs to.
+   * The country site this post belongs to. Its editors own it wherever else it appears.
    */
   country:
     | 'int'
@@ -522,6 +522,86 @@ export interface Post {
     | 'us'
     | 'vn'
     | 'zm';
+  /**
+   * Where this post is published. A post shown elsewhere is still edited here, by this country's team.
+   */
+  audience: 'own' | 'some' | 'all';
+  /**
+   * The other country sites that also show this post.
+   */
+  distributeTo?:
+    | (
+        | 'int'
+        | 'ao'
+        | 'ar'
+        | 'au'
+        | 'at'
+        | 'bd'
+        | 'be'
+        | 'br'
+        | 'cm'
+        | 'ca'
+        | 'cl'
+        | 'co'
+        | 'ci'
+        | 'cz'
+        | 'cd'
+        | 'do'
+        | 'ke'
+        | 'eg'
+        | 'et'
+        | 'fj'
+        | 'fr'
+        | 'de'
+        | 'gh'
+        | 'gr'
+        | 'gt'
+        | 'ht'
+        | 'hn'
+        | 'hu'
+        | 'in'
+        | 'id'
+        | 'il'
+        | 'it'
+        | 'jp'
+        | 'kz'
+        | 'mg'
+        | 'my'
+        | 'mx'
+        | 'mn'
+        | 'mz'
+        | 'mm'
+        | 'np'
+        | 'nl'
+        | 'nz'
+        | 'ng'
+        | 'pk'
+        | 'pe'
+        | 'ph'
+        | 'pl'
+        | 'pt'
+        | 'ro'
+        | 'ru'
+        | 'rw'
+        | 'sg'
+        | 'sk'
+        | 'za'
+        | 'kr'
+        | 'es'
+        | 'lk'
+        | 'se'
+        | 'ch'
+        | 'tw'
+        | 'th'
+        | 'tr'
+        | 'ua'
+        | 'ae'
+        | 'gb'
+        | 'us'
+        | 'vn'
+        | 'zm'
+      )[]
+    | null;
   title: string;
   /**
    * The web address for this post, e.g. yef-tonga-romans.
@@ -879,6 +959,8 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   country?: T;
+  audience?: T;
+  distributeTo?: T;
   title?: T;
   slug?: T;
   category?: T;

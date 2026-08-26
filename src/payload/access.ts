@@ -1,4 +1,4 @@
-import type { Access, FieldAccess } from "payload";
+import type { Access, FieldAccess, Where } from "payload";
 import { countries } from "@/lib/i18n/countries";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 
@@ -83,6 +83,37 @@ export function canCreateIn(section?: string): Access {
     if (isSuper(u)) return true;
     if (section && !hasSection(u, section)) return false;
     return scopeOf(u).length > 0;
+  };
+}
+
+/**
+ * What a signed-in editor sees in the admin list.
+ *
+ * The public site reads with the local API, which bypasses access control and
+ * scopes itself by country, so this only governs signed-in people: they see
+ * what they own plus what other countries have distributed to them, rather
+ * than the whole network's posts.
+ */
+export function distributedRead(): Access {
+  return ({ req: { user } }) => {
+    const u = user as AdminUser | null;
+    if (!u) return true;
+    if (isSuper(u)) return true;
+    const scope = scopeOf(u);
+    if (scope.length === 0) return false;
+    const visible: Where = {
+      or: [
+        { country: { in: scope } },
+        { audience: { equals: "all" } },
+        {
+          and: [
+            { audience: { equals: "some" } },
+            { distributeTo: { in: scope } },
+          ],
+        },
+      ],
+    };
+    return visible;
   };
 }
 

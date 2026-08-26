@@ -77,13 +77,24 @@ function formatDate(value: string) {
 }
 
 /**
- * Posts belong to one country site, so every read is scoped to the site the
- * request is on. Without this the headquarters site would list every
- * country's news alongside its own.
+ * Every read is scoped to the site the request is on — without this the
+ * headquarters site would list every country's news alongside its own.
+ *
+ * A post reaches a site three ways: it belongs to that country, it was
+ * distributed to it by name, or it was published to every country. The last
+ * two are how headquarters pushes an announcement out to the network without
+ * each country having to re-type it.
  */
 function forThisCountry(where?: Where): Where {
-  const country = { country: { equals: getCountryCode() } };
-  return where ? { and: [country, where] } : country;
+  const code = getCountryCode();
+  const visible: Where = {
+    or: [
+      { country: { equals: code } },
+      { audience: { equals: "all" } },
+      { and: [{ audience: { equals: "some" } }, { distributeTo: { in: [code] } }] },
+    ],
+  };
+  return where ? { and: [visible, where] } : visible;
 }
 
 async function findPosts(where?: Where, limit = 100) {
