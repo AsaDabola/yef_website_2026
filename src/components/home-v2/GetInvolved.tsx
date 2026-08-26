@@ -7,6 +7,8 @@ import Reveal from "@/components/ui/Reveal";
 import { useT } from "@/lib/i18n/client";
 
 const CARD_GAP = 26;
+/** How long a card holds before the row moves on. */
+const ROTATE_INTERVAL = 5000;
 
 const cards = [
   {
@@ -72,19 +74,69 @@ export default function GetInvolved() {
     return () => window.removeEventListener("resize", sync);
   }, [sync]);
 
-  // Page by whole cards so a slide never comes to rest half out of view.
-  const page = (direction: 1 | -1) => {
+  /** One card plus its gap — what the row moves by. */
+  const pitchOf = (el: HTMLElement) => {
+    const first = el.firstElementChild as HTMLElement | null;
+    return first ? first.offsetWidth + CARD_GAP : el.clientWidth;
+  };
+
+  // The arrows page by however many cards are on screen, so a slide never
+  // comes to rest half out of view.
+  const page = useCallback((direction: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
-    const first = el.firstElementChild as HTMLElement | null;
-    const pitch = first ? first.offsetWidth + CARD_GAP : el.clientWidth;
+    const pitch = pitchOf(el);
     const perView = Math.max(1, Math.floor(el.clientWidth / pitch));
     el.scrollBy({ left: direction * pitch * perView, behavior: "smooth" });
-  };
+  }, []);
+
+  /**
+   * Rotates on its own, a card at a time, wrapping back to the first once the
+   * end is reached. It holds while the pointer is over the row or a card has
+   * keyboard focus, so it never moves out from under someone reading or
+   * tabbing through, and it does not run at all for a reader who has asked
+   * for reduced motion.
+   */
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let held = false;
+    const hold = () => {
+      held = true;
+    };
+    const release = () => {
+      held = false;
+    };
+
+    const timer = setInterval(() => {
+      if (held) return;
+      const end = el.scrollLeft >= el.scrollWidth - el.clientWidth - 1;
+      // A card at a time on its own, rather than the arrows' whole page —
+      // the row drifts instead of jumping.
+      if (end) el.scrollTo({ left: 0, behavior: "smooth" });
+      else el.scrollBy({ left: pitchOf(el), behavior: "smooth" });
+    }, ROTATE_INTERVAL);
+
+    el.addEventListener("pointerenter", hold);
+    el.addEventListener("pointerleave", release);
+    el.addEventListener("focusin", hold);
+    el.addEventListener("focusout", release);
+    return () => {
+      clearInterval(timer);
+      el.removeEventListener("pointerenter", hold);
+      el.removeEventListener("pointerleave", release);
+      el.removeEventListener("focusin", hold);
+      el.removeEventListener("focusout", release);
+    };
+  }, []);
 
   return (
     <section className="font-body bg-white">
-      <div className="mx-auto max-w-[1440px] px-6 py-24 lg:px-0 lg:py-[130px]">
+      {/* A gutter at every width — the row used to run to the viewport
+          edge below 1440, leaving the first and last cards flush against it. */}
+      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:px-12 lg:py-[130px]">
         <Reveal className="flex items-end justify-between">
           <div>
             <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
@@ -123,7 +175,7 @@ export default function GetInvolved() {
             ref={trackRef}
             onScroll={sync}
             className="-my-4 mt-9 flex snap-x snap-mandatory gap-[26px] overflow-x-auto py-4 [-ms-overflow-style:none] [scrollbar-width:none] lg:mt-12 [&::-webkit-scrollbar]:hidden"
-            itemClassName="w-[260px] shrink-0 snap-start sm:w-[320px] lg:w-[380px]"
+            itemClassName="w-[74%] shrink-0 snap-start sm:w-[43%] lg:w-[26%]"
           >
             {cards.map((card) => (
               <div key={card.title}>
