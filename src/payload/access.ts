@@ -1,5 +1,10 @@
 import type { Access, FieldAccess, Where } from "payload";
-import { countries } from "@/lib/i18n/countries";
+import {
+  countries,
+  countriesInRegions,
+  regions,
+  regionsOfCountries,
+} from "@/lib/i18n/countries";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 
 /**
@@ -10,12 +15,13 @@ import { INTERNATIONAL } from "@/lib/i18n/constants";
  * super admin is responsible for all of them; everyone else carries an
  * explicit list and can neither read nor write outside it.
  */
-export type Role = "super" | "country-admin" | "editor";
+export type Role = "super" | "region-admin" | "country-admin" | "editor";
 
 export type AdminUser = {
   id: string | number;
   role?: Role | null;
   countries?: string[] | null;
+  regions?: string[] | null;
   sections?: string[] | null;
 };
 
@@ -45,14 +51,45 @@ export const sectionOptions = [
 export const isSuper = (user?: AdminUser | null): boolean =>
   user?.role === "super";
 
-/** The countries a user may act in; empty for a signed-out visitor. */
-export const scopeOf = (user?: AdminUser | null): string[] =>
-  user?.countries ?? [];
+/** The regions a user may act across, as select options. */
+export const regionOptions = regions.map((r) => ({ label: r, value: r }));
 
-/** A user may edit a section when they are a super admin or it is listed. */
+/**
+ * The countries a user may act in.
+ *
+ * A region admin names regions rather than countries, so their scope is every
+ * country in them. A country admin may hold both, and gets the union.
+ */
+export function scopeOf(user?: AdminUser | null): string[] {
+  const named = user?.countries ?? [];
+  const fromRegions = countriesInRegions(user?.regions ?? []);
+  return [...new Set([...named, ...fromRegions])];
+}
+
+/**
+ * The countries a user may distribute content to — their continental sphere.
+ *
+ * A country's team can push a story to the rest of its own continent, but not
+ * onto the whole network; that stays with headquarters. A region admin's
+ * sphere is already their region, so this returns the same set.
+ */
+export function reachOf(user?: AdminUser | null): string[] {
+  if (isSuper(user)) return countries.map((c) => c.code);
+  const scope = scopeOf(user);
+  return [...new Set([...scope, ...countriesInRegions(regionsOfCountries(scope))])];
+}
+
+/**
+ * A user may edit a section when they are a super admin, or an admin of a
+ * region or a country — those two carry every section within their scope, and
+ * are held back by which countries they reach rather than which pages. Only
+ * an editor is narrowed section by section.
+ */
 export function hasSection(user: AdminUser | null | undefined, section: string) {
   if (isSuper(user)) return true;
-  if (user?.role === "country-admin") return true;
+  if (user?.role === "region-admin" || user?.role === "country-admin") {
+    return true;
+  }
   return Boolean(user?.sections?.includes(section));
 }
 

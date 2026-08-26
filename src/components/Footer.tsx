@@ -72,7 +72,7 @@ export default async function Footer() {
         <div className="mx-auto max-w-[1800px] px-6 pb-16 pt-16 lg:px-16 lg:pt-20">
           <Link href="/" className="relative block h-[60px] w-[170px]">
             <Image
-              src="/images/icons/logo-yef-white-compact.svg"
+              src="/images/icons/logo-yef.svg"
               alt={t("Youth Evangelical Fellowship")}
               fill
               sizes="170px"

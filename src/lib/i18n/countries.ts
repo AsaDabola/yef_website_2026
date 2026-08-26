@@ -292,6 +292,25 @@ export const countries: Country[] = [
 
 export const countryCodes = countries.map((c) => c.code);
 
+/** Every region, in the order the picker groups them. */
+export const regions: Region[] = [...new Set(countries.map((c) => c.region))];
+
+/** The country codes belonging to any of the given regions. */
+export function countriesInRegions(list: readonly string[]): string[] {
+  const wanted = new Set(list);
+  return countries.filter((c) => wanted.has(c.region)).map((c) => c.code);
+}
+
+/** The regions the given countries sit in — a country's continental sphere. */
+export function regionsOfCountries(list: readonly string[]): Region[] {
+  const wanted = new Set(list);
+  return [
+    ...new Set(
+      countries.filter((c) => wanted.has(c.code)).map((c) => c.region),
+    ),
+  ];
+}
+
 const byCode = new Map(countries.map((c) => [c.code, c]));
 
 export function getCountry(

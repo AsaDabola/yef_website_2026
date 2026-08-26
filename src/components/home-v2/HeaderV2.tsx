@@ -28,7 +28,7 @@ export default function HeaderV2() {
           className="relative h-8 w-[88px] shrink-0 sm:h-[60px] sm:w-42"
         >
           <Image
-            src="/images/icons/logo-yef-white-compact.svg"
+            src="/images/icons/logo-yef.svg"
             alt={t("Youth Evangelical Fellowship")}
             fill
             sizes="168px"

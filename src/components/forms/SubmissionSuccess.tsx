@@ -31,7 +31,7 @@ export default function SubmissionSuccess({
       className={`flex flex-col items-center justify-center gap-6 rounded-2xl bg-[#0066cf] px-8 py-16 text-center sm:px-12 sm:py-20 ${className ?? ""}`}
     >
       <Image
-        src="/images/icons/logo-yef-white-compact.svg"
+        src="/images/icons/logo-yef.svg"
         alt={t("Youth Evangelical Fellowship")}
         width={138}
         height={50}

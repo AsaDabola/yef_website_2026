@@ -2,6 +2,7 @@ import type { CollectionConfig } from "payload";
 import {
   countryOptions,
   isSuper,
+  regionOptions,
   sectionOptions,
   superOnlyField,
   usersAccess,
@@ -14,7 +15,7 @@ export const Users: CollectionConfig = {
   labels: { singular: "Person", plural: "People & permissions" },
   admin: {
     useAsTitle: "email",
-    defaultColumns: ["email", "name", "role", "countries"],
+    defaultColumns: ["email", "name", "role", "regions", "countries"],
     description:
       "Who can sign in, which country sites they are responsible for, and which parts of those sites they may edit.",
   },
@@ -51,6 +52,10 @@ export const Users: CollectionConfig = {
       options: [
         { label: "Super admin — every country, every section", value: "super" },
         {
+          label: "Continental admin — every country in their regions",
+          value: "region-admin",
+        },
+        {
           label: "Country admin — their countries, every section",
           value: "country-admin",
         },
@@ -63,6 +68,18 @@ export const Users: CollectionConfig = {
       admin: { position: "sidebar" },
     },
     {
+      name: "regions",
+      type: "select",
+      hasMany: true,
+      options: regionOptions,
+      access: { create: superOnlyField, update: superOnlyField },
+      admin: {
+        description:
+          "The continents this person is responsible for. Every country in them falls into their scope.",
+        condition: (data) => data?.role === "region-admin",
+      },
+    },
+    {
       name: "countries",
       type: "select",
       hasMany: true,
@@ -70,8 +87,9 @@ export const Users: CollectionConfig = {
       access: { create: superOnlyField, update: superOnlyField },
       admin: {
         description:
-          "The country sites this person may edit. Ignored for super admins, who reach every country.",
-        condition: (data) => data?.role !== "super",
+          "The country sites this person may edit. Ignored for super admins, who reach every country, and for continental admins, whose regions decide it.",
+        condition: (data) =>
+          data?.role !== "super" && data?.role !== "region-admin",
       },
     },
     {
@@ -82,7 +100,7 @@ export const Users: CollectionConfig = {
       access: { create: superOnlyField, update: superOnlyField },
       admin: {
         description:
-          "The parts of those sites this person may edit. Country admins reach every section, so this applies to editors.",
+          "The parts of those sites this person may edit. Continental and country admins reach every section, so this applies to editors.",
         condition: (data) => data?.role === "editor",
       },
     },

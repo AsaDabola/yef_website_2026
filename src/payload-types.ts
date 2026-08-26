@@ -650,9 +650,27 @@ export interface Post {
 export interface User {
   id: number;
   name?: string | null;
-  role: 'super' | 'country-admin' | 'editor';
+  role: 'super' | 'region-admin' | 'country-admin' | 'editor';
   /**
-   * The country sites this person may edit. Ignored for super admins, who reach every country.
+   * The continents this person is responsible for. Every country in them falls into their scope.
+   */
+  regions?:
+    | (
+        | 'South America'
+        | 'North America'
+        | 'Europe'
+        | 'South Asia'
+        | 'Southeast Asia'
+        | 'Asia-Pacific'
+        | 'Africa'
+        | 'Oceania'
+        | 'Central America & Caribbean'
+        | 'Commonwealth of Independent States'
+        | 'Middle East & North Africa'
+      )[]
+    | null;
+  /**
+   * The country sites this person may edit. Ignored for super admins, who reach every country, and for continental admins, whose regions decide it.
    */
   countries?:
     | (
@@ -728,7 +746,7 @@ export interface User {
       )[]
     | null;
   /**
-   * The parts of those sites this person may edit. Country admins reach every section, so this applies to editors.
+   * The parts of those sites this person may edit. Continental and country admins reach every section, so this applies to editors.
    */
   sections?: ('home' | 'who-we-are' | 'get-involved' | 'news' | 'network' | 'resources' | 'donate' | 'media')[] | null;
   updatedAt: string;
@@ -1024,6 +1042,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   role?: T;
+  regions?: T;
   countries?: T;
   sections?: T;
   updatedAt?: T;

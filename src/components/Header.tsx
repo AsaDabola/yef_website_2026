@@ -34,7 +34,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 py-8 lg:px-16">
         <Link href="/" className="relative h-9 w-24 shrink-0 sm:h-20 sm:w-52">
           <Image
-            src="/images/icons/logo-yef-white.svg"
+            src="/images/icons/logo-yef.svg"
             alt={t("Youth Evangelical Fellowship")}
             fill
             sizes="208px"

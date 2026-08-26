@@ -1,10 +1,11 @@
-import type { CollectionConfig } from "payload";
+import { APIError, type CollectionConfig } from "payload";
 import {
   canCreateIn,
   countryOptions,
   countryScoped,
   distributedRead,
   hasSection,
+  reachOf,
   isSuper,
   scopeOf,
   type AdminUser,
@@ -34,6 +35,38 @@ export const Posts: CollectionConfig = {
     create: canCreateIn("news"),
     update: countryScoped("news"),
     delete: countryScoped("news"),
+  },
+  hooks: {
+    beforeValidate: [
+      ({ data, req }) => {
+        const user = req.user as AdminUser | null;
+        if (!data || !user || isSuper(user)) return data;
+
+        // Publishing to the whole network is headquarters' call. Everyone
+        // else distributes within their own continental sphere, so a single
+        // country's team cannot put a story on all 68 sites.
+        if (data.audience === "all") {
+          throw new APIError(
+            "Only a super admin can publish to every country. Choose the countries instead.",
+            403,
+          );
+        }
+
+        if (data.audience === "some") {
+          const reach = new Set(reachOf(user));
+          const outside = ((data.distributeTo ?? []) as string[]).filter(
+            (code) => !reach.has(code),
+          );
+          if (outside.length > 0) {
+            throw new APIError(
+              `You can only distribute within your own region. Outside it: ${outside.join(", ")}.`,
+              403,
+            );
+          }
+        }
+        return data;
+      },
+    ],
   },
   versions: { drafts: true },
   fields: [
