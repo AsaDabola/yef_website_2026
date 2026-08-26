@@ -28,7 +28,8 @@ for (const root of ["src/app/(frontend)", "src/components", "src/lib"]) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       const p = path.join(dir, entry.name);
       if (entry.isDirectory()) walk(p);
-      else if (/\.tsx?$/.test(p) && !p.includes(`${path.sep}i18n${path.sep}`)) files.push(p);
+      // src/lib/i18n is the runtime itself; src/components/i18n is UI with copy.
+      else if (/\.tsx?$/.test(p) && !p.startsWith(path.join("src", "lib", "i18n"))) files.push(p);
     }
   })(root);
 }
@@ -83,6 +84,14 @@ for (const file of files) {
     }
     ts.forEachChild(n, visit);
   })(src);
+}
+
+// Strings the scanner cannot see because they come from data rather than a
+// literal t("...") call — the region headings in the country picker.
+const extra = JSON.parse(fs.readFileSync("src/messages/_extra-keys.json", "utf8"));
+for (const key of extra) {
+  catalog.add(key);
+  clientKeys.add(key);
 }
 
 const keys = [...catalog].sort((a, b) => a.localeCompare(b));

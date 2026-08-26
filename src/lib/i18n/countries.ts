@@ -20,6 +20,11 @@ export type Country = {
   alsoServes?: string[];
   /** In the G20 group of the source list rather than the M40 group. */
   g20?: boolean;
+  /**
+   * Keep this name as written instead of using the browser's localized region
+   * name — for entries that are not simply a country.
+   */
+  ownName?: boolean;
 };
 
 export type Region =
@@ -90,6 +95,7 @@ export const countries: Country[] = [
     locales: ["en", "sw", "fr", "rw", "rn"],
     alsoServes: ["tz", "ug", "rw", "bi", "ss"],
     g20: true,
+    ownName: true,
   },
   {
     code: "kr",

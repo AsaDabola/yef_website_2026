@@ -2,15 +2,33 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { useI18n } from "@/lib/i18n/client";
+import { useI18n, useT } from "@/lib/i18n/client";
 import {
   countriesByRegion,
   defaultLocaleFor,
   getCountry,
+  type Country,
 } from "@/lib/i18n/countries";
 import { getLocale, locales } from "@/lib/i18n/locales";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 import { stripLocalePath } from "@/lib/i18n/paths";
+
+/**
+ * A country's name in the reader's language. The browser already knows all 68
+ * of them in all 48 languages, so they do not need translating by hand.
+ */
+function countryName(country: Country, locale: string): string {
+  if (country.ownName) return country.name;
+  try {
+    return (
+      new Intl.DisplayNames([locale], { type: "region" }).of(
+        country.code.toUpperCase(),
+      ) ?? country.name
+    );
+  } catch {
+    return country.name;
+  }
+}
 
 /** The flag emoji for an ISO 3166-1 alpha-2 code. */
 function flag(code: string): string {
@@ -82,7 +100,8 @@ const trigger = (tone: Tone) =>
  * at the same page, in that country's own language.
  */
 export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
-  const { country } = useI18n();
+  const t = useT();
+  const { country, locale } = useI18n();
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -112,7 +131,7 @@ export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
           <Globe />
         )}
         <span className="hidden sm:inline">
-          {current?.name ?? "International"}
+          {current ? countryName(current, locale) : t("International")}
         </span>
         <Chevron />
       </button>
@@ -133,13 +152,13 @@ export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
             }`}
           >
             <Globe />
-            International
+            {t("International")}
           </button>
 
           {countriesByRegion().map(([region, list]) => (
             <div key={region} className="mt-2">
               <p className="px-3 pt-2 pb-1 font-semibold text-[11px] text-black/45 uppercase tracking-[0.08em]">
-                {region}
+                {t(region)}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2">
                 {list.map((c) => (
@@ -155,7 +174,7 @@ export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
                     }`}
                   >
                     <span aria-hidden="true">{flag(c.code)}</span>
-                    <span className="truncate">{c.name}</span>
+                    <span className="truncate">{countryName(c, locale)}</span>
                   </button>
                 ))}
               </div>
