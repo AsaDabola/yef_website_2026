@@ -19,6 +19,8 @@ export default async function GetInvolvedHero() {
         className="yef-tide object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/63 from-[14.5%] to-transparent to-[46.2%]" />
+      {/* The frame's 176px band, carrying the white nav over the bright surf. */}
+      <div className="absolute inset-x-0 top-0 h-[176px] bg-gradient-to-b from-black/20 via-black/20 via-50% to-transparent" />
 
       <HeaderV2 />
 

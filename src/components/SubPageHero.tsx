@@ -24,7 +24,10 @@ export default function SubPageHero({
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20" />
+      {/* The frame's 176px band: black at 0.2 down to the halfway point, then
+          clear — it carries the white nav over a bright photograph without
+          darkening the rest of the picture. */}
+      <div className="absolute inset-x-0 top-0 h-[176px] bg-gradient-to-b from-black/20 via-black/20 via-50% to-transparent" />
       <Header />
     </section>
   );
