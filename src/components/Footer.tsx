@@ -5,6 +5,10 @@ import {
   LinkArrowIcon,
   PinIcon,
 } from "@/components/ui/SocialIcons";
+import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
+import { getCountry } from "@/lib/i18n/countries";
+import { countryName } from "@/lib/i18n/display";
+import { getRequestLocale } from "@/lib/i18n/request";
 import { getT } from "@/lib/i18n/server";
 
 const columns: { title: string; links: { label: string; href: string }[] }[] = [
@@ -60,6 +64,15 @@ const socialLinks = [
 
 export default async function Footer() {
   const t = await getT();
+  const { country, locale } = getRequestLocale();
+  const site = getCountry(country);
+
+  // Headquarters signs off as "International"; a country site signs off with
+  // its own name, in the reader's language.
+  const signature = site
+    ? `${t("Youth Evangelical Fellowship")} ${countryName(site, locale)}.`
+    : null;
+
   return (
     <footer className="bg-black">
       <div className="bg-yef-navy">
@@ -137,12 +150,22 @@ export default async function Footer() {
         </div>
       </div>
       <div className="bg-yef-footer-strip">
-        <p className="mx-auto max-w-[1800px] px-6 py-6 text-center font-normal text-base leading-[1.6] text-yef-gray lg:px-16">
-          {t("Copyright ©")} {new Date().getFullYear()}{" "}
-          {t(
-            "Youth Evangelical Fellowship International. All Rights Reserved.",
-          )}
-        </p>
+        <div className="mx-auto flex max-w-[1800px] flex-col items-center gap-4 px-6 py-6 lg:flex-row lg:justify-between lg:px-16">
+          <p className="order-2 text-center font-normal text-base leading-[1.6] text-yef-gray lg:order-1 lg:text-start">
+            {t("Copyright ©")} {new Date().getFullYear()}{" "}
+            {signature ? (
+              <>
+                {signature} {t("All Rights Reserved.")}
+              </>
+            ) : (
+              t("Youth Evangelical Fellowship International. All Rights Reserved.")
+            )}
+          </p>
+          <div className="order-1 flex items-center gap-2 lg:order-2">
+            <CountryPicker placement="up" />
+            <LanguagePicker placement="up" />
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -7,35 +7,11 @@ import {
   countriesByRegion,
   defaultLocaleFor,
   getCountry,
-  type Country,
 } from "@/lib/i18n/countries";
 import { getLocale, locales } from "@/lib/i18n/locales";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 import { stripLocalePath } from "@/lib/i18n/paths";
-
-/**
- * A country's name in the reader's language. The browser already knows all 68
- * of them in all 48 languages, so they do not need translating by hand.
- */
-function countryName(country: Country, locale: string): string {
-  if (country.ownName) return country.name;
-  try {
-    return (
-      new Intl.DisplayNames([locale], { type: "region" }).of(
-        country.code.toUpperCase(),
-      ) ?? country.name
-    );
-  } catch {
-    return country.name;
-  }
-}
-
-/** The flag emoji for an ISO 3166-1 alpha-2 code. */
-function flag(code: string): string {
-  return String.fromCodePoint(
-    ...[...code.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65),
-  );
-}
+import { countryName, flag } from "@/lib/i18n/display";
 
 function Chevron() {
   return (
@@ -90,6 +66,12 @@ function useDismiss(onDismiss: () => void) {
 
 type Tone = "light" | "dark";
 
+/** Which way the menu opens — footer pickers have no room below them. */
+type Placement = "down" | "up";
+
+const menu = (placement: Placement) =>
+  placement === "up" ? "bottom-full mb-2" : "top-full mt-2";
+
 const trigger = (tone: Tone) =>
   tone === "light"
     ? "border-white/50 text-white hover:bg-white/10"
@@ -99,7 +81,13 @@ const trigger = (tone: Tone) =>
  * Country picker. Choosing a country moves the visitor to that country's site
  * at the same page, in that country's own language.
  */
-export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
+export function CountryPicker({
+  tone = "light",
+  placement = "down",
+}: {
+  tone?: Tone;
+  placement?: Placement;
+}) {
   const t = useT();
   const { country, locale } = useI18n();
   const router = useRouter();
@@ -139,7 +127,7 @@ export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
       {open && (
         <div
           role="menu"
-          className="absolute end-0 z-50 mt-2 max-h-[70vh] w-[min(92vw,640px)] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl"
+          className={`absolute end-0 z-50 max-h-[70vh] w-[min(92vw,640px)] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl ${menu(placement)}`}
         >
           <button
             type="button"
@@ -190,7 +178,13 @@ export function CountryPicker({ tone = "light" }: { tone?: Tone }) {
  * Language picker. It lists only the languages the current country's site is
  * published in — the headquarters site offers all of them.
  */
-export function LanguagePicker({ tone = "light" }: { tone?: Tone }) {
+export function LanguagePicker({
+  tone = "light",
+  placement = "down",
+}: {
+  tone?: Tone;
+  placement?: Placement;
+}) {
   const { country, locale } = useI18n();
   const router = useRouter();
   const pathname = usePathname();
@@ -225,7 +219,7 @@ export function LanguagePicker({ tone = "light" }: { tone?: Tone }) {
       {open && (
         <div
           role="menu"
-          className="absolute end-0 z-50 mt-2 max-h-[70vh] w-[min(92vw,420px)] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl"
+          className={`absolute end-0 z-50 max-h-[70vh] w-[min(92vw,420px)] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl ${menu(placement)}`}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2">
             {offered.map((l) => (
