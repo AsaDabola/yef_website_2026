@@ -12,7 +12,10 @@ export default function SubPageHero({
   alt = "",
 }: SubPageHeroProps) {
   return (
-    <section className="relative h-[220px] overflow-hidden bg-yef-navy-deep sm:h-[320px] lg:h-[450px]">
+    // The frame's sub_banner section is 378 tall, not the 450 of the photo
+    // placed inside it — the photo overflows and is cropped. The smaller
+    // breakpoints keep the same proportion.
+    <section className="relative h-[185px] overflow-hidden bg-yef-navy-deep sm:h-[270px] lg:h-[378px]">
       <Image
         src={image}
         alt={alt}
