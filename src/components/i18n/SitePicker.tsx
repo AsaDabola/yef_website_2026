@@ -78,12 +78,35 @@ const trigger = (tone: Tone) =>
     : "border-black/15 text-v2-navy hover:bg-black/5";
 
 /**
+ * A way back to headquarters, shown in place of the picker on a country site.
+ *
+ * The countries are sealed from each other, but the hub is not another
+ * country — it is where the directory of all of them lives, so without this
+ * a visitor who was sent to their own country's site by the front door would
+ * have no route to it.
+ */
+function InternationalLink({ tone }: { tone: Tone }) {
+  const t = useT();
+  const pathname = usePathname();
+  const rest = stripLocalePath(pathname);
+  return (
+    <a
+      href={`/${INTERNATIONAL}/en${rest === "/" ? "" : rest}`}
+      className={`flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-medium text-sm transition-colors ${trigger(tone)}`}
+    >
+      <Globe />
+      <span className="hidden sm:inline">{t("International")}</span>
+    </a>
+  );
+}
+
+/**
  * Country picker, shown only on the headquarters site.
  *
  * Each country site is presented as its own entity: from inside one there is
- * no country switch, only a language switch. Choosing a country opens it in a
- * new tab rather than navigating away, so the reader keeps the site they were
- * on and lands on the new one fresh.
+ * no country switch, only a link back to headquarters. Choosing a country
+ * opens it in a new tab rather than navigating away, so the reader keeps the
+ * site they were on and lands on the new one fresh.
  */
 export function CountryPicker({
   tone = "light",
@@ -100,8 +123,8 @@ export function CountryPicker({
 
   const rest = stripLocalePath(pathname);
 
-  // A country site never offers other countries.
-  if (country !== INTERNATIONAL) return null;
+  // A country site never offers other countries — only the way home.
+  if (country !== INTERNATIONAL) return <InternationalLink tone={tone} />;
 
   const href = (code: string) => {
     const target = code === INTERNATIONAL ? "en" : defaultLocaleFor(code);
