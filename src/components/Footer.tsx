@@ -143,15 +143,17 @@ export default async function Footer() {
         </div>
       </div>
       <div className="bg-yef-footer-strip">
-        <div className="mx-auto flex max-w-[1800px] flex-col items-center gap-4 px-6 py-6 lg:flex-row lg:justify-between lg:px-16">
-          <p className="order-2 text-center font-normal text-base leading-[1.6] text-yef-gray lg:order-1 lg:text-start">
-            {t("Copyright ©")} {new Date().getFullYear()}{" "}
-            {siteName}. {t("All Rights Reserved.")}
-          </p>
-          <div className="order-1 flex items-center gap-2 lg:order-2">
+        {/* The frame centres the copyright across the full strip; the
+            pickers are ours, so they sit centred above it. */}
+        <div className="mx-auto flex max-w-[1800px] flex-col items-center gap-4 px-6 py-6 lg:px-16">
+          <div className="flex items-center gap-2">
             <CountryPicker placement="up" />
             <LanguagePicker placement="up" />
           </div>
+          <p className="text-center font-medium text-base leading-[1.6] text-yef-gray">
+            {t("Copyright ©")} {new Date().getFullYear()}{" "}
+            {siteName}. {t("All Rights Reserved.")}
+          </p>
         </div>
       </div>
     </footer>
