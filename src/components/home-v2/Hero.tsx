@@ -16,22 +16,22 @@ export type HeroSlide = {
 
 const defaultSlides: HeroSlide[] = [
   {
+    image: "/images/home-v2/hero-fire.webp",
+    alt: "Youth gathered around a bonfire at dusk",
+    heading: "To Know Christ.\nTo Make Him Known.",
+    body: "For we do not preach ourselves but Jesus Christ as Lord",
+  },
+  {
     image: "/images/home-v2/hero-headquarters.webp",
     alt: "Youth Evangelical Fellowship headquarters building",
     heading: "Join Us\nToday",
     body: "Be part of YEF, Become True Disciples of Christ.",
   },
   {
-    image: "/images/home-v2/slide-2-students.png",
+    image: "/images/home-v2/slide-2-students.webp",
     alt: "Students smiling together on a mission trip",
     heading: "Grow Together\nin Christ.",
     body: "Join YEF Campus Chapter, Fellowship in Christ",
-  },
-  {
-    image: "/images/home-v2/hero-fire.webp",
-    alt: "Youth gathered around a bonfire at dusk",
-    heading: "To Know Christ.\nTo Make Him Known.",
-    body: "For we do not preach ourselves but Jesus Christ as Lord",
   },
 ];
 
@@ -74,54 +74,21 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
         </div>
       ))}
 
-      {/* The banner frames layer two washes over the photograph: a 30%
-          vignette that stays almost clear at its centre and closes to 94%
-          at the edges, then a fade into the foot of the section. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 65% 101% at 65% 44%, rgba(14,18,22,0.05) 0%, rgba(14,18,22,0.35) 35%, rgba(14,18,22,0.94) 83%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to bottom, rgba(14,18,22,0) 60.87%, rgba(14,18,22,0.28) 95.99%)",
-        }}
-      />
-      {/* The frame's washes are tuned to the bonfire photo, which is already
-          dark where the copy sits. The other slides have no such headroom —
-          slide 2 is a wall-to-wall close-up with a bright forehead and teeth
-          right behind the headline, well under 3:1 with no scrim at all — so
-          the text column gets its own left-to-right fade independent of the
-          photo underneath it. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(14,18,22,0.58) 0%, rgba(14,18,22,0.58) 32%, rgba(14,18,22,0) 68%)",
-        }}
-      />
-
       <HeaderV2 />
 
       <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pb-24 pt-40 sm:px-10 lg:px-19 lg:pb-32">
-        <div className="max-w-3xl">
+        <div className="grid max-w-3xl">
           {slides.map((slide, index) => (
             <div
               key={slide.image}
-              // An inactive block is absolutely positioned over the whole
-              // content column, dots included, so it has to stop taking
-              // pointer events or it swallows every click on them.
-              className={`transition-opacity duration-1000 ${
+              // Every slide sits in the same grid cell at all times, so the
+              // column's height is set once (by the tallest slide) instead
+              // of jumping between them — switching the active index only
+              // ever crossfades opacity, nothing reflows.
+              className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
                 index === active
                   ? "opacity-100"
-                  : "pointer-events-none absolute inset-0 opacity-0"
+                  : "pointer-events-none opacity-0"
               }`}
               aria-hidden={index !== active}
             >
