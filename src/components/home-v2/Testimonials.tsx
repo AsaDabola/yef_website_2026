@@ -10,7 +10,7 @@ const testimonials = [
       "I grew up knowing about God the way you know about a city you've never visited. Bible study was the first time someone asked what I actually believed — and waited for the answer.",
     name: "Tamara Hollis",
     place: "Orlando, United States",
-    image: "/images/home-v2/testimonial-tamara.png",
+    image: "/images/home-v2/testimonial-tamara.webp",
   },
   {
     quote:

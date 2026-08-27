@@ -65,7 +65,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                     "Support Letter Template",
                   ],
                 ]}
-                image="/images/get-involved/summer-training-campus.png"
+                image="/images/get-involved/summer-training.webp"
                 alt={t("YEF students setting up an outreach table on campus")}
               />
 
@@ -82,7 +82,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                     "Team Training Schedule",
                   ],
                 ]}
-                image="/images/get-involved/story-prayer.png"
+                image="/images/get-involved/short-term-mission.webp"
                 alt={t("A woman leading a classroom in prayer")}
               />
 
@@ -101,7 +101,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                     "What Comes Next",
                   ],
                 ]}
-                image="/images/get-involved/discipleship.png"
+                image="/images/get-involved/discipleship.webp"
                 alt={t("A student in discipleship training")}
               />
 
