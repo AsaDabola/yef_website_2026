@@ -8,6 +8,7 @@ import InfoCard from "@/components/get-involved/InfoCard";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
+import Link from "@/components/ui/LocaleLink";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
@@ -367,6 +368,25 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
               />
             </div>
           </div>
+        </section>
+
+        {/* The application frame lives on its own page; this is the only door
+            to it from the Mission Trip story. */}
+        <section className="mx-auto max-w-[1391px] px-6 py-20 text-center lg:py-[100px]">
+          <h2 className="font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
+            {t("Begin Your Mission Journey")}
+          </h2>
+          <p className="mx-auto mt-5 max-w-[640px] text-[16.6px] text-black leading-[27.2px]">
+            {t(
+              "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
+            )}
+          </p>
+          <Link
+            href="/get-involved/mission-trip/apply"
+            className="mt-9 inline-block rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+          >
+            {t("Apply for a Mission Trip")}
+          </Link>
         </section>
 
         <MissionSchoolCta />
