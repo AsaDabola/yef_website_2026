@@ -16,7 +16,7 @@ const people = [
   {
     name: "Dr. William Mark Wagner",
     title: "President",
-    image: "/images/staff/william_mark_wagner.jpg",
+    image: "/images/staff/william_mark_wagner.webp",
   },
   {
     name: "Danielle White",
@@ -26,32 +26,32 @@ const people = [
   {
     name: "Selemon Trife",
     title: "YEF Africa Representative",
-    image: "/images/staff/Selemon_Trife.jpg",
+    image: "/images/staff/Selemon_Trife.webp",
   },
   {
     name: "Victor Ahn",
     title: "YEF Asia Pacific Representative",
-    image: "/images/staff/victer_ahn.jpg",
+    image: "/images/staff/victer_ahn.webp",
   },
   {
     name: "Deborah Lan",
     title: "YEF China Representative",
-    image: "/images/staff/Deborah_Lan.jpg",
+    image: "/images/staff/Deborah_Lan.webp",
   },
   {
     name: "Bridaija Jones",
     title: "YEF HQ Mission Staff",
-    image: "/images/staff/Bridaija_Jones.jpg",
+    image: "/images/staff/Bridaija_Jones.webp",
   },
   {
     name: "Emmanual Reid",
     title: "YEF HQ Mission Staff",
-    image: "/images/staff/Emmanual_Reid.jpg",
+    image: "/images/staff/Emmanual_Reid.webp",
   },
   {
     name: "Olivia Lin",
     title: "Director of Chinese Mission",
-    image: "/images/staff/olivia-1.jpg",
+    image: "/images/staff/olivia-1.webp",
   },
   {
     name: "Andrea Li",
