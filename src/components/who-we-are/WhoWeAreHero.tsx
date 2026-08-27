@@ -18,6 +18,11 @@ export default async function WhoWeAreHero() {
         className="object-cover"
       />
 
+      {/* The frame's 176px band, the same one the sub-banners carry: black
+          at 0.2 down to the halfway point, then clear, so the white nav
+          reads over the ridge line without dimming the photograph. */}
+      <div className="absolute inset-x-0 top-0 h-[176px] bg-gradient-to-b from-black/20 via-black/20 via-50% to-transparent" />
+
       <HeaderV2 />
 
       <div className="relative z-10 mx-auto grid max-w-[1920px] grid-cols-1 gap-14 px-6 pt-40 pb-28 sm:px-10 lg:px-[10%] lg:pt-[16.7%] lg:pb-[12%] xl:grid-cols-[39.06fr_42.63fr] xl:justify-between xl:gap-[18.31%]">
