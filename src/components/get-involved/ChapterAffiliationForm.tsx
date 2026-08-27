@@ -115,6 +115,7 @@ export default function ChapterAffiliationForm() {
             "Our chapter agrees to affiliate under the YEF statement of faith and chapter guidelines, and to remain in contact with a regional YEF coordinator.",
           )}
           name="agreement"
+          required
         />
         <p className="text-[13px] text-black/45 leading-[18px]">
           {t(

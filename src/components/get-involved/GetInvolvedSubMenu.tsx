@@ -16,7 +16,7 @@ const links = [
   { label: "Discipleship", href: "/get-involved#discipleship" },
   { label: "Large Group", href: "/get-involved" },
   { label: "Leadership Training", href: "/get-involved#leadership-training" },
-  { label: "Volunteer", href: "/get-involved#volunteering" },
+  { label: "Volunteer", href: "/get-involved/volunteer" },
 ];
 
 export default function GetInvolvedSubMenu() {

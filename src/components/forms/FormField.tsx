@@ -48,17 +48,46 @@ export function TextAreaField({
 export function CheckboxField({
   label,
   name,
+  required,
 }: {
   label: string;
   name: string;
+  /**
+   * A single consent tick is required; a box in a "select all that apply"
+   * group is not, and marking every one of them required would make the form
+   * impossible to submit.
+   */
+  required?: boolean;
 }) {
   return (
     <label className="flex items-start gap-3 text-[13.5px] text-[#4b5565] leading-[20px]">
       <input
         type="checkbox"
         name={name}
-        required
+        required={required}
         className="size-5 shrink-0 rounded-[5px] border-[1.5px] border-black/30 text-v2-blue focus:ring-v2-accent"
+      />
+      <span>{label}</span>
+    </label>
+  );
+}
+
+export function RadioField({
+  label,
+  name,
+  value,
+}: {
+  label: string;
+  name: string;
+  value: string;
+}) {
+  return (
+    <label className="flex items-center gap-2.5 rounded-full border border-black/14 px-5 py-2.5 text-[14px] text-[#1b1d21] has-[:checked]:border-v2-blue has-[:checked]:bg-v2-blue/5">
+      <input
+        type="radio"
+        name={name}
+        value={value}
+        className="size-4 shrink-0 border-[1.5px] border-black/30 text-v2-blue focus:ring-v2-accent"
       />
       <span>{label}</span>
     </label>

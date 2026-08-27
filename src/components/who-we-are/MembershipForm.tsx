@@ -48,6 +48,7 @@ export default function MembershipForm() {
           "I agree to the YEF statement of faith and consent to being contacted about my membership.",
         )}
         name="agreement"
+        required
       />
       <button
         type="submit"
