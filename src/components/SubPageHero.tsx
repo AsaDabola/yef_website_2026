@@ -8,7 +8,7 @@ type SubPageHeroProps = {
 };
 
 export default function SubPageHero({
-  image = "/images/shared/banner-sunrise-ridges.jpg",
+  image = "/images/shared/banner-getinvolved.webp",
   alt = "",
 }: SubPageHeroProps) {
   return (

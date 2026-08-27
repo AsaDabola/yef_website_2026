@@ -28,7 +28,7 @@ const defaultSlides: HeroSlide[] = [
     body: "Join YEF Campus Chapter, Fellowship in Christ",
   },
   {
-    image: "/images/home-v2/hero-fire.png",
+    image: "/images/home-v2/hero-fire.webp",
     alt: "Youth gathered around a bonfire at dusk",
     heading: "To Know Christ.\nTo Make Him Known.",
     body: "For we do not preach ourselves but Jesus Christ as Lord",
