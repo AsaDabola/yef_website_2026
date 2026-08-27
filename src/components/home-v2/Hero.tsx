@@ -42,12 +42,16 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
   const t = useT();
   const [active, setActive] = useState(0);
 
+  // Bumped on every manual pick so the dwell restarts from the click
+  // rather than firing out whatever was left of the previous one.
+  const [since, setSince] = useState(0);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setActive((current) => (current + 1) % slides.length);
     }, SLIDE_DURATION);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length, since]);
 
   return (
     <section className="font-body relative flex min-h-[640px] items-center overflow-hidden bg-v2-navy lg:min-h-screen">
@@ -77,8 +81,13 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
           {slides.map((slide, index) => (
             <div
               key={slide.image}
+              // An inactive block is absolutely positioned over the whole
+              // content column, dots included, so it has to stop taking
+              // pointer events or it swallows every click on them.
               className={`transition-opacity duration-1000 ${
-                index === active ? "opacity-100" : "absolute inset-0 opacity-0"
+                index === active
+                  ? "opacity-100"
+                  : "pointer-events-none absolute inset-0 opacity-0"
               }`}
               aria-hidden={index !== active}
             >
@@ -103,12 +112,22 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
             <button
               key={slide.image}
               type="button"
-              aria-label={`Show slide ${index + 1}`}
-              onClick={() => setActive(index)}
-              className={`h-1.5 rounded-full transition-all ${
-                index === active ? "w-8 bg-white" : "w-1.5 bg-white/40"
-              }`}
-            />
+              aria-label={t(slide.heading).replace("\n", " ")}
+              aria-current={index === active}
+              onClick={() => {
+                setActive(index);
+                setSince((n) => n + 1);
+              }}
+              // The bar is only 6px tall, so the button carries padding to
+              // reach a thumb-sized target around it.
+              className="group -my-3 py-3 first:-ml-1 first:pl-1"
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-all group-hover:bg-white ${
+                  index === active ? "w-8 bg-white" : "w-1.5 bg-white/40"
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>

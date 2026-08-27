@@ -84,11 +84,16 @@ export default async function NewsArticlePage({
         <article className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <Breadcrumb label={`News / ${article.title}`} />
 
-          <p className="mt-6 text-sm text-v2-muted">{article.date}</p>
-          <h1 className="mt-2 max-w-3xl font-display font-extrabold text-4xl text-black leading-tight sm:text-5xl">
+          {/* The frame sets the article head at 13.3/17.5, 44.8/60 and
+              18.9/30 — the headline is semibold, not the extrabold the
+              landing pages use. */}
+          <p className="mt-6 font-semibold text-[13.3px] text-[#4b5565] leading-[17.5px]">
+            {article.date}
+          </p>
+          <h1 className="mt-2 max-w-3xl font-display font-semibold text-[32px] text-black leading-[42px] tracking-[-0.96px] sm:text-[38px] sm:leading-[50px] lg:text-[44.8px] lg:leading-[60px]">
             {t(article.title)}
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-v2-muted-dark-2">
+          <p className="mt-4 max-w-3xl font-medium text-[17px] text-[#4b5565] leading-[27px] lg:text-[18.9px] lg:leading-[30px]">
             {t(article.subtitle ?? article.excerpt)}
           </p>
 
