@@ -21,12 +21,12 @@ export default function HeaderV2() {
 
   return (
     // Fixed rather than absolute, so it rides the page down. At rest it sits
-    // exactly where it did, over the hero; once the page has moved it takes a
-    // navy ground of its own, since white nav over white content reads as
+    // exactly where it did, over the hero; once the page has moved it takes the
+    // brand blue as a ground, since white nav over white content reads as
     // nothing at all.
     <header
       className={`font-body fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
-        scrolled ? "bg-v2-navy/95 shadow-lg backdrop-blur-sm" : ""
+        scrolled ? "bg-yef-primary/95 shadow-lg backdrop-blur-sm" : ""
       }`}
     >
       {/* The frame insets the logo 76px from the left and the GIVE button 48px

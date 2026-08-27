@@ -34,11 +34,11 @@ export default function Header() {
   return (
     // Fixed rather than absolute, so it rides the page down. At rest it sits
     // exactly where it did, over the banner; once the page has moved it takes
-    // a navy ground of its own, since white nav over white content reads as
-    // nothing at all.
+    // the brand blue as a ground, since white nav over white content reads
+    // as nothing at all.
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
-        scrolled ? "bg-yef-navy/95 shadow-lg backdrop-blur-sm" : ""
+        scrolled ? "bg-yef-primary/95 shadow-lg backdrop-blur-sm" : ""
       }`}
     >
       <div className={`mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 transition-[padding] duration-300 lg:px-16 ${
