@@ -74,6 +74,26 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
         </div>
       ))}
 
+      {/* The banner frames layer two washes over the photograph: a 30%
+          vignette that stays almost clear at its centre and closes to 94%
+          at the edges, then a fade into the foot of the section. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 65% 101% at 65% 44%, rgba(14,18,22,0.05) 0%, rgba(14,18,22,0.35) 35%, rgba(14,18,22,0.94) 83%)",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(14,18,22,0) 60.87%, rgba(14,18,22,0.28) 95.99%)",
+        }}
+      />
+
       <HeaderV2 />
 
       <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pb-24 pt-40 sm:px-10 lg:px-19 lg:pb-32">
@@ -94,12 +114,12 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
               <h1 className="whitespace-pre-line font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl lg:text-8xl">
                 {t(slide.heading)}
               </h1>
-              <p className="mt-8 max-w-lg text-lg text-white/85 leading-relaxed">
+              <p className="mt-8 max-w-[600px] text-[17px] text-white/82 leading-[1.7]">
                 {t(slide.body)}
               </p>
               <Link
                 href="/who-we-are"
-                className="mt-10 inline-flex items-center justify-center rounded-full border border-white/55 px-8 py-4 font-semibold text-xs tracking-[1.92px] text-white transition-colors hover:bg-white hover:text-v2-navy"
+                className="mt-10 inline-flex h-[47px] items-center justify-center rounded-full border border-white/55 px-[34px] py-4 font-semibold text-xs tracking-[1.92px] text-white transition-colors hover:bg-white hover:text-v2-navy"
               >
                 {t("LEARN MORE")}
               </Link>
