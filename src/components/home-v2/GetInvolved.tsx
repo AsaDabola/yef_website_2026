@@ -1,14 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
 import { useT } from "@/lib/i18n/client";
 
 const CARD_GAP = 26;
-/** How long a card holds before the row moves on. */
-const ROTATE_INTERVAL = 5000;
+/** How fast the row creeps, in pixels per second. */
+const DRIFT_SPEED = 34;
 
 const cards = [
   {
@@ -39,13 +39,13 @@ const cards = [
     tag: "Each Summer",
     title: "Short-term Mission",
     body: "Three to seven days in the US and Korea. Word, prayer, and long meals with students who came from the other side of the world.",
-    image: "/images/home-v2/get-involved-short-term-mission.png",
+    image: "/images/home-v2/get-involved-short-term-mission.webp",
   },
   {
     tag: "By Invitation",
     title: "Discipleship Training",
     body: "For those who have finished discipleship and are ready to teach. You become a missionary to the campus you already attend.",
-    image: "/images/home-v2/get-involved-discipleship-training.png",
+    image: "/images/home-v2/get-involved-discipleship-training.webp",
   },
   {
     tag: "Year Round",
@@ -58,44 +58,39 @@ const cards = [
 export default function GetInvolved() {
   const t = useT();
   const trackRef = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
 
-  const sync = useCallback(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    setAtStart(el.scrollLeft <= 1);
-    setAtEnd(el.scrollLeft >= el.scrollWidth - el.clientWidth - 1);
-  }, []);
-
-  useEffect(() => {
-    sync();
-    window.addEventListener("resize", sync);
-    return () => window.removeEventListener("resize", sync);
-  }, [sync]);
-
-  /** One card plus its gap — what the row moves by. */
+  /** One card plus its gap — what an arrow press moves by. */
   const pitchOf = (el: HTMLElement) => {
     const first = el.firstElementChild as HTMLElement | null;
     return first ? first.offsetWidth + CARD_GAP : el.clientWidth;
   };
 
-  // The arrows page by however many cards are on screen, so a slide never
-  // comes to rest half out of view.
+  /**
+   * Suppresses the drift for a moment so a smooth scroll can land — the
+   * drift writes scrollLeft every frame and would otherwise fight it.
+   */
+  const nudged = useRef(0);
+
   const page = useCallback((direction: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
     const pitch = pitchOf(el);
     const perView = Math.max(1, Math.floor(el.clientWidth / pitch));
+    nudged.current = Date.now() + 700;
     el.scrollBy({ left: direction * pitch * perView, behavior: "smooth" });
   }, []);
 
   /**
-   * Rotates on its own, a card at a time, wrapping back to the first once the
-   * end is reached. It holds while the pointer is over the row or a card has
-   * keyboard focus, so it never moves out from under someone reading or
-   * tabbing through, and it does not run at all for a reader who has asked
-   * for reduced motion.
+   * Turns continuously rather than stepping card to card: the row creeps at a
+   * constant speed and never comes to rest.
+   *
+   * The cards are rendered twice, so once the drift passes the end of the
+   * first copy it can jump back by exactly that distance and land on an
+   * identical frame — the seam is invisible and the row reads as endless.
+   *
+   * It holds while the pointer is over the row or a card has keyboard focus,
+   * so it never moves out from under someone reading or tabbing through, and
+   * it does not run at all for a reader who has asked for reduced motion.
    */
   useEffect(() => {
     const el = trackRef.current;
@@ -103,6 +98,25 @@ export default function GetInvolved() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let held = false;
+    let last = 0;
+    let frame = 0;
+
+    const step = (now: number) => {
+      const dt = last ? Math.min(now - last, 100) : 0;
+      last = now;
+      if (!held && Date.now() > nudged.current) {
+        el.scrollLeft += (DRIFT_SPEED * dt) / 1000;
+      }
+      // One lap is the distance from the first card to its duplicate. Half
+      // the scroll width is not the same thing — it lands half a gap short,
+      // which would jog the row every time it wrapped.
+      const first = el.children[0] as HTMLElement | undefined;
+      const repeat = el.children[cards.length] as HTMLElement | undefined;
+      const lap = first && repeat ? repeat.offsetLeft - first.offsetLeft : 0;
+      if (lap > 0 && el.scrollLeft >= lap) el.scrollLeft -= lap;
+      frame = requestAnimationFrame(step);
+    };
+
     const hold = () => {
       held = true;
     };
@@ -110,21 +124,13 @@ export default function GetInvolved() {
       held = false;
     };
 
-    const timer = setInterval(() => {
-      if (held) return;
-      const end = el.scrollLeft >= el.scrollWidth - el.clientWidth - 1;
-      // A card at a time on its own, rather than the arrows' whole page —
-      // the row drifts instead of jumping.
-      if (end) el.scrollTo({ left: 0, behavior: "smooth" });
-      else el.scrollBy({ left: pitchOf(el), behavior: "smooth" });
-    }, ROTATE_INTERVAL);
-
+    frame = requestAnimationFrame(step);
     el.addEventListener("pointerenter", hold);
     el.addEventListener("pointerleave", release);
     el.addEventListener("focusin", hold);
     el.addEventListener("focusout", release);
     return () => {
-      clearInterval(timer);
+      cancelAnimationFrame(frame);
       el.removeEventListener("pointerenter", hold);
       el.removeEventListener("pointerleave", release);
       el.removeEventListener("focusin", hold);
@@ -150,18 +156,16 @@ export default function GetInvolved() {
             <button
               type="button"
               onClick={() => page(-1)}
-              disabled={atStart}
               aria-label={t("Previous ways to get involved")}
-              className="flex size-[50px] items-center justify-center rounded-full border border-[rgba(0,42,85,0.13)] text-[15px] text-black transition-opacity disabled:opacity-35"
+              className="flex size-[50px] items-center justify-center rounded-full border border-[rgba(0,42,85,0.13)] text-[15px] text-black transition-opacity hover:opacity-70"
             >
               &larr;
             </button>
             <button
               type="button"
               onClick={() => page(1)}
-              disabled={atEnd}
               aria-label={t("More ways to get involved")}
-              className="flex size-[50px] items-center justify-center rounded-full border border-[rgba(0,42,85,0.13)] text-[15px] text-black transition-opacity disabled:opacity-35"
+              className="flex size-[50px] items-center justify-center rounded-full border border-[rgba(0,42,85,0.13)] text-[15px] text-black transition-opacity hover:opacity-70"
             >
               &rarr;
             </button>
@@ -173,12 +177,16 @@ export default function GetInvolved() {
               overflow-x scroller also clips vertically. */}
           <HoverGroup
             ref={trackRef}
-            onScroll={sync}
-            className="-my-4 mt-9 flex snap-x snap-mandatory gap-[26px] overflow-x-auto py-4 [-ms-overflow-style:none] [scrollbar-width:none] lg:mt-12 [&::-webkit-scrollbar]:hidden"
-            itemClassName="w-[74%] shrink-0 snap-start sm:w-[43%] lg:w-[26%]"
+            className="-my-4 mt-9 flex gap-[26px] overflow-x-auto py-4 [-ms-overflow-style:none] [scrollbar-width:none] lg:mt-12 [&::-webkit-scrollbar]:hidden"
+            itemClassName="w-[74%] shrink-0 sm:w-[43%] lg:w-[26%]"
           >
-            {cards.map((card) => (
-              <div key={card.title}>
+            {/* Twice through: the drift wraps at the halfway mark onto an
+                identical frame, so the row has no visible seam or end. */}
+            {[...cards, ...cards].map((card, index) => (
+              <div
+                key={`${card.title}-${index}`}
+                aria-hidden={index >= cards.length}
+              >
                 <div className="group relative aspect-[380/507] w-full cursor-pointer overflow-hidden bg-v2-navy">
                   <Image
                     src={card.image}
