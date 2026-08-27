@@ -192,12 +192,11 @@ export default function GetInvolved() {
                     src={card.image}
                     alt={card.title}
                     fill
-                    sizes="(min-width: 1024px) 380px, (min-width: 640px) 320px, 260px"
+                    // The cards are a share of the row now, not fixed pixels, so the
+                    // hint follows suit — it decides which width Next serves.
+                    sizes="(min-width: 1024px) 26vw, (min-width: 640px) 43vw, 74vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <span className="absolute bottom-3 left-3 rounded-[3px] bg-black/30 px-2 py-1 font-normal text-[9.5px] text-white/45 tracking-[0.95px] uppercase">
-                    {t("Video")}
-                  </span>
                 </div>
                 <p className="mt-[22px] font-normal text-[11px] text-v2-muted tracking-[1.98px] uppercase">
                   {t(card.tag)}
