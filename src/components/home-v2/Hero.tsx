@@ -93,6 +93,20 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
             "linear-gradient(to bottom, rgba(14,18,22,0) 60.87%, rgba(14,18,22,0.28) 95.99%)",
         }}
       />
+      {/* The frame's washes are tuned to the bonfire photo, which is already
+          dark where the copy sits. The other slides have no such headroom —
+          slide 2 is a wall-to-wall close-up with a bright forehead and teeth
+          right behind the headline, well under 3:1 with no scrim at all — so
+          the text column gets its own left-to-right fade independent of the
+          photo underneath it. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(14,18,22,0.58) 0%, rgba(14,18,22,0.58) 32%, rgba(14,18,22,0) 68%)",
+        }}
+      />
 
       <HeaderV2 />
 
