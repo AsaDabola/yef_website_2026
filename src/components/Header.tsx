@@ -44,12 +44,17 @@ export default function Header() {
       <div className={`mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 transition-[padding] duration-300 lg:px-16 ${
           scrolled ? "py-3" : "py-8"
         }`}>
-        <Link href="/" className="relative h-9 w-24 shrink-0 sm:h-20 sm:w-52">
+        {/* The same box as the home header and the footer, so one logo size
+            serves the whole site. */}
+        <Link
+          href="/"
+          className="relative h-8 w-[88px] shrink-0 sm:h-[60px] sm:w-42"
+        >
           <Image
             src="/images/icons/logo-yef.svg"
             alt={t("Youth Evangelical Fellowship")}
             fill
-            sizes="208px"
+            sizes="168px"
             className="object-contain object-left"
             priority
           />
