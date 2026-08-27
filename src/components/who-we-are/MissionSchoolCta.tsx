@@ -59,7 +59,7 @@ export default async function MissionSchoolCta() {
                 <Link
                   key={card.title}
                   href={card.href}
-                  className="group relative flex aspect-[320/533] flex-col justify-between overflow-hidden rounded-[20px] bg-[#1a1e22] p-[26px]"
+                  className="group relative flex aspect-[320/533] flex-col justify-between overflow-hidden rounded-[20px] bg-[#1a1e22] p-4 sm:p-[26px]"
                 >
                   <Image
                     src={card.image}
@@ -76,17 +76,25 @@ export default async function MissionSchoolCta() {
                   </p>
 
                   <div className="relative">
-                    <p className="font-extrabold text-[34px] text-white leading-[34px] tracking-[-0.2899px]">
+                    {/* One long word ("Curriculum") has to fit a half-width
+                        card on a phone, so the title scales with the card. */}
+                    <p className="font-extrabold text-[22px] text-white leading-[24px] tracking-[-0.2899px] sm:text-[28px] sm:leading-[30px] lg:text-[34px] lg:leading-[34px]">
                       {t(card.title)}
                     </p>
-                    <span className="mt-[39px] inline-flex items-center gap-[7px] rounded-full bg-[#6abbff] px-[18px] py-2.5 font-bold text-xs text-[#06222b] leading-[18px] tracking-[0.72px] uppercase">
+                    {/* The pill fills the card so a two-line label keeps the
+                        arrow inside it rather than pushing it past the edge. */}
+                    <span className="mt-5 flex w-full items-center justify-between gap-2 rounded-full bg-[#6abbff] px-4 py-2.5 font-bold text-[11px] text-[#06222b] leading-[16px] tracking-[0.72px] uppercase sm:mt-[39px] sm:inline-flex sm:w-auto sm:justify-start sm:gap-[7px] sm:px-[18px] sm:text-xs sm:leading-[18px]">
                       {t(card.cta)}
+                      {/* The pill is light blue, so the arrow takes the
+                          label's colour rather than the white used on the
+                          dark sections. */}
                       <Image
-                        src="/images/icons/icon-arrow-right-24-white.svg"
+                        src="/images/icons/icon-arrow-right-24-dark.svg"
                         alt=""
                         width={24}
                         height={24}
                         aria-hidden="true"
+                        className="size-4 shrink-0 sm:size-6"
                       />
                     </span>
                   </div>
