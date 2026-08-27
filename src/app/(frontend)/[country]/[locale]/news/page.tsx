@@ -36,7 +36,9 @@ export default async function NewsPage({ params }: { params: LocaleParams }) {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-black/45 lg:bg-gradient-to-r lg:from-black/75 lg:via-black/30 lg:to-transparent" />
+          {/* The frame's band: 176px of black fading 0.2 to clear, carrying
+              the nav over the water. */}
+          <div className="absolute inset-x-0 top-0 h-[176px] bg-gradient-to-b from-black/20 via-black/20 via-50% to-transparent" />
 
           <HeaderV2 />
 

@@ -39,6 +39,16 @@ const people = [
     image: "/images/staff/Deborah_Lan.webp",
   },
   {
+    name: "Andrea Li",
+    title: "YEF Hong Kong",
+    image: "/images/staff/Andrea_Li.webp",
+  },
+  {
+    name: "Ilinca",
+    title: "YEF Romania",
+    image: "/images/staff/Ilinca.webp",
+  },
+  {
     name: "Bridaija Jones",
     title: "YEF HQ Mission Staff",
     image: "/images/staff/Bridaija_Jones.webp",
@@ -54,21 +64,12 @@ const people = [
     image: "/images/staff/olivia-1.webp",
   },
   {
-    name: "Andrea Li",
-    title: "YEF Hong Kong",
-    image: "/images/staff/Andrea_Li.webp",
-  },
-  {
-    name: "Ilinca",
-    title: "YEF Romania",
-    image: "/images/staff/Ilinca.webp",
-  },
-  {
     name: "Josiah Kim",
     title: "Broadcaster",
     image: "/images/staff/Josiah.webp",
   },
 ];
+
 
 export default async function StaffExecutiveCommitteePage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
