@@ -54,7 +54,7 @@ export default async function WhoWeAreHero() {
         <div className="xl:pt-5">
           <div className="relative aspect-[655/492] w-full overflow-hidden rounded-2xl">
             <Image
-              src="/images/who-we-are/hero-president-portrait.png"
+              src="/images/who-we-are/hero-president-portrait.webp"
               alt={t(
                 "Dr. Mark Wagner, President of Youth Evangelical Fellowship",
               )}
