@@ -69,8 +69,20 @@ type Tone = "light" | "dark";
 /** Which way the menu opens — footer pickers have no room below them. */
 type Placement = "down" | "up";
 
-const menu = (placement: Placement) =>
-  placement === "up" ? "bottom-full mb-2" : "top-full mt-2";
+/**
+ * On a phone the menu is far wider than the trigger, so anchoring its right
+ * edge to the trigger's pushes it off the left of the screen. Below `sm` it
+ * becomes a sheet pinned to the viewport instead; from `sm` up it is the
+ * dropdown it looks like.
+ */
+const menu = (placement: Placement, width: string) =>
+  [
+    "fixed inset-x-3 sm:absolute sm:inset-x-auto sm:end-0",
+    width,
+    placement === "up"
+      ? "bottom-4 sm:bottom-full sm:mb-2"
+      : "top-24 sm:top-full sm:mt-2",
+  ].join(" ");
 
 const trigger = (tone: Tone) =>
   tone === "light"
@@ -148,7 +160,7 @@ export function CountryPicker({
       {open && (
         <div
           role="menu"
-          className={`absolute end-0 z-50 max-h-[70vh] w-[min(92vw,640px)] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl ${menu(placement)}`}
+          className={`z-50 max-h-[70vh] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl ${menu(placement, "sm:w-[min(92vw,640px)]")}`}
         >
           <p className="flex w-full items-center gap-2 rounded-lg px-3 py-2 font-semibold text-sm text-yef-primary">
             <Globe />
@@ -229,7 +241,7 @@ export function LanguagePicker({
       {open && (
         <div
           role="menu"
-          className={`absolute end-0 z-50 max-h-[70vh] w-[min(92vw,420px)] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl ${menu(placement)}`}
+          className={`z-50 max-h-[70vh] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl ${menu(placement, "sm:w-[min(92vw,420px)]")}`}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2">
             {offered.map((l) => (
