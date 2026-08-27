@@ -1,10 +1,30 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import { chapters } from "@/lib/chapters";
+import { useT } from "@/lib/i18n/client";
+
+/** Marks each row in the list, standing in for the thumbnails. */
+function PinIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
 
 export default function ChapterMap() {
+  const t = useT();
   const [selectedId, setSelectedId] = useState(chapters[0].id);
   const [query, setQuery] = useState("");
   const [country, setCountry] = useState("All");
@@ -40,20 +60,20 @@ export default function ChapterMap() {
       <div className="max-h-[640px] overflow-y-auto border-b border-v2-border bg-white lg:max-h-[640px] lg:border-b-0 lg:border-r">
         <div className="sticky top-0 z-10 space-y-3 border-b border-v2-border bg-white p-4">
           <label className="sr-only" htmlFor="chapter-search">
-            Search chapters
+            {t("Search chapters")}
           </label>
           <input
             id="chapter-search"
             type="text"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search chapters"
+            placeholder={t("Search chapters")}
             className="w-full rounded-full border border-v2-border px-4 py-2.5 text-sm text-v2-navy placeholder:text-v2-muted focus:border-v2-accent focus:outline-none"
           />
 
           <div className="grid grid-cols-2 gap-2">
             <label className="block">
-              <span className="sr-only">Country</span>
+              <span className="sr-only">{t("Country")}</span>
               <select
                 value={country}
                 onChange={(event) => {
@@ -70,7 +90,7 @@ export default function ChapterMap() {
               </select>
             </label>
             <label className="block">
-              <span className="sr-only">City</span>
+              <span className="sr-only">{t("City")}</span>
               <select
                 value={city}
                 onChange={(event) => setCity(event.target.value)}
@@ -86,7 +106,11 @@ export default function ChapterMap() {
           </div>
 
           <p className="text-sm text-v2-muted">
-            Showing {filtered.length} chapter{filtered.length === 1 ? "" : "s"}
+            {t(
+              filtered.length === 1
+                ? "Showing {count} chapter"
+                : "Showing {count} chapters",
+            ).replace("{count}", String(filtered.length))}
           </p>
         </div>
 
@@ -96,21 +120,21 @@ export default function ChapterMap() {
               <button
                 type="button"
                 onClick={() => setSelectedId(chapter.id)}
-                className={`flex w-full items-center gap-3 p-4 text-left transition-colors ${
+                className={`flex w-full items-start gap-3 p-4 text-left transition-colors ${
                   chapter.id === selectedId ? "bg-v2-bg" : "hover:bg-v2-bg/60"
                 }`}
               >
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-lg">
-                  <Image
-                    src={chapter.image}
-                    alt={chapter.name}
-                    fill
-                    sizes="56px"
-                    className="object-cover"
-                  />
-                </div>
+                <PinIcon
+                  className={`mt-0.5 size-4 shrink-0 ${
+                    chapter.id === selectedId
+                      ? "text-v2-accent"
+                      : "text-v2-muted"
+                  }`}
+                />
                 <div className="min-w-0">
-                  <p className="font-semibold text-v2-navy">{chapter.name}</p>
+                  <p className="font-semibold text-v2-navy">
+                    {t(chapter.name)}
+                  </p>
                   <p className="truncate text-[13px] text-v2-muted">
                     {chapter.address}
                   </p>
@@ -120,7 +144,7 @@ export default function ChapterMap() {
           ))}
           {filtered.length === 0 && (
             <li className="p-6 text-center text-sm text-v2-muted">
-              No chapters match that search.
+              {t("No chapters match that search.")}
             </li>
           )}
         </ul>
@@ -131,14 +155,14 @@ export default function ChapterMap() {
           <iframe
             key={selected.id}
             title={`Map showing ${selected.name}`}
-            src={`https://www.google.com/maps?q=${encodeURIComponent(selected.address)}&output=embed`}
+            src={`https://www.google.com/maps?q=${selected.lat},${selected.lng}&z=16&output=embed`}
             className="absolute inset-0 size-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
         ) : (
           <div className="flex size-full items-center justify-center bg-v2-bg text-sm text-v2-muted">
-            Select a chapter to see it on the map.
+            {t("Select a chapter to see it on the map.")}
           </div>
         )}
 
@@ -151,38 +175,20 @@ export default function ChapterMap() {
                     {selected.country}
                   </p>
                   <p className="mt-1 font-display font-bold text-xl text-v2-navy">
-                    {selected.name}
+                    {t(selected.name)}
                   </p>
                 </div>
               </div>
-              <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl">
-                <Image
-                  src={selected.image}
-                  alt={selected.name}
-                  fill
-                  sizes="320px"
-                  className="object-cover"
-                />
-              </div>
-              <p className="mt-4 text-sm text-v2-muted-dark">
+              <p className="mt-3 text-sm text-v2-muted-dark">
                 {selected.address}
               </p>
               <div className="mt-4 flex items-center gap-3 border-t border-v2-border pt-4">
-                <div className="relative size-10 shrink-0 overflow-hidden rounded-full">
-                  <Image
-                    src={selected.image}
-                    alt={selected.leader}
-                    fill
-                    sizes="40px"
-                    className="object-cover"
-                  />
-                </div>
                 <div>
                   <p className="font-semibold text-[14.5px] text-v2-navy">
                     {selected.leader}
                   </p>
                   <p className="text-[12.5px] text-v2-muted">
-                    {selected.role}
+                    {t(selected.role)}
                   </p>
                 </div>
               </div>

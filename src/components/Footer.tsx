@@ -1,10 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import {
   InstagramIcon,
   LinkArrowIcon,
   PinIcon,
 } from "@/components/ui/SocialIcons";
+import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
+import { getSiteName } from "@/components/ui/SiteWordmark";
+import { getT } from "@/lib/i18n/server";
 
 const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -27,7 +30,7 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Bible Studies", href: "/get-involved#bible-studies" },
       { label: "Summer Training", href: "/get-involved#summer-training" },
       { label: "Mission Trip", href: "/get-involved/mission-trip" },
-      { label: "Volunteer", href: "/get-involved#volunteering" },
+      { label: "Volunteer", href: "/get-involved/volunteer" },
       { label: "Internship", href: "/get-involved#internship" },
       { label: "Discipleship", href: "/get-involved#discipleship" },
     ],
@@ -57,46 +60,51 @@ const socialLinks = [
   { label: "Instagram", href: "#", Icon: InstagramIcon },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getT();
+  // Headquarters signs off as "International"; a country site signs off with
+  // its own name, in the reader's language.
+  const siteName = await getSiteName();
+
   return (
     <footer className="bg-black">
       <div className="bg-yef-navy">
         <div className="mx-auto max-w-[1800px] px-6 pb-16 pt-16 lg:px-16 lg:pt-20">
-          <Link href="/" className="relative block h-[60px] w-[170px]">
+          <Link href="/" className="relative block h-8 w-[88px] sm:h-[60px] sm:w-42">
             <Image
-              src="/images/icons/logo-yef-white-compact.svg"
-              alt="Youth Evangelical Fellowship"
+              src="/images/icons/logo-yef.svg"
+              alt={t("Youth Evangelical Fellowship")}
               fill
-              sizes="170px"
+              sizes="168px"
               className="object-contain object-left"
             />
           </Link>
 
           <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.7fr_1fr_1fr_1fr_1fr]">
             <div>
-              <p className="font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
-                Subscribe for news, updates, and events
+              <p className="font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
+                {t("Subscribe for news, updates, and events")}
               </p>
               <form className="mt-6 flex max-w-xs flex-col items-start gap-3">
                 <label className="sr-only" htmlFor="footer-email">
-                  Email address
+                  {t("Email address")}
                 </label>
                 <input
                   id="footer-email"
                   type="email"
-                  placeholder="Email address"
+                  placeholder={t("Email address")}
                   className="w-full rounded-full border border-white/20 bg-transparent px-6 py-4 text-sm text-white placeholder:text-white/40 focus:border-white/50 focus:outline-none"
                 />
                 <button
                   type="submit"
                   className="shrink-0 rounded-full bg-yef-primary px-8 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
                 >
-                  Sign Up
+                  {t("Sign Up")}
                 </button>
               </form>
 
-              <p className="mt-10 font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
-                Follow us
+              <p className="mt-10 font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
+                {t("Follow us")}
               </p>
               <div className="mt-4 flex items-center gap-4">
                 {socialLinks.map(({ label, href, Icon }) => (
@@ -114,17 +122,17 @@ export default function Footer() {
 
             {columns.map((column) => (
               <div key={column.title}>
-                <p className="font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
-                  {column.title}
+                <p className="font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
+                  {t(column.title)}
                 </p>
                 <ul className="mt-4 space-y-3">
                   {column.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="font-medium text-base text-white transition-opacity hover:opacity-80"
+                        className="font-normal text-base text-white transition-opacity hover:opacity-80"
                       >
-                        {link.label}
+                        {t(link.label)}
                       </Link>
                     </li>
                   ))}
@@ -135,10 +143,18 @@ export default function Footer() {
         </div>
       </div>
       <div className="bg-yef-footer-strip">
-        <p className="mx-auto max-w-[1800px] px-6 py-6 text-center font-normal text-base leading-[1.6] text-yef-gray lg:px-16">
-          Copyright © {new Date().getFullYear()} Youth Evangelical Fellowship
-          International. All Rights Reserved.
-        </p>
+        {/* The frame centres the copyright across the full strip; the
+            pickers are ours, so they sit centred above it. */}
+        <div className="mx-auto flex max-w-[1800px] flex-col items-center gap-4 px-6 py-6 lg:px-16">
+          <div className="flex items-center gap-2">
+            <CountryPicker placement="up" />
+            <LanguagePicker placement="up" />
+          </div>
+          <p className="text-center font-medium text-base leading-[1.6] text-yef-gray">
+            {t("Copyright ©")} {new Date().getFullYear()}{" "}
+            {siteName}. {t("All Rights Reserved.")}
+          </p>
+        </div>
       </div>
     </footer>
   );

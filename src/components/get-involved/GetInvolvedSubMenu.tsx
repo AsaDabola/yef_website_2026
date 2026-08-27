@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { usePathname } from "next/navigation";
+import { useT } from "@/lib/i18n/client";
 
 const links = [
   { label: "Bible Studies", href: "/get-involved#bible-studies" },
@@ -15,21 +16,24 @@ const links = [
   { label: "Discipleship", href: "/get-involved#discipleship" },
   { label: "Large Group", href: "/get-involved" },
   { label: "Leadership Training", href: "/get-involved#leadership-training" },
-  { label: "Volunteer", href: "/get-involved#volunteering" },
+  { label: "Volunteer", href: "/get-involved/volunteer" },
 ];
 
 export default function GetInvolvedSubMenu() {
+  const t = useT();
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Get Involved section navigation" className="w-full max-w-[237px]">
-      <p className="font-bold text-sm text-yef-primary">Get Involved</p>
+    <nav
+      aria-label={t("Get Involved section navigation")}
+      className="w-full max-w-[237px]"
+    >
+      <p className="font-bold text-sm text-yef-primary">{t("Get Involved")}</p>
       <ul className="mt-4">
         {links.map((link) => {
-          const active =
-            link.href.startsWith("/get-involved/")
-              ? pathname === link.href
-              : pathname === "/get-involved" && link.href === "/get-involved";
+          const active = link.href.startsWith("/get-involved/")
+            ? pathname === link.href
+            : pathname === "/get-involved" && link.href === "/get-involved";
           return (
             <li key={link.label}>
               <Link
@@ -40,7 +44,7 @@ export default function GetInvolvedSubMenu() {
                     : "border-black/10 text-black hover:border-yef-primary hover:text-yef-primary"
                 }`}
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             </li>
           );

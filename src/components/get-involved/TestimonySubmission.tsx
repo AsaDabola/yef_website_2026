@@ -1,26 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import {
-  LabeledCheckboxField,
-  LabeledTextAreaField,
-  LabeledTextField,
-} from "@/components/forms/LabeledField";
+import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
+import { LabeledTextField } from "@/components/forms/LabeledField";
+import { useT } from "@/lib/i18n/client";
 
 export default function TestimonySubmission() {
+  const t = useT();
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-v2-border bg-white p-10 text-center sm:p-14">
-        <h2 className="font-display font-extrabold text-3xl text-v2-navy">
-          Thank You for Sharing
-        </h2>
-        <p className="mx-auto mt-4 max-w-md text-v2-muted-dark-2 leading-relaxed">
-          Your story has been received. We&rsquo;re grateful you took the
-          time to share what God has been doing in your life.
-        </p>
-      </div>
+      <SubmissionSuccess
+        title={t("Thank You for Sharing")}
+        message="Your story has been received. We're grateful you took the time to share what God has been doing in your life."
+        footnote="In the meantime, feel free to explore more ways to get involved."
+      />
     );
   }
 
@@ -30,65 +25,81 @@ export default function TestimonySubmission() {
         event.preventDefault();
         setSubmitted(true);
       }}
+      className="flex flex-col gap-8 rounded-2xl bg-white p-8 sm:p-12"
     >
-      <h1 className="text-center font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
-        Submit Your Story
-      </h1>
-      <p className="mx-auto mt-4 max-w-2xl text-center text-v2-muted-dark-2 leading-relaxed">
-        God has been at work in your life &mdash; we&rsquo;d love to hear
-        about it. Share the grace you&rsquo;ve received, and how it&rsquo;s
-        shaped your walk with Him.
-      </p>
-
-      <div className="mt-10 space-y-5">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="space-y-4">
+        <div className="flex flex-col gap-3 sm:flex-row">
           <LabeledTextField
-            label="Name"
-            placeholder="First & Last Name"
+            label={t("Name")}
+            placeholder={t("First & Last Name")}
             name="name"
             required
+            half
           />
           <LabeledTextField
-            label="Email"
-            placeholder="Email Address"
+            label={t("Email")}
+            placeholder={t("Email Address")}
             type="email"
             name="email"
             required
+            half
           />
         </div>
         <LabeledTextField
-          label="Testimony Title"
-          placeholder="Give your story a short title"
+          label={t("Testimony Title")}
+          placeholder={t("Give your story a short title")}
           name="title"
           required
         />
-        <LabeledTextAreaField
-          label="Your Testimony"
-          hint="What has God been teaching you? How have you seen His grace at work in your life recently?"
-          placeholder="Share your story here..."
-          name="testimony"
-          rows={7}
-        />
-        <p className="text-xs text-v2-muted">Minimum 100 words</p>
+      </div>
 
-        <div className="border-t border-v2-border pt-5">
-          <p className="font-semibold text-sm text-black">
-            Sharing Permission
-          </p>
-          <div className="mt-3">
-            <LabeledCheckboxField
-              label="I give YEFI permission to share my testimony (website, social media, newsletter)."
-              name="permission"
-            />
-          </div>
-        </div>
+      <div className="space-y-3.5">
+        <label
+          htmlFor="testimony"
+          className="block font-semibold text-[16px] leading-[19px] text-[#1b1d21]"
+        >
+          {t("Your Testimony")}
+        </label>
+        <p className="text-[13px] leading-[16px] text-[#6b737d]">
+          {t(
+            "What has God been teaching you? How have you seen His grace at work in your life recently?",
+          )}
+        </p>
+        <textarea
+          id="testimony"
+          name="testimony"
+          placeholder={t("Share your story here...")}
+          className="block h-[220px] w-full rounded-[8px] border border-[#d1d6de] bg-[#fafafb] p-[14px] text-[13px] leading-[16px] text-[#1b1d21] placeholder:text-[#9ea3ab] focus:border-v2-accent focus:outline-none focus:ring-2 focus:ring-v2-accent/20"
+        />
+        <p className="text-right text-[11px] leading-[13px] text-[#9ea3ab]">
+          {t("Minimum 100 words")}
+        </p>
+      </div>
+
+      <div className="space-y-3.5">
+        <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
+          {t("Sharing Permission")}
+        </p>
+        <label className="flex items-center gap-2.5 text-[13px] leading-[18px] text-[#1b1d21]">
+          <input
+            type="checkbox"
+            name="permission"
+            defaultChecked
+            className="size-[18px] shrink-0 rounded-[4px] border-[1.5px] border-[#bfc4cc] text-[#2b4c7e] focus:ring-v2-accent"
+          />
+          <span>
+            {t(
+              "I give YEFI permission to share my testimony (website, social media, newsletter).",
+            )}
+          </span>
+        </label>
       </div>
 
       <button
         type="submit"
-        className="mt-8 w-full rounded-full bg-yef-primary py-4 font-semibold text-xs text-white tracking-[1.5px] uppercase transition-transform duration-200 hover:scale-[1.01] hover:opacity-90"
+        className="w-full rounded-[8px] bg-[#2b4c7e] px-7 py-3.5 font-bold text-[14px] leading-[17px] text-white uppercase transition-opacity hover:opacity-90"
       >
-        Submit My Testimony
+        {t("Submit My Testimony")}
       </button>
     </form>
   );

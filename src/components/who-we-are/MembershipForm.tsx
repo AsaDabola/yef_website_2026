@@ -1,26 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import {
   CheckboxField,
   TextAreaField,
   TextField,
 } from "@/components/forms/FormField";
+import { useT } from "@/lib/i18n/client";
 
 export default function MembershipForm() {
+  const t = useT();
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {
     return (
-      <div className="mt-10 max-w-2xl rounded-2xl bg-v2-bg p-8">
-        <p className="font-display font-extrabold text-2xl text-v2-navy">
-          You&rsquo;re all set!
-        </p>
-        <p className="mt-3 text-v2-muted-dark-2">
-          Thanks for applying to join YEF. A member of our team will reach
-          out to you soon.
-        </p>
-      </div>
+      <SubmissionSuccess
+        className="mt-6 max-w-[700px]"
+        title={t("You're All Set!")}
+        message="Thanks for applying to join YEF. A member of our team will reach out to you soon."
+      />
     );
   }
 
@@ -30,29 +29,32 @@ export default function MembershipForm() {
         event.preventDefault();
         setSubmitted(true);
       }}
-      className="mt-10 max-w-2xl space-y-4"
+      className="mt-6 max-w-[700px] space-y-[22px]"
     >
-      <TextField label="Full name" name="fullName" required />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <TextField label="Email" type="email" name="email" required />
-        <TextField label="Phone" type="tel" name="phone" />
+      <TextField label={t("Full name")} name="fullName" required />
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <TextField label={t("Email")} type="email" name="email" required />
+        <TextField label={t("Phone")} type="tel" name="phone" />
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <TextField label="Country" name="country" required />
-        <TextField label="City" name="city" required />
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <TextField label={t("Country")} name="country" required />
+        <TextField label={t("City")} name="city" required />
       </div>
-      <TextField label="Campus or church (optional)" name="campus" />
-      <TextField label="Age range" name="ageRange" />
-      <TextAreaField label="Why do you want to join YEF?" name="reason" />
+      <TextField label={t("Campus or church (optional)")} name="campus" />
+      <TextField label={t("Age range")} name="ageRange" />
+      <TextAreaField label={t("Why do you want to join YEF?")} name="reason" />
       <CheckboxField
-        label="I agree to the YEF statement of faith and consent to being contacted about my membership."
+        label={t(
+          "I agree to the YEF statement of faith and consent to being contacted about my membership.",
+        )}
         name="agreement"
+        required
       />
       <button
         type="submit"
-        className="rounded-full bg-v2-blue px-8 py-4 font-semibold text-sm text-white tracking-[0.5px] uppercase transition-transform duration-200 hover:scale-105"
+        className="w-[270px] rounded-full bg-[#0066cf] px-10 py-[18px] font-semibold text-[14px] text-white tracking-[2.24px] uppercase transition-transform duration-200 hover:scale-105"
       >
-        Submit Application
+        {t("Submit Application")}
       </button>
     </form>
   );

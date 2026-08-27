@@ -1,38 +1,37 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
+import { getT } from "@/lib/i18n/server";
 
 const stories = [
   {
     title: "Sharing the Gospel",
     body: "Through evangelism, we hope to help people encounter God's love, discover the truth of His Word, and begin a life of faith and discipleship.",
-    image:
-      "https://www.figma.com/api/mcp/asset/871bd08d-5798-4c41-97b1-195076236fc7.png",
+    image: "/images/who-we-are/story-sharing-the-gospel.png",
     href: "/sharing-the-gospel",
   },
   {
     title: "Reaching the Campus",
     body: "The university years shape a person's future. Through campus mission, YEF shares the Gospel, nurtures students in God's Word, and raises disciples who can impact the world.",
-    image:
-      "https://www.figma.com/api/mcp/asset/efc3559b-711d-48a8-b628-6921819d790c.png",
+    image: "/images/who-we-are/story-reaching-the-campus.png",
     href: "/reaching-the-campus",
   },
   {
     title: "Raising Disciples",
     body: "Evangelical means being centered on the Gospel of Jesus Christ, the Bible, personal faith, and sharing the Good News with others.",
-    image:
-      "https://www.figma.com/api/mcp/asset/29d88f9d-6030-4578-9aee-ba7af6583dfc.png",
-    href: "/raising-disciples",
+    image: "/images/who-we-are/story-raising-disciples.png",
+    href: "/what-is-evangelical",
   },
 ];
 
-export default function StoriesNews() {
+export default async function StoriesNews() {
+  const t = await getT();
   return (
     <section className="font-body bg-white">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+      <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 lg:px-12 lg:py-[154px]">
         <Reveal>
-          <HoverGroup className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <HoverGroup className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-[25px] lg:grid-cols-3">
             {stories.map((story) => (
               <Link key={story.title} href={story.href} className="group">
                 <div className="relative aspect-[432/243] w-full overflow-hidden rounded-2xl">
@@ -45,17 +44,21 @@ export default function StoriesNews() {
                   />
                 </div>
                 <div className="mt-6 flex items-start justify-between gap-4">
-                  <h3 className="font-semibold text-2xl text-black">
-                    {story.title}
+                  <h3 className="font-semibold text-[22.6px] text-black leading-[30px]">
+                    {t(story.title)}
                   </h3>
-                  <span
+                  <Image
+                    src="/images/icons/icon-arrow-up-right.svg"
+                    alt=""
+                    width={23}
+                    height={24}
                     aria-hidden="true"
-                    className="mt-1 text-2xl text-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                  >
-                    &#8599;
-                  </span>
+                    className="mt-[7px] shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                  />
                 </div>
-                <p className="mt-4 text-[#4b5565]">{story.body}</p>
+                <p className="mt-4 font-medium text-[15.2px] text-[#4b5565] leading-[24px]">
+                  {t(story.body)}
+                </p>
               </Link>
             ))}
           </HoverGroup>

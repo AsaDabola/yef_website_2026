@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { getT } from "@/lib/i18n/server";
 
-export default function ResourceTeaserCard({
+export default async function ResourceTeaserCard({
   image,
   alt,
   title,
@@ -11,6 +12,7 @@ export default function ResourceTeaserCard({
   title: string;
   href: string;
 }) {
+  const t = await getT();
   return (
     <a
       href={href}
@@ -23,11 +25,11 @@ export default function ResourceTeaserCard({
         sizes="(min-width: 1024px) 25vw, 90vw"
         className="object-cover transition-transform duration-500 group-hover:scale-110"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0e1216] from-5% via-[#0e1216]/25 via-45% to-[#0e1216]/5" />
-      <p className="absolute left-6 top-6 font-semibold text-[11px] text-white/85 tracking-[1.6px] uppercase">
-        Get Involved
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0e1216]/75 from-4% via-[#0e1216]/28 via-47% to-[#0e1216]/[0.04]" />
+      <p className="absolute top-[26px] left-[26px] font-semibold text-[11px] text-white/85 tracking-[1.6px] uppercase">
+        {t("Get Involved")}
       </p>
-      <p className="absolute bottom-6 left-6 font-display font-extrabold text-2xl text-white tracking-[-0.3px]">
+      <p className="absolute bottom-[48px] left-[26px] font-display font-extrabold text-[34px] text-white leading-[34px] tracking-[-0.29px]">
         {title}
       </p>
     </a>

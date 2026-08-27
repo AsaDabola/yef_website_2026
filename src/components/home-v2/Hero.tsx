@@ -1,43 +1,57 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { useEffect, useState } from "react";
 import HeaderV2 from "./HeaderV2";
+import { useT } from "@/lib/i18n/client";
+import SiteName from "@/components/ui/SiteName";
 
-const slides = [
+export type HeroSlide = {
+  image: string;
+  alt: string;
+  heading: string;
+  body: string;
+};
+
+const defaultSlides: HeroSlide[] = [
   {
-    image: "/images/home-v2/hero-fire.png",
-    alt: "Youth gathered around a bonfire at dusk",
-    heading: ["To Know Christ.", "To Make Him Known."],
-    body: "For we do not preach ourselves but Jesus Christ as Lord",
+    image: "/images/home-v2/hero-headquarters.webp",
+    alt: "Youth Evangelical Fellowship headquarters building",
+    heading: "Join Us\nToday",
+    body: "Be part of YEF, Become True Disciples of Christ.",
   },
   {
     image: "/images/home-v2/slide-2-students.png",
     alt: "Students smiling together on a mission trip",
-    heading: ["Grow Together", "in Christ."],
+    heading: "Grow Together\nin Christ.",
     body: "Join YEF Campus Chapter, Fellowship in Christ",
   },
   {
-    image:
-      "https://www.figma.com/api/mcp/asset/c5e5b4cc-1ceb-4295-a020-3625a39bbf8f.png",
-    alt: "Youth Evangelical Fellowship building",
-    heading: ["Join Us", "Today"],
-    body: "Be part of YEF, Become True Disciples of Christ.",
+    image: "/images/home-v2/hero-fire.webp",
+    alt: "Youth gathered around a bonfire at dusk",
+    heading: "To Know Christ.\nTo Make Him Known.",
+    body: "For we do not preach ourselves but Jesus Christ as Lord",
   },
 ];
 
 const SLIDE_DURATION = 6500;
 
-export default function Hero() {
+export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
+  const slides = fromCms?.length ? fromCms : defaultSlides;
+  const t = useT();
   const [active, setActive] = useState(0);
+
+  // Bumped on every manual pick so the dwell restarts from the click
+  // rather than firing out whatever was left of the previous one.
+  const [since, setSince] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActive((current) => (current + 1) % slides.length);
     }, SLIDE_DURATION);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length, since]);
 
   return (
     <section className="font-body relative flex min-h-[640px] items-center overflow-hidden bg-v2-navy lg:min-h-screen">
@@ -57,9 +71,42 @@ export default function Hero() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/10 to-black/50" />
         </div>
       ))}
+
+      {/* The banner frames layer two washes over the photograph: a 30%
+          vignette that stays almost clear at its centre and closes to 94%
+          at the edges, then a fade into the foot of the section. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 65% 101% at 65% 44%, rgba(14,18,22,0.05) 0%, rgba(14,18,22,0.35) 35%, rgba(14,18,22,0.94) 83%)",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(14,18,22,0) 60.87%, rgba(14,18,22,0.28) 95.99%)",
+        }}
+      />
+      {/* The frame's washes are tuned to the bonfire photo, which is already
+          dark where the copy sits. The other slides have no such headroom —
+          slide 2 is a wall-to-wall close-up with a bright forehead and teeth
+          right behind the headline, well under 3:1 with no scrim at all — so
+          the text column gets its own left-to-right fade independent of the
+          photo underneath it. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(14,18,22,0.58) 0%, rgba(14,18,22,0.58) 32%, rgba(14,18,22,0) 68%)",
+        }}
+      />
 
       <HeaderV2 />
 
@@ -68,26 +115,27 @@ export default function Hero() {
           {slides.map((slide, index) => (
             <div
               key={slide.image}
+              // An inactive block is absolutely positioned over the whole
+              // content column, dots included, so it has to stop taking
+              // pointer events or it swallows every click on them.
               className={`transition-opacity duration-1000 ${
-                index === active ? "opacity-100" : "absolute inset-0 opacity-0"
+                index === active
+                  ? "opacity-100"
+                  : "pointer-events-none absolute inset-0 opacity-0"
               }`}
               aria-hidden={index !== active}
             >
-              <h1 className="font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl lg:text-8xl">
-                {slide.heading.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
+              <h1 className="whitespace-pre-line font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl lg:text-8xl">
+                {t(slide.heading)}
               </h1>
-              <p className="mt-8 max-w-lg text-lg text-white/85 leading-relaxed">
-                {slide.body}
+              <p className="mt-8 max-w-[600px] text-[17px] text-white/82 leading-[1.7]">
+                {t(slide.body)}
               </p>
               <Link
                 href="/who-we-are"
-                className="mt-10 inline-flex items-center justify-center rounded-full border border-white/55 px-8 py-4 font-semibold text-xs tracking-[1.92px] text-white transition-colors hover:bg-white hover:text-v2-navy"
+                className="mt-10 inline-flex h-[47px] items-center justify-center rounded-full border border-white/55 px-[34px] py-4 font-semibold text-xs tracking-[1.92px] text-white transition-colors hover:bg-white hover:text-v2-navy"
               >
-                LEARN MORE
+                {t("LEARN MORE")}
               </Link>
             </div>
           ))}
@@ -98,18 +146,28 @@ export default function Hero() {
             <button
               key={slide.image}
               type="button"
-              aria-label={`Show slide ${index + 1}`}
-              onClick={() => setActive(index)}
-              className={`h-1.5 rounded-full transition-all ${
-                index === active ? "w-8 bg-white" : "w-1.5 bg-white/40"
-              }`}
-            />
+              aria-label={t(slide.heading).replace("\n", " ")}
+              aria-current={index === active}
+              onClick={() => {
+                setActive(index);
+                setSince((n) => n + 1);
+              }}
+              // The bar is only 6px tall, so the button carries padding to
+              // reach a thumb-sized target around it.
+              className="group -my-3 py-3 first:-ml-1 first:pl-1"
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-all group-hover:bg-white ${
+                  index === active ? "w-8 bg-white" : "w-1.5 bg-white/40"
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>
 
-      <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs tracking-[2.2px] text-white/80">
-        YOUTH EVANGELICAL FELLOWSHIP INTERNATIONAL
+      <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs tracking-[2.2px] text-white/80 uppercase">
+        <SiteName />
       </p>
     </section>
   );

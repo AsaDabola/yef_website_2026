@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { useState } from "react";
 import Reveal from "@/components/ui/Reveal";
+import { useT } from "@/lib/i18n/client";
 
 const chips = [
   "United States",
@@ -14,6 +15,7 @@ const chips = [
 ];
 
 export default function FindYourCampus() {
+  const t = useT();
   const [active, setActive] = useState(chips[0]);
 
   return (
@@ -21,19 +23,22 @@ export default function FindYourCampus() {
       <div className="mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
         <Reveal>
           <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl">
-            Find Your{" "}
+            {t("Find Your")}{" "}
             <span className="font-instrument-serif font-normal italic text-v2-accent">
-              Campus
+              {t("Campus")}
             </span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-v2-muted-dark leading-relaxed">
-            Our roots are on college campuses, though we consider every
-            nation our neighborhood. Choose a region to find the chapter
-            nearest you.
+            {t(
+              "Our roots are on college campuses, though we consider every nation our neighborhood. Choose a region to find the chapter nearest you.",
+            )}
           </p>
         </Reveal>
 
-        <Reveal delay={150} className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <Reveal
+          delay={150}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+        >
           {chips.map((chip) => (
             <button
               key={chip}
@@ -52,7 +57,7 @@ export default function FindYourCampus() {
             href="/network"
             className="rounded-full border border-v2-border px-7 py-3.5 font-medium text-[13.5px] text-v2-navy transition-all duration-200 hover:scale-105 hover:border-v2-navy"
           >
-            All Chapters &rarr;
+            {t("All Chapters →")}
           </Link>
         </Reveal>
       </div>

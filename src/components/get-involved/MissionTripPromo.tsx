@@ -1,71 +1,38 @@
-import Image from "next/image";
+import GetInvolvedFeature from "@/components/get-involved/GetInvolvedFeature";
+import { getT } from "@/lib/i18n/server";
 
 const steps = [
   {
-    number: "01",
-    title: "Experience Mission",
+    icon: "/images/icons/icon-christ.svg",
+    title: "01. Experience Mission",
     body: "Step Beyond Your Everyday Life and Experience the Joy of Sharing the Gospel",
   },
   {
-    number: "02",
-    title: "Serve & Grow",
+    icon: "/images/icons/icon-church.svg",
+    title: "02. Serve & Grow",
     body: "Serve Alongside Local Believers, Grow in Faith, and Discover Your Calling",
   },
   {
-    number: "03",
-    title: "Prepare & Go",
+    icon: "/images/icons/icon-child.svg",
+    title: "03. Prepare & Go",
     body: "Receive Biblical and Practical Training and Take Your Next Step into Mission",
   },
 ];
 
-export default function MissionTripPromo() {
+export default async function MissionTripPromo() {
+  const t = await getT();
   return (
-    <section id="mission-trip" className="scroll-mt-32 rounded-[24px] bg-v2-bg px-8 py-12 sm:px-12 sm:py-14">
-      <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px]">
-        Mission Trips
-      </h2>
-      <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-[492px_1fr] lg:items-center">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
-          <Image
-            src="/images/home-v2/get-involved-mission-trips.png"
-            alt="Students on a mission trip"
-            fill
-            sizes="(min-width: 1024px) 35vw, 100vw"
-            className="object-cover"
-          />
-        </div>
-
-        <div className="space-y-7">
-          {steps.map((step) => (
-            <div key={step.number} className="flex gap-4">
-              <p className="font-display font-bold text-lg text-yef-primary">
-                {step.number}.
-              </p>
-              <div>
-                <p className="font-semibold text-lg text-v2-navy">
-                  {step.title}
-                </p>
-                <p className="mt-1 text-v2-muted-dark-2 leading-relaxed">
-                  {step.body}
-                </p>
-              </div>
-            </div>
-          ))}
-          <a
-            href="/get-involved/mission-trip"
-            className="inline-flex items-center gap-2 font-semibold text-yef-primary transition-opacity hover:opacity-80"
-          >
-            Learn more about Mission Trip
-            <Image
-              src="/images/icons/icon-arrow-right-blue.svg"
-              alt=""
-              width={18}
-              height={18}
-              aria-hidden="true"
-            />
-          </a>
-        </div>
-      </div>
-    </section>
+    <GetInvolvedFeature
+      id="mission-trip"
+      title={t("Mission Trips")}
+      intro="Youth Evangelical Fellowship (YEF) is dedicated to revealing the Gospel of Jesus Christ in our daily lives, transforming our communities, and bringing the good news to all people. As creative and committed Christians, we work daily to quench the spiritual drought in our cities and restore the hearts of many worldwide."
+      image="/images/get-involved/mission-trip-street-evangelism.png"
+      alt={t("YEF members handing out tracts on a busy street")}
+      items={steps}
+      link={{
+        label: "Learn more about Mission Trip",
+        href: "/get-involved/mission-trip",
+      }}
+    />
   );
 }

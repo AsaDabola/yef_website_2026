@@ -1,20 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import { useState } from "react";
-import { newsArticles } from "@/lib/news";
+import type { NewsArticle } from "@/lib/news";
 import HoverGroup from "@/components/ui/HoverGroup";
+import { useT } from "@/lib/i18n/client";
 
 const tabs = ["View All", "News", "Story", "Event"];
 
-export default function NewsGrid() {
+export default function NewsGrid({ posts }: { posts: NewsArticle[] }) {
+  const t = useT();
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const articles =
     activeTab === "View All"
-      ? newsArticles
-      : newsArticles.filter((article) => article.tag === activeTab);
+      ? posts
+      : posts.filter((article) => article.tag === activeTab);
 
   return (
     <div>
@@ -31,13 +33,13 @@ export default function NewsGrid() {
                   : "border-transparent text-v2-muted-dark-2 hover:text-v2-navy"
               }`}
             >
-              {tab}
+              {t(tab)}
             </button>
           ))}
         </div>
         <div className="flex gap-3 pb-3 text-sm text-v2-muted-dark-2">
           <span className="flex items-center gap-1.5 rounded-lg border border-v2-border px-4 py-2">
-            Newest
+            {t("Newest")}
             <span aria-hidden="true">&#9662;</span>
           </span>
           <span className="flex items-center gap-1.5 rounded-lg border border-v2-border px-4 py-2">
@@ -64,11 +66,11 @@ export default function NewsGrid() {
               />
             </div>
             <p className="mt-6 font-semibold text-[13px] text-v2-blue">
-              {article.tag}
+              {t(article.tag)}
             </p>
             <div className="mt-2 flex items-start justify-between gap-3">
               <h3 className="font-display font-bold text-xl text-black leading-snug">
-                {article.title}
+                {t(article.title)}
               </h3>
               <span
                 aria-hidden="true"
@@ -78,7 +80,7 @@ export default function NewsGrid() {
               </span>
             </div>
             <p className="mt-3 text-[15px] text-v2-muted-dark-2 leading-relaxed">
-              {article.excerpt}
+              {t(article.excerpt)}
             </p>
           </Link>
         ))}
@@ -89,7 +91,7 @@ export default function NewsGrid() {
           type="button"
           className="flex items-center gap-2 font-semibold text-sm text-v2-muted-dark-2"
         >
-          <span aria-hidden="true">&larr;</span> Previous
+          <span aria-hidden="true">&larr;</span> {t("Previous")}
         </button>
         <div className="flex gap-2">
           {["1", "2", "…", "32"].map((page) => (
@@ -111,7 +113,7 @@ export default function NewsGrid() {
           type="button"
           className="flex items-center gap-2 font-semibold text-sm text-v2-navy"
         >
-          Next <span aria-hidden="true">&rarr;</span>
+          {t("Next")} <span aria-hidden="true">&rarr;</span>
         </button>
       </div>
     </div>

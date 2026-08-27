@@ -1,0 +1,342 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #00071e;
+
+  --color-yef-primary: #0066cf;
+  --color-yef-primary-light: #4b9cef;
+  --color-yef-navy: #002a55;
+  --color-yef-navy-deep: #00071e;
+  --color-yef-accent: #c41e49;
+  --color-yef-footer-strip: #155597;
+  --color-yef-gray: #b1b1b1;
+  --color-yef-gray-light: #f7f7f7;
+
+  --color-v2-navy: #00203f;
+  --color-v2-blue: #0656a5;
+  --color-v2-accent: #3d9be9;
+  --color-v2-muted: #7c90a6;
+  --color-v2-muted-dark: #425a72;
+  --color-v2-muted-dark-2: #4a6076;
+  --color-v2-bg: #f2f6fb;
+  --color-v2-border: rgba(0, 42, 85, 0.13);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-playfair);
+
+  --color-yef-primary: var(--color-yef-primary);
+  --color-yef-primary-light: var(--color-yef-primary-light);
+  --color-yef-navy: var(--color-yef-navy);
+  --color-yef-navy-deep: var(--color-yef-navy-deep);
+  --color-yef-accent: var(--color-yef-accent);
+  --color-yef-footer-strip: var(--color-yef-footer-strip);
+  --color-yef-gray: var(--color-yef-gray);
+  --color-yef-gray-light: var(--color-yef-gray-light);
+  --font-display: var(--font-bricolage);
+  --font-instrument-serif: var(--font-instrument-serif);
+  --font-body: var(--font-inter);
+  --font-signature: var(--font-la-belle-aurore);
+
+  --color-v2-navy: var(--color-v2-navy);
+  --color-v2-blue: var(--color-v2-blue);
+  --color-v2-accent: var(--color-v2-accent);
+  --color-v2-muted: var(--color-v2-muted);
+  --color-v2-muted-dark: var(--color-v2-muted-dark);
+  --color-v2-muted-dark-2: var(--color-v2-muted-dark-2);
+  --color-v2-bg: var(--color-v2-bg);
+  --color-v2-border: var(--color-v2-border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/*
+ * The mission band's converging lines. Each path carries a short bright dash
+ * on a long gap, so sliding the offset reads as a highlight travelling in
+ * toward the point where the lines meet.
+ */
+@keyframes yef-flow {
+  from {
+    stroke-dashoffset: 1600;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.yef-flow {
+  stroke-dasharray: 190 1410;
+  animation: yef-flow 9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-flow {
+    animation: none;
+    stroke-dasharray: none;
+    opacity: 0.14;
+  }
+}
+
+/*
+ * The sign-up band's world map breathes rather than sitting flat — a slow
+ * swell in brightness and scale, far enough under the copy not to distract.
+ */
+@keyframes yef-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.035);
+  }
+}
+
+.yef-pulse {
+  animation: yef-pulse 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-pulse {
+    animation: none;
+  }
+}
+
+/*
+ * History timeline. Entries rise into place as the rail's fill reaches them,
+ * and their dot lights up at the same moment, so the line reads as drawing
+ * the history rather than sitting there finished.
+ */
+.yef-timeline-ready .yef-timeline-entry {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.yef-timeline-ready .yef-timeline-entry.is-active {
+  opacity: 1;
+  transform: none;
+}
+
+.yef-timeline-dot {
+  background: rgba(0, 0, 0, 0.22);
+  transition:
+    background-color 0.45s ease-out,
+    box-shadow 0.45s ease-out;
+}
+
+.is-active .yef-timeline-dot {
+  background: var(--color-yef-primary);
+  box-shadow: 0 0 0 5px rgba(0, 102, 207, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-timeline-ready .yef-timeline-entry {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/*
+ * The Get Involved hero's surf. A still photograph cannot move, so it is
+ * given a slow swell instead: a gentle scale and drift over half a minute,
+ * reversing rather than looping so there is never a jump back to the start.
+ */
+@keyframes yef-tide {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.09) translate3d(-0.8%, -1.4%, 0);
+  }
+}
+
+.yef-tide {
+  animation: yef-tide 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-tide {
+    animation: none;
+  }
+}
+
+/*
+ * The flowing blue field behind The Call. A rotating conic wash, drifting
+ * blobs, a sweeping shine and a fine grain, stacked over the section's own
+ * pale ground.
+ */
+@property --yef-flow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.yef-flow-wash {
+  position: absolute;
+  inset: -30%;
+  background: conic-gradient(
+    from var(--yef-flow-angle) at 35% 30%,
+    #f6f9fd 0deg,
+    #cfe0f8 60deg,
+    #9dbeef 130deg,
+    #6f96e8 190deg,
+    #9dbeef 250deg,
+    #e2edfb 320deg,
+    #f6f9fd 360deg
+  );
+  filter: blur(85px);
+  animation: yef-flow-spin 60s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes yef-flow-spin {
+  to {
+    --yef-flow-angle: 360deg;
+  }
+}
+
+.yef-flow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  mix-blend-mode: soft-light;
+  will-change: transform;
+}
+
+.yef-flow-b1 {
+  width: 44%;
+  height: 44%;
+  top: 8%;
+  left: 12%;
+  background: radial-gradient(circle, #ffffff, transparent 70%);
+  opacity: 0.55;
+  animation: yef-flow-drift1 20s ease-in-out infinite;
+}
+
+.yef-flow-b2 {
+  width: 36%;
+  height: 36%;
+  right: 10%;
+  bottom: 10%;
+  background: radial-gradient(circle, #a5c4f6, transparent 70%);
+  opacity: 0.45;
+  animation: yef-flow-drift2 26s ease-in-out infinite;
+}
+
+.yef-flow-b3 {
+  width: 30%;
+  height: 30%;
+  top: 38%;
+  left: 52%;
+  background: radial-gradient(circle, #6f96e8, transparent 72%);
+  opacity: 0.32;
+  animation: yef-flow-drift3 23s ease-in-out infinite;
+}
+
+@keyframes yef-flow-drift1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(6%, 8%) scale(1.1);
+  }
+}
+
+@keyframes yef-flow-drift2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, -5%) scale(0.92);
+  }
+}
+
+@keyframes yef-flow-drift3 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-4%, 6%) scale(1.06);
+  }
+}
+
+.yef-flow-shine {
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.7) 47%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.7) 53%,
+    transparent 70%
+  );
+  background-size: 300% 300%;
+  mix-blend-mode: soft-light;
+  animation: yef-flow-shine 9s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+@keyframes yef-flow-shine {
+  0%,
+  100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+}
+
+.yef-flow-glow {
+  position: absolute;
+  width: 38%;
+  height: 38%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.85),
+    rgba(160, 200, 255, 0.35) 45%,
+    transparent 72%
+  );
+  filter: blur(50px);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: left, top;
+}
+
+.yef-flow-grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yef-flow-wash,
+  .yef-flow-blob,
+  .yef-flow-shine {
+    animation: none !important;
+  }
+}

@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
+import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
 import {
   FacebookIcon,
   InstagramIcon,
   SearchIcon,
   XIcon,
 } from "@/components/ui/SocialIcons";
+import { useT } from "@/lib/i18n/client";
+import { useScrolled } from "@/lib/useScrolled";
 
 const navLinks = [
   { label: "Who We Are", href: "/who-we-are" },
@@ -24,17 +27,34 @@ const socialLinks = [
 ];
 
 export default function Header() {
+  const t = useT();
   const [open, setOpen] = useState(false);
+  const scrolled = useScrolled();
 
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 py-8 lg:px-16">
-        <Link href="/" className="relative h-9 w-24 shrink-0 sm:h-20 sm:w-52">
+    // Fixed rather than absolute, so it rides the page down. At rest it sits
+    // exactly where it did, over the banner; once the page has moved it takes
+    // the brand blue as a ground, since white nav over white content reads
+    // as nothing at all.
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
+        scrolled ? "bg-yef-primary/95 shadow-lg backdrop-blur-sm" : ""
+      }`}
+    >
+      <div className={`mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 transition-[padding] duration-300 lg:px-16 ${
+          scrolled ? "py-3" : "py-8"
+        }`}>
+        {/* The same box as the home header and the footer, so one logo size
+            serves the whole site. */}
+        <Link
+          href="/"
+          className="relative h-8 w-[88px] shrink-0 sm:h-[60px] sm:w-42"
+        >
           <Image
-            src="/images/icons/logo-yef-white.svg"
-            alt="Youth Evangelical Fellowship"
+            src="/images/icons/logo-yef.svg"
+            alt={t("Youth Evangelical Fellowship")}
             fill
-            sizes="208px"
+            sizes="168px"
             className="object-contain object-left"
             priority
           />
@@ -48,7 +68,7 @@ export default function Header() {
                 href={link.href}
                 className="font-medium text-lg text-white transition-opacity hover:opacity-80"
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             ))}
           </nav>
@@ -70,22 +90,27 @@ export default function Header() {
             type="button"
             className="hidden items-center gap-2 border-b border-white/0 font-medium text-lg text-white transition-opacity hover:opacity-80 md:flex"
           >
-            Search
+            {t("Search")}
             <SearchIcon className="size-[15px]" />
           </button>
+
+          <div className="hidden items-center gap-2 lg:flex">
+            <CountryPicker />
+            <LanguagePicker />
+          </div>
 
           <Link
             href="/donate"
             className="rounded-full border border-white px-4 py-2 font-semibold text-sm text-white transition-colors hover:bg-white hover:text-yef-primary sm:px-7 sm:py-3.5 sm:text-lg"
           >
-            Give
+            {t("Give")}
           </Link>
 
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
-            aria-label="Toggle menu"
+            aria-label={t("Toggle menu")}
             className="flex size-12 shrink-0 items-center justify-center rounded-full border border-white text-white lg:hidden"
           >
             <svg
@@ -116,10 +141,14 @@ export default function Header() {
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-3 font-medium text-lg text-white transition-colors hover:bg-white/10"
             >
-              {link.label}
+              {t(link.label)}
             </Link>
           ))}
-          <div className="mt-2 flex items-center gap-4 border-t border-white/15 px-3 pt-4">
+          <div className="mt-2 flex flex-wrap items-center gap-2 border-t border-white/15 px-3 pt-4">
+            <CountryPicker />
+            <LanguagePicker />
+          </div>
+          <div className="flex items-center gap-4 px-3 pt-2">
             {socialLinks.map(({ label, href, Icon }) => (
               <Link
                 key={label}

@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/LocaleLink";
 import Reveal from "@/components/ui/Reveal";
+import { getT } from "@/lib/i18n/server";
 
 const pillars = [
   {
@@ -20,30 +21,28 @@ const pillars = [
   },
 ];
 
-export default function VisionMission() {
+export default async function VisionMission() {
+  const t = await getT();
   return (
     <section className="font-body bg-[#f1f6ff]">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+      <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 lg:px-12 lg:py-24">
         <Reveal>
-          <h2 className="font-display font-extrabold text-4xl text-[#0e1216] tracking-[-0.8px] sm:text-5xl">
-            Our Vision &amp; Mission
+          <h2 className="font-display font-extrabold text-4xl text-black leading-[50px] tracking-[-0.8px] sm:text-5xl lg:text-[54.4px]">
+            {t("Our Vision & Mission")}
           </h2>
-          <p className="mt-6 max-w-2xl text-lg text-[#4b5565]">
-            Youth Evangelical Fellowship (YEF) is dedicated to revealing the
-            Gospel of Jesus Christ in our daily lives, transforming our
-            communities, and bringing the good news to all people. As
-            creative and committed Christians, we work daily to quench the
-            spiritual drought in our cities and restore the hearts of many
-            worldwide.
+          <p className="mt-6 max-w-[749px] font-medium text-lg text-[#4b5565] leading-[30px] lg:mt-[34px] lg:text-[18.9px]">
+            {t(
+              "Youth Evangelical Fellowship (YEF) is dedicated to revealing the Gospel of Jesus Christ in our daily lives, transforming our communities, and bringing the good news to all people. As creative and committed Christians, we work daily to quench the spiritual drought in our cities and restore the hearts of many worldwide.",
+            )}
           </p>
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start lg:pl-10">
-            <div className="group relative aspect-[656/492] w-full cursor-pointer overflow-hidden rounded-2xl">
+          <div className="mt-12 grid grid-cols-1 gap-10 lg:mt-[47px] lg:grid-cols-[655fr_627fr] lg:items-start lg:gap-[33px]">
+            <div className="group relative aspect-[655/492] w-full cursor-pointer overflow-hidden rounded-2xl">
               <Image
-                src="/images/who-we-are/vision-mission-bible.png"
-                alt="A wooden cross resting on an open Bible"
+                src="/images/who-we-are/vision-cross-bible.jpg"
+                alt={t("A wooden cross resting on an open Bible")}
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -51,10 +50,10 @@ export default function VisionMission() {
             </div>
 
             <div>
-              <div className="space-y-6">
+              <div className="space-y-10 lg:space-y-12">
                 {pillars.map((pillar) => (
-                  <div key={pillar.title} className="flex gap-4">
-                    <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm">
+                  <div key={pillar.title} className="flex gap-[17px]">
+                    <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-white">
                       <Image
                         src={pillar.icon}
                         alt=""
@@ -63,23 +62,25 @@ export default function VisionMission() {
                         aria-hidden="true"
                       />
                     </div>
-                    <p className="pt-1 text-lg text-black">
-                      <span className="font-semibold">{pillar.title} :</span>{" "}
-                      <span className="text-[#4b5565]">{pillar.body}</span>
+                    <p className="pt-1 text-[15px] text-black leading-[24px]">
+                      <span className="font-semibold">{t(pillar.title)} :</span>{" "}
+                      <span className="font-medium text-[#4b5565]">
+                        {t(pillar.body)}
+                      </span>
                     </p>
                   </div>
                 ))}
               </div>
               <Link
                 href="/who-we-are/welcome"
-                className="mt-8 inline-flex items-center gap-2 font-semibold text-[#1d46d8] transition-opacity hover:opacity-80"
+                className="mt-10 inline-flex items-center gap-2 font-semibold text-[15px] text-[#1d46d8] leading-[20px] transition-opacity hover:opacity-80 lg:mt-[56px]"
               >
-                Learn more about how we&rsquo;re different
+                {t("Learn more about how we’re different")}
                 <Image
-                  src="/images/icons/icon-arrow-right-blue.svg"
+                  src="/images/icons/icon-arrow-right-24-blue.svg"
                   alt=""
-                  width={18}
-                  height={18}
+                  width={24}
+                  height={24}
                   aria-hidden="true"
                 />
               </Link>
