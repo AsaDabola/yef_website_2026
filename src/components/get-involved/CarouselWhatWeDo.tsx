@@ -22,6 +22,31 @@ const cards = [
     icon: "/images/icons/icon-way-of-the-cross.svg",
   },
   {
+    title: "The Way of Faith",
+    body: "Walk through the foundations of faith—repentance, assurance, and daily trust in the God who keeps His promises.",
+    icon: "/images/icons/icon-christ.svg",
+  },
+  {
+    title: "Galatians",
+    body: "Stand firm in the freedom Christ won, and learn to live by the Spirit rather than by the law.",
+    icon: "/images/icons/icon-romans.svg",
+  },
+  {
+    title: "Acts",
+    body: "Follow the early church as the Gospel spreads from Jerusalem to the ends of the earth.",
+    icon: "/images/icons/icon-church.svg",
+  },
+  {
+    title: "1 & 2 Corinthians",
+    body: "Learn what it means to live as the church—in unity, in love, and in the sufficiency of God’s grace.",
+    icon: "/images/icons/icon-romans.svg",
+  },
+  {
+    title: "The Sermon on the Mount",
+    body: "Sit under the teaching of Jesus and see what life in the kingdom of God is meant to look like.",
+    icon: "/images/icons/icon-four-spiritual-laws.svg",
+  },
+  {
     title: "Providing Education",
     body: "Each student receives Biblical and practical training, empowering them to reach their dreams and become thriving disciples.",
     icon: "/images/icons/icon-providing-education.svg",

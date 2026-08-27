@@ -37,16 +37,6 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 id="bible-studies"
                 title={t("Bible Studies")}
                 body={t("Embrace your identity in Christ and live out your calling. Offering individual and group studies, YEF is proud to offer deep and extensive Bible studies. Join us and go deeper in the Word during your college years, which will stay with you for many years to come. The Word of God has the power to change lives and so we aim to give you this great blessing that will surely change your whole life. Transform your lives with the power of His love.")}
-                resourceColumns={[
-                  [
-                    "The Four Spiritual Laws",
-                    "Romans",
-                    "The Way of the Cross",
-                    "The Way of Faith",
-                    "Galatians",
-                  ],
-                  ["Acts", "1 & 2 Corinthians", "The Sermon on the Mount"],
-                ]}
                 image="/images/get-involved/bible-studies-sunset.png"
                 alt={t("The sun setting over a calm ocean")}
                 ctas={[
