@@ -70,19 +70,19 @@ export default async function Footer() {
     <footer className="bg-black">
       <div className="bg-yef-navy">
         <div className="mx-auto max-w-[1800px] px-6 pb-16 pt-16 lg:px-16 lg:pt-20">
-          <Link href="/" className="relative block h-[60px] w-[170px]">
+          <Link href="/" className="relative block h-8 w-[88px] sm:h-[60px] sm:w-42">
             <Image
               src="/images/icons/logo-yef.svg"
               alt={t("Youth Evangelical Fellowship")}
               fill
-              sizes="170px"
+              sizes="168px"
               className="object-contain object-left"
             />
           </Link>
 
           <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.7fr_1fr_1fr_1fr_1fr]">
             <div>
-              <p className="font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
+              <p className="font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
                 {t("Subscribe for news, updates, and events")}
               </p>
               <form className="mt-6 flex max-w-xs flex-col items-start gap-3">
@@ -103,7 +103,7 @@ export default async function Footer() {
                 </button>
               </form>
 
-              <p className="mt-10 font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
+              <p className="mt-10 font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
                 {t("Follow us")}
               </p>
               <div className="mt-4 flex items-center gap-4">
@@ -122,7 +122,7 @@ export default async function Footer() {
 
             {columns.map((column) => (
               <div key={column.title}>
-                <p className="font-bold text-sm uppercase tracking-[0.7px] text-yef-gray">
+                <p className="font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
                   {t(column.title)}
                 </p>
                 <ul className="mt-4 space-y-3">
@@ -130,7 +130,7 @@ export default async function Footer() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="font-medium text-base text-white transition-opacity hover:opacity-80"
+                        className="font-normal text-base text-white transition-opacity hover:opacity-80"
                       >
                         {t(link.label)}
                       </Link>
