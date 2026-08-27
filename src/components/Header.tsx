@@ -11,6 +11,7 @@ import {
   XIcon,
 } from "@/components/ui/SocialIcons";
 import { useT } from "@/lib/i18n/client";
+import { useScrolled } from "@/lib/useScrolled";
 
 const navLinks = [
   { label: "Who We Are", href: "/who-we-are" },
@@ -28,10 +29,21 @@ const socialLinks = [
 export default function Header() {
   const t = useT();
   const [open, setOpen] = useState(false);
+  const scrolled = useScrolled();
 
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 py-8 lg:px-16">
+    // Fixed rather than absolute, so it rides the page down. At rest it sits
+    // exactly where it did, over the banner; once the page has moved it takes
+    // a navy ground of its own, since white nav over white content reads as
+    // nothing at all.
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
+        scrolled ? "bg-yef-navy/95 shadow-lg backdrop-blur-sm" : ""
+      }`}
+    >
+      <div className={`mx-auto flex max-w-[1800px] flex-wrap items-center justify-between gap-6 px-6 transition-[padding] duration-300 lg:px-16 ${
+          scrolled ? "py-3" : "py-8"
+        }`}>
         <Link href="/" className="relative h-9 w-24 shrink-0 sm:h-20 sm:w-52">
           <Image
             src="/images/icons/logo-yef.svg"

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
 import { useT } from "@/lib/i18n/client";
+import { useScrolled } from "@/lib/useScrolled";
 
 const navLinks = [
   { label: "Who we are", href: "/who-we-are" },
@@ -16,13 +17,24 @@ const navLinks = [
 export default function HeaderV2() {
   const t = useT();
   const [open, setOpen] = useState(false);
+  const scrolled = useScrolled();
 
   return (
-    <header className="font-body absolute inset-x-0 top-0 z-30">
+    // Fixed rather than absolute, so it rides the page down. At rest it sits
+    // exactly where it did, over the hero; once the page has moved it takes a
+    // navy ground of its own, since white nav over white content reads as
+    // nothing at all.
+    <header
+      className={`font-body fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
+        scrolled ? "bg-v2-navy/95 shadow-lg backdrop-blur-sm" : ""
+      }`}
+    >
       {/* The frame insets the logo 76px from the left and the GIVE button 48px
           from the right, and groups the nav beside GIVE rather than centring
           it between the two. */}
-      <div className="mx-auto flex max-w-[1920px] items-center justify-between px-6 py-6 sm:px-10 lg:pr-12 lg:pl-19">
+      <div className={`mx-auto flex max-w-[1920px] items-center justify-between px-6 transition-[padding] duration-300 sm:px-10 lg:pr-12 lg:pl-19 ${
+          scrolled ? "py-3" : "py-6"
+        }`}>
         <Link
           href="/"
           className="relative h-8 w-[88px] shrink-0 sm:h-[60px] sm:w-42"
