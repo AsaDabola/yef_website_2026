@@ -5,8 +5,10 @@ import { getT } from "@/lib/i18n/server";
 
 const defaults = {
   eyebrow: "Mission Statement",
+  // The frame sets the verse in three lines; the breaks are placed here
+  // rather than left to the container width, which lands on four.
   verse:
-    "Your people will offer themselves freely on the day of your power; young people will come to",
+    "Your people will offer themselves freely on\nthe day of your power; young people will\ncome to",
   verseAccent: "you like the morning dew.",
   reference: "Psalm 110:3",
   columns: [
@@ -33,7 +35,7 @@ export default async function MissionStatement({
           <p className="font-semibold text-[11px] text-white/50 tracking-[2.42px] uppercase">
             {t(c.eyebrow)}
           </p>
-          <p className="mt-8 max-w-4xl font-display font-bold text-4xl text-[#f2f6fb] leading-[1.12] tracking-[-1.8px] sm:text-5xl lg:text-[60px]">
+          <p className="mt-8 max-w-[1200px] whitespace-pre-line font-display font-bold text-4xl text-[#f2f6fb] leading-[1.12] tracking-[-1.8px] sm:text-5xl lg:text-[60px]">
             {t(c.verse)}{" "}
             <span className="font-instrument-serif font-normal italic">
               {t(c.verseAccent)}
