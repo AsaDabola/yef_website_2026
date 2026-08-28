@@ -58,12 +58,12 @@ export default async function DiscipleshipPage({ params }: { params: LocaleParam
                 <GalleryMosaic
                   images={[
                     {
-                      src: "/images/get-involved/discipleship-friends-sky.webp",
-                      alt: t("A group of friends laughing together outdoors"),
-                    },
-                    {
                       src: "/images/get-involved/discipleship-embrace.webp",
                       alt: t("Believers embracing one another in fellowship"),
+                    },
+                    {
+                      src: "/images/get-involved/discipleship-friends-sky.webp",
+                      alt: t("A group of friends laughing together outdoors"),
                     },
                     {
                       src: "/images/get-involved/discipleship-praying-hands.webp",
