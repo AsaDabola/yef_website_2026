@@ -385,7 +385,7 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
             href="/get-involved/mission-trip/apply"
             className="mt-9 inline-block rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
           >
-            {t("Apply for a Mission Trip")}
+            {t("Apply for a Campus Mission")}
           </Link>
         </section>
 
