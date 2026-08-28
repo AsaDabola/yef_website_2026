@@ -76,14 +76,14 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 id="summer-training"
                 title={t("Summer Training")}
                 cardTitle={t("Grow in Christ")}
-                body={t("Every year, YEF offers summer training in the U.S. and South Korea. This training of 3 to 7 days, will allow students to be surrounded in the Word and prayer, while in fellowship with others from all around the world. These days usually consist of Bible studies, camping, visiting attractions, as well as, practicum of mission such as evangelism, teaching etc. Stay tuned to our site events, if you're interested! Program may vary each year.")}
-                resourceColumns={[
-                  ["Application Form", "Camp Guidelines", "Scholarship Request"],
-                  [
-                    "Pre-Reading & Scripture Study",
-                    "Visa Invitation Letter",
-                    "Support Letter Template",
-                  ],
+                body={t("Every year, during students' summer break from campus, YEF gathers students from around the world for a season of training in the Word. Days are filled with Bible study, prayer, and fellowship with believers from different countries and cultures — alongside activities, camping, and a hands-on practicum in mission, evangelism, and teaching. Program details and dates vary each year, so stay tuned to our site events if you're interested.")}
+                ctas={[
+                  {
+                    label: "Learn More",
+                    href: "/get-involved/summer-training",
+                    primary: true,
+                  },
+                  { label: "Apply for Summer Training", href: "/get-involved/apply" },
                 ]}
                 image="/images/get-involved/summer-training.webp"
                 alt={t("YEF students setting up an outreach table on campus")}
@@ -93,22 +93,17 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 id="short-term-mission"
                 title={t("Short-term Mission")}
                 cardTitle={t("Serve with Purpose")}
-                body={t("Interested in furthering God's kingdom with the talents God has given you? YEF provides volunteer opportunities that anyone can contribute to building the ministry together. You can share your talents with our campus ministry to reach more of the unreached student on college campuses. Volunteer positions vary from video making, Web design, technology, event-planning, communication and much more.")}
+                body={t("YEF short-term mission trips send teams of students to serve during school breaks — on their own campus, in another city, another country, or online. Teams share the Gospel, lead Bible studies, pray for the campuses and communities they visit, and serve alongside local YEF chapters and churches. It's a chance to step out in faith, grow through hands-on ministry, and see God work through students who are simply willing to go.")}
                 ctas={[
+                  {
+                    label: "Learn More",
+                    href: "/get-involved/short-term-mission",
+                    primary: true,
+                  },
                   {
                     label: "Apply for Short-term Mission",
                     href: "/get-involved/short-term-mission/apply",
-                    primary: true,
                   },
-                ]}
-                resourceColumns={[
-                  [
-                    "Trip Destinations & Dates",
-                    "Application & Requirements",
-                    "Support Raising Toolkit",
-                    "Travel Prep",
-                    "Team Training Schedule",
-                  ],
                 ]}
                 image="/images/get-involved/short-term-mission.webp"
                 alt={t("A woman leading a classroom in prayer")}

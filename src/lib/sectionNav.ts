@@ -19,10 +19,10 @@ export const whoWeAreLinks = [
 export const getInvolvedLinks = [
   { label: "Bible Studies", href: "/get-involved#bible-studies" },
   { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
-  { label: "Summer Training", href: "/get-involved#summer-training" },
+  { label: "Summer Training", href: "/get-involved/summer-training" },
   {
     label: "Short-term Mission",
-    href: "/get-involved#short-term-mission",
+    href: "/get-involved/short-term-mission",
   },
   { label: "Internship", href: "/get-involved#internship" },
   { label: "Discipleship", href: "/get-involved#discipleship" },
