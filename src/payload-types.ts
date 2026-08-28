@@ -136,7 +136,7 @@ export interface Page {
   /**
    * Which page of the country's site this lays out.
    */
-  route: 'home';
+  route: 'home' | 'who-we-are';
   country:
     | 'int'
     | 'ao'
@@ -321,6 +321,77 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'movement';
+          }
+        | {
+            image?: (number | null) | Media;
+            heading?: string | null;
+            body?: string | null;
+            /**
+             * Shown after the bolded label “Mission Statement:” in the hero.
+             */
+            missionBody?: string | null;
+            portrait?: (number | null) | Media;
+            /**
+             * The short pull-quote over the portrait.
+             */
+            quote?: string | null;
+            /**
+             * e.g. “- Dr. Mark Wagner, President of YEF”.
+             */
+            signature?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'whoWeAreHero';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            /**
+             * Always the three cards in this order (Welcome, Membership, Statement of Faith) — only their words and photo are editable here.
+             */
+            cards?:
+              | {
+                  image?: (number | null) | Media;
+                  /**
+                   * A line break here breaks the label.
+                   */
+                  eyebrow?: string | null;
+                  title?: string | null;
+                  cta?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'introCards';
+          }
+        | {
+            heading?: string | null;
+            body?: string | null;
+            image?: (number | null) | Media;
+            /**
+             * Always the same three pillars, in order — only the title and body are editable; the icon is fixed.
+             */
+            pillars?:
+              | {
+                  title?: string | null;
+                  body?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'visionMission';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'storiesNews';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'missionSchoolCta';
           }
       )[]
     | null;
@@ -961,6 +1032,64 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
         movement?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        whoWeAreHero?:
+          | T
+          | {
+              image?: T;
+              heading?: T;
+              body?: T;
+              missionBody?: T;
+              portrait?: T;
+              quote?: T;
+              signature?: T;
+              id?: T;
+              blockName?: T;
+            };
+        introCards?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              cards?:
+                | T
+                | {
+                    image?: T;
+                    eyebrow?: T;
+                    title?: T;
+                    cta?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        visionMission?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              image?: T;
+              pillars?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        storiesNews?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        missionSchoolCta?:
           | T
           | {
               id?: T;

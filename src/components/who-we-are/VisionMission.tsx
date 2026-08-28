@@ -3,7 +3,7 @@ import Link from "@/components/ui/LocaleLink";
 import Reveal from "@/components/ui/Reveal";
 import { getT } from "@/lib/i18n/server";
 
-const pillars = [
+const defaultPillars = [
   {
     title: "Reach the Next Generation",
     body: "Share the Gospel with university students and young people, helping them encounter Jesus Christ and build their lives upon God's Word.",
@@ -21,19 +21,42 @@ const pillars = [
   },
 ];
 
-export default async function VisionMission() {
+const defaults = {
+  heading: "Our Vision & Mission",
+  body: "Youth Evangelical Fellowship (YEF) is dedicated to revealing the Gospel of Jesus Christ in our daily lives, transforming our communities, and bringing the good news to all people. As creative and committed Christians, we work daily to quench the spiritual drought in our cities and restore the hearts of many worldwide.",
+  image: "/images/who-we-are/vision-cross-bible.jpg",
+};
+
+export type VisionMissionPillar = { title?: string; body?: string };
+
+export type VisionMissionContent = Partial<typeof defaults> & {
+  pillars?: VisionMissionPillar[];
+};
+
+/**
+ * Each pillar keeps its bundled icon regardless of what an editor saves —
+ * icons are a fixed set of three, not a free upload.
+ */
+export default async function VisionMission({
+  content,
+}: {
+  content?: VisionMissionContent;
+}) {
   const t = await getT();
+  const c = { ...defaults, ...content };
+  const pillars = defaultPillars.map((pillar, i) => ({
+    ...pillar,
+    ...(content?.pillars?.[i] ?? {}),
+  }));
   return (
     <section className="font-body bg-[#f1f6ff]">
       <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 lg:px-12 lg:py-24">
         <Reveal>
           <h2 className="font-display font-extrabold text-4xl text-black leading-[50px] tracking-[-0.8px] sm:text-5xl lg:text-[54.4px]">
-            {t("Our Vision & Mission")}
+            {t(c.heading)}
           </h2>
           <p className="mt-6 max-w-[749px] font-medium text-lg text-[#4b5565] leading-[30px] lg:mt-[34px] lg:text-[18.9px]">
-            {t(
-              "Youth Evangelical Fellowship (YEF) is dedicated to revealing the Gospel of Jesus Christ in our daily lives, transforming our communities, and bringing the good news to all people. As creative and committed Christians, we work daily to quench the spiritual drought in our cities and restore the hearts of many worldwide.",
-            )}
+            {t(c.body)}
           </p>
         </Reveal>
 
@@ -41,7 +64,7 @@ export default async function VisionMission() {
           <div className="mt-12 grid grid-cols-1 gap-10 lg:mt-[47px] lg:grid-cols-[655fr_627fr] lg:items-start lg:gap-[33px]">
             <div className="group relative aspect-[655/492] w-full cursor-pointer overflow-hidden rounded-2xl">
               <Image
-                src="/images/who-we-are/vision-cross-bible.jpg"
+                src={c.image}
                 alt={t("A wooden cross resting on an open Bible")}
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
@@ -51,11 +74,11 @@ export default async function VisionMission() {
 
             <div>
               <div className="space-y-10 lg:space-y-12">
-                {pillars.map((pillar) => (
-                  <div key={pillar.title} className="flex gap-[17px]">
+                {pillars.map((pillar, i) => (
+                  <div key={i} className="flex gap-[17px]">
                     <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-white">
                       <Image
-                        src={pillar.icon}
+                        src={defaultPillars[i].icon}
                         alt=""
                         width={24}
                         height={24}

@@ -25,6 +25,20 @@ export const defaultHomeLayout: PageBlock[] = [
   { blockType: "signup" },
 ];
 
+/** The order the Who We Are page's sections ship in. */
+export const defaultWhoWeAreLayout: PageBlock[] = [
+  { blockType: "whoWeAreHero" },
+  { blockType: "introCards" },
+  { blockType: "visionMission" },
+  { blockType: "storiesNews" },
+  { blockType: "missionSchoolCta" },
+];
+
+const defaultLayouts: Record<string, PageBlock[]> = {
+  home: defaultHomeLayout,
+  "who-we-are": defaultWhoWeAreLayout,
+};
+
 /**
  * The layout an editor has published for this country's page, or the bundled
  * one. `draft` reads the unpublished version, which is how live preview shows
@@ -34,7 +48,8 @@ export async function getLayout(
   route = "home",
   draft = false,
 ): Promise<PageBlock[]> {
-  if (!cmsConfigured) return defaultHomeLayout;
+  const fallback = defaultLayouts[route] ?? defaultHomeLayout;
+  if (!cmsConfigured) return fallback;
   try {
     const [{ getPayload }, { default: config }] = await Promise.all([
       import("payload"),
@@ -54,9 +69,9 @@ export async function getLayout(
       },
     });
     const layout = docs[0]?.layout as PageBlock[] | undefined;
-    return layout?.length ? layout : defaultHomeLayout;
+    return layout?.length ? layout : fallback;
   } catch (error) {
     console.error("Falling back to the bundled page layout: ", error);
-    return defaultHomeLayout;
+    return fallback;
   }
 }

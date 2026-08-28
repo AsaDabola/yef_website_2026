@@ -4,13 +4,38 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 import { getT } from "@/lib/i18n/server";
 import SiteName from "@/components/ui/SiteName";
 
-export default async function WhoWeAreHero() {
+const defaults = {
+  image: "/images/who-we-are/hero-mountains.png",
+  heading: "Who We Are",
+  body: "YEF is dedicated to revealing the Gospel of Jesus Christ in our daily lives, transforming our communities, and bringing the good news to all people. As creative and committed Christians, we work daily to quench the spiritual drought in our cities and restore the hearts of many around the world.",
+  missionBody:
+    "YEF exists to reach and plant the Gospel of Christ’s love into the souls of the youth on campus—those who can bring great, lasting impact to the future of Christian faith.",
+  portrait: "/images/who-we-are/hero-president-portrait.webp",
+  portraitAlt: "Dr. Mark Wagner, President of Youth Evangelical Fellowship",
+  quote:
+    "“God has a Great Calling for His people. Walk the journey with faith and you will find true joy and peace”",
+  signature: "- Dr. Mark Wagner, President of Youth Evangelical Fellowship",
+};
+
+export type WhoWeAreHeroContent = Partial<typeof defaults>;
+
+/**
+ * Content comes from the page's Who We Are Hero block when a country has
+ * published one, and from `defaults` otherwise — same fallback pattern as
+ * the home page's blocks.
+ */
+export default async function WhoWeAreHero({
+  content,
+}: {
+  content?: WhoWeAreHeroContent;
+}) {
   const t = await getT();
+  const c = { ...defaults, ...content };
   return (
     <section className="font-body relative min-h-[760px] overflow-hidden bg-v2-navy lg:min-h-[61vw]">
       <div className="absolute inset-0 bg-gradient-to-b from-v2-navy via-v2-blue via-55% to-[#00142a]" />
       <Image
-        src="/images/who-we-are/hero-mountains.png"
+        src={c.image}
         alt={t("Mountain range at dusk")}
         fill
         priority
@@ -28,12 +53,10 @@ export default async function WhoWeAreHero() {
       <div className="relative z-10 mx-auto grid max-w-[1920px] grid-cols-1 gap-14 px-6 pt-40 pb-28 sm:px-10 lg:px-[10%] lg:pt-[16.7%] lg:pb-[12%] xl:grid-cols-[39.06fr_42.63fr] xl:justify-between xl:gap-[18.31%]">
         <div>
           <h1 className="font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl xl:text-[96px]">
-            {t("Who We Are")}
+            {t(c.heading)}
           </h1>
           <p className="mt-8 font-medium text-lg text-white leading-[32px] xl:mt-[53px] xl:text-[19px] xl:leading-[39px]">
-            {t(
-              "YEF is dedicated to revealing the Gospel of Jesus Christ in our daily lives, transforming our communities, and bringing the good news to all people. As creative and committed Christians, we work daily to quench the spiritual drought in our cities and restore the hearts of many around the world.",
-            )}
+            {t(c.body)}
           </p>
           <Link
             href="/who-we-are/welcome"
@@ -44,32 +67,25 @@ export default async function WhoWeAreHero() {
 
           <p className="mt-10 font-medium text-lg text-white leading-[32px] xl:mt-[55px] xl:text-[19px] xl:leading-[39px]">
             <span className="font-bold">{t("Mission Statement: ")} </span>
-
-            {t(
-              "YEF exists to reach and plant the Gospel of Christ’s love into the souls of the youth on campus—those who can bring great, lasting impact to the future of Christian faith.",
-            )}
+            {t(c.missionBody)}
           </p>
         </div>
 
         <div className="xl:pt-5">
           <div className="relative aspect-[655/492] w-full overflow-hidden rounded-2xl">
             <Image
-              src="/images/who-we-are/hero-president-portrait.webp"
-              alt={t(
-                "Dr. Mark Wagner, President of Youth Evangelical Fellowship",
-              )}
+              src={c.portrait}
+              alt={t(c.portraitAlt)}
               fill
               sizes="(min-width: 1280px) 43vw, 90vw"
               className="object-cover"
             />
             <p className="absolute bottom-[6%] left-[8.5%] w-[181px] max-w-[45%] font-semibold text-[13px] uppercase leading-[16.5px] tracking-[1.6045px] text-white">
-              {t(
-                "“God has a Great Calling for His people. Walk the journey with faith and you will find true joy and peace”",
-              )}
+              {t(c.quote)}
             </p>
           </div>
           <p className="mt-[28px] font-signature capitalize text-[22px] leading-[32.5px] tracking-[0.6px] text-white/85 xl:pl-[26px]">
-            {t("- Dr. Mark Wagner, President of Youth Evangelical Fellowship")}
+            {t(c.signature)}
           </p>
         </div>
       </div>
