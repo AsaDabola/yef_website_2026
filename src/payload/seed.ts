@@ -361,12 +361,27 @@ async function seedPosts(payload: Payload) {
  *  itself adds (`id`, `blockType`) — i.e. the placeholder layout this same
  *  script used to seed before it filled in real content, never touched by
  *  an editor since. Safe to overwrite; anything else is someone's work. */
+/** Whether a field's saved value is really "nothing" — covers Payload's own
+ *  bookkeeping (null ids/blockNames, empty arrays) as well as an unfilled
+ *  text field, so a genuinely empty block reads as empty regardless of
+ *  which of those shapes it happens to be. */
+function isEmptyValue(value: unknown): boolean {
+  if (value === null || value === undefined || value === "") return true;
+  if (Array.isArray(value)) return value.every(isEmptyValue);
+  if (typeof value === "object") {
+    return Object.values(value as object).every(isEmptyValue);
+  }
+  return false;
+}
+
 function isUntouchedLayout(layout: unknown): boolean {
   if (!Array.isArray(layout)) return true;
   return layout.every(
     (block) =>
       block && typeof block === "object" &&
-      Object.keys(block as object).every((key) => key === "id" || key === "blockType"),
+      Object.entries(block as object).every(
+        ([key, value]) => key === "id" || key === "blockType" || isEmptyValue(value),
+      ),
   );
 }
 
