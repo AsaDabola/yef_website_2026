@@ -8,15 +8,42 @@ import HoverGroup from "@/components/ui/HoverGroup";
 import { useT } from "@/lib/i18n/client";
 
 const tabs = ["View All", "News", "Story", "Event"];
+const PAGE_SIZE = 12;
+
+/** 1, 2, …, current-1, current, current+1, …, last — never a run of dots
+ *  next to the number it would have replaced. */
+function pageList(current: number, total: number): (number | "…")[] {
+  const pages = new Set([1, total, current - 1, current, current + 1]);
+  const sorted = [...pages].filter((p) => p >= 1 && p <= total).sort((a, b) => a - b);
+  const out: (number | "…")[] = [];
+  sorted.forEach((p, i) => {
+    if (i > 0 && p - (sorted[i - 1] as number) > 1) out.push("…");
+    out.push(p);
+  });
+  return out;
+}
 
 export default function NewsGrid({ posts }: { posts: NewsArticle[] }) {
   const t = useT();
   const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [page, setPage] = useState(1);
 
-  const articles =
+  const filtered =
     activeTab === "View All"
       ? posts
       : posts.filter((article) => article.tag === activeTab);
+
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, pageCount);
+  const articles = filtered.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
+
+  const selectTab = (tab: string) => {
+    setActiveTab(tab);
+    setPage(1);
+  };
 
   return (
     <div>
@@ -26,7 +53,7 @@ export default function NewsGrid({ posts }: { posts: NewsArticle[] }) {
             <button
               key={tab}
               type="button"
-              onClick={() => setActiveTab(tab)}
+              onClick={() => selectTab(tab)}
               className={`border-b-2 pb-3 font-semibold text-[15px] transition-colors ${
                 tab === activeTab
                   ? "border-v2-blue text-v2-blue"
@@ -86,36 +113,51 @@ export default function NewsGrid({ posts }: { posts: NewsArticle[] }) {
         ))}
       </HoverGroup>
 
-      <div className="mt-16 flex items-center justify-between border-t border-v2-border pt-6">
-        <button
-          type="button"
-          className="flex items-center gap-2 font-semibold text-sm text-v2-muted-dark-2"
-        >
-          <span aria-hidden="true">&larr;</span> {t("Previous")}
-        </button>
-        <div className="flex gap-2">
-          {["1", "2", "…", "32"].map((page) => (
-            <span
-              key={page}
-              className={`flex size-12 items-center justify-center rounded-lg font-semibold text-v2-blue ${
-                page === "1"
-                  ? "border border-v2-blue bg-[#eff5ff]"
-                  : page === "…"
-                    ? "text-v2-muted-dark-2"
-                    : "border border-transparent"
-              }`}
-            >
-              {page}
-            </span>
-          ))}
+      {pageCount > 1 && (
+        <div className="mt-16 flex items-center justify-between border-t border-v2-border pt-6">
+          <button
+            type="button"
+            disabled={currentPage === 1}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            className="flex items-center gap-2 font-semibold text-sm text-v2-muted-dark-2 disabled:opacity-40"
+          >
+            <span aria-hidden="true">&larr;</span> {t("Previous")}
+          </button>
+          <div className="flex gap-2">
+            {pageList(currentPage, pageCount).map((page, i) =>
+              page === "…" ? (
+                <span
+                  key={`gap-${i}`}
+                  className="flex size-12 items-center justify-center font-semibold text-v2-muted-dark-2"
+                >
+                  …
+                </span>
+              ) : (
+                <button
+                  key={page}
+                  type="button"
+                  onClick={() => setPage(page)}
+                  className={`flex size-12 items-center justify-center rounded-lg border font-semibold text-v2-blue ${
+                    page === currentPage
+                      ? "border-v2-blue bg-[#eff5ff]"
+                      : "border-transparent"
+                  }`}
+                >
+                  {page}
+                </button>
+              ),
+            )}
+          </div>
+          <button
+            type="button"
+            disabled={currentPage === pageCount}
+            onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+            className="flex items-center gap-2 font-semibold text-sm text-v2-navy disabled:opacity-40"
+          >
+            {t("Next")} <span aria-hidden="true">&rarr;</span>
+          </button>
         </div>
-        <button
-          type="button"
-          className="flex items-center gap-2 font-semibold text-sm text-v2-navy"
-        >
-          {t("Next")} <span aria-hidden="true">&rarr;</span>
-        </button>
-      </div>
+      )}
     </div>
   );
 }

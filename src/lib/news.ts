@@ -1,3 +1,5 @@
+import { archiveNewsArticles } from "@/lib/newsArchive";
+
 export type NewsArticle = {
   slug: string;
   tag: string;
@@ -13,7 +15,7 @@ export type NewsArticle = {
   paragraphs?: string[];
 };
 
-export const newsArticles: NewsArticle[] = [
+const curatedNewsArticles: NewsArticle[] = [
   {
     slug: "campus-missionaries-philippines",
     tag: "News",
@@ -139,6 +141,13 @@ export const newsArticles: NewsArticle[] = [
     date: "Jun 27 2026",
   },
 ];
+
+// Newest first, across both sets — a couple of archive dates land inside the
+// hand-authored stories' date range, so a plain append wouldn't stay sorted.
+export const newsArticles: NewsArticle[] = [
+  ...curatedNewsArticles,
+  ...archiveNewsArticles,
+].sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
 export function getArticleBySlug(slug: string) {
   return newsArticles.find((article) => article.slug === slug);
