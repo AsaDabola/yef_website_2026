@@ -59,15 +59,15 @@ export default async function VolunteeringPage({ params }: { params: LocaleParam
                   images={[
                     {
                       src: "/images/get-involved/volunteering-campus-outreach.webp",
-                      alt: "A volunteer talking with students at a campus outreach table",
+                      alt: t("A volunteer talking with students at a campus outreach table"),
                     },
                     {
                       src: "/images/get-involved/volunteering-donation-drive.png",
-                      alt: "Volunteers waving beside a donation box at a clothing drive",
+                      alt: t("Volunteers waving beside a donation box at a clothing drive"),
                     },
                     {
                       src: "/images/get-involved/volunteering-clipboard.webp",
-                      alt: "A volunteer wearing a \"Volunteer\" shirt writing on a clipboard",
+                      alt: t("A volunteer wearing a \"Volunteer\" shirt writing on a clipboard"),
                     },
                   ]}
                 />

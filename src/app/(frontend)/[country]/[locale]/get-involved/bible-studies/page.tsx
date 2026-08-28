@@ -60,15 +60,15 @@ export default async function BibleStudiesPage({ params }: { params: LocaleParam
                   images={[
                     {
                       src: "/images/get-involved/bible-studies-table-discussion.webp",
-                      alt: "Students gathered around a table for Bible study",
+                      alt: t("Students gathered around a table for Bible study"),
                     },
                     {
                       src: "/images/get-involved/bible-studies-rephidim-meeting.webp",
-                      alt: "A group of students at a YEF Bible study meeting",
+                      alt: t("A group of students at a YEF Bible study meeting"),
                     },
                     {
                       src: "/images/get-involved/bible-studies-group-prayer.webp",
-                      alt: "Students bowed together in prayer",
+                      alt: t("Students bowed together in prayer"),
                     },
                   ]}
                 />

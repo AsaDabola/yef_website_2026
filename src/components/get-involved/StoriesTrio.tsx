@@ -41,7 +41,7 @@ export default async function StoriesTrio({
             <div className="relative aspect-[431/242] w-full overflow-hidden rounded-2xl">
               <Image
                 src={story.image}
-                alt={story.alt}
+                alt={t(story.alt)}
                 fill
                 sizes="(min-width: 1024px) 33vw, 100vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"

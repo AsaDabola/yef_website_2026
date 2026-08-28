@@ -92,7 +92,7 @@ export default async function IntroCards({
                   >
                     <Image
                       src={card.image}
-                      alt={card.alt}
+                      alt={t(card.alt)}
                       fill
                       sizes="(min-width: 1024px) 344px, 90vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"

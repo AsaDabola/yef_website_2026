@@ -38,12 +38,12 @@ export default function LoginForm() {
           });
           if (!res.ok) {
             const body = await res.json().catch(() => null);
-            throw new Error(body?.errors?.[0]?.message || "Sign in failed.");
+            throw new Error(body?.errors?.[0]?.message || t("Sign in failed."));
           }
           router.push(localePath("/resources", country, locale));
           router.refresh();
         } catch (err) {
-          setError(err instanceof Error ? err.message : "Sign in failed.");
+          setError(err instanceof Error ? err.message : t("Sign in failed."));
           setSubmitting(false);
         }
       }}

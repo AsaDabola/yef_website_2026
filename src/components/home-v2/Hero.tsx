@@ -67,7 +67,7 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
         >
           <Image
             src={slide.image}
-            alt={slide.alt}
+            alt={t(slide.alt)}
             fill
             priority={index === 0}
             sizes="100vw"

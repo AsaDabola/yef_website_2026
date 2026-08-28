@@ -56,15 +56,15 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
               images={[
                 {
                   src: "/images/get-involved/leadership-retreat-classroom.webp",
-                  alt: "A leader teaching a session to a room of students at a retreat",
+                  alt: t("A leader teaching a session to a room of students at a retreat"),
                 },
                 {
                   src: "/images/get-involved/gallery-street-outreach.png",
-                  alt: "Team members sharing the gospel on the street",
+                  alt: t("Team members sharing the gospel on the street"),
                 },
                 {
                   src: "/images/get-involved/gallery-campus-chat.png",
-                  alt: "Team members talking on a university campus",
+                  alt: t("Team members talking on a university campus"),
                 },
               ]}
             />

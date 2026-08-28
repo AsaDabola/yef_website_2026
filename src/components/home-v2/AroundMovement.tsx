@@ -30,7 +30,7 @@ export default async function AroundMovement() {
                 <div className="group relative aspect-[469/496] w-full cursor-pointer overflow-hidden">
                   <Image
                     src={item.image}
-                    alt={item.alt}
+                    alt={t(item.alt)}
                     fill
                     sizes="(min-width: 1024px) 33vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"

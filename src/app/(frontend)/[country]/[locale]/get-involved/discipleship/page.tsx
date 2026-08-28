@@ -59,15 +59,15 @@ export default async function DiscipleshipPage({ params }: { params: LocaleParam
                   images={[
                     {
                       src: "/images/get-involved/discipleship-friends-sky.webp",
-                      alt: "A group of friends laughing together outdoors",
+                      alt: t("A group of friends laughing together outdoors"),
                     },
                     {
                       src: "/images/get-involved/discipleship-embrace.webp",
-                      alt: "Believers embracing one another in fellowship",
+                      alt: t("Believers embracing one another in fellowship"),
                     },
                     {
                       src: "/images/get-involved/discipleship-praying-hands.webp",
-                      alt: "A student praying over an open Bible",
+                      alt: t("A student praying over an open Bible"),
                     },
                   ]}
                 />

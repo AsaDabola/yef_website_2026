@@ -74,15 +74,15 @@ export default async function YefMissionSchoolPage({ params }: { params: LocaleP
               images={[
                 {
                   src: "/images/get-involved/mission-school-bible-study.png",
-                  alt: "A small group studying the Bible together around a table",
+                  alt: t("A small group studying the Bible together around a table"),
                 },
                 {
                   src: "/images/get-involved/mission-school-street-outreach.png",
-                  alt: "YEF members handing out tracts on a European street",
+                  alt: t("YEF members handing out tracts on a European street"),
                 },
                 {
                   src: "/images/get-involved/gospel-campus-conversation.png",
-                  alt: "Two students talking on a campus path",
+                  alt: t("Two students talking on a campus path"),
                 },
               ]}
             />

@@ -266,7 +266,7 @@ async function EntryCard({ entry }: { entry: Entry }) {
         <div className="relative mt-4 aspect-[16/10] w-full overflow-hidden rounded-xl">
           <Image
             src={entry.image.src}
-            alt={entry.image.alt}
+            alt={t(entry.image.alt)}
             fill
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"

@@ -60,15 +60,15 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
                   images={[
                     {
                       src: "/images/get-involved/short-term-mission-friends.webp",
-                      alt: "Three friends with backpacks setting off from a train platform",
+                      alt: t("Three friends with backpacks setting off from a train platform"),
                     },
                     {
                       src: "/images/get-involved/short-term-mission-signpost.webp",
-                      alt: "A signpost pointing to Short-Term and Long-Term",
+                      alt: t("A signpost pointing to Short-Term and Long-Term"),
                     },
                     {
                       src: "/images/get-involved/short-term-mission-hands.webp",
-                      alt: "A team stacking hands together in unity",
+                      alt: t("A team stacking hands together in unity"),
                     },
                   ]}
                 />
