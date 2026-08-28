@@ -18,7 +18,7 @@ export default async function ChapterAffiliationPage({ params }: { params: Local
     <>
       <main>
         <SubPageHero
-          image="/images/get-involved/banner-chapter-affiliation.png"
+          image="/images/get-involved/banner-chapter-affiliation.webp"
           alt={t("Hands raised and joined together against green foliage")}
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">

@@ -38,11 +38,13 @@ export default async function AroundMovement() {
                   {item.title && (
                     <>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                      <div className="absolute right-8 bottom-8 left-8 text-white">
+                      {/* The frame sets the caption 30 in from each side and
+                          55 up from the foot of the 496 card. */}
+                      <div className="absolute right-[30px] bottom-[55px] left-[30px] text-white">
                         <p className="font-semibold text-[11px] text-white/60 tracking-[2.42px] uppercase">
                           {t(item.tag)}
                         </p>
-                        <p className="mt-2 font-display font-bold text-[23px] tracking-[-0.46px]">
+                        <p className="mt-[11px] font-display font-bold text-[23px] leading-[28px] tracking-[-0.46px]">
                           {t(item.title)}
                         </p>
                       </div>

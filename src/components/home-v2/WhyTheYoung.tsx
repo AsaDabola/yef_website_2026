@@ -1,4 +1,3 @@
-import FlowingBackground from "./FlowingBackground";
 import Reveal from "@/components/ui/Reveal";
 import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
@@ -41,8 +40,7 @@ export default async function WhyTheYoung({
   const c = { ...defaults, ...content };
   const proof = content?.items?.length ? content.items : defaultItems;
   return (
-    <section className="font-body relative overflow-hidden bg-[#eef1f7]">
-      <FlowingBackground />
+    <section className="font-body relative overflow-hidden bg-[#f2f6fb]">
       {/* 1920x650 frame: a 1440 column at x=240, y=110, with the rule at 227
           and the three 480 cells from 254. */}
       <div className="relative mx-auto max-w-[1440px] px-6 py-24 sm:px-10 sm:pb-0 lg:pt-[110px] 2xl:px-0">
@@ -66,20 +64,18 @@ export default async function WhyTheYoung({
             {proof.map((item, index) => (
               <div
                 key={item.name}
-                // Each column is padded on both sides: a gutter only on the
-                // side the divider sits kept the middle column's text running
-                // right up against the next column's rule. The deep bottom
-                // padding is the section's, moved inside the columns so the
-                // dividers reach the rule that closes the section.
+                // The frame sets each cell's text at x=0, flush against the
+                // rule that opens it, and holds it to 280 of the 480 cell so
+                // it never reaches the next one. The bottom padding is the
+                // section's, carried here so the rules run the cell's height.
                 className={[
-                  "pb-8 sm:row-span-2 sm:grid sm:grid-rows-subgrid sm:pt-18 sm:pb-[45px]",
-                  index > 0 && "sm:border-l sm:border-v2-border sm:pl-10",
-                  index < proof.length - 1 && "sm:pr-10",
+                  "pb-8 sm:row-span-2 sm:grid sm:grid-rows-subgrid sm:pt-[65px] sm:pb-[52px]",
+                  index > 0 && "sm:border-l sm:border-v2-border",
                 ]
                   .filter(Boolean)
                   .join(" ")}
               >
-                <div>
+                <div className="sm:max-w-[280px]">
                   {item.number && (
                     <p className="font-display font-bold text-5xl text-yef-primary tracking-[-1.92px] lg:text-[64px]">
                       {item.number}
@@ -89,7 +85,7 @@ export default async function WhyTheYoung({
                     {t(item.name)}
                   </p>
                 </div>
-                <p className="mt-4 text-[14px] text-v2-muted-dark leading-[1.65]">
+                <p className="mt-4 text-[14px] text-v2-muted-dark leading-[1.65] sm:max-w-[440px]">
                   {t(item.body)}
                 </p>
               </div>
