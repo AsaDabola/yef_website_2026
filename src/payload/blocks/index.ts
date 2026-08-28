@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { whoWeAreBlocks } from "@/payload/blocks/whoWeAre";
 
 /**
  * The home page's sections, as blocks an editor can reorder and edit.
@@ -169,3 +170,11 @@ export const homeBlocks: Block[] = [
   SignUpBlock,
   ...bundledBlocks,
 ];
+
+/**
+ * Every block any page's `layout` field can hold. One shared list keeps the
+ * schema simple — an editor sees every page's blocks grouped separately in
+ * the picker (by `admin.group`), rather than each route needing its own
+ * field and its own migration.
+ */
+export const pageBlocks: Block[] = [...homeBlocks, ...whoWeAreBlocks];

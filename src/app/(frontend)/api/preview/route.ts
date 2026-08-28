@@ -21,6 +21,7 @@ export async function GET(request: Request): Promise<Response> {
 
   const url = new URL(request.url);
   const country = url.searchParams.get("country") ?? INTERNATIONAL;
+  const route = url.searchParams.get("route") ?? "home";
 
   const payload = await getPayload({ config });
   const { user } = await payload.auth({
@@ -36,5 +37,6 @@ export async function GET(request: Request): Promise<Response> {
   const locale =
     country === INTERNATIONAL ? "en" : defaultLocaleFor(country);
   const known = country === INTERNATIONAL || Boolean(getCountry(country));
-  redirect(`/${known ? country : INTERNATIONAL}/${locale}`);
+  const path = route === "home" ? "" : `/${route}`;
+  redirect(`/${known ? country : INTERNATIONAL}/${locale}${path}`);
 }
