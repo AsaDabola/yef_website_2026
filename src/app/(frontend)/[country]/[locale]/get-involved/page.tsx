@@ -93,6 +93,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="discipleship"
                 title={t("Discipleship Training")}
+                cardTitle={t("Follow Jesus Daily")}
                 body={t("Discipleship is one of the key focuses of our ministry. Jesus also raised twelve disciples among the many crowds that followed. Those who are willing to follow the life of Jesus, by overcoming all the hindrances of the world were selected and preciously guided with Word of Jesus. YEF is dedicated to raising students on campus into disciples of Jesus with a more adaptable program for campus life. With small group and personal mentoring, the Bible can guide us to know the heart of God and His amazing salvation. Through our program, you can discover the meaning of salvation, the cross, the calling of God in our lives and much more. Yes, just as Jesus said, “Go, make disciples!”")}
                 resourceColumns={[
                   [
@@ -110,6 +111,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="leadership-training"
                 title={t("Leadership Training")}
+                cardTitle={t("Raise Up Leaders")}
                 body={t("YEF offers leadership training regionally and nationwide to provide rich spiritual foods to the students in need. Leadership Training is open to the students who finished their discipleship program on their campus. During their training, they will be equipped as teachers and missionaries on campus by learning about mission and the practicum for instructing students.")}
                 resourceColumns={[
                   [
@@ -127,6 +129,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="volunteering"
                 title={t("Volunteering")}
+                cardTitle={t("Give Your Time")}
                 body={t("As a volunteer with YEF, you will be helping build or start a spiritual movement in your local chapter. Contact your local YEF leader for further information.")}
                 resourceColumns={[
                   [
