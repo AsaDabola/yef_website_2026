@@ -74,43 +74,57 @@ function mediaUploader(payload: Payload) {
   };
 }
 
+const POST_CATEGORIES = new Set(["News", "Story", "Event"]);
+
 async function seedPosts(payload: Payload) {
   const uploadMedia = mediaUploader(payload);
   let created = 0;
   let skipped = 0;
+  let failed = 0;
 
   for (const article of newsArticles) {
-    const existing = await payload.find({
-      collection: "posts",
-      where: { slug: { equals: article.slug } },
-      limit: 1,
-    });
-    if (existing.docs.length > 0) {
-      skipped += 1;
-      continue;
+    try {
+      const existing = await payload.find({
+        collection: "posts",
+        where: { slug: { equals: article.slug } },
+        limit: 1,
+      });
+      if (existing.docs.length > 0) {
+        skipped += 1;
+        continue;
+      }
+
+      const media = await uploadMedia(article.image, article.title);
+      // A handful of articles carry tags (e.g. Testimonial) outside the
+      // three categories Posts supports — file those under News rather than
+      // failing the whole seed on one article.
+      const category = POST_CATEGORIES.has(article.tag) ? article.tag : "News";
+
+      await payload.create({
+        collection: "posts",
+        data: {
+          country: "int",
+          audience: "own",
+          title: article.title,
+          slug: article.slug,
+          category: category as "News" | "Story" | "Event",
+          publishedAt: new Date(article.date).toISOString(),
+          excerpt: article.excerpt,
+          image: media,
+          showOnHome: false,
+          _status: "published",
+        },
+      });
+      created += 1;
+    } catch (error) {
+      failed += 1;
+      payload.logger.error(`Post "${article.slug}" failed to seed: ${error}`);
     }
-
-    const media = await uploadMedia(article.image, article.title);
-
-    await payload.create({
-      collection: "posts",
-      data: {
-        country: "int",
-        audience: "own",
-        title: article.title,
-        slug: article.slug,
-        category: article.tag as "News" | "Story" | "Event",
-        publishedAt: new Date(article.date).toISOString(),
-        excerpt: article.excerpt,
-        image: media,
-        showOnHome: false,
-        _status: "published",
-      },
-    });
-    created += 1;
   }
 
-  payload.logger.info(`Posts seed: ${created} created, ${skipped} skipped.`);
+  payload.logger.info(
+    `Posts seed: ${created} created, ${skipped} skipped, ${failed} failed.`,
+  );
 }
 
 async function seedPage(
@@ -184,27 +198,45 @@ async function seedPhotoEvent(
   payload.logger.info(`Photo event "${slug}": created.`);
 }
 
+/** Runs one seed step; logs and continues rather than taking the whole
+ *  script down, so one bad step (Pages, say) still lets the others run. */
+async function step(payload: Payload, label: string, fn: () => Promise<void>) {
+  try {
+    await fn();
+  } catch (error) {
+    payload.logger.error(`${label} failed: ${error}`);
+  }
+}
+
 const run = async () => {
   const payload = await getPayload({ config });
 
-  await seedPosts(payload);
-  await seedPage(payload, "home", "Home", defaultHomeLayout);
-  await seedPage(payload, "who-we-are", "Who We Are", defaultWhoWeAreLayout);
-  await seedPhotoEvent(
-    payload,
-    "yef-hq-retreat",
-    "YEF HQ Retreat",
-    new Date("2025-01-01").toISOString(),
-    "yef-hq-retreat",
-    ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp"],
+  await step(payload, "Posts seed", () => seedPosts(payload));
+  await step(payload, 'Page "home"', () =>
+    seedPage(payload, "home", "Home", defaultHomeLayout),
   );
-  await seedPhotoEvent(
-    payload,
-    "2026-ministry-highlights",
-    "2026 Ministry Highlights",
-    new Date("2026-01-01").toISOString(),
-    "2026-ministry-highlights",
-    ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
+  await step(payload, 'Page "who-we-are"', () =>
+    seedPage(payload, "who-we-are", "Who We Are", defaultWhoWeAreLayout),
+  );
+  await step(payload, 'Photo event "yef-hq-retreat"', () =>
+    seedPhotoEvent(
+      payload,
+      "yef-hq-retreat",
+      "YEF HQ Retreat",
+      new Date("2025-01-01").toISOString(),
+      "yef-hq-retreat",
+      ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp"],
+    ),
+  );
+  await step(payload, 'Photo event "2026-ministry-highlights"', () =>
+    seedPhotoEvent(
+      payload,
+      "2026-ministry-highlights",
+      "2026 Ministry Highlights",
+      new Date("2026-01-01").toISOString(),
+      "2026-ministry-highlights",
+      ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
+    ),
   );
 
   payload.logger.info("Seed complete.");
