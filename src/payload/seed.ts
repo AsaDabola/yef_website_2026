@@ -3,16 +3,79 @@ import path from "node:path";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { newsArticles } from "@/lib/news";
+import type { Page } from "@/payload-types";
+
+// Duplicated from src/lib/pages.ts rather than imported: that module pulls in
+// "server-only", which only resolves inside Next's bundler, not this
+// standalone `payload run` script. Keep these two in sync with lib/pages.ts
+// if either default layout changes.
+const defaultHomeLayout = [
+  { blockType: "hero" },
+  { blockType: "campusFinder" },
+  { blockType: "about" },
+  { blockType: "mission" },
+  { blockType: "proof" },
+  { blockType: "getInvolved" },
+  { blockType: "testimonials" },
+  { blockType: "giving" },
+  { blockType: "movement" },
+  { blockType: "signup" },
+];
+
+const defaultWhoWeAreLayout = [
+  { blockType: "whoWeAreHero" },
+  { blockType: "introCards" },
+  { blockType: "visionMission" },
+  { blockType: "storiesNews" },
+  { blockType: "missionSchoolCta" },
+];
 
 /**
- * Moves the articles that shipped with the site into the CMS, so switching the
- * News page over to Payload doesn't lose anything. Safe to re-run: posts are
- * matched on slug and skipped if they already exist.
+ * Moves what the site already ships with into the CMS, so /admin shows real,
+ * editable documents instead of an empty list backed by bundled fallbacks.
+ * Safe to re-run: everything is matched on slug/route and skipped if it
+ * already exists, so re-running after an editor has made changes won't
+ * overwrite their work.
  *
  *   npm run seed
+ *
+ * Also runs automatically at the end of every production build (see
+ * package.json), since that is the only place with real database access —
+ * this sandbox can't reach the live Postgres instance directly.
  */
-const run = async () => {
-  const payload = await getPayload({ config });
+
+type Payload = Awaited<ReturnType<typeof getPayload>>;
+
+/** Uploads a public/ file as Media once per source path, reusing the same
+ *  document for every article that shares a placeholder image. */
+function mediaUploader(payload: Payload) {
+  const cache = new Map<string, number>();
+  return async (publicPath: string, alt: string): Promise<number> => {
+    const cached = cache.get(publicPath);
+    if (cached !== undefined) return cached;
+
+    const filePath = path.join(process.cwd(), "public", publicPath);
+    const ext = path.extname(filePath).slice(1);
+    const mimetype =
+      ext === "jpg" ? "image/jpeg" : ext === "svg" ? "image/svg+xml" : `image/${ext}`;
+    const media = await payload.create({
+      collection: "media",
+      data: { alt, country: "int" },
+      file: {
+        data: await fs.readFile(filePath),
+        name: path.basename(filePath),
+        mimetype,
+        size: (await fs.stat(filePath)).size,
+      },
+    });
+    const id = Number(media.id);
+    cache.set(publicPath, id);
+    return id;
+  };
+}
+
+async function seedPosts(payload: Payload) {
+  const uploadMedia = mediaUploader(payload);
   let created = 0;
   let skipped = 0;
 
@@ -27,18 +90,7 @@ const run = async () => {
       continue;
     }
 
-    const filePath = path.join(process.cwd(), "public", article.image);
-    const media = await payload.create({
-      collection: "media",
-      // Seeded content belongs to the headquarters site.
-      data: { alt: article.title, country: "int" },
-      file: {
-        data: await fs.readFile(filePath),
-        name: path.basename(filePath),
-        mimetype: "image/png",
-        size: (await fs.stat(filePath)).size,
-      },
-    });
+    const media = await uploadMedia(article.image, article.title);
 
     await payload.create({
       collection: "posts",
@@ -50,7 +102,7 @@ const run = async () => {
         category: article.tag as "News" | "Story" | "Event",
         publishedAt: new Date(article.date).toISOString(),
         excerpt: article.excerpt,
-        image: media.id,
+        image: media,
         showOnHome: false,
         _status: "published",
       },
@@ -58,7 +110,104 @@ const run = async () => {
     created += 1;
   }
 
-  payload.logger.info(`Seed complete: ${created} created, ${skipped} skipped.`);
+  payload.logger.info(`Posts seed: ${created} created, ${skipped} skipped.`);
+}
+
+async function seedPage(
+  payload: Payload,
+  route: Page["route"],
+  title: string,
+  layout: { blockType: string }[],
+) {
+  const existing = await payload.find({
+    collection: "pages",
+    where: { and: [{ route: { equals: route } }, { country: { equals: "int" } }] },
+    limit: 1,
+  });
+  if (existing.docs.length > 0) {
+    payload.logger.info(`Page "${route}": already exists, skipped.`);
+    return;
+  }
+
+  await payload.create({
+    collection: "pages",
+    data: {
+      title,
+      route,
+      country: "int",
+      layout: layout as Page["layout"],
+      _status: "published",
+    },
+  });
+  payload.logger.info(`Page "${route}": created.`);
+}
+
+async function seedPhotoEvent(
+  payload: Payload,
+  slug: string,
+  title: string,
+  publishedAt: string,
+  dir: string,
+  files: string[],
+) {
+  const existing = await payload.find({
+    collection: "photo-events",
+    where: { slug: { equals: slug } },
+    limit: 1,
+  });
+  if (existing.docs.length > 0) {
+    payload.logger.info(`Photo event "${slug}": already exists, skipped.`);
+    return;
+  }
+
+  const uploadMedia = mediaUploader(payload);
+  const photos = [];
+  for (const [i, file] of files.entries()) {
+    const media = await uploadMedia(
+      `/images/photo-news/${dir}/${file}`,
+      `${title} — photo ${i + 1}`,
+    );
+    photos.push({ image: media });
+  }
+
+  await payload.create({
+    collection: "photo-events",
+    data: {
+      country: "int",
+      audience: "own",
+      title,
+      slug,
+      publishedAt,
+      photos,
+    },
+  });
+  payload.logger.info(`Photo event "${slug}": created.`);
+}
+
+const run = async () => {
+  const payload = await getPayload({ config });
+
+  await seedPosts(payload);
+  await seedPage(payload, "home", "Home", defaultHomeLayout);
+  await seedPage(payload, "who-we-are", "Who We Are", defaultWhoWeAreLayout);
+  await seedPhotoEvent(
+    payload,
+    "yef-hq-retreat",
+    "YEF HQ Retreat",
+    new Date("2025-01-01").toISOString(),
+    "yef-hq-retreat",
+    ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp"],
+  );
+  await seedPhotoEvent(
+    payload,
+    "2026-ministry-highlights",
+    "2026 Ministry Highlights",
+    new Date("2026-01-01").toISOString(),
+    "2026-ministry-highlights",
+    ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
+  );
+
+  payload.logger.info("Seed complete.");
   process.exit(0);
 };
 
