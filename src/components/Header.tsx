@@ -21,9 +21,17 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "#", Icon: FacebookIcon },
-  { label: "X", href: "#", Icon: XIcon },
-  { label: "Instagram", href: "#", Icon: InstagramIcon },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/youthevangelicalfellowship/",
+    Icon: FacebookIcon,
+  },
+  { label: "X", href: "https://x.com/YEF_Intl", Icon: XIcon },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/yef_international/",
+    Icon: InstagramIcon,
+  },
 ];
 
 export default function Header() {
@@ -78,6 +86,8 @@ export default function Header() {
               <Link
                 key={label}
                 href={href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={t(label)}
                 className="text-white transition-opacity hover:opacity-80"
               >
@@ -151,6 +161,8 @@ export default function Header() {
               <Link
                 key={label}
                 href={href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={t(label)}
                 className="text-white transition-opacity hover:opacity-80"
               >
