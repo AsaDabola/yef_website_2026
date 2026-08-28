@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useI18n, useT } from "@/lib/i18n/client";
 import { countriesByRegion, defaultLocaleFor } from "@/lib/i18n/countries";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 import { stripLocalePath } from "@/lib/i18n/paths";
 import { countryName, flag } from "@/lib/i18n/display";
+import { useDismiss } from "@/lib/useDismiss";
 
 function Chevron() {
   return (
@@ -39,24 +40,6 @@ function Globe() {
       <path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18" />
     </svg>
   );
-}
-
-/** Closes the menu on an outside click or Escape. */
-function useDismiss(onDismiss: () => void) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) onDismiss();
-    };
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onDismiss();
-    document.addEventListener("mousedown", onClick);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onClick);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [onDismiss]);
-  return ref;
 }
 
 type Tone = "light" | "dark";
@@ -126,7 +109,7 @@ export function CountryPicker({
   const { country, locale } = useI18n();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const ref = useDismiss(() => setOpen(false));
+  const ref = useDismiss<HTMLDivElement>(() => setOpen(false));
 
   const rest = stripLocalePath(pathname);
 
