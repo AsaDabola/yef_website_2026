@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
+import CampusEvangelismPromo from "@/components/get-involved/CampusEvangelismPromo";
 import CarouselWhatWeDo from "@/components/get-involved/CarouselWhatWeDo";
 import GetInvolvedHero from "@/components/get-involved/GetInvolvedHero";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
@@ -46,6 +47,10 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               />
 
               <CarouselWhatWeDo />
+
+              <div className="border-t border-black/10 py-16">
+                <CampusEvangelismPromo />
+              </div>
 
               <StoriesTrio />
 
