@@ -38,7 +38,14 @@ export default async function MissionStatement({
           <p className="font-semibold text-[11px] text-white/50 tracking-[2.42px] uppercase">
             {t(c.eyebrow)}
           </p>
-          <p className="mt-[26px] max-w-[1143px] whitespace-pre-line font-display font-bold text-4xl text-[#f2f6fb] leading-[1.12] tracking-[-1.8px] sm:text-5xl lg:text-[60px]">
+          {/* The three lines are authored in the copy, so the box is sized to
+              the longest of them rather than to the frame's 1143 — that number
+              is what the longest line measures in Figma, not a constraint.
+              Each size then steps up only once the column can hold that line:
+              60px needs 1006px and had been starting at lg, where only 944 is
+              available, which broke the verse onto five lines from 1024 to
+              1280. */}
+          <p className="mt-[26px] w-fit max-w-full whitespace-pre-line font-display font-bold text-4xl text-[#f2f6fb] leading-[1.12] tracking-[-1.8px] lg:text-5xl xl:text-[60px]">
             {t(c.verse)}{" "}
             <span className="font-instrument-serif font-normal italic">
               {t(c.verseAccent)}
