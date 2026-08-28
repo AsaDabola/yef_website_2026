@@ -20,7 +20,7 @@ const cards = [
   {
     tag: "Weekly",
     title: "Bible Study",
-    body: "One-on-one and in groups. A teacher meets you where your schedule allows and walks the text with you — no prior background assumed.",
+    body: "Study Scripture personally and together, building a faith firmly grounded in the Gospel.",
     image: "/images/home-v2/get-involved-bible-study.png",
   },
   {
