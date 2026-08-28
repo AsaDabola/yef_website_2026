@@ -8,7 +8,7 @@ const localeSet = new Set(localeCodes);
 
 /** Paths that are not part of the localized site. */
 const PASSTHROUGH =
-  /^\/(_next|api|admin|images|data|media|favicon\.ico|robots\.txt|sitemap\.xml)(\/|$)/;
+  /^\/(_next|api|admin|images|data|media|favicon\.ico|icon\.svg|apple-icon\.png|robots\.txt|sitemap\.xml)(\/|$)/;
 
 /** Picks the best country/language for a first-time visitor. */
 function preferred(request: NextRequest): { country: string; locale: string } {
