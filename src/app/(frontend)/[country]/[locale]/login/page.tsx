@@ -77,11 +77,11 @@ export default async function LoginPage({ params }: { params: LocaleParams }) {
                 "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers.",
               )}
             </p>
-            <p className="mt-10 max-w-[680px] font-signature text-3xl text-[#9fc9ff] leading-[46px] xl:mt-[52px] xl:text-4xl xl:leading-[54px]">
+            <p className="mt-10 max-w-[640px] font-semibold text-2xl text-[#9fc9ff] italic leading-[38px] xl:mt-[52px] xl:text-[29px] xl:leading-[42px]">
               {t(
                 "“All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness, so that the servant of God may be thoroughly equipped for every good work.”",
               )}
-              <span className="mt-3 block font-sans font-medium text-base text-white/70">
+              <span className="mt-3 block font-sans font-medium text-base text-white/70 not-italic">
                 {t("— 2 Timothy 3:16-17")}
               </span>
             </p>
