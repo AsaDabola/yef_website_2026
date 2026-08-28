@@ -28,6 +28,10 @@ export default buildConfig({
     meta: {
       titleSuffix: " — YEF",
     },
+    components: {
+      // A stat-card row above the default collection list.
+      beforeDashboard: ["@/payload/admin/DashboardStats#default"],
+    },
     // Live preview renders the real site beside the editor, through a route
     // that turns on Payload's draft mode so unpublished work shows.
     livePreview: {
