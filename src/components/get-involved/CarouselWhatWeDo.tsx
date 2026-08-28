@@ -7,49 +7,49 @@ import { useT } from "@/lib/i18n/client";
 
 const cards = [
   {
-    title: "Bible Studies",
-    body: "Weekly Bible studies — one-on-one or in small groups — where students open Scripture together and learn to feed themselves on the Word.",
+    title: "The Four Spiritual Laws",
+    body: "Discover the essential message of the Gospel—God’s love, our need for salvation, and faith in Jesus Christ.",
     icon: "/images/icons/icon-four-spiritual-laws.svg",
   },
   {
-    title: "Discipleship Training",
-    body: "Mentoring students through God's Word phase by phase, so they grow from being cared for into someone who can care for others.",
-    icon: "/images/icons/icon-way-of-the-cross.svg",
-  },
-  {
-    title: "Campus Evangelism",
-    body: "Equipping students to share the Gospel with their fellow students, right where they already are.",
+    title: "Romans",
+    body: "Explore the Gospel, God’s righteousness, and new life through faith in Jesus Christ.",
     icon: "/images/icons/icon-romans.svg",
   },
   {
-    title: "Summer Training",
-    body: "A season set apart each year for students from around the world to train in the Word, build fellowship, and put mission into practice.",
+    title: "The Way of the Cross",
+    body: "Walk through Christ's journey to the cross, and discover what it means to follow Him in suffering and in glory.",
+    icon: "/images/icons/icon-way-of-the-cross.svg",
+  },
+  {
+    title: "The Way of Faith",
+    body: "Walk through the foundations of faith—repentance, assurance, and daily trust in the God who keeps His promises.",
     icon: "/images/icons/icon-christ.svg",
   },
   {
-    title: "Short-term Mission",
-    body: "Sending teams of students to evangelize, disciple, and serve local churches during school breaks — near and far.",
+    title: "Galatians",
+    body: "Stand firm in the freedom Christ won, and learn to live by the Spirit rather than by the law.",
+    icon: "/images/icons/icon-romans.svg",
+  },
+  {
+    title: "Acts",
+    body: "Follow the early church as the Gospel spreads from Jerusalem to the ends of the earth.",
     icon: "/images/icons/icon-church.svg",
   },
   {
-    title: "Leadership Training",
-    body: "Forming students who've grown through discipleship into teachers and missionaries who can lead and shepherd others.",
+    title: "1 & 2 Corinthians",
+    body: "Learn what it means to live as the church—in unity, in love, and in the sufficiency of God’s grace.",
+    icon: "/images/icons/icon-romans.svg",
+  },
+  {
+    title: "The Sermon on the Mount",
+    body: "Sit under the teaching of Jesus and see what life in the kingdom of God is meant to look like.",
+    icon: "/images/icons/icon-four-spiritual-laws.svg",
+  },
+  {
+    title: "Providing Education",
+    body: "Each student receives Biblical and practical training, empowering them to reach their dreams and become thriving disciples.",
     icon: "/images/icons/icon-providing-education.svg",
-  },
-  {
-    title: "Volunteering",
-    body: "Everyday gifts — administration, hospitality, media, prayer, and more — put to work building the ministry in a local chapter.",
-    icon: "/images/icons/icon-child.svg",
-  },
-  {
-    title: "Internship",
-    body: "Hands-on ministry experience and mentorship at YEF HQ, for members ready to carry what they've learned back to their campus.",
-    icon: "/images/icons/icon-providing-education.svg",
-  },
-  {
-    title: "Chapter Affiliation",
-    body: "Connecting a campus or church fellowship to YEF's wider network of chapters, resources, and leadership.",
-    icon: "/images/icons/icon-church.svg",
   },
 ];
 
@@ -86,12 +86,12 @@ export default function CarouselWhatWeDo() {
 
   return (
     <section
-      id="what-we-do"
+      id="bible-study-programs"
       className="scroll-mt-32 border-t border-black/10 py-16"
     >
       <Reveal>
         <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
-          {t("What We Do")}
+          {t("Bible Study Programs")}
         </h2>
       </Reveal>
 
