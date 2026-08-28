@@ -29,7 +29,7 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "Bible Studies", href: "/get-involved#bible-studies" },
       { label: "Summer Training", href: "/get-involved#summer-training" },
-      { label: "Mission Trip", href: "/get-involved/mission-trip" },
+      { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
       { label: "Volunteer", href: "/get-involved/volunteer" },
       { label: "Internship", href: "/get-involved#internship" },
       { label: "Discipleship", href: "/get-involved#discipleship" },

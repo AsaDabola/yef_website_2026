@@ -6,7 +6,6 @@ import GetInvolvedHero from "@/components/get-involved/GetInvolvedHero";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import InternshipSection from "@/components/get-involved/InternshipSection";
 import MinistrySection from "@/components/get-involved/MinistrySection";
-import MissionTripPromo from "@/components/get-involved/MissionTripPromo";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
@@ -54,13 +53,10 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
 
               <StoriesTrio />
 
-              <div className="border-t border-black/10 py-16">
-                <MissionTripPromo />
-              </div>
-
               <MinistrySection
                 id="summer-training"
                 title={t("Summer Training")}
+                cardTitle={t("Grow in Christ")}
                 body={t("Every year, YEF offers summer training in the U.S. and South Korea. This training of 3 to 7 days, will allow students to be surrounded in the Word and prayer, while in fellowship with others from all around the world. These days usually consist of Bible studies, camping, visiting attractions, as well as, practicum of mission such as evangelism, teaching etc. Stay tuned to our site events, if you're interested! Program may vary each year.")}
                 resourceColumns={[
                   ["Application Form", "Camp Guidelines", "Scholarship Request"],
@@ -77,6 +73,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="short-term-mission"
                 title={t("Short-term Mission")}
+                cardTitle={t("Serve with Purpose")}
                 body={t("Interested in furthering God's kingdom with the talents God has given you? YEF provides volunteer opportunities that anyone can contribute to building the ministry together. You can share your talents with our campus ministry to reach more of the unreached student on college campuses. Volunteer positions vary from video making, Web design, technology, event-planning, communication and much more.")}
                 resourceColumns={[
                   [
