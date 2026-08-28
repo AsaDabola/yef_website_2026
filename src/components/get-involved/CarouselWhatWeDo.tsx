@@ -1,61 +1,81 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
 import { useT } from "@/lib/i18n/client";
 
 const cards = [
   {
-    title: "The Four Spiritual Laws",
-    body: "Discover the essential message of the Gospel—God’s love, our need for salvation, and faith in Jesus Christ.",
+    title: "Bible Studies",
+    body: "Weekly Bible studies — one-on-one or in small groups — where students open Scripture together and learn to feed themselves on the Word.",
     icon: "/images/icons/icon-four-spiritual-laws.svg",
   },
   {
-    title: "Romans",
-    body: "Explore the Gospel, God’s righteousness, and new life through faith in Jesus Christ.",
-    icon: "/images/icons/icon-romans.svg",
-  },
-  {
-    title: "The Way of the Cross",
-    body: "Discipleship.",
+    title: "Discipleship Training",
+    body: "Mentoring students through God's Word phase by phase, so they grow from being cared for into someone who can care for others.",
     icon: "/images/icons/icon-way-of-the-cross.svg",
   },
   {
-    title: "The Way of Faith",
-    body: "Walk through the foundations of faith—repentance, assurance, and daily trust in the God who keeps His promises.",
+    title: "Campus Evangelism",
+    body: "Equipping students to share the Gospel with their fellow students, right where they already are.",
+    icon: "/images/icons/icon-romans.svg",
+  },
+  {
+    title: "Summer Training",
+    body: "A season set apart each year for students from around the world to train in the Word, build fellowship, and put mission into practice.",
     icon: "/images/icons/icon-christ.svg",
   },
   {
-    title: "Galatians",
-    body: "Stand firm in the freedom Christ won, and learn to live by the Spirit rather than by the law.",
-    icon: "/images/icons/icon-romans.svg",
-  },
-  {
-    title: "Acts",
-    body: "Follow the early church as the Gospel spreads from Jerusalem to the ends of the earth.",
+    title: "Short-term Mission",
+    body: "Sending teams of students to evangelize, disciple, and serve local churches during school breaks — near and far.",
     icon: "/images/icons/icon-church.svg",
   },
   {
-    title: "1 & 2 Corinthians",
-    body: "Learn what it means to live as the church—in unity, in love, and in the sufficiency of God’s grace.",
-    icon: "/images/icons/icon-romans.svg",
-  },
-  {
-    title: "The Sermon on the Mount",
-    body: "Sit under the teaching of Jesus and see what life in the kingdom of God is meant to look like.",
-    icon: "/images/icons/icon-four-spiritual-laws.svg",
-  },
-  {
-    title: "Providing Education",
-    body: "Each student receives Biblical and practical training, empowering them to reach their dreams and become thriving disciples.",
+    title: "Leadership Training",
+    body: "Forming students who've grown through discipleship into teachers and missionaries who can lead and shepherd others.",
     icon: "/images/icons/icon-providing-education.svg",
+  },
+  {
+    title: "Volunteering",
+    body: "Everyday gifts — administration, hospitality, media, prayer, and more — put to work building the ministry in a local chapter.",
+    icon: "/images/icons/icon-child.svg",
+  },
+  {
+    title: "Internship",
+    body: "Hands-on ministry experience and mentorship at YEF HQ, for members ready to carry what they've learned back to their campus.",
+    icon: "/images/icons/icon-providing-education.svg",
+  },
+  {
+    title: "Chapter Affiliation",
+    body: "Connecting a campus or church fellowship to YEF's wider network of chapters, resources, and leadership.",
+    icon: "/images/icons/icon-church.svg",
   },
 ];
 
 export default function CarouselWhatWeDo() {
   const t = useT();
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  /** A little slack so sub-pixel scroll positions don't leave a button
+   *  looking enabled when there's nowhere left to scroll. */
+  const updateScrollState = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    setCanScrollPrev(el.scrollLeft > 4);
+    setCanScrollNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  };
+
+  useEffect(() => {
+    updateScrollState();
+    const el = scrollerRef.current;
+    if (!el) return;
+    const onResize = () => updateScrollState();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   const scrollByCard = (direction: 1 | -1) => {
     scrollerRef.current?.scrollBy({
@@ -78,6 +98,7 @@ export default function CarouselWhatWeDo() {
       <Reveal delay={120}>
         <div
           ref={scrollerRef}
+          onScroll={updateScrollState}
           className="mt-10 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {cards.map((card) => (
@@ -109,11 +130,20 @@ export default function CarouselWhatWeDo() {
         <button
           type="button"
           onClick={() => scrollByCard(-1)}
+          disabled={!canScrollPrev}
           aria-label={t("Previous")}
-          className="flex size-[46px] items-center justify-center rounded-full border border-[#d0d5dc] bg-white transition-colors hover:border-v2-navy"
+          className={`flex size-[46px] items-center justify-center rounded-full border bg-white transition-colors ${
+            canScrollPrev
+              ? "border-[#8996a7] hover:border-v2-navy"
+              : "cursor-not-allowed border-[#d0d5dc]"
+          }`}
         >
           <Image
-            src="/images/icons/icon-chevron-left.svg"
+            src={
+              canScrollPrev
+                ? "/images/icons/icon-chevron-left-dark.svg"
+                : "/images/icons/icon-chevron-left.svg"
+            }
             alt=""
             width={20}
             height={20}
@@ -123,11 +153,20 @@ export default function CarouselWhatWeDo() {
         <button
           type="button"
           onClick={() => scrollByCard(1)}
+          disabled={!canScrollNext}
           aria-label={t("Next")}
-          className="flex size-[46px] items-center justify-center rounded-full border border-[#8996a7] bg-white transition-colors hover:border-v2-navy"
+          className={`flex size-[46px] items-center justify-center rounded-full border bg-white transition-colors ${
+            canScrollNext
+              ? "border-[#8996a7] hover:border-v2-navy"
+              : "cursor-not-allowed border-[#d0d5dc]"
+          }`}
         >
           <Image
-            src="/images/icons/icon-chevron-right.svg"
+            src={
+              canScrollNext
+                ? "/images/icons/icon-chevron-right.svg"
+                : "/images/icons/icon-chevron-right-light.svg"
+            }
             alt=""
             width={20}
             height={20}
