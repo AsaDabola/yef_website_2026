@@ -155,7 +155,9 @@ export default async function DiscipleshipPage({ params }: { params: LocaleParam
           </div>
         </section>
 
-        <StoriesTrio divider={false} />
+        <div className="mx-auto max-w-[1391px] px-6">
+          <StoriesTrio divider={false} />
+        </div>
 
         <section className="mx-auto max-w-[1391px] px-6 py-20 text-center lg:py-[100px]">
           <h2 className="font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
