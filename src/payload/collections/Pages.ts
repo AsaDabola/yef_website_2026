@@ -1,5 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { homeBlocks } from "@/payload/blocks";
+import { pageBlocks } from "@/payload/blocks";
 import {
   canCreateIn,
   countryOptions,
@@ -57,7 +57,10 @@ export const Pages: CollectionConfig = {
       type: "select",
       required: true,
       defaultValue: "home",
-      options: [{ label: "Home page", value: "home" }],
+      options: [
+        { label: "Home page", value: "home" },
+        { label: "Who We Are", value: "who-we-are" },
+      ],
       index: true,
       admin: {
         position: "sidebar",
@@ -81,7 +84,7 @@ export const Pages: CollectionConfig = {
     {
       name: "layout",
       type: "blocks",
-      blocks: homeBlocks,
+      blocks: pageBlocks,
       admin: {
         description:
           "Sections render top to bottom in this order. Removing one falls back to nothing — leave it in place to keep it.",

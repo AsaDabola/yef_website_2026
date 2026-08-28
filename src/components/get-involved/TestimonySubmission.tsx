@@ -13,8 +13,10 @@ export default function TestimonySubmission() {
     return (
       <SubmissionSuccess
         title={t("Thank You for Sharing")}
-        message="Your story has been received. We're grateful you took the time to share what God has been doing in your life."
-        footnote="In the meantime, feel free to explore more ways to get involved."
+        message={t(
+          "Your story has been received. We're grateful you took the time to share what God has been doing in your life.",
+        )}
+        footnote={t("In the meantime, feel free to explore more ways to get involved.")}
       />
     );
   }

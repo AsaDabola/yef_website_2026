@@ -84,7 +84,7 @@ function formatDate(value: string) {
  * two are how headquarters pushes an announcement out to the network without
  * each country having to re-type it.
  */
-function forThisCountry(where?: Where): Where {
+export function forThisCountry(where?: Where): Where {
   const code = getCountryCode();
   const visible: Where = {
     or: [
@@ -96,7 +96,7 @@ function forThisCountry(where?: Where): Where {
   return where ? { and: [visible, where] } : visible;
 }
 
-async function findPosts(where?: Where, limit = 100) {
+async function findPosts(where?: Where, limit = 1000) {
   const [{ getPayload }, { default: config }] = await Promise.all([
     import("payload"),
     import("@payload-config"),

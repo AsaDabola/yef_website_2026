@@ -13,13 +13,12 @@ import { useT } from "@/lib/i18n/client";
 const interests = [
   "Bible Studies",
   "Discipleship",
-  "Mission Trip",
+  "Campus Evangelism",
   "Summer Training",
   "Internship",
   "Leadership Training",
-  "Volunteer / Short-term Projects",
-  "Large Group",
-  "Vision Trip",
+  "Volunteer",
+  "Short-term Mission",
 ];
 
 const growthAreas = [
@@ -63,8 +62,10 @@ export default function ConnectForm({
     return (
       <SubmissionSuccess
         title={t("You're All Set!")}
-        message="Thanks for reaching out to YEFI! We've received your information and a member of our team will be in touch with you soon to help you find the right opportunity."
-        footnote="In the meantime, feel free to explore more ways to get involved."
+        message={t(
+          "Thanks for reaching out to YEFI! We've received your information and a member of our team will be in touch with you soon to help you find the right opportunity.",
+        )}
+        footnote={t("In the meantime, feel free to explore more ways to get involved.")}
       />
     );
   }
@@ -78,7 +79,7 @@ export default function ConnectForm({
       className="flex flex-col gap-8 rounded-2xl bg-white p-8 sm:p-12"
     >
       <div className="space-y-2.5">
-        <h1 className={titleClassName}>{title}</h1>
+        <h1 className={titleClassName}>{t(title)}</h1>
         <p className="text-[14px] leading-[17px] text-[#6b737d]">
           {t("Interested in studying the Bible or getting involved with YEFI?")}
           <br />
@@ -104,7 +105,7 @@ export default function ConnectForm({
               {interests.map((interest) => (
                 <LabeledCheckboxField
                   key={interest}
-                  label={interest}
+                  label={t(interest)}
                   name="interests"
                 />
               ))}
@@ -133,7 +134,7 @@ export default function ConnectForm({
         </p>
         <div className="space-y-2.5">
           {growthAreas.map((area) => (
-            <LabeledCheckboxField key={area} label={area} name="growthAreas" />
+            <LabeledCheckboxField key={area} label={t(area)} name="growthAreas" />
           ))}
         </div>
       </div>

@@ -45,7 +45,9 @@ export default function VolunteerForm() {
       <SubmissionSuccess
         className="mx-auto mt-10 max-w-[900px]"
         title={t("Thank You!")}
-        message="Thank you for your willingness to serve. A member of the YEF team will follow up with you shortly."
+        message={t(
+          "Thank you for your willingness to serve. A member of the YEF team will follow up with you shortly.",
+        )}
       />
     );
   }

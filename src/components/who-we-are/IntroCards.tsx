@@ -5,7 +5,7 @@ import Reveal from "@/components/ui/Reveal";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import { getT } from "@/lib/i18n/server";
 
-const cards = [
+const defaultCards = [
   {
     eyebrow: "NEW TO YEF?\nSTART YOUR\nJOURNEY HERE",
     title: "Welcome",
@@ -32,8 +32,38 @@ const cards = [
   },
 ];
 
-export default async function IntroCards() {
+const defaults = {
+  eyebrow: "Who we are",
+  heading: "Youth Evangelical Fellowship",
+};
+
+export type IntroCard = {
+  eyebrow?: string;
+  title?: string;
+  cta?: string;
+  image?: string;
+};
+
+export type IntroCardsContent = Partial<typeof defaults> & {
+  cards?: IntroCard[];
+};
+
+/**
+ * The three cards keep their bundled destinations (`href`) and alt text
+ * regardless of what an editor saves — they are fixed navigation to the
+ * three pages beneath Who We Are, not free content.
+ */
+export default async function IntroCards({
+  content,
+}: {
+  content?: IntroCardsContent;
+}) {
   const t = await getT();
+  const c = { ...defaults, ...content };
+  const cards = defaultCards.map((card, i) => ({
+    ...card,
+    ...(content?.cards?.[i] ?? {}),
+  }));
   return (
     <section className="font-body bg-white">
       <div className="mx-auto max-w-[1920px] px-6 pt-20 pb-16 sm:px-10 lg:px-[4.27%] lg:pt-[155px] lg:pb-[116px]">
@@ -45,10 +75,10 @@ export default async function IntroCards() {
           <div className="min-w-0 flex-1 lg:max-w-[1120px] lg:px-6">
             <Reveal>
               <p className="font-semibold text-xs text-[#626973] leading-[18px] tracking-[2.64px] uppercase">
-                {t("Who we are")}
+                {t(c.eyebrow)}
               </p>
               <h2 className="mt-3.5 font-display font-extrabold text-4xl text-[#0e1216] leading-[1] tracking-[-1.5906px] sm:text-5xl lg:text-[54.4px] 2xl:whitespace-nowrap">
-                {t("Youth Evangelical Fellowship")}
+                {t(c.heading)}
               </h2>
             </Reveal>
 

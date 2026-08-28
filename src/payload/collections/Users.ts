@@ -6,6 +6,7 @@ import {
   sectionOptions,
   superOnlyField,
   usersAccess,
+  usersReadAccess,
   type AdminUser,
 } from "@/payload/access";
 
@@ -15,14 +16,16 @@ export const Users: CollectionConfig = {
   labels: { singular: "Person", plural: "People & permissions" },
   admin: {
     useAsTitle: "email",
-    defaultColumns: ["email", "name", "role", "regions", "countries"],
+    defaultColumns: ["avatar", "email", "name", "role", "regions", "countries"],
     description:
       "Who can sign in, which country sites they are responsible for, and which parts of those sites they may edit.",
   },
   access: {
-    read: usersAccess,
+    read: usersReadAccess,
     // Handing out accounts is how permissions are granted, so it stays with
-    // super admins rather than following the country scope.
+    // super admins rather than following the country scope. Subadmins and
+    // country/continental admins alike can see the People list, but only a
+    // super admin can add or remove someone from it.
     create: ({ req: { user } }) => isSuper(user as AdminUser | null),
     delete: ({ req: { user } }) => isSuper(user as AdminUser | null),
     update: usersAccess,
@@ -45,22 +48,30 @@ export const Users: CollectionConfig = {
       type: "text",
     },
     {
+      name: "avatar",
+      type: "upload",
+      relationTo: "media",
+      admin: {
+        description: "Shown next to their name in the admin. Anyone can set their own.",
+      },
+    },
+    {
       name: "role",
       type: "select",
       required: true,
       defaultValue: "editor",
       options: [
-        { label: "Super admin — every country, every section", value: "super" },
+        { label: "Super Admin — every country, every section", value: "super" },
         {
-          label: "Continental admin — every country in their regions",
+          label: "Admin (Continental) — every country in their regions",
           value: "region-admin",
         },
         {
-          label: "Country admin — their countries, every section",
+          label: "Admin (Country) — their countries, every section",
           value: "country-admin",
         },
         {
-          label: "Editor — their countries, listed sections only",
+          label: "Subadmin — their countries, listed sections only",
           value: "editor",
         },
       ],

@@ -64,13 +64,17 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    members: MemberAuthOperations;
   };
   blocks: {};
   collections: {
     pages: Page;
     posts: Post;
+    'photo-events': PhotoEvent;
     media: Media;
     users: User;
+    members: Member;
+    resources: Resource;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,8 +84,11 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    'photo-events': PhotoEventsSelect<false> | PhotoEventsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    members: MembersSelect<false> | MembersSelect<true>;
+    resources: ResourcesSelect<false> | ResourcesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -97,13 +104,31 @@ export interface Config {
   widgets: {
     collections: CollectionsWidget;
   };
-  user: User;
+  user: User | Member;
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface MemberAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -136,7 +161,7 @@ export interface Page {
   /**
    * Which page of the country's site this lays out.
    */
-  route: 'home';
+  route: 'home' | 'who-we-are';
   country:
     | 'int'
     | 'ao'
@@ -321,6 +346,77 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'movement';
+          }
+        | {
+            image?: (number | null) | Media;
+            heading?: string | null;
+            body?: string | null;
+            /**
+             * Shown after the bolded label “Mission Statement:” in the hero.
+             */
+            missionBody?: string | null;
+            portrait?: (number | null) | Media;
+            /**
+             * The short pull-quote over the portrait.
+             */
+            quote?: string | null;
+            /**
+             * e.g. “- Dr. Mark Wagner, President of YEF”.
+             */
+            signature?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'whoWeAreHero';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            /**
+             * Always the three cards in this order (Welcome, Membership, Statement of Faith) — only their words and photo are editable here.
+             */
+            cards?:
+              | {
+                  image?: (number | null) | Media;
+                  /**
+                   * A line break here breaks the label.
+                   */
+                  eyebrow?: string | null;
+                  title?: string | null;
+                  cta?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'introCards';
+          }
+        | {
+            heading?: string | null;
+            body?: string | null;
+            image?: (number | null) | Media;
+            /**
+             * Always the same three pillars, in order — only the title and body are editable; the icon is fixed.
+             */
+            pillars?:
+              | {
+                  title?: string | null;
+                  body?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'visionMission';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'storiesNews';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'missionSchoolCta';
           }
       )[]
     | null;
@@ -642,6 +738,181 @@ export interface Post {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * A batch of photos from one event. The first photo is used as the cover tile.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photo-events".
+ */
+export interface PhotoEvent {
+  id: number;
+  country:
+    | 'int'
+    | 'ao'
+    | 'ar'
+    | 'au'
+    | 'at'
+    | 'bd'
+    | 'be'
+    | 'br'
+    | 'cm'
+    | 'ca'
+    | 'cl'
+    | 'co'
+    | 'ci'
+    | 'cz'
+    | 'cd'
+    | 'do'
+    | 'ke'
+    | 'eg'
+    | 'et'
+    | 'fj'
+    | 'fr'
+    | 'de'
+    | 'gh'
+    | 'gr'
+    | 'gt'
+    | 'ht'
+    | 'hn'
+    | 'hu'
+    | 'in'
+    | 'id'
+    | 'il'
+    | 'it'
+    | 'jp'
+    | 'kz'
+    | 'mg'
+    | 'my'
+    | 'mx'
+    | 'mn'
+    | 'mz'
+    | 'mm'
+    | 'np'
+    | 'nl'
+    | 'nz'
+    | 'ng'
+    | 'pk'
+    | 'pe'
+    | 'ph'
+    | 'pl'
+    | 'pt'
+    | 'ro'
+    | 'ru'
+    | 'rw'
+    | 'sg'
+    | 'sk'
+    | 'za'
+    | 'kr'
+    | 'es'
+    | 'lk'
+    | 'se'
+    | 'ch'
+    | 'tw'
+    | 'th'
+    | 'tr'
+    | 'ua'
+    | 'ae'
+    | 'gb'
+    | 'us'
+    | 'vn'
+    | 'zm';
+  /**
+   * Where this batch is published. A batch shown elsewhere is still edited here, by this country's team.
+   */
+  audience: 'own' | 'some' | 'all';
+  /**
+   * The other country sites that also show this batch.
+   */
+  distributeTo?:
+    | (
+        | 'int'
+        | 'ao'
+        | 'ar'
+        | 'au'
+        | 'at'
+        | 'bd'
+        | 'be'
+        | 'br'
+        | 'cm'
+        | 'ca'
+        | 'cl'
+        | 'co'
+        | 'ci'
+        | 'cz'
+        | 'cd'
+        | 'do'
+        | 'ke'
+        | 'eg'
+        | 'et'
+        | 'fj'
+        | 'fr'
+        | 'de'
+        | 'gh'
+        | 'gr'
+        | 'gt'
+        | 'ht'
+        | 'hn'
+        | 'hu'
+        | 'in'
+        | 'id'
+        | 'il'
+        | 'it'
+        | 'jp'
+        | 'kz'
+        | 'mg'
+        | 'my'
+        | 'mx'
+        | 'mn'
+        | 'mz'
+        | 'mm'
+        | 'np'
+        | 'nl'
+        | 'nz'
+        | 'ng'
+        | 'pk'
+        | 'pe'
+        | 'ph'
+        | 'pl'
+        | 'pt'
+        | 'ro'
+        | 'ru'
+        | 'rw'
+        | 'sg'
+        | 'sk'
+        | 'za'
+        | 'kr'
+        | 'es'
+        | 'lk'
+        | 'se'
+        | 'ch'
+        | 'tw'
+        | 'th'
+        | 'tr'
+        | 'ua'
+        | 'ae'
+        | 'gb'
+        | 'us'
+        | 'vn'
+        | 'zm'
+      )[]
+    | null;
+  /**
+   * e.g. Summer Mission Trip 2026 — Kenya.
+   */
+  title: string;
+  /**
+   * The web address for this batch, e.g. kenya-mission-trip-2026.
+   */
+  slug: string;
+  publishedAt: string;
+  photos: {
+    image: number | Media;
+    caption?: string | null;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Who can sign in, which country sites they are responsible for, and which parts of those sites they may edit.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -650,6 +921,10 @@ export interface Post {
 export interface User {
   id: number;
   name?: string | null;
+  /**
+   * Shown next to their name in the admin. Anyone can set their own.
+   */
+  avatar?: (number | null) | Media;
   role: 'super' | 'region-admin' | 'country-admin' | 'editor';
   /**
    * The continents this person is responsible for. Every country in them falls into their scope.
@@ -769,6 +1044,72 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Accounts for the Resources hub — approve a member here before they can sign in.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "members".
+ */
+export interface Member {
+  id: number;
+  name: string;
+  role: 'member' | 'leader' | 'staff' | 'minister';
+  /**
+   * A member can't sign in until this is checked.
+   */
+  approved?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'members';
+}
+/**
+ * Policies, training materials, forms, worship resources, and recorded messages shown on the Resources hub.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources".
+ */
+export interface Resource {
+  id: number;
+  title: string;
+  description?: string | null;
+  category: 'policy' | 'training' | 'forms' | 'worship' | 'media';
+  kind: 'document' | 'audio' | 'video' | 'link';
+  /**
+   * Only used when Kind is set to External link.
+   */
+  externalUrl?: string | null;
+  visibility: 'internal' | 'public';
+  /**
+   * Optional: a page section id (e.g. "leadership-training") to also surface this resource there.
+   */
+  relatedSlug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -801,18 +1142,35 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
+        relationTo: 'photo-events';
+        value: number | PhotoEvent;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'members';
+        value: number | Member;
+      } | null)
+    | ({
+        relationTo: 'resources';
+        value: number | Resource;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'members';
+        value: number | Member;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -822,10 +1180,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: number;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'members';
+        value: number | Member;
+      };
   key?: string | null;
   value?:
     | {
@@ -966,6 +1329,64 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        whoWeAreHero?:
+          | T
+          | {
+              image?: T;
+              heading?: T;
+              body?: T;
+              missionBody?: T;
+              portrait?: T;
+              quote?: T;
+              signature?: T;
+              id?: T;
+              blockName?: T;
+            };
+        introCards?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              cards?:
+                | T
+                | {
+                    image?: T;
+                    eyebrow?: T;
+                    title?: T;
+                    cta?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        visionMission?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              image?: T;
+              pillars?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        storiesNews?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        missionSchoolCta?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -991,6 +1412,27 @@ export interface PostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photo-events_select".
+ */
+export interface PhotoEventsSelect<T extends boolean = true> {
+  country?: T;
+  audience?: T;
+  distributeTo?: T;
+  title?: T;
+  slug?: T;
+  publishedAt?: T;
+  photos?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1041,6 +1483,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  avatar?: T;
   role?: T;
   regions?: T;
   countries?: T;
@@ -1061,6 +1504,55 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "members_select".
+ */
+export interface MembersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  approved?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources_select".
+ */
+export interface ResourcesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  category?: T;
+  kind?: T;
+  externalUrl?: T;
+  visibility?: T;
+  relatedSlug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

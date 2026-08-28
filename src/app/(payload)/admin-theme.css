@@ -1,0 +1,45 @@
+/**
+ * Payload's default admin theme puts the nav column and the main content on
+ * the same background. This splits them: a black nav column against a light
+ * gray content area in light mode, and both black in dark mode so the split
+ * disappears rather than fighting the dark palette.
+ *
+ * Targets Payload's own class names (.nav, .template-default__wrap) rather
+ * than its `--theme-*` variables, since overriding those would also recolor
+ * every other themed surface in the admin (fields, drawers, tables, …).
+ */
+
+html[data-theme="light"] .template-default .nav {
+  background-color: #0a0a0a;
+  border-right-color: #0a0a0a;
+}
+
+html[data-theme="light"] .template-default .nav,
+html[data-theme="light"] .template-default .nav a,
+html[data-theme="light"] .template-default .nav button,
+html[data-theme="light"] .template-default .nav__label {
+  color: #e6e6e6;
+}
+
+html[data-theme="light"] .template-default .nav svg {
+  color: inherit;
+}
+
+html[data-theme="light"] .template-default .nav__link-indicator {
+  background: #ffffff;
+}
+
+html[data-theme="light"] .template-default__wrap {
+  background-color: #f2f2f2;
+}
+
+html[data-theme="dark"] .template-default .nav,
+html[data-theme="dark"] .template-default__wrap {
+  background-color: #0a0a0a;
+}
+
+/* Same near-black on both sides, but a faint seam so the nav still reads as
+   its own panel rather than one undivided slab. */
+html[data-theme="dark"] .template-default .nav {
+  border-right-color: #262626;
+}

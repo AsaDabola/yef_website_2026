@@ -30,7 +30,9 @@ export default function ChapterAffiliationForm() {
       <SubmissionSuccess
         className="mt-6 max-w-[700px]"
         title={t("You're All Set!")}
-        message="Thanks for applying to affiliate your chapter with YEF. A regional coordinator will follow up with your leadership team soon."
+        message={t(
+          "Thanks for applying to affiliate your chapter with YEF. A regional coordinator will follow up with your leadership team soon.",
+        )}
       />
     );
   }
@@ -69,7 +71,7 @@ export default function ChapterAffiliationForm() {
         </a>
         <FileField
           label={t("Attach completed application form (optional)")}
-          hint="PDF — up to 10MB"
+          hint={t("PDF — up to 10MB")}
           name="applicationFile"
         />
       </div>
@@ -107,7 +109,7 @@ export default function ChapterAffiliationForm() {
         </a>
         <FileField
           label={t("Attach signed chapter agreement (optional)")}
-          hint="PDF — up to 10MB"
+          hint={t("PDF — up to 10MB")}
           name="agreementFile"
         />
         <CheckboxField

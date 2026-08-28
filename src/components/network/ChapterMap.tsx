@@ -84,7 +84,7 @@ export default function ChapterMap() {
               >
                 {countries.map((option) => (
                   <option key={option} value={option}>
-                    {option === "All" ? "All Countries" : option}
+                    {option === "All" ? t("All Countries") : option}
                   </option>
                 ))}
               </select>
@@ -98,7 +98,7 @@ export default function ChapterMap() {
               >
                 {cities.map((option) => (
                   <option key={option} value={option}>
-                    {option === "All" ? "All Cities" : option}
+                    {option === "All" ? t("All Cities") : option}
                   </option>
                 ))}
               </select>

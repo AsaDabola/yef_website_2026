@@ -42,7 +42,7 @@ export default async function GetInvolvedFeature({
           {title}
         </h2>
         <p className="mt-[34px] max-w-[734px] font-medium text-[18.9px] text-[#4b5565] leading-[30px]">
-          {intro}
+          {t(intro)}
         </p>
 
         <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">

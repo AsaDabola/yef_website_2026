@@ -23,7 +23,11 @@ export default function DonationForm() {
       <SubmissionSuccess
         className="mx-auto max-w-[900px]"
         title={t("Thank You!")}
-        message={`Your ${frequency.toLowerCase()} gift of $${displayAmount} helps students grow in faith, go on mission, and lead others closer to Christ.`}
+        message={t(
+          "Your {frequency} gift of {amount} helps students grow in faith, go on mission, and lead others closer to Christ.",
+        )
+          .replace("{frequency}", t(frequency))
+          .replace("{amount}", `$${displayAmount}`)}
       />
     );
   }
@@ -61,7 +65,7 @@ export default function DonationForm() {
                   : "text-v2-muted-dark-2 hover:text-v2-navy"
               }`}
             >
-              {option}
+              {t(option)}
             </button>
           ))}
         </div>

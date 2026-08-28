@@ -1,5 +1,6 @@
 import Image from "next/image";
 import FeatureCard from "@/components/who-we-are/FeatureCard";
+import Link from "@/components/ui/LocaleLink";
 import { getT } from "@/lib/i18n/server";
 
 export default async function MinistrySection({
@@ -10,6 +11,7 @@ export default async function MinistrySection({
   image,
   alt,
   ctas,
+  cardTitle,
 }: {
   id: string;
   title: string;
@@ -18,6 +20,8 @@ export default async function MinistrySection({
   image: string;
   alt: string;
   ctas?: { label: string; href: string; primary?: boolean }[];
+  /** Overrides the caption on the photo card when it should differ from the section heading. */
+  cardTitle?: string;
 }) {
   const t = await getT();
   return (
@@ -66,8 +70,8 @@ export default async function MinistrySection({
                   <ul key={i} className="space-y-[9px]">
                     {column.map((item) => (
                       <li key={item}>
-                        <a
-                          href="#"
+                        <Link
+                          href="/resources"
                           className="inline-flex items-center gap-2 text-[15.8px] text-black leading-[20.8px] transition-opacity hover:opacity-70"
                         >
                           <Image
@@ -79,9 +83,9 @@ export default async function MinistrySection({
                             className="shrink-0"
                           />
                           <span className="border-[#0066cf] border-b pb-[2px]">
-                            {item}
+                            {t(item)}
                           </span>
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -95,7 +99,7 @@ export default async function MinistrySection({
           image={image}
           alt={alt}
           eyebrow={t("Get Involved")}
-          title={title}
+          title={cardTitle ?? title}
           className="justify-self-center lg:justify-self-end"
         />
       </div>

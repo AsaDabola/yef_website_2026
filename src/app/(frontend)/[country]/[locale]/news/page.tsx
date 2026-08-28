@@ -4,6 +4,7 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import NewsGrid from "@/components/news/NewsGrid";
 import { getNewsArticles } from "@/lib/posts";
+import { getPhotoEvents } from "@/lib/photoEvents";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
@@ -20,7 +21,10 @@ export const revalidate = 60;
 export default async function NewsPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
-  const posts = await getNewsArticles();
+  const [posts, photoEvents] = await Promise.all([
+    getNewsArticles(),
+    getPhotoEvents(),
+  ]);
 
   return (
     <>
@@ -39,6 +43,9 @@ export default async function NewsPage({ params }: { params: LocaleParams }) {
           {/* The frame's band: 176px of black fading 0.2 to clear, carrying
               the nav over the water. */}
           <div className="absolute inset-x-0 top-0 h-[176px] bg-gradient-to-b from-black/20 via-black/20 via-50% to-transparent" />
+          {/* A scrim over the left half where the headline and copy sit — the
+              lake photo is bright enough there to wash out the white text. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 via-45% to-transparent" />
 
           <HeaderV2 />
 
@@ -79,7 +86,7 @@ export default async function NewsPage({ params }: { params: LocaleParams }) {
         <section className="mx-auto max-w-[1392px] px-6 pt-[74px] pb-16">
           <Breadcrumb label={t("News")} />
           <div className="mt-[98px]">
-            <NewsGrid posts={posts} />
+            <NewsGrid posts={posts} photoEvents={photoEvents} />
           </div>
         </section>
       </main>

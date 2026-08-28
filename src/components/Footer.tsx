@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import {
+  FacebookIcon,
   InstagramIcon,
-  LinkArrowIcon,
-  PinIcon,
+  XIcon,
 } from "@/components/ui/SocialIcons";
-import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
+import { CountryPicker } from "@/components/i18n/SitePicker";
 import { getSiteName } from "@/components/ui/SiteWordmark";
 import { getT } from "@/lib/i18n/server";
 
@@ -29,7 +29,7 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "Bible Studies", href: "/get-involved#bible-studies" },
       { label: "Summer Training", href: "/get-involved#summer-training" },
-      { label: "Mission Trip", href: "/get-involved/mission-trip" },
+      { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
       { label: "Volunteer", href: "/get-involved/volunteer" },
       { label: "Internship", href: "/get-involved#internship" },
       { label: "Discipleship", href: "/get-involved#discipleship" },
@@ -55,9 +55,17 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
 ];
 
 const socialLinks = [
-  { label: "Pinterest", href: "#", Icon: PinIcon },
-  { label: "Link", href: "#", Icon: LinkArrowIcon },
-  { label: "Instagram", href: "#", Icon: InstagramIcon },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/youthevangelicalfellowship/",
+    Icon: FacebookIcon,
+  },
+  { label: "X", href: "https://x.com/YEF_Intl", Icon: XIcon },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/yef_international/",
+    Icon: InstagramIcon,
+  },
 ];
 
 export default async function Footer() {
@@ -111,7 +119,9 @@ export default async function Footer() {
                   <Link
                     key={label}
                     href={href}
-                    aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t(label)}
                     className="flex size-8 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:border-white"
                   >
                     <Icon className="size-4" />
@@ -148,7 +158,6 @@ export default async function Footer() {
         <div className="mx-auto flex max-w-[1800px] flex-col items-center gap-4 px-6 py-6 lg:px-16">
           <div className="flex items-center gap-2">
             <CountryPicker placement="up" />
-            <LanguagePicker placement="up" />
           </div>
           <p className="text-center font-body font-medium text-base leading-[1.6] text-yef-gray">
             {t("Copyright ©")} {new Date().getFullYear()}{" "}

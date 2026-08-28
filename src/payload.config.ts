@@ -6,8 +6,11 @@ import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { Media } from "@/payload/collections/Media";
+import { Members } from "@/payload/collections/Members";
 import { Pages } from "@/payload/collections/Pages";
+import { PhotoEvents } from "@/payload/collections/PhotoEvents";
 import { Posts } from "@/payload/collections/Posts";
+import { Resources } from "@/payload/collections/Resources";
 import { Users } from "@/payload/collections/Users";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -35,7 +38,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Pages, Posts, Media, Users],
+  collections: [Pages, Posts, PhotoEvents, Media, Users, Members, Resources],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -51,7 +54,7 @@ export default buildConfig({
   plugins: blobToken
     ? [
         vercelBlobStorage({
-          collections: { [Media.slug]: true },
+          collections: { [Media.slug]: true, [Resources.slug]: true },
           token: blobToken,
         }),
       ]

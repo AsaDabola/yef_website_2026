@@ -192,7 +192,7 @@ export default async function YefMissionSchoolPage({ params }: { params: LocaleP
                     <li key={item} className="flex items-center gap-2.5">
                       <ArrowRightIcon className="size-4 shrink-0 text-yef-primary" />
                       <span className="border-b border-v2-border pb-1 text-sm text-v2-navy leading-none">
-                        {item}
+                        {t(item)}
                       </span>
                     </li>
                   ))}
@@ -283,7 +283,7 @@ export default async function YefMissionSchoolPage({ params }: { params: LocaleP
                     <li key={item} className="flex items-start gap-3">
                       <ArrowRightIcon className="mt-1 size-5 shrink-0 text-white" />
                       <span className="border-b border-white/30 pb-1 text-lg text-white leading-snug">
-                        {item}
+                        {t(item)}
                       </span>
                     </li>
                   ))}

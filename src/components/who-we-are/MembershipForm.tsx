@@ -18,7 +18,9 @@ export default function MembershipForm() {
       <SubmissionSuccess
         className="mt-6 max-w-[700px]"
         title={t("You're All Set!")}
-        message="Thanks for applying to join YEF. A member of our team will reach out to you soon."
+        message={t(
+          "Thanks for applying to join YEF. A member of our team will reach out to you soon.",
+        )}
       />
     );
   }

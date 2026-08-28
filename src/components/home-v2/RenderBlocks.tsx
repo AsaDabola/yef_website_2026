@@ -13,6 +13,18 @@ import Testimonials from "@/components/home-v2/Testimonials";
 import WhyTheYoung, {
   type ProofContent,
 } from "@/components/home-v2/WhyTheYoung";
+import WhoWeAreHero, {
+  type WhoWeAreHeroContent,
+} from "@/components/who-we-are/WhoWeAreHero";
+import IntroCards, {
+  type IntroCard,
+  type IntroCardsContent,
+} from "@/components/who-we-are/IntroCards";
+import VisionMission, {
+  type VisionMissionContent,
+} from "@/components/who-we-are/VisionMission";
+import StoriesNews from "@/components/who-we-are/StoriesNews";
+import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 
 /** A media upload as Payload returns it once populated. */
 type Upload = { url?: string | null; alt?: string | null } | number | null;
@@ -105,6 +117,56 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
             return <Giving key={key} />;
           case "movement":
             return <AroundMovement key={key} />;
+          case "whoWeAreHero": {
+            const content: WhoWeAreHeroContent = {
+              image: imageOf(block.image as Upload),
+              heading: block.heading as string,
+              body: block.body as string,
+              missionBody: block.missionBody as string,
+              portrait: imageOf(block.portrait as Upload),
+              portraitAlt: altOf(block.portrait as Upload),
+              quote: block.quote as string,
+              signature: block.signature as string,
+            };
+            return <WhoWeAreHero key={key} content={prune(content)} />;
+          }
+          case "introCards": {
+            const rows = (block.cards ?? []) as {
+              image: Upload;
+              eyebrow: string;
+              title: string;
+              cta: string;
+            }[];
+            const cards: IntroCard[] = rows.map((row) => ({
+              image: imageOf(row.image),
+              eyebrow: row.eyebrow,
+              title: row.title,
+              cta: row.cta,
+            }));
+            const content: IntroCardsContent = {
+              eyebrow: block.eyebrow as string,
+              heading: block.heading as string,
+              cards: cards.length ? cards : undefined,
+            };
+            return <IntroCards key={key} content={prune(content)} />;
+          }
+          case "visionMission": {
+            const pillars = (block.pillars ?? []) as {
+              title: string;
+              body: string;
+            }[];
+            const content: VisionMissionContent = {
+              heading: block.heading as string,
+              body: block.body as string,
+              image: imageOf(block.image as Upload),
+              pillars: pillars.length ? pillars : undefined,
+            };
+            return <VisionMission key={key} content={prune(content)} />;
+          }
+          case "storiesNews":
+            return <StoriesNews key={key} />;
+          case "missionSchoolCta":
+            return <MissionSchoolCta key={key} />;
           default:
             return null;
         }
