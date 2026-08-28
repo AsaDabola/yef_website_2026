@@ -13,7 +13,6 @@ import { useT } from "@/lib/i18n/client";
 const interests = [
   "Bible Studies",
   "Discipleship",
-  "Mission Trip",
   "Campus Evangelism",
   "Summer Training",
   "Internship",
