@@ -33,25 +33,6 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
             <div className="min-w-0 flex-1">
               <Breadcrumb label={t("Get Involved")} />
 
-              <div className="mt-10 flex flex-col items-start justify-between gap-6 rounded-2xl border border-[#dce3f5] bg-[#f1f6ff] p-8 sm:flex-row sm:items-center">
-                <div>
-                  <h2 className="font-display font-bold text-xl text-black">
-                    {t("Not sure where to start?")}
-                  </h2>
-                  <p className="mt-2 max-w-[520px] text-[15px] text-[#4b5565] leading-[24px]">
-                    {t(
-                      "Tell us what you're interested in, and we'll help you find the right opportunity.",
-                    )}
-                  </p>
-                </div>
-                <a
-                  href="/get-involved/apply"
-                  className="shrink-0 rounded-full bg-[#0066cf] px-8 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
-                >
-                  {t("Tell Us Your Interests")}
-                </a>
-              </div>
-
               <MinistrySection
                 id="bible-studies"
                 title={t("Bible Studies")}
@@ -164,6 +145,23 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 image="/images/get-involved/volunteering-donation-drive.png"
                 alt={t("Volunteers sorting clothing at a donation drive")}
               />
+
+              <div className="mt-16 flex flex-col items-center gap-4 rounded-2xl border border-[#dce3f5] bg-[#f1f6ff] px-8 py-14 text-center">
+                <h2 className="font-display font-bold text-2xl text-black">
+                  {t("Still Not Sure Where to Start?")}
+                </h2>
+                <p className="max-w-[480px] text-[15px] text-[#4b5565] leading-[24px]">
+                  {t(
+                    "Tell us what you're interested in, and we'll help you find the right opportunity.",
+                  )}
+                </p>
+                <a
+                  href="/get-involved/apply"
+                  className="mt-2 rounded-full bg-[#0066cf] px-8 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
+                >
+                  {t("Tell Us Your Interests")}
+                </a>
+              </div>
             </div>
           </div>
         </section>
