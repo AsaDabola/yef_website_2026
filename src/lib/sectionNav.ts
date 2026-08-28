@@ -28,4 +28,5 @@ export const getInvolvedLinks = [
   { label: "Discipleship", href: "/get-involved#discipleship" },
   { label: "Leadership Training", href: "/get-involved#leadership-training" },
   { label: "Volunteer", href: "/get-involved/volunteer" },
+  { label: "Submit Your Story", href: "/submit-your-story" },
 ];

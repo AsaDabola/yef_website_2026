@@ -33,6 +33,7 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Volunteer", href: "/get-involved/volunteer" },
       { label: "Internship", href: "/get-involved#internship" },
       { label: "Discipleship", href: "/get-involved#discipleship" },
+      { label: "Submit Your Story", href: "/submit-your-story" },
     ],
   },
   {

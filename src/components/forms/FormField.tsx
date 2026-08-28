@@ -98,14 +98,16 @@ export function FileField({
   label,
   hint,
   name,
+  accept,
 }: {
   label: string;
   hint: string;
   name: string;
+  accept?: string;
 }) {
   return (
     <label className="flex h-[90px] cursor-pointer flex-col items-center justify-center gap-[5px] rounded-[16px] border-[1.5px] border-black/20 border-dashed bg-[#fafaf7] px-5 py-[22px] text-center transition-colors hover:border-v2-accent">
-      <input type="file" name={name} className="sr-only" />
+      <input type="file" name={name} accept={accept} className="sr-only" />
       <span className="font-semibold text-[14px] text-black/75">{label}</span>
       <span className="text-[12.5px] text-black/40">{hint}</span>
     </label>

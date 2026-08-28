@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
+import { FileField } from "@/components/forms/FormField";
 import { LabeledTextField } from "@/components/forms/LabeledField";
 import { useT } from "@/lib/i18n/client";
 
@@ -76,6 +77,18 @@ export default function TestimonySubmission() {
         <p className="text-right text-[11px] leading-[13px] text-[#9ea3ab]">
           {t("Minimum 100 words")}
         </p>
+      </div>
+
+      <div className="space-y-3.5">
+        <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
+          {t("Photo")}
+        </p>
+        <FileField
+          label={t("Add a photo (optional)")}
+          hint={t("JPG or PNG — up to 10MB")}
+          name="photo"
+          accept="image/*"
+        />
       </div>
 
       <div className="space-y-3.5">
