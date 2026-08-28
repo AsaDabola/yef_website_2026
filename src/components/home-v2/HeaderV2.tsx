@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Get Involved", href: "/get-involved" },
   { label: "News", href: "/news" },
   { label: "Network", href: "/network" },
+  { label: "Resources", href: "/resources" },
 ];
 
 export default function HeaderV2() {
