@@ -78,7 +78,7 @@ export default function Header() {
               <Link
                 key={label}
                 href={href}
-                aria-label={label}
+                aria-label={t(label)}
                 className="text-white transition-opacity hover:opacity-80"
               >
                 <Icon className="size-[18px]" />
@@ -151,7 +151,7 @@ export default function Header() {
               <Link
                 key={label}
                 href={href}
-                aria-label={label}
+                aria-label={t(label)}
                 className="text-white transition-opacity hover:opacity-80"
               >
                 <Icon className="size-[18px]" />

@@ -75,7 +75,7 @@ export default async function Testimonials() {
                       {t(testimonial.name)}
                     </p>
                     <p className="text-[12.5px] text-v2-muted">
-                      {testimonial.place}
+                      {t(testimonial.place)}
                     </p>
                   </div>
                 </div>

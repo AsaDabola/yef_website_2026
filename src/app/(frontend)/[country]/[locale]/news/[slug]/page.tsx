@@ -43,7 +43,7 @@ function ShareButton({ label }: { label: string }) {
   );
 }
 
-function TagRow({ tags }: { tags: string[] }) {
+function TagRow({ tags, t }: { tags: string[]; t: (s: string) => string }) {
   return (
     <div className="flex flex-wrap gap-2">
       {tags.map((tag) => (
@@ -51,7 +51,7 @@ function TagRow({ tags }: { tags: string[] }) {
           key={tag}
           className="rounded-full border border-[#8996a7] px-3.5 py-1.5 font-semibold text-[13px] text-[#353b45]"
         >
-          {tag}
+          {t(tag)}
         </span>
       ))}
     </div>
@@ -82,7 +82,7 @@ export default async function NewsArticlePage({
       <main>
         <SubPageHero />
         <article className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
-          <Breadcrumb label={`News / ${article.title}`} />
+          <Breadcrumb label={`${t("News")} / ${t(article.title)}`} />
 
           {/* The frame sets the article head at 13.3/17.5, 44.8/60 and
               18.9/30 — the headline is semibold, not the extrabold the
@@ -98,7 +98,7 @@ export default async function NewsArticlePage({
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-            <TagRow tags={tags} />
+            <TagRow tags={tags} t={t} />
             <ShareButton label={t("Share")} />
           </div>
 
@@ -222,7 +222,7 @@ export default async function NewsArticlePage({
               )}
 
               <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#dcdfe5] pt-6">
-                <TagRow tags={tags} />
+                <TagRow tags={tags} t={t} />
                 <ShareButton label={t("Share")} />
               </div>
             </div>

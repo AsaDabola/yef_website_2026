@@ -77,7 +77,7 @@ export default async function OurMissionPage({ params }: { params: LocaleParams 
 </p>
                   <ul className="mt-8 max-w-[551px] space-y-0 text-[16.6px] text-yef-primary leading-[27.2px]">
                     {beliefs.map((belief) => (
-                      <li key={belief}>{belief}</li>
+                      <li key={belief}>{t(belief)}</li>
                     ))}
                   </ul>
                 </div>

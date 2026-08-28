@@ -111,7 +111,7 @@ export default async function Footer() {
                   <Link
                     key={label}
                     href={href}
-                    aria-label={label}
+                    aria-label={t(label)}
                     className="flex size-8 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:border-white"
                   >
                     <Icon className="size-4" />

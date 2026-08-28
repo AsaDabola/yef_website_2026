@@ -49,7 +49,7 @@ export default async function StatementOfFaithPage({ params }: { params: LocaleP
 
               <div className="mt-[96px] max-w-[1126px] space-y-[27.2px] text-[20px] text-black leading-[27.2px]">
                 {beliefs.map((belief) => (
-                  <p key={belief}>{belief}</p>
+                  <p key={belief}>{t(belief)}</p>
                 ))}
               </div>
             </div>

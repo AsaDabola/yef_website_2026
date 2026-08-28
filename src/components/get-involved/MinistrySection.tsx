@@ -83,7 +83,7 @@ export default async function MinistrySection({
                             className="shrink-0"
                           />
                           <span className="border-[#0066cf] border-b pb-[2px]">
-                            {item}
+                            {t(item)}
                           </span>
                         </Link>
                       </li>
