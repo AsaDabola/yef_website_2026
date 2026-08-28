@@ -146,18 +146,20 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 alt={t("Volunteers sorting clothing at a donation drive")}
               />
 
-              <div className="mt-16 flex flex-col items-center gap-4 rounded-2xl border border-[#dce3f5] bg-[#f1f6ff] px-8 py-14 text-center">
-                <h2 className="font-display font-bold text-2xl text-black">
-                  {t("Still Not Sure Where to Start?")}
-                </h2>
-                <p className="max-w-[480px] text-[15px] text-[#4b5565] leading-[24px]">
-                  {t(
-                    "Tell us what you're interested in, and we'll help you find the right opportunity.",
-                  )}
-                </p>
+              <div className="mt-16 flex flex-col items-start justify-between gap-5 rounded-2xl bg-v2-navy px-8 py-7 sm:flex-row sm:items-center">
+                <div>
+                  <h2 className="font-display font-bold text-lg text-white">
+                    {t("Still Not Sure Where to Start?")}
+                  </h2>
+                  <p className="mt-1 max-w-[440px] text-[14px] text-white/70 leading-[21px]">
+                    {t(
+                      "Tell us what you're interested in, and we'll help you find the right opportunity.",
+                    )}
+                  </p>
+                </div>
                 <a
                   href="/get-involved/apply"
-                  className="mt-2 rounded-full bg-[#0066cf] px-8 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
+                  className="shrink-0 rounded-full bg-white px-7 py-3.5 font-semibold text-[#00203f] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
                 >
                   {t("Tell Us Your Interests")}
                 </a>
