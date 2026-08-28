@@ -1,5 +1,6 @@
 import Image from "next/image";
 import FeatureCard from "@/components/who-we-are/FeatureCard";
+import Link from "@/components/ui/LocaleLink";
 import { getT } from "@/lib/i18n/server";
 
 export default async function MinistrySection({
@@ -69,8 +70,8 @@ export default async function MinistrySection({
                   <ul key={i} className="space-y-[9px]">
                     {column.map((item) => (
                       <li key={item}>
-                        <a
-                          href="#"
+                        <Link
+                          href="/resources"
                           className="inline-flex items-center gap-2 text-[15.8px] text-black leading-[20.8px] transition-opacity hover:opacity-70"
                         >
                           <Image
@@ -84,7 +85,7 @@ export default async function MinistrySection({
                           <span className="border-[#0066cf] border-b pb-[2px]">
                             {item}
                           </span>
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

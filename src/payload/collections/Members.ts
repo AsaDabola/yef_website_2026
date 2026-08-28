@@ -1,0 +1,82 @@
+import type { CollectionConfig } from "payload";
+import { APIError } from "payload";
+
+/**
+ * Public-facing accounts for the Resources hub: YEF students, leaders, staff,
+ * and ministers. Distinct from `users` (the CMS editors) — different people,
+ * different purpose, and mixing them would let a site visitor's account carry
+ * CMS edit rights.
+ *
+ * New accounts are unapproved until a `users` admin flips the checkbox in
+ * `/admin`; `beforeLogin` refuses to sign in anyone who isn't.
+ */
+export const Members: CollectionConfig = {
+  slug: "members",
+  auth: true,
+  labels: { singular: "Member", plural: "Members" },
+  admin: {
+    useAsTitle: "email",
+    defaultColumns: ["email", "name", "role", "approved"],
+    description:
+      "Accounts for the Resources hub — approve a member here before they can sign in.",
+  },
+  access: {
+    create: () => true,
+    read: ({ req: { user } }) => {
+      if (user?.collection === "users") return true;
+      if (user?.collection === "members") return { id: { equals: user.id } };
+      return false;
+    },
+    update: ({ req: { user } }) => {
+      if (user?.collection === "users") return true;
+      if (user?.collection === "members") return { id: { equals: user.id } };
+      return false;
+    },
+    delete: ({ req: { user } }) => user?.collection === "users",
+  },
+  hooks: {
+    beforeLogin: [
+      ({ user }) => {
+        if (!user.approved) {
+          throw new APIError(
+            "Your account is awaiting approval from a YEF staff member.",
+            403,
+            undefined,
+            true,
+          );
+        }
+        return user;
+      },
+    ],
+  },
+  fields: [
+    { name: "name", type: "text", required: true },
+    {
+      name: "role",
+      type: "select",
+      required: true,
+      defaultValue: "member",
+      options: [
+        { label: "Member", value: "member" },
+        { label: "Leader", value: "leader" },
+        { label: "Staff", value: "staff" },
+        { label: "Minister", value: "minister" },
+      ],
+      access: {
+        update: ({ req: { user } }) => user?.collection === "users",
+      },
+    },
+    {
+      name: "approved",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        position: "sidebar",
+        description: "A member can't sign in until this is checked.",
+      },
+      access: {
+        update: ({ req: { user } }) => user?.collection === "users",
+      },
+    },
+  ],
+};
