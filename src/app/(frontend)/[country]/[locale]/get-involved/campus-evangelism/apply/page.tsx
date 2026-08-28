@@ -41,7 +41,7 @@ export default async function MissionApplyPage({
             900px card inset a further 40px. */}
         <section className="mx-auto max-w-[1920px] px-6 pt-[115px] lg:pr-[42px] lg:pl-20">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-[165px]">
-            <div className="shrink-0 lg:w-[237px]">
+            <div className="shrink-0 lg:w-[237px] lg:sticky lg:top-32 lg:self-start">
               <GetInvolvedSubMenu />
             </div>
 
