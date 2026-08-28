@@ -27,7 +27,7 @@ export default async function DiscipleshipPage({ params }: { params: LocaleParam
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/discipleship.webp"
+            src="/images/get-involved/discipleship-hero.webp"
             alt=""
             fill
             priority
@@ -58,16 +58,16 @@ export default async function DiscipleshipPage({ params }: { params: LocaleParam
                 <GalleryMosaic
                   images={[
                     {
-                      src: "/images/get-involved/disciples-fellowship-collage.png",
-                      alt: "Students in discipleship fellowship together",
+                      src: "/images/get-involved/discipleship-friends-sky.webp",
+                      alt: "A group of friends laughing together outdoors",
                     },
                     {
-                      src: "/images/get-involved/disciples-library-group.png",
-                      alt: "A small group studying together in the library",
+                      src: "/images/get-involved/discipleship-embrace.webp",
+                      alt: "Believers embracing one another in fellowship",
                     },
                     {
-                      src: "/images/get-involved/disciples-fall-event.png",
-                      alt: "Students gathered at a discipleship event",
+                      src: "/images/get-involved/discipleship-praying-hands.webp",
+                      alt: "A student praying over an open Bible",
                     },
                   ]}
                 />
@@ -132,8 +132,8 @@ export default async function DiscipleshipPage({ params }: { params: LocaleParam
           <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
             <div className="relative min-h-[320px] w-full lg:min-h-[480px]">
               <Image
-                src="/images/get-involved/campus-library-group.png"
-                alt={t("Students meeting together on campus")}
+                src="/images/get-involved/discipleship-hand-raised.webp"
+                alt={t("A young man raising his hand in worship at sunset")}
                 fill
                 sizes="(min-width: 1024px) 672px, 100vw"
                 className="object-cover"
