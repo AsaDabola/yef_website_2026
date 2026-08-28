@@ -3,20 +3,7 @@
 import Link from "@/components/ui/LocaleLink";
 import { usePathname } from "next/navigation";
 import { useT } from "@/lib/i18n/client";
-
-const links = [
-  { label: "Bible Studies", href: "/get-involved#bible-studies" },
-  { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
-  { label: "Summer Training", href: "/get-involved#summer-training" },
-  {
-    label: "Short-term Mission",
-    href: "/get-involved#short-term-mission",
-  },
-  { label: "Internship", href: "/get-involved#internship" },
-  { label: "Discipleship", href: "/get-involved#discipleship" },
-  { label: "Leadership Training", href: "/get-involved#leadership-training" },
-  { label: "Volunteer", href: "/get-involved/volunteer" },
-];
+import { getInvolvedLinks as links } from "@/lib/sectionNav";
 
 export default function GetInvolvedSubMenu() {
   const t = useT();
@@ -25,16 +12,16 @@ export default function GetInvolvedSubMenu() {
   return (
     <nav
       aria-label={t("Get Involved section navigation")}
-      className="w-full max-w-[237px]"
+      className="w-full lg:max-w-[237px]"
     >
       <p className="font-bold text-sm text-yef-primary">{t("Get Involved")}</p>
-      <ul className="mt-4">
+      <ul className="mt-4 flex gap-7 overflow-x-auto whitespace-nowrap pb-2 lg:flex-col lg:gap-0 lg:overflow-visible lg:whitespace-normal lg:pb-0">
         {links.map((link) => {
           const active = link.href.startsWith("/get-involved/")
             ? pathname === link.href
             : pathname === "/get-involved" && link.href === "/get-involved";
           return (
-            <li key={link.label}>
+            <li key={link.label} className="shrink-0">
               <Link
                 href={link.href}
                 className={`block border-b py-3 text-lg transition-colors ${

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import { CountryPicker } from "@/components/i18n/SitePicker";
 import {
+  ChevronDownIcon,
   FacebookIcon,
   InstagramIcon,
   SearchIcon,
@@ -12,10 +13,11 @@ import {
 } from "@/components/ui/SocialIcons";
 import { useT } from "@/lib/i18n/client";
 import { useScrolled } from "@/lib/useScrolled";
+import { getInvolvedLinks, whoWeAreLinks } from "@/lib/sectionNav";
 
 const navLinks = [
-  { label: "Who We Are", href: "/who-we-are" },
-  { label: "Get Involved", href: "/get-involved" },
+  { label: "Who We Are", href: "/who-we-are", subLinks: whoWeAreLinks },
+  { label: "Get Involved", href: "/get-involved", subLinks: getInvolvedLinks },
   { label: "News", href: "/news" },
   { label: "Network", href: "/network" },
 ];
@@ -37,6 +39,7 @@ const socialLinks = [
 export default function Header() {
   const t = useT();
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
   const scrolled = useScrolled();
 
   return (
@@ -142,16 +145,51 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="fixed inset-x-6 top-[104px] z-40 flex flex-col gap-1 rounded-2xl border border-white/15 bg-yef-navy/95 p-4 shadow-xl backdrop-blur-sm lg:hidden">
+        <nav className="fixed inset-x-6 top-[104px] z-40 flex max-h-[calc(100vh-140px)] flex-col gap-1 overflow-y-auto rounded-2xl border border-white/15 bg-yef-navy/95 p-4 shadow-xl backdrop-blur-sm lg:hidden">
           {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-3 font-medium text-lg text-white transition-colors hover:bg-white/10"
-            >
-              {t(link.label)}
-            </Link>
+            <div key={link.label}>
+              <div className="flex items-center">
+                <Link
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="flex-1 rounded-lg px-3 py-3 font-medium text-lg text-white transition-colors hover:bg-white/10"
+                >
+                  {t(link.label)}
+                </Link>
+                {link.subLinks && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExpanded((cur) => (cur === link.label ? null : link.label))
+                    }
+                    aria-expanded={expanded === link.label}
+                    aria-label={t("Toggle submenu")}
+                    className="flex size-11 shrink-0 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10"
+                  >
+                    <ChevronDownIcon
+                      className={`size-4 shrink-0 transition-transform ${
+                        expanded === link.label ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                )}
+              </div>
+              {link.subLinks && expanded === link.label && (
+                <ul className="mb-1 ml-3 flex flex-col gap-0.5 border-white/15 border-l pl-3">
+                  {link.subLinks.map((sub) => (
+                    <li key={sub.label}>
+                      <Link
+                        href={sub.href}
+                        onClick={() => setOpen(false)}
+                        className="block rounded-lg px-3 py-2.5 text-base text-white/75 transition-colors hover:bg-white/10 hover:text-white"
+                      >
+                        {t(sub.label)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           ))}
           <div className="mt-2 flex flex-wrap items-center gap-2 border-t border-white/15 px-3 pt-4">
             <CountryPicker />
