@@ -43,6 +43,9 @@ export default async function NewsPage({ params }: { params: LocaleParams }) {
           {/* The frame's band: 176px of black fading 0.2 to clear, carrying
               the nav over the water. */}
           <div className="absolute inset-x-0 top-0 h-[176px] bg-gradient-to-b from-black/20 via-black/20 via-50% to-transparent" />
+          {/* A scrim over the left half where the headline and copy sit — the
+              lake photo is bright enough there to wash out the white text. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 via-45% to-transparent" />
 
           <HeaderV2 />
 
