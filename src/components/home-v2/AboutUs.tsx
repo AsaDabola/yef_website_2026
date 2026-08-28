@@ -7,13 +7,13 @@ const defaults = {
   image: "/images/home-v2/about-us-photo.png",
   imageAlt: "Students celebrating together on campus",
   eyebrow: "About Us",
-  heading: "We are a fellowship of the",
-  headingAccent: "young",
-  lead: "YEF is a group of proactive, outreaching Christians whose youth and passion are spent bringing glory to God’s name.",
-  body: "It began in 2009 with a handful of students in New York City who wanted more than a Sunday faith. They opened their Bibles between classes, prayed in dorm rooms, and invited whoever would come. What started on two campuses has become a fellowship present in more than forty countries.",
+  heading: "A global campus",
+  headingAccent: "fellowship",
+  lead: "YEF is a global evangelical fellowship where university students encounter Christ, grow in the Word, and learn to share the Gospel with others.",
+  body: "Founded in New York City in 2009, YEF began with students gathering around Scripture, prayer, and campus evangelism. As disciples were raised and new leaders were sent out, the fellowship expanded across cities and nations, united by the same Gospel and mission.",
   stats: [
-    { value: "40+", label: "COUNTRIES REACHED" },
-    { value: "2009", label: "FOUNDED IN NYC" },
+    { value: "WORD", label: "ROOTED IN SCRIPTURE" },
+    { value: "MISSION", label: "FROM CAMPUS TO NATIONS" },
   ],
 };
 
@@ -29,9 +29,9 @@ export default async function AboutUs({ content }: { content?: AboutUsContent })
   const c = { ...defaults, ...content };
   const stats = c.stats?.length ? c.stats : defaults.stats;
   return (
-    <section className="font-body bg-white">
+    <section className="font-body bg-v2-bg">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center lg:gap-[100px]">
           <Reveal className="group relative aspect-[620/700] w-full cursor-pointer overflow-hidden transition-transform duration-300 hover:-translate-y-1">
             <Image
               src={c.image}
@@ -64,7 +64,7 @@ export default async function AboutUs({ content }: { content?: AboutUsContent })
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <p className="font-display font-bold text-[44px] text-v2-accent tracking-[-1.32px]">
-                    {stat.value}
+                    {t(stat.value)}
                   </p>
                   <p className="mt-2 font-semibold text-xs text-v2-muted tracking-[1.56px] uppercase">
                     {t(stat.label)}

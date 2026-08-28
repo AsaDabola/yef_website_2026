@@ -23,7 +23,7 @@ const PROSE_FIELDS = new Set([
   // Field names the page blocks standardise on, so a section's bundled
   // defaults stay visible to the catalog once its copy moves into an object.
   "imageAlt", "headingAccent", "lead", "verse", "verseAccent", "reference",
-  "buttonLabel", "columns",
+  "buttonLabel", "columns", "value",
 ]);
 
 const files = [];
