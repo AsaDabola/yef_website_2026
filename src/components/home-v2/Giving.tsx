@@ -18,7 +18,7 @@ export default async function Giving() {
             <h2 className="mt-5 font-display font-bold text-4xl text-v2-navy tracking-[-0.4px] sm:text-5xl lg:text-[54px]">
               {t("Support the")}{" "}
               <span className="font-instrument-serif font-normal italic text-v2-accent">
-                mission
+                {t("mission")}
               </span>
               .
             </h2>

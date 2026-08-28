@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
-import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
+import { CountryPicker } from "@/components/i18n/SitePicker";
 import { useT } from "@/lib/i18n/client";
 import { useScrolled } from "@/lib/useScrolled";
 
@@ -66,7 +66,6 @@ export default function HeaderV2() {
           <div className="flex items-center gap-3">
             <div className="hidden items-center gap-2 lg:flex">
               <CountryPicker />
-              <LanguagePicker />
             </div>
 
             <Link
@@ -117,7 +116,6 @@ export default function HeaderV2() {
           ))}
           <div className="mt-2 flex flex-wrap items-center gap-2 border-white/15 border-t pt-3">
             <CountryPicker />
-            <LanguagePicker />
           </div>
         </nav>
       )}

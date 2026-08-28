@@ -5,7 +5,7 @@ import {
   LinkArrowIcon,
   PinIcon,
 } from "@/components/ui/SocialIcons";
-import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
+import { CountryPicker } from "@/components/i18n/SitePicker";
 import { getSiteName } from "@/components/ui/SiteWordmark";
 import { getT } from "@/lib/i18n/server";
 
@@ -111,7 +111,7 @@ export default async function Footer() {
                   <Link
                     key={label}
                     href={href}
-                    aria-label={label}
+                    aria-label={t(label)}
                     className="flex size-8 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:border-white"
                   >
                     <Icon className="size-4" />
@@ -148,7 +148,6 @@ export default async function Footer() {
         <div className="mx-auto flex max-w-[1800px] flex-col items-center gap-4 px-6 py-6 lg:px-16">
           <div className="flex items-center gap-2">
             <CountryPicker placement="up" />
-            <LanguagePicker placement="up" />
           </div>
           <p className="text-center font-body font-medium text-base leading-[1.6] text-yef-gray">
             {t("Copyright ©")} {new Date().getFullYear()}{" "}

@@ -51,7 +51,7 @@ export default function FindYourCampus() {
                   : "border border-v2-navy/13 text-v2-navy hover:border-v2-navy"
               }`}
             >
-              {chip}
+              {t(chip)}
             </button>
           ))}
           <Link
