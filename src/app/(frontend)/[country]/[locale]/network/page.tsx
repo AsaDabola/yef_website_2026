@@ -85,7 +85,7 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
 </h1>
           <p className="mt-4 max-w-xl text-v2-muted-dark leading-relaxed">
             
-{t("YEF chapters meet on campuses in more than 40 countries. Search the list or drop a pin to see who’s leading a fellowship near you.")}
+{t("YEF chapters meet on campuses around the world. Search the list or drop a pin to see who’s leading a fellowship near you.")}
 </p>
 
           <div className="mt-10">

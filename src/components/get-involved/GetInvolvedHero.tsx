@@ -36,7 +36,7 @@ export default async function GetInvolvedHero() {
           </p>
           <p className="font-medium text-lg text-white leading-[30px] xl:text-[19px]">
             {t(
-              "With more than 40 countries across the world, the YEF staff, volunteers and members are dedicated to using their talents and youth for kingdom building works. Our main activities for basic operation include:",
+              "Across the world, the YEF staff, volunteers and members are dedicated to using their talents and youth for kingdom building works. Our main activities for basic operation include:",
             )}
           </p>
         </div>
@@ -52,7 +52,7 @@ export default async function GetInvolvedHero() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 from-[14%] to-transparent to-[39%]" />
           <p className="absolute bottom-[8%] left-[6%] w-[181px] max-w-[45%] font-semibold text-[13px] text-white leading-[16.5px] tracking-[1.6045px] uppercase">
             {t(
-              "“YEF is a global movement empowering purpose-driven young leaders to ignite revival across campuses in 40+ countries.”",
+              "“YEF is a global movement empowering purpose-driven young leaders to ignite revival across campuses around the world.”",
             )}
           </p>
         </div>
