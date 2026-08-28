@@ -99,21 +99,7 @@ export default async function Footer() {
             />
           </Link>
 
-          <p className="mt-6 max-w-sm text-base text-yef-gray leading-[1.7]">
-            {t(
-              "A global evangelical campus fellowship sharing the Gospel, teaching the Bible, and raising disciples of Jesus Christ.",
-            )}
-          </p>
-
-          <div className="mt-5 space-y-1.5 text-base text-yef-gray">
-            <p>
-              <Link
-                href="mailto:info@yefi.org"
-                className="transition-opacity hover:opacity-80"
-              >
-                info@yefi.org
-              </Link>
-            </p>
+          <div className="mt-6 text-base text-yef-gray">
             <p>{t("519 S Park Ave. Sanford, FL 32771 USA")}</p>
           </div>
 
