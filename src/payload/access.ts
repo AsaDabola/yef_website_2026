@@ -154,7 +154,29 @@ export function distributedRead(): Access {
   };
 }
 
-/** Only super admins manage accounts; everyone else sees just their own. */
+/**
+ * Who can see a person's account in the People list. Everyone with an admin
+ * account can see their teammates — the people covering the same countries —
+ * so a country or continental admin can tell who else is on their site,
+ * without that visibility letting them touch another team's accounts.
+ */
+export const usersReadAccess: Access = ({ req: { user } }) => {
+  const u = user as AdminUser | null;
+  if (!u) return false;
+  if (isSuper(u)) return true;
+  const scope = scopeOf(u);
+  const clauses: Where[] = [{ id: { equals: u.id } }];
+  if (scope.length > 0) clauses.push({ countries: { in: scope } });
+  return { or: clauses };
+};
+
+/**
+ * Who can edit a person's account. Handing out permissions is a super admin's
+ * call, so this stays narrower than read: everyone else may only touch their
+ * own record — which is how they update their own name and avatar, since the
+ * role, region, country and section fields are separately locked to super
+ * admins at the field level regardless of who owns the document.
+ */
 export const usersAccess: Access = ({ req: { user } }) => {
   const u = user as AdminUser | null;
   if (!u) return false;

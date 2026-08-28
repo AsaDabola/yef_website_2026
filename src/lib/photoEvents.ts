@@ -1,6 +1,7 @@
 import "server-only";
-import { cmsConfigured } from "@/lib/posts";
+import { cmsConfigured, forThisCountry } from "@/lib/posts";
 import { getCountryCode } from "@/lib/i18n/request";
+import { INTERNATIONAL } from "@/lib/i18n/constants";
 
 export type PhotoEventPhoto = {
   url: string;
@@ -33,14 +34,61 @@ function formatDate(value: string) {
   });
 }
 
+function photosOf(
+  title: string,
+  dir: string,
+  files: string[],
+): PhotoEventPhoto[] {
+  return files.map((file, i) => ({
+    url: `/images/photo-news/${dir}/${file}`,
+    alt: `${title} — photo ${i + 1}`,
+  }));
+}
+
 /**
- * There is no bundled fallback here — unlike the news articles, these photo
- * batches have no design-time content to ship with the site. A country with
- * none published simply shows an empty Photo News tab until an editor adds
- * some in /admin.
+ * Ships with the site so the International site's Photo News tab is never
+ * empty before anyone has touched /admin. A country other than headquarters
+ * sees nothing here until its own team (or headquarters, distributing to
+ * them) publishes a batch in the CMS — matching how the rest of the site
+ * falls back to bundled content only for International.
+ */
+const fallbackPhotoEvents: PhotoEvent[] = [
+  {
+    slug: "yef-hq-retreat",
+    title: "YEF HQ Retreat",
+    date: "2025",
+    cover: "/images/photo-news/yef-hq-retreat/1.webp",
+    photos: photosOf("YEF HQ Retreat", "yef-hq-retreat", [
+      "1.webp",
+      "2.webp",
+      "3.webp",
+      "4.webp",
+      "5.webp",
+    ]),
+  },
+  {
+    slug: "2026-ministry-highlights",
+    title: "2026 Ministry Highlights",
+    date: "2026",
+    cover: "/images/photo-news/2026-ministry-highlights/1.webp",
+    photos: photosOf(
+      "2026 Ministry Highlights",
+      "2026-ministry-highlights",
+      ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
+    ),
+  },
+];
+
+/**
+ * Every read is scoped to the site the request is on, the same three ways a
+ * Post reaches a country: it belongs there, it was published to every
+ * country, or it was distributed there by name. That is how headquarters
+ * seeds International first and then pushes a batch out continent by
+ * continent, or country by country, rather than every site sharing one list.
  */
 export async function getPhotoEvents(): Promise<PhotoEvent[]> {
-  if (!cmsConfigured) return [];
+  const isInternational = getCountryCode() === INTERNATIONAL;
+  if (!cmsConfigured) return isInternational ? fallbackPhotoEvents : [];
   try {
     const [{ getPayload }, { default: config }] = await Promise.all([
       import("payload"),
@@ -52,8 +100,9 @@ export async function getPhotoEvents(): Promise<PhotoEvent[]> {
       depth: 2,
       limit: 100,
       sort: "-publishedAt",
-      where: { country: { equals: getCountryCode() } },
+      where: forThisCountry(),
     });
+    if (docs.length === 0) return isInternational ? fallbackPhotoEvents : [];
     return (docs as unknown as PhotoEventDoc[])
       .map((doc) => {
         const photos: PhotoEventPhoto[] = (doc.photos ?? [])
@@ -76,7 +125,7 @@ export async function getPhotoEvents(): Promise<PhotoEvent[]> {
       })
       .filter((event) => event.cover);
   } catch (error) {
-    console.error("Falling back to no photo events: ", error);
-    return [];
+    console.error("Falling back to bundled photo events: ", error);
+    return isInternational ? fallbackPhotoEvents : [];
   }
 }

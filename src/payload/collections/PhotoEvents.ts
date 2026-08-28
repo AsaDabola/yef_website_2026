@@ -1,10 +1,12 @@
-import type { CollectionConfig } from "payload";
+import { APIError, type CollectionConfig } from "payload";
 import {
   canCreateIn,
   countryOptions,
   countryScoped,
+  distributedRead,
   hasSection,
   isSuper,
+  reachOf,
   scopeOf,
   type AdminUser,
 } from "@/payload/access";
@@ -26,10 +28,42 @@ export const PhotoEvents: CollectionConfig = {
     hidden: ({ user }) => !hasSection(user as AdminUser | null, "news"),
   },
   access: {
-    read: countryScoped("news"),
+    // Same reasoning as Posts: the admin list is narrowed to what a signed-in
+    // editor owns plus what has been distributed to them; the public site
+    // reads through the local API, which bypasses this and scopes by country.
+    read: distributedRead(),
     create: canCreateIn("news"),
     update: countryScoped("news"),
     delete: countryScoped("news"),
+  },
+  hooks: {
+    beforeValidate: [
+      ({ data, req }) => {
+        const user = req.user as AdminUser | null;
+        if (!data || !user || isSuper(user)) return data;
+
+        if (data.audience === "all") {
+          throw new APIError(
+            "Only a super admin can publish to every country. Choose the countries instead.",
+            403,
+          );
+        }
+
+        if (data.audience === "some") {
+          const reach = new Set(reachOf(user));
+          const outside = ((data.distributeTo ?? []) as string[]).filter(
+            (code) => !reach.has(code),
+          );
+          if (outside.length > 0) {
+            throw new APIError(
+              `You can only distribute within your own region. Outside it: ${outside.join(", ")}.`,
+              403,
+            );
+          }
+        }
+        return data;
+      },
+    ],
   },
   fields: [
     {
@@ -43,6 +77,34 @@ export const PhotoEvents: CollectionConfig = {
       admin: { position: "sidebar" },
       access: {
         update: ({ req: { user } }) => isSuper(user as AdminUser | null),
+      },
+    },
+    {
+      name: "audience",
+      type: "select",
+      required: true,
+      defaultValue: "own",
+      options: [
+        { label: "This country only", value: "own" },
+        { label: "Chosen countries", value: "some" },
+        { label: "Every country", value: "all" },
+      ],
+      admin: {
+        position: "sidebar",
+        description:
+          "Where this batch is published. A batch shown elsewhere is still edited here, by this country's team.",
+      },
+    },
+    {
+      name: "distributeTo",
+      type: "select",
+      hasMany: true,
+      options: countryOptions,
+      index: true,
+      admin: {
+        position: "sidebar",
+        description: "The other country sites that also show this batch.",
+        condition: (data) => data?.audience === "some",
       },
     },
     {
