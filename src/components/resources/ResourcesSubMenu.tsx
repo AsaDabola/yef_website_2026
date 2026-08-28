@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "@/components/ui/LocaleLink";
+import CategoryIcon from "@/components/resources/CategoryIcon";
 import { useT } from "@/lib/i18n/client";
+import type { Resource } from "@/payload-types";
 
-const categories = [
+const categories: { key: Resource["category"]; label: string }[] = [
   { key: "policy", label: "Policy" },
   { key: "training", label: "Training Resources" },
   { key: "forms", label: "Forms" },
@@ -25,8 +27,9 @@ export default function ResourcesSubMenu() {
           <li key={category.key}>
             <Link
               href={`/resources#${category.key}`}
-              className="block border-black/10 border-b py-3 text-lg text-black transition-colors hover:border-yef-primary hover:text-yef-primary"
+              className="flex items-center gap-3 border-black/10 border-b py-3 text-lg text-black transition-colors hover:border-yef-primary hover:text-yef-primary"
             >
+              <CategoryIcon category={category.key} className="size-[18px] shrink-0 text-yef-primary" />
               {t(category.label)}
             </Link>
           </li>

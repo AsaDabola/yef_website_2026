@@ -7,6 +7,7 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import Link from "@/components/ui/LocaleLink";
+import CategoryIcon from "@/components/resources/CategoryIcon";
 import ResourceCard from "@/components/resources/ResourceCard";
 import ResourcesSubMenu from "@/components/resources/ResourcesSubMenu";
 import { getT } from "@/lib/i18n/server";
@@ -81,7 +82,7 @@ export default async function ResourcesPage({ params }: { params: LocaleParams }
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src="/images/get-involved/banner-resources.webp"
             alt=""
             fill
             priority
@@ -110,29 +111,36 @@ export default async function ResourcesPage({ params }: { params: LocaleParams }
                 )}
               </p>
 
-              <div className="mt-14 space-y-16">
+              <div className="mt-14 space-y-10">
                 {categories.map(({ key, label, blurb }) => {
                   const items = byCategory.get(key) ?? [];
                   return (
                     <div
                       key={key}
                       id={key}
-                      className="scroll-mt-32 border-black/10 border-t pt-10 first:border-t-0 first:pt-0"
+                      className="scroll-mt-32 rounded-[24px] bg-[#f1f6ff] px-6 py-10 sm:px-10 sm:py-12"
                     >
-                      <h2 className="font-display font-bold text-2xl text-black">
-                        {t(label)}
-                      </h2>
-                      <p className="mt-1 text-[14.5px] text-[#6b737d]">
-                        {t(blurb)}
-                      </p>
+                      <div className="flex items-start gap-5">
+                        <div className="flex size-[52px] shrink-0 items-center justify-center rounded-2xl bg-white text-yef-primary shadow-sm">
+                          <CategoryIcon category={key} className="size-6" />
+                        </div>
+                        <div>
+                          <h2 className="font-display font-bold text-2xl text-black sm:text-[28px]">
+                            {t(label)}
+                          </h2>
+                          <p className="mt-1 text-[14.5px] text-[#4b5565]">
+                            {t(blurb)}
+                          </p>
+                        </div>
+                      </div>
 
-                      <div className="mt-6 space-y-4">
+                      <div className="mt-8 space-y-4">
                         {items.length > 0 ? (
                           items.map((resource) => (
                             <ResourceCard key={resource.id} resource={resource} t={t} />
                           ))
                         ) : (
-                          <p className="rounded-2xl border border-dashed border-v2-border px-6 py-8 text-[14px] text-[#6b737d] italic">
+                          <p className="rounded-2xl border border-white/60 border-dashed bg-white/40 px-6 py-8 text-[14px] text-[#4b5565] italic">
                             {t("Nothing here yet — check back soon.")}
                           </p>
                         )}
