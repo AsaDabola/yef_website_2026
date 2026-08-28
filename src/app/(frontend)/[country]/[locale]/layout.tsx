@@ -6,7 +6,6 @@ import {
   Instrument_Serif,
   La_Belle_Aurore,
   Playfair_Display,
-  Poppins,
 } from "next/font/google";
 import { I18nProvider } from "@/lib/i18n/client";
 import { loadClientMessages } from "@/lib/i18n/messages";
@@ -19,12 +18,6 @@ import {
   setRequestLocale,
 } from "@/lib/i18n/request";
 import "../../globals.css";
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-playfair",
@@ -87,7 +80,7 @@ export default async function FrontendLayout({
     <html
       lang={locale}
       dir={isRtl(locale) ? "rtl" : undefined}
-      className={`${poppins.variable} ${playfairDisplay.variable} ${bricolageGrotesque.variable} ${instrumentSerif.variable} ${inter.variable} ${laBelleAurore.variable} antialiased`}
+      className={`${playfairDisplay.variable} ${bricolageGrotesque.variable} ${instrumentSerif.variable} ${inter.variable} ${laBelleAurore.variable} antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <I18nProvider country={country} locale={locale} messages={messages}>

@@ -25,7 +25,7 @@ export default async function OurMissionPage({ params }: { params: LocaleParams 
     <>
       <main>
         <SubPageHero
-          image="/images/who-we-are/banner-mission.png"
+          image="/images/shared/banner-getinvolved.webp"
           alt={t("Aerial view of a forested coastline meeting turquoise water")}
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
