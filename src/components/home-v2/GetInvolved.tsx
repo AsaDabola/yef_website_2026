@@ -12,45 +12,45 @@ const DRIFT_SPEED = 34;
 
 const cards = [
   {
-    tag: "Weekly",
-    title: "Bible Study",
-    body: "One-on-one and in groups. A teacher meets you where your schedule allows and walks the text with you — no prior background assumed.",
-    image: "/images/home-v2/get-involved-bible-study.png",
+    tag: "Ongoing",
+    title: "Campus Evangelism",
+    body: "Every campus is a mission field — Campus Evangelism exists to ignite that faith right where students already are.",
+    image: "/images/home-v2/get-involved-campus-evangelism.webp",
   },
   {
-    tag: "Each Summer",
-    title: "Summer Training",
-    body: "Three to seven days in the US and Korea. Word, prayer, and long meals with students who came from the other side of the world.",
-    image: "/images/home-v2/get-involved-summer-training.png",
+    tag: "Weekly",
+    title: "Bible Study",
+    body: "Study Scripture personally and together, building a faith firmly grounded in the Gospel.",
+    image: "/images/home-v2/get-involved-bible-study.webp",
   },
   {
     tag: "By Invitation",
     title: "Leadership Training",
-    body: "For those who have finished discipleship and are ready to teach. You become a missionary to the campus you already attend.",
-    image: "/images/home-v2/get-involved-leadership-training.png",
-  },
-  {
-    tag: "Short Term",
-    title: "Mission Trip",
-    body: "Local and overseas. The fastest way to learn what mission actually costs — and what it is actually worth.",
-    image: "/images/home-v2/get-involved-mission-trip-cross-map.jpg",
+    body: "Learn to teach the Word, care for others, lead fellowship, and make disciples.",
+    image: "/images/home-v2/get-involved-leadership-training.webp",
   },
   {
     tag: "Each Summer",
+    title: "Summer Training",
+    body: "Grow through focused Bible study, prayer, fellowship, evangelism, and mission training.",
+    image: "/images/home-v2/get-involved-summer-training.webp",
+  },
+  {
+    tag: "Go",
     title: "Short-term Mission",
     body: "Three to seven days in the US and Korea. Word, prayer, and long meals with students who came from the other side of the world.",
     image: "/images/home-v2/get-involved-short-term-mission.webp",
   },
   {
-    tag: "By Invitation",
+    tag: "Growth",
     title: "Discipleship Training",
-    body: "For those who have finished discipleship and are ready to teach. You become a missionary to the campus you already attend.",
+    body: "A hands-on training to grow as a disciple and step into leadership — becoming a missionary to the campus you already call home.",
     image: "/images/home-v2/get-involved-discipleship-training.webp",
   },
   {
-    tag: "Year Round",
+    tag: "Serve",
     title: "Volunteering",
-    body: "Help build the movement in your local chapter with the talents you already have — video, design, tech, events, and more.",
+    body: "Show up for one another and your community through small, consistent acts of service.",
     image: "/images/home-v2/get-involved-volunteering.png",
   },
 ];
@@ -142,7 +142,9 @@ export default function GetInvolved() {
     <section className="font-body bg-white">
       {/* A gutter at every width — the row used to run to the viewport
           edge below 1440, leaving the first and last cards flush against it. */}
-      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:px-12 lg:py-[130px]">
+      {/* 1920x1000 frame: a 1440 column at x=240, the heading from y=116 and
+          the 380-wide cards on a 666 row ending at 921. */}
+      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:pt-[116px] lg:pb-[67px] 2xl:px-0">
         <Reveal className="flex items-end justify-between">
           <div>
             <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
@@ -178,7 +180,7 @@ export default function GetInvolved() {
           <HoverGroup
             ref={trackRef}
             className="-my-4 mt-9 flex gap-[26px] overflow-x-auto py-4 [-ms-overflow-style:none] [scrollbar-width:none] lg:mt-12 [&::-webkit-scrollbar]:hidden"
-            itemClassName="w-[74%] shrink-0 sm:w-[43%] lg:w-[26%]"
+            itemClassName="w-[74%] shrink-0 sm:w-[43%] lg:w-[26.4%]"
           >
             {/* Twice through: the drift wraps at the halfway mark onto an
                 identical frame, so the row has no visible seam or end. */}

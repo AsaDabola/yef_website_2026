@@ -7,16 +7,16 @@ type ProofItem = { number?: string; name: string; body: string };
 
 const defaultItems: ProofItem[] = [
   {
-    name: "The Best of\nTimes",
-    body: "The days of youth are when we can meet God first, and meet Him deepest.",
+    name: "Know Christ",
+    body: "The university years are a formative season when convictions, values, and direction for life are taking shape. YEF calls students to seek Christ and build their lives firmly upon Him.",
   },
   {
-    name: "A Calling That\nComes Now",
-    body: "God does not wait for the perfect moment. He is calling, right now, in the midst of this youth.",
+    name: "Grow in the\nWord",
+    body: "Through Scripture, prayer, fellowship, and discipleship, students deepen their faith, develop a biblical worldview, and learn to follow Christ in every area of life.",
   },
   {
-    name: "Grace for\nThose Who Seek",
-    body: "For those who sought Him in their youth, revival has always come in abundance.",
+    name: "Live on Mission",
+    body: "Faith is meant to be lived and shared. Students are encouraged to serve others, make disciples, and carry the Gospel to their friends, campuses, communities, and beyond.",
   },
 ];
 
@@ -43,7 +43,9 @@ export default async function WhyTheYoung({
   return (
     <section className="font-body relative overflow-hidden bg-[#eef1f7]">
       <FlowingBackground />
-      <div className="relative mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+      {/* 1920x650 frame: a 1440 column at x=240, y=110, with the rule at 227
+          and the three 480 cells from 254. */}
+      <div className="relative mx-auto max-w-[1440px] px-6 py-24 sm:px-10 sm:pb-0 lg:pt-[110px] 2xl:px-0">
         <Reveal>
           <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
             {t(c.eyebrow)}
@@ -57,24 +59,36 @@ export default async function WhyTheYoung({
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="mt-14 grid grid-cols-1 gap-y-10 border-t border-v2-border pt-12 sm:grid-cols-3 sm:gap-y-0">
+          {/* Two shared rows — title, then body. Each column subscribes to
+              them so every body starts on the same line however many lines a
+              title runs to, in English or in translation. */}
+          <div className="mt-14 grid grid-cols-1 gap-y-10 border-t border-v2-border pt-12 sm:grid-cols-3 sm:grid-rows-[auto_1fr] sm:gap-y-0 sm:pt-7">
             {proof.map((item, index) => (
               <div
                 key={item.name}
-                className={
-                  index > 0
-                    ? "border-v2-border pb-8 sm:border-l sm:pl-10"
-                    : "pb-8 sm:pr-10"
-                }
+                // Each column is padded on both sides: a gutter only on the
+                // side the divider sits kept the middle column's text running
+                // right up against the next column's rule. The deep bottom
+                // padding is the section's, moved inside the columns so the
+                // dividers reach the rule that closes the section.
+                className={[
+                  "pb-8 sm:row-span-2 sm:grid sm:grid-rows-subgrid sm:pt-18 sm:pb-[45px]",
+                  index > 0 && "sm:border-l sm:border-v2-border sm:pl-10",
+                  index < proof.length - 1 && "sm:pr-10",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
-                {item.number && (
-                  <p className="font-display font-bold text-5xl text-yef-primary tracking-[-1.92px] lg:text-[64px]">
-                    {item.number}
+                <div>
+                  {item.number && (
+                    <p className="font-display font-bold text-5xl text-yef-primary tracking-[-1.92px] lg:text-[64px]">
+                      {item.number}
+                    </p>
+                  )}
+                  <p className="whitespace-pre-line font-display font-bold text-[21px] text-v2-navy uppercase leading-[1.24]">
+                    {t(item.name)}
                   </p>
-                )}
-                <p className="whitespace-pre-line font-display font-bold text-[21px] text-v2-navy leading-[1.24]">
-                  {t(item.name)}
-                </p>
+                </div>
                 <p className="mt-4 text-[14px] text-v2-muted-dark leading-[1.65]">
                   {t(item.body)}
                 </p>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Header from "@/components/Header";
+import HeaderV2 from "@/components/home-v2/HeaderV2";
 
 type SubPageHeroProps = {
   /** Banner photo. Defaults to the shared sunrise banner. */
@@ -28,7 +28,7 @@ export default function SubPageHero({
           clear — it carries the white nav over a bright photograph without
           darkening the rest of the picture. */}
       <div className="absolute inset-x-0 top-0 h-[176px] bg-gradient-to-b from-black/20 via-black/20 via-50% to-transparent" />
-      <Header />
+      <HeaderV2 />
     </section>
   );
 }

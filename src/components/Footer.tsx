@@ -150,7 +150,7 @@ export default async function Footer() {
             <CountryPicker placement="up" />
             <LanguagePicker placement="up" />
           </div>
-          <p className="text-center font-medium text-base leading-[1.6] text-yef-gray">
+          <p className="text-center font-body font-medium text-base leading-[1.6] text-yef-gray">
             {t("Copyright ©")} {new Date().getFullYear()}{" "}
             {siteName}. {t("All Rights Reserved.")}
           </p>

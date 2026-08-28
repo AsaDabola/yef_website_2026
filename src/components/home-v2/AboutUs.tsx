@@ -4,16 +4,16 @@ import Reveal from "@/components/ui/Reveal";
 import { getT } from "@/lib/i18n/server";
 
 const defaults = {
-  image: "/images/home-v2/about-us-photo.png",
+  image: "/images/home-v2/about-us-photo.webp",
   imageAlt: "Students celebrating together on campus",
   eyebrow: "About Us",
-  heading: "We are a fellowship of the",
-  headingAccent: "young",
-  lead: "YEF is a group of proactive, outreaching Christians whose youth and passion are spent bringing glory to God’s name.",
-  body: "It began in 2009 with a handful of students in New York City who wanted more than a Sunday faith. They opened their Bibles between classes, prayed in dorm rooms, and invited whoever would come. What started on two campuses has become a fellowship present in more than forty countries.",
+  heading: "A global campus",
+  headingAccent: "fellowship",
+  lead: "YEF is a global evangelical fellowship where university students encounter Christ, grow in the Word, and learn to share the Gospel with others.",
+  body: "Founded in New York City in 2009, YEF began with students gathering around Scripture, prayer, and campus evangelism. As disciples were raised and new leaders were sent out, the fellowship expanded across cities and nations, united by the same Gospel and mission.",
   stats: [
-    { value: "40+", label: "COUNTRIES REACHED" },
-    { value: "2009", label: "FOUNDED IN NYC" },
+    { value: "WORD", label: "ROOTED IN SCRIPTURE" },
+    { value: "MISSION", label: "FROM CAMPUS TO NATIONS" },
   ],
 };
 
@@ -30,8 +30,12 @@ export default async function AboutUs({ content }: { content?: AboutUsContent })
   const stats = c.stats?.length ? c.stats : defaults.stats;
   return (
     <section className="font-body bg-white">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+      {/* 1920x880 frame: a 1440 column at x=240, holding the 620 photograph
+          and a 720 text column 100 apart. 31fr/36fr is that 620:720 split —
+          two equal columns made the photo 852 wide and, at its 620:700
+          ratio, 260 taller than the frame. */}
+      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:pt-[110px] lg:pb-[70px] 2xl:px-0">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[31fr_36fr] lg:items-center lg:gap-[100px]">
           <Reveal className="group relative aspect-[620/700] w-full cursor-pointer overflow-hidden transition-transform duration-300 hover:-translate-y-1">
             <Image
               src={c.image}
@@ -60,7 +64,7 @@ export default async function AboutUs({ content }: { content?: AboutUsContent })
               {t(c.body)}
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-14 pb-3.5 pt-6">
+            <div className="mt-11 flex flex-wrap gap-14">
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <p className="font-display font-bold text-[44px] text-v2-accent tracking-[-1.32px]">
@@ -75,7 +79,7 @@ export default async function AboutUs({ content }: { content?: AboutUsContent })
 
             <Link
               href="/who-we-are"
-              className="mt-4 inline-flex items-center justify-center rounded-full border border-v2-navy px-8.5 py-4 font-semibold text-xs text-v2-navy tracking-[1.92px] uppercase transition-colors hover:bg-v2-navy hover:text-white"
+              className="mt-[60px] inline-flex items-center justify-center rounded-full border border-v2-navy px-8.5 py-4 font-semibold text-xs text-v2-navy tracking-[1.92px] uppercase transition-colors hover:bg-v2-navy hover:text-white"
             >
               {t("Our Mission")}
             </Link>

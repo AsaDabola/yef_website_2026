@@ -12,26 +12,28 @@ export type HeroSlide = {
   alt: string;
   heading: string;
   body: string;
+  button?: { label: string; href: string };
 };
 
 const defaultSlides: HeroSlide[] = [
-  {
-    image: "/images/home-v2/hero-headquarters.webp",
-    alt: "Youth Evangelical Fellowship headquarters building",
-    heading: "Join Us\nToday",
-    body: "Be part of YEF, Become True Disciples of Christ.",
-  },
-  {
-    image: "/images/home-v2/slide-2-students.png",
-    alt: "Students smiling together on a mission trip",
-    heading: "Grow Together\nin Christ.",
-    body: "Join YEF Campus Chapter, Fellowship in Christ",
-  },
   {
     image: "/images/home-v2/hero-fire.webp",
     alt: "Youth gathered around a bonfire at dusk",
     heading: "To Know Christ.\nTo Make Him Known.",
     body: "For we do not preach ourselves but Jesus Christ as Lord",
+  },
+  {
+    image: "/images/home-v2/hero-headquarters.webp",
+    alt: "Youth Evangelical Fellowship headquarters building",
+    heading: "For Christ.\nFor the Campus.\nFor the Nations.",
+    body: "We exist to help students know Christ, live for Him on campus, and carry the Gospel to the nations.",
+  },
+  {
+    image: "/images/home-v2/slide-2-students.webp",
+    alt: "Students smiling together on a mission trip",
+    heading: "Reaching Students.\nRaising Disciples.",
+    body: "A global evangelical campus fellowship sharing the Gospel, teaching the Bible,\nand raising disciples of Jesus Christ.",
+    button: { label: "FIND YOUR CAMPUS", href: "#find-your-campus" },
   },
 ];
 
@@ -54,7 +56,7 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
   }, [slides.length, since]);
 
   return (
-    <section className="font-body relative flex min-h-[640px] items-center overflow-hidden bg-v2-navy lg:min-h-screen">
+    <section className="font-body relative flex min-h-screen items-end overflow-hidden bg-v2-navy">
       {slides.map((slide, index) => (
         <div
           key={slide.image}
@@ -74,68 +76,35 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
         </div>
       ))}
 
-      {/* The banner frames layer two washes over the photograph: a 30%
-          vignette that stays almost clear at its centre and closes to 94%
-          at the edges, then a fade into the foot of the section. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 65% 101% at 65% 44%, rgba(14,18,22,0.05) 0%, rgba(14,18,22,0.35) 35%, rgba(14,18,22,0.94) 83%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to bottom, rgba(14,18,22,0) 60.87%, rgba(14,18,22,0.28) 95.99%)",
-        }}
-      />
-      {/* The frame's washes are tuned to the bonfire photo, which is already
-          dark where the copy sits. The other slides have no such headroom —
-          slide 2 is a wall-to-wall close-up with a bright forehead and teeth
-          right behind the headline, well under 3:1 with no scrim at all — so
-          the text column gets its own left-to-right fade independent of the
-          photo underneath it. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(14,18,22,0.58) 0%, rgba(14,18,22,0.58) 32%, rgba(14,18,22,0) 68%)",
-        }}
-      />
-
       <HeaderV2 />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pb-24 pt-40 sm:px-10 lg:px-19 lg:pb-32">
-        <div className="max-w-3xl">
+      <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pt-40 pb-24 sm:px-10 lg:px-19 lg:pb-32">
+        <div className="grid max-w-3xl">
           {slides.map((slide, index) => (
             <div
               key={slide.image}
-              // An inactive block is absolutely positioned over the whole
-              // content column, dots included, so it has to stop taking
-              // pointer events or it swallows every click on them.
-              className={`transition-opacity duration-1000 ${
+              // Every slide sits in the same grid cell at all times, so the
+              // column's height is set once (by the tallest slide) instead
+              // of jumping between them — switching the active index only
+              // ever crossfades opacity, nothing reflows.
+              className={`col-start-1 row-start-1 transition-opacity duration-1000 ${
                 index === active
                   ? "opacity-100"
-                  : "pointer-events-none absolute inset-0 opacity-0"
+                  : "pointer-events-none opacity-0"
               }`}
               aria-hidden={index !== active}
             >
               <h1 className="whitespace-pre-line font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl lg:text-8xl">
                 {t(slide.heading)}
               </h1>
-              <p className="mt-8 max-w-[600px] text-[17px] text-white/82 leading-[1.7]">
+              <p className="mt-8 max-w-[600px] whitespace-pre-line text-[17px] text-white/82 leading-[1.7]">
                 {t(slide.body)}
               </p>
               <Link
-                href="/who-we-are"
+                href={slide.button?.href ?? "/who-we-are"}
                 className="mt-10 inline-flex h-[47px] items-center justify-center rounded-full border border-white/55 px-[34px] py-4 font-semibold text-xs tracking-[1.92px] text-white transition-colors hover:bg-white hover:text-v2-navy"
               >
-                {t("LEARN MORE")}
+                {t(slide.button?.label ?? "LEARN MORE")}
               </Link>
             </div>
           ))}
