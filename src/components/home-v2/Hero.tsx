@@ -78,7 +78,7 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
 
       <HeaderV2 />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pb-24 pt-40 sm:px-10 lg:px-19 lg:pb-32">
+      <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pt-24 pb-24 sm:px-10 lg:px-19 lg:pb-32">
         <div className="grid max-w-3xl">
           {slides.map((slide, index) => (
             <div
