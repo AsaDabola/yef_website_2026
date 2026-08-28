@@ -15,7 +15,7 @@ const cards = [
     tag: "Ongoing",
     title: "Campus Evangelism",
     body: "Every campus is a mission field — Campus Evangelism exists to ignite that faith right where students already are.",
-    image: "/images/get-involved/gospel-campus-conversation.png",
+    image: "/images/home-v2/get-involved-campus-evangelism.webp",
   },
   {
     tag: "Weekly",
