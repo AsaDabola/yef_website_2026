@@ -4,6 +4,9 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import { newsArticles } from "@/lib/news";
 import type { Page } from "@/payload-types";
+import newsRealImages from "@/payload/newsRealImages.json";
+
+const realImages = newsRealImages as Record<string, { url: string; filename: string }>;
 
 // Duplicated from src/lib/pages.ts rather than imported: that module pulls in
 // "server-only", which only resolves inside Next's bundler, not this
@@ -74,27 +77,86 @@ function mediaUploader(payload: Payload) {
   };
 }
 
+/** Uploads an image fetched from a remote URL as Media once per URL — used
+ *  for the real WordPress-hosted photos, which are more authoritative than
+ *  the Drive-matched placeholders under public/. */
+function remoteMediaUploader(payload: Payload) {
+  const cache = new Map<string, number>();
+  return async (url: string, filename: string, alt: string): Promise<number> => {
+    const cached = cache.get(url);
+    if (cached !== undefined) return cached;
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`fetch ${url} failed: ${res.status}`);
+    const buffer = Buffer.from(await res.arrayBuffer());
+    const ext = path.extname(filename).slice(1).toLowerCase();
+    const mimetype =
+      ext === "jpg" ? "image/jpeg" : ext === "svg" ? "image/svg+xml" : `image/${ext}`;
+    const media = await payload.create({
+      collection: "media",
+      data: { alt, country: "int" },
+      file: { data: buffer, name: filename, mimetype, size: buffer.length },
+    });
+    const id = Number(media.id);
+    cache.set(url, id);
+    return id;
+  };
+}
+
 const POST_CATEGORIES = new Set(["News", "Story", "Event"]);
 
 async function seedPosts(payload: Payload) {
   const uploadMedia = mediaUploader(payload);
+  const uploadRemoteMedia = remoteMediaUploader(payload);
   let created = 0;
+  let updated = 0;
   let skipped = 0;
   let failed = 0;
 
   for (const article of newsArticles) {
     try {
+      // The real photo hosted on the original WordPress site, when we have
+      // one for this slug, always wins over the Drive-matched placeholder.
+      const real = realImages[article.slug];
+      const expectedFilename = real ? real.filename : path.basename(article.image);
+      const getMedia = () =>
+        real
+          ? uploadRemoteMedia(real.url, real.filename, article.title)
+          : uploadMedia(article.image, article.title);
+
       const existing = await payload.find({
         collection: "posts",
         where: { slug: { equals: article.slug } },
         limit: 1,
+        depth: 1,
       });
       if (existing.docs.length > 0) {
-        skipped += 1;
+        const doc = existing.docs[0];
+        const currentImage = doc?.image;
+        const currentFilename =
+          typeof currentImage === "object" && currentImage
+            ? currentImage.filename
+            : undefined;
+        // The background photo-matching pass (and now the real WordPress
+        // export) keeps replacing placeholders with better photos after this
+        // article was first seeded — re-upload and repoint the post whenever
+        // the source image has moved on, rather than leaving it stuck on
+        // whatever was seeded first.
+        if (currentFilename === expectedFilename) {
+          skipped += 1;
+          continue;
+        }
+        const media = await getMedia();
+        await payload.update({
+          collection: "posts",
+          id: doc.id,
+          data: { image: media },
+        });
+        updated += 1;
         continue;
       }
 
-      const media = await uploadMedia(article.image, article.title);
+      const media = await getMedia();
       // A handful of articles carry tags (e.g. Testimonial) outside the
       // three categories Posts supports — file those under News rather than
       // failing the whole seed on one article.
@@ -123,7 +185,7 @@ async function seedPosts(payload: Payload) {
   }
 
   payload.logger.info(
-    `Posts seed: ${created} created, ${skipped} skipped, ${failed} failed.`,
+    `Posts seed: ${created} created, ${updated} updated, ${skipped} skipped, ${failed} failed.`,
   );
 }
 
