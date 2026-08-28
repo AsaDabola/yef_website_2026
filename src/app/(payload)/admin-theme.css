@@ -38,6 +38,8 @@ html[data-theme="dark"] .template-default__wrap {
   background-color: #0a0a0a;
 }
 
+/* Same near-black on both sides, but a faint seam so the nav still reads as
+   its own panel rather than one undivided slab. */
 html[data-theme="dark"] .template-default .nav {
-  border-right-color: #0a0a0a;
+  border-right-color: #262626;
 }

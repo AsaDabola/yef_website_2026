@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "payload generate:importmap && ([ -n \"$DATABASE_URI\" ] && payload migrate || true) && next build",
+    "build": "payload generate:importmap && ([ -n \"$DATABASE_URI\" ] && payload migrate || true) && ([ -n \"$DATABASE_URI\" ] && payload run src/payload/seed.ts || true) && next build",
     "start": "next start",
     "lint": "eslint",
     "generate:types": "payload generate:types",
