@@ -57,19 +57,23 @@ export default function LoginForm() {
         required
       />
 
-      {error && <p className="text-[14px] text-red-600">{error}</p>}
+      {error && (
+        <p className="rounded-lg bg-white/90 px-3 py-2 text-[14px] text-red-600">
+          {error}
+        </p>
+      )}
 
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02] disabled:opacity-60"
+        className="w-full rounded-full bg-white px-10 py-4 font-semibold text-[#0066cf] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02] disabled:opacity-60"
       >
         {submitting ? t("Signing In...") : t("Sign In")}
       </button>
 
-      <p className="text-center text-[14px] text-[#6b737d]">
+      <p className="text-center text-[14px] text-white/75">
         {t("Don't have an account?")}{" "}
-        <Link href="/join" className="text-[#0066cf] underline">
+        <Link href="/join" className="text-white underline">
           {t("Request access")}
         </Link>
       </p>
