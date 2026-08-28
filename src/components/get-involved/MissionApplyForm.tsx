@@ -53,7 +53,9 @@ export default function MissionApplyForm() {
       <SubmissionSuccess
         className="mt-10 max-w-[900px]"
         title={t("Thank You!")}
-        message="Thank you for stepping toward this calling. A member of the YEF missions team will follow up with you shortly."
+        message={t(
+          "Thank you for stepping toward this calling. A member of the YEF missions team will follow up with you shortly.",
+        )}
       />
     );
   }

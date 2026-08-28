@@ -53,15 +53,15 @@ export default async function BibleStudiesPage({ params }: { params: LocaleParam
               images={[
                 {
                   src: "/images/get-involved/bible-study-large-group.png",
-                  alt: "A large group of students gathered for Bible study",
+                  alt: t("A large group of students gathered for Bible study"),
                 },
                 {
                   src: "/images/get-involved/gallery-bible-study-bench.png",
-                  alt: "Students studying the Bible together on a bench",
+                  alt: t("Students studying the Bible together on a bench"),
                 },
                 {
                   src: "/images/get-involved/teaser-bible-study-field.png",
-                  alt: "Students reading Scripture together outdoors",
+                  alt: t("Students reading Scripture together outdoors"),
                 },
               ]}
             />

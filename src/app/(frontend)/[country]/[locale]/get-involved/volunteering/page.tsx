@@ -53,15 +53,15 @@ export default async function VolunteeringPage({ params }: { params: LocaleParam
               images={[
                 {
                   src: "/images/get-involved/volunteering.png",
-                  alt: "A YEF volunteer serving at a chapter event",
+                  alt: t("A YEF volunteer serving at a chapter event"),
                 },
                 {
                   src: "/images/get-involved/volunteering-donation-drive.png",
-                  alt: "Volunteers sorting clothing at a donation drive",
+                  alt: t("Volunteers sorting clothing at a donation drive"),
                 },
                 {
                   src: "/images/get-involved/story-teacher.png",
-                  alt: "A volunteer teaching a group of students",
+                  alt: t("A volunteer teaching a group of students"),
                 },
               ]}
             />

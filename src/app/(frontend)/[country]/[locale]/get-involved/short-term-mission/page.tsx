@@ -53,15 +53,15 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
               images={[
                 {
                   src: "/images/get-involved/teaser-mission-trip-girls.png",
-                  alt: "Students on a YEF short-term mission trip",
+                  alt: t("Students on a YEF short-term mission trip"),
                 },
                 {
                   src: "/images/get-involved/mission-school-street-outreach.png",
-                  alt: "A team sharing the Gospel through street outreach",
+                  alt: t("A team sharing the Gospel through street outreach"),
                 },
                 {
                   src: "/images/get-involved/gospel-outreach-table.png",
-                  alt: "A team sharing the Gospel at an outreach table",
+                  alt: t("A team sharing the Gospel at an outreach table"),
                 },
               ]}
             />

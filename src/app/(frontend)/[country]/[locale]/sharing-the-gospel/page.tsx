@@ -52,15 +52,15 @@ export default async function SharingTheGospelPage({ params }: { params: LocaleP
               images={[
                 {
                   src: "/images/get-involved/gospel-outreach-table.png",
-                  alt: "YEF students at an outreach table on campus",
+                  alt: t("YEF students at an outreach table on campus"),
                 },
                 {
                   src: "/images/get-involved/gospel-campus-conversation.png",
-                  alt: "Two students talking on a campus path",
+                  alt: t("Two students talking on a campus path"),
                 },
                 {
                   src: "/images/get-involved/gallery-campus-chat.png",
-                  alt: "Team members talking on a university campus",
+                  alt: t("Team members talking on a university campus"),
                 },
               ]}
             />

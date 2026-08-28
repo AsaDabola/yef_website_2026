@@ -53,15 +53,15 @@ export default async function SummerTrainingPage({ params }: { params: LocalePar
               images={[
                 {
                   src: "/images/get-involved/gallery-christmas-retreat.png",
-                  alt: "Students gathered together at a YEF retreat",
+                  alt: t("Students gathered together at a YEF retreat"),
                 },
                 {
                   src: "/images/get-involved/photo-embrace-1.png",
-                  alt: "Students embracing in fellowship",
+                  alt: t("Students embracing in fellowship"),
                 },
                 {
                   src: "/images/get-involved/hero-beach.png",
-                  alt: "Students spending time together outdoors",
+                  alt: t("Students spending time together outdoors"),
                 },
               ]}
             />

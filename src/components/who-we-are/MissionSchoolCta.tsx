@@ -63,7 +63,7 @@ export default async function MissionSchoolCta() {
                 >
                   <Image
                     src={card.image}
-                    alt={card.alt}
+                    alt={t(card.alt)}
                     fill
                     sizes="(min-width: 1024px) 320px, 45vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"

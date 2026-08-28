@@ -48,15 +48,15 @@ export default async function RaisingDisciplesPage({ params }: { params: LocaleP
               images={[
                 {
                   src: "/images/get-involved/disciples-library-group.png",
-                  alt: "A YEF Bible study group gathered in a campus library",
+                  alt: t("A YEF Bible study group gathered in a campus library"),
                 },
                 {
                   src: "/images/get-involved/disciples-fellowship-collage.png",
-                  alt: "Students talking together at a YEF fellowship gathering",
+                  alt: t("Students talking together at a YEF fellowship gathering"),
                 },
                 {
                   src: "/images/get-involved/disciples-fall-event.png",
-                  alt: "Students at the YEF fall fellowship event",
+                  alt: t("Students at the YEF fall fellowship event"),
                 },
               ]}
             />

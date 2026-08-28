@@ -183,15 +183,15 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
             images={[
               {
                 src: "/images/get-involved/gallery-campus-evangelism-table.webp",
-                alt: "YEF students sharing the Gospel at a campus outreach table",
+                alt: t("YEF students sharing the Gospel at a campus outreach table"),
               },
               {
                 src: "/images/get-involved/gallery-campus-evangelism-trees.webp",
-                alt: "Students walking together beneath campus trees",
+                alt: t("Students walking together beneath campus trees"),
               },
               {
                 src: "/images/get-involved/gallery-campus-evangelism-walk.webp",
-                alt: "Students walking across a sunlit campus path",
+                alt: t("Students walking across a sunlit campus path"),
               },
             ]}
           />

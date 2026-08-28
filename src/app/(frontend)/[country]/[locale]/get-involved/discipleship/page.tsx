@@ -53,15 +53,15 @@ export default async function DiscipleshipPage({ params }: { params: LocaleParam
               images={[
                 {
                   src: "/images/get-involved/disciples-fellowship-collage.png",
-                  alt: "Students in discipleship fellowship together",
+                  alt: t("Students in discipleship fellowship together"),
                 },
                 {
                   src: "/images/get-involved/disciples-library-group.png",
-                  alt: "A small group studying together in the library",
+                  alt: t("A small group studying together in the library"),
                 },
                 {
                   src: "/images/get-involved/disciples-fall-event.png",
-                  alt: "Students gathered at a discipleship event",
+                  alt: t("Students gathered at a discipleship event"),
                 },
               ]}
             />
