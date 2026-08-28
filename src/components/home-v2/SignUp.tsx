@@ -21,7 +21,7 @@ export default async function SignUp({
   return (
     <section
       id="signup"
-      className="font-body relative overflow-hidden bg-gradient-to-b from-[#00203f] to-[#0656a5]"
+      className="font-body relative overflow-hidden bg-gradient-to-b from-yef-primary to-[#003f7f]"
     >
       {/* The map is light line-art on a navy ground, so it screens onto the
           band: the ground drops out and only the lines carry over, keeping

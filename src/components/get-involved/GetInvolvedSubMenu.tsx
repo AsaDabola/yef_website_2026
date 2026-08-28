@@ -9,12 +9,11 @@ const links = [
   { label: "Summer Training", href: "/get-involved#summer-training" },
   { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
   {
-    label: "Volunteer/Short-term Projects",
+    label: "Short-term Mission",
     href: "/get-involved#short-term-mission",
   },
   { label: "Internship", href: "/get-involved#internship" },
   { label: "Discipleship", href: "/get-involved#discipleship" },
-  { label: "Large Group", href: "/get-involved" },
   { label: "Leadership Training", href: "/get-involved#leadership-training" },
   { label: "Volunteer", href: "/get-involved/volunteer" },
 ];
