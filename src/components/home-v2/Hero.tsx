@@ -31,7 +31,7 @@ const defaultSlides: HeroSlide[] = [
   {
     image: "/images/home-v2/slide-2-students.webp",
     alt: "Students smiling together on a mission trip",
-    heading: "Reaching Students.\nRaising Disciples.",
+    heading: "Reaching Students.\nRaising Disciples.\nFor Christ.\nFor the Nations.",
     body: "A global evangelical campus fellowship sharing the Gospel, teaching the Bible, and raising disciples of Jesus Christ.",
     button: { label: "FIND YOUR CAMPUS", href: "#find-your-campus" },
   },
