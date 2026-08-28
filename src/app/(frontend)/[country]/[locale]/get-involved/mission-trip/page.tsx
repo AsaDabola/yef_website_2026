@@ -13,7 +13,7 @@ import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
-  title: "Mission Trips | Youth Evangelical Fellowship",
+  title: "Campus Evangelism | Youth Evangelical Fellowship",
 };
 
 /** The pale blue the frame uses behind the three banded sections. */
@@ -39,7 +39,7 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-mission-trip.jpg"
+            src="/images/get-involved/banner-campus-evangelism.webp"
             alt=""
             fill
             priority
@@ -62,31 +62,31 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
               <Breadcrumb label={t("Get Involved")} />
 
               <h1 className="mt-[42px] font-display font-extrabold text-4xl text-black tracking-[-0.8px] sm:text-[46px] sm:leading-[60px]">
-                
-{t("Mission Trips")}
+
+{t("Campus Evangelism")}
 </h1>
 
-              {/* Go. Serve. Share. Make Disciples. */}
+              {/* Reach Students. Share Christ. Make Disciples. */}
               <section className="mt-[84px] max-w-[1134px] border-t border-black/10">
                 <div className="grid grid-cols-1 2xl:grid-cols-[minmax(0,572px)_344px] 2xl:gap-x-16 min-[1728px]:gap-x-[218px]">
                   <div>
                     <HeadingRule />
                     <h2 className="mt-[28px] font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
-                      
-{t("Go. Serve. Share. Make Disciples.")}
+
+{t("Reach Students. Share Christ. Make Disciples.")}
 </h2>
                     <p className="mt-[33px] whitespace-pre-line min-[1728px]:w-[640px] text-[19.9px] text-yef-primary italic leading-[37.4px]">
                       {t("“Go into all the world and preach the gospel to all creation.”\n— Mark 16:15")}
                     </p>
                     <p className="mt-[31px] whitespace-pre-line text-[16.6px] text-black leading-[27.2px]">
-                      {t("Mission begins with a willing heart.\n\nYEF Mission Trips give students, young adults, and believers an opportunity to step outside of their everyday lives and participate directly in the work of the gospel. Through evangelism, Bible study, prayer, service, and fellowship with local believers, participants experience what it means to live with God's mission at the center of their lives.\n\nWhether serving in another city, on a university campus, or across international borders, every mission trip carries the same purpose: to make Jesus Christ known and strengthen the work God is already doing in that mission field.")}
+                      {t("Campus evangelism begins with a willing heart. YEF equips young people to meet students, build genuine relationships, share the Gospel, and invite them to discover Christ through God's Word. Every campus is filled with students searching for purpose, identity, and community — many of whom have never had a real conversation about faith. Through everyday moments, intentional outreach, and consistent presence, YEF trains students to become confident, compassionate witnesses for Christ right where they already are.")}
                     </p>
                   </div>
 
                   <div className="mt-10 max-w-[344px] 2xl:mt-[31px]">
                     <ResourceTeaserCard
-                      image="/images/get-involved/teaser-bible-study-field.png"
-                      alt={t("Students gathered on a campus field")}
+                      image="/images/get-involved/campus-evangelism-teaser-university.webp"
+                      alt={t("Students walking together on a university campus")}
                       title={t("Bible Studies")}
                       href="/get-involved#bible-studies"
                     />
@@ -94,30 +94,30 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
                 </div>
               </section>
 
-              {/* Why Go on a Mission Trip? */}
+              {/* Why Go into Campus Evangelism? */}
               <section className="mt-[70px] max-w-[1134px] border-t border-black/10">
                 <div className="grid grid-cols-1 2xl:grid-cols-[minmax(0,572px)_344px] 2xl:gap-x-16 min-[1728px]:gap-x-[218px]">
                   <div>
                     <HeadingRule />
                     <h2 className="mt-[28px] font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
-                      
-{t("Why Go on a Mission Trip?")}
+
+{t("Why Go into Campus Evangelism?")}
 </h2>
                     <p className="mt-[38px] max-w-[610px] whitespace-pre-line text-[16.6px] text-black leading-[27.2px]">
-                      {t("A mission trip is more than traveling somewhere new. It is an opportunity to see people, cities, and nations through the eyes of Christ.\n\nJesus said:")}
+                      {t("Campus evangelism is more than a single conversation. It is an opportunity to see students, campuses, and communities through the eyes of Christ.\n\nJesus said:")}
                     </p>
                     <p className="mt-[39px] whitespace-pre-line min-[1728px]:w-[790px] text-[19.9px] text-yef-primary italic leading-[37.4px]">
                       {t("“The harvest is plentiful but the workers are few.”\n— Matthew 9:37")}
                     </p>
                     <p className="mt-[23px] max-w-[624px] whitespace-pre-line text-[16.6px] text-black leading-[27.2px]">
-                      {t("There are campuses where students have never been personally invited to study the Bible. There are cities where young people are searching for purpose and community. There are mission fields where local believers need encouragement, fellowship, and additional laborers. YEF Mission Trips allow participants to enter these fields and serve alongside local churches, missionaries, and fellowship leaders.\n\nSometimes the greatest change also happens within the missionary. Through mission, participants learn to depend more deeply on God, overcome fear, serve others, work as a team, and discover that God can use ordinary people who are simply willing to obey Him.")}
+                      {t("There are campuses where students have never been personally invited to study the Bible. There are students searching for purpose, identity, and community. There are classmates and friends who have never heard the Gospel clearly explained. YEF Campus Evangelism equips participants to step onto these campuses and share Christ alongside fellow students, campus ministries, and local churches.\n\nSometimes the greatest change also happens within the evangelist. Through evangelism, participants learn to depend more deeply on God, overcome fear, love others well, work as a team, and discover that God can use ordinary students who are simply willing to obey Him.")}
                     </p>
                   </div>
 
                   <div className="mt-10 max-w-[344px] 2xl:mt-[98px]">
                     <ResourceTeaserCard
-                      image="/images/get-involved/teaser-mission-trip-girls.png"
-                      alt={t("Students smiling together on a mission trip")}
+                      image="/images/get-involved/campus-evangelism-teaser-friends.webp"
+                      alt={t("Two students talking together on campus")}
                       title={t("Bible Studies")}
                       href="/get-involved#bible-studies"
                     />
@@ -136,8 +136,8 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
             <div className="mt-10 grid grid-cols-1 gap-x-[33px] gap-y-[39px] lg:mt-[49px] lg:grid-cols-2">
               <div className="flex items-center lg:pl-[63px]">
                 <p className="max-w-[531px] font-medium text-2xl text-yef-primary tracking-[-0.8px] sm:text-[36.4px] sm:leading-[50px]">
-                  
-{t("Every mission field is different, but YEF Mission Trips are centered around several important areas of ministry.")}
+
+{t("Every campus is different, but YEF Campus Evangelism is centered around several important areas of ministry.")}
 </p>
               </div>
 
@@ -180,16 +180,16 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
           <GalleryMosaic
             images={[
               {
-                src: "/images/get-involved/gallery-bible-study-bench.png",
-                alt: "A YEF Bible study meeting indoors",
+                src: "/images/get-involved/gallery-campus-evangelism-table.webp",
+                alt: "YEF students sharing the Gospel at a campus outreach table",
               },
               {
-                src: "/images/get-involved/gallery-street-outreach.png",
-                alt: "Team members sharing the gospel on the street",
+                src: "/images/get-involved/gallery-campus-evangelism-trees.webp",
+                alt: "Students walking together beneath campus trees",
               },
               {
-                src: "/images/get-involved/gallery-campus-chat.png",
-                alt: "Team members talking on a university campus",
+                src: "/images/get-involved/gallery-campus-evangelism-walk.webp",
+                alt: "Students walking across a sunlit campus path",
               },
             ]}
           />
@@ -201,31 +201,31 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
               <h2 className={`${BAND_HEADING} lg:mt-[11px]`}>{t("Where We Serve")}</h2>
               <p className={`${BAND_INTRO} lg:max-w-[908px]`}>
-                
-{t("YEF’s mission extends across university campuses, cities, and nations. Mission opportunities may include:")}
+
+{t("YEF's campus evangelism extends across university campuses at home and abroad. Opportunities may include:")}
 </p>
             </div>
 
             <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-[62px] lg:mt-[59px] lg:grid-cols-2">
               <InfoCard
                 className="lg:min-h-[257px]"
-                title={t("Campus Missions")}
+                title={t("Local Campus Outreach")}
+                body={t("Reach students on your own campus through outreach events, one-on-one conversations, and invitations to Bible study.")}
+              />
+              <InfoCard
+                className="lg:min-h-[257px]"
+                title={t("New Campus Outreach")}
                 body={t("Serve alongside YEF chapters and local churches to evangelize university students, establish Bible studies, and strengthen campus fellowships.")}
               />
               <InfoCard
                 className="lg:min-h-[257px]"
-                title={t("Domestic Mission Trips")}
-                body={t("Travel to another city or region to support developing mission fields, local outreach, retreats, and evangelism.")}
+                title={t("Pioneering New Campuses")}
+                body={t("Join efforts to reach campuses where YEF has not yet established a fellowship, laying the groundwork for new relationships, Bible studies, and chapters.")}
               />
               <InfoCard
                 className="lg:min-h-[257px]"
-                title={t("International Mission Trips")}
-                body={t("Experience cross-cultural mission by serving alongside YEF leaders, missionaries, and churches in another nation.")}
-              />
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("Pioneering Missions")}
-                body={t("Join efforts to enter developing mission fields where YEF is working to establish new relationships, Bible studies, campus ministries, or chapters.")}
+                title={t("International Campus Evangelism")}
+                body={t("Experience cross-cultural evangelism by serving alongside YEF leaders and campus ministries in another nation.")}
               />
             </div>
           </div>
@@ -237,7 +237,7 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
             <div className="rounded-2xl border border-v2-border bg-white px-8 pt-16 pb-12 sm:px-[73px] lg:min-h-[557px] lg:pt-[68px]">
               <h2 className={BAND_HEADING}>{t("Who Can Join?")}</h2>
               <p className="mt-[54px] whitespace-pre-line text-[19px] text-[#4b5565] leading-[24px]">
-                {t("YEF Mission Trips are especially designed for students, young adults, church members, volunteers, and emerging missionaries who desire to grow in faith and participate in the Great Commission.\n\nYou do not need to be an experienced evangelist or Bible teacher.\n\nYou need a willing heart.")}
+                {t("YEF Campus Evangelism is especially designed for students, young adults, church members, volunteers, and emerging evangelists who desire to grow in faith and participate in the Great Commission.\n\nYou do not need to be an experienced evangelist or Bible teacher.\n\nYou need a willing heart.")}
               </p>
             </div>
 
@@ -269,12 +269,12 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
           <div className="mx-auto max-w-[1392px] px-6">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
               <h2 className={`${BAND_HEADING} lg:max-w-[405px]`}>
-                
-{t("Preparing for Mission")}
+
+{t("Preparing for Evangelism")}
 </h2>
               <p className={`${BAND_INTRO} lg:mt-[16px] lg:max-w-[908px]`}>
-                
-{t("Before entering the mission field, participants receive preparation to help them serve effectively and responsibly. Training may include:")}
+
+{t("Before stepping onto campus, participants receive preparation to help them share Christ effectively and responsibly. Training may include:")}
 </p>
             </div>
 
@@ -315,18 +315,18 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
         <section className="mx-auto max-w-[1391px] px-6 pt-20 pb-20 lg:pt-[141px] lg:pb-[110px]">
           <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-v2-border bg-white lg:min-h-[993px] lg:grid-cols-[1fr_412px]">
             <div className="px-8 pt-12 pb-12 lg:pt-[57px] lg:pr-[45px] lg:pl-[95px]">
-              <h2 className={BAND_HEADING}>{t("A Typical Day in Mission")}</h2>
+              <h2 className={BAND_HEADING}>{t("A Typical Day in Campus Evangelism")}</h2>
 
               <div className="mt-10 max-w-[790px] text-[19.2px] text-[#4b5565] leading-[30px]">
                 <p>
-                  
-{t("While every mission trip is different, a typical day may include:")}
+
+{t("While every day of outreach is different, a typical day may include:")}
 </p>
 
                 {[
                   {
                     time: "Morning",
-                    body: "Prayer, worship, Scripture meditation, breakfast, and preparation for the day's mission.",
+                    body: "Prayer, worship, Scripture meditation, breakfast, and preparation for the day's outreach.",
                   },
                   {
                     time: "Daytime",
@@ -352,16 +352,16 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
                 ))}
 
                 <p className="mt-[30px]">
-                  
-{t("Mission is not simply one activity during the day. Participants are encouraged to approach the entire experience with a missionary heart.")}
+
+{t("Evangelism is not simply one activity during the day. Participants are encouraged to approach the entire day with a missionary heart.")}
 </p>
               </div>
             </div>
 
             <div className="relative min-h-[320px] w-full lg:min-h-full">
               <Image
-                src="/images/get-involved/typical-day-portrait.png"
-                alt={t("A YEF mission trip participant")}
+                src="/images/get-involved/campus-evangelism-typical-day.webp"
+                alt={t("A YEF student sharing the Gospel on campus")}
                 fill
                 sizes="(min-width: 1024px) 412px, 100vw"
                 className="object-cover"
