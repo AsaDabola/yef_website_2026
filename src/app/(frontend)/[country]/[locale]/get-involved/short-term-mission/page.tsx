@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
-import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
+import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import InfoCard from "@/components/get-involved/InfoCard";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
+import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import Link from "@/components/ui/LocaleLink";
 import { getT } from "@/lib/i18n/server";
@@ -14,7 +15,6 @@ export const metadata: Metadata = {
   title: "Short-term Mission | Youth Evangelical Fellowship",
 };
 
-/** The pale blue the frame uses behind the banded section, matching Campus Evangelism. */
 const BAND = "bg-[#eff5ff]";
 const BAND_HEADING =
   "font-display font-extrabold text-3xl text-black tracking-[-0.8px] sm:text-[46px] sm:leading-[50px]";
@@ -38,34 +38,68 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[110px] lg:pr-[92px] lg:pl-[81px]">
-          <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
-            <div className="shrink-0 lg:w-[237px] lg:sticky lg:top-32 lg:self-start">
-              <GetInvolvedSubMenu />
-            </div>
+        <section className="mx-auto max-w-[1392px] px-6 pt-[111px]">
+          <Breadcrumb label={t("Short-term Mission")} />
 
-            <div className="min-w-0 flex-1 max-w-[1134px]">
-              <Breadcrumb label={t("Get Involved")} />
+          <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
+            {t("Short-term Mission")}
+          </h1>
+          <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
+            {t("Step Out in Faith. Go Where You're Sent.")}
+          </p>
 
-              <h1 className="mt-[42px] font-display font-extrabold text-4xl text-black tracking-[-0.8px] sm:text-[46px] sm:leading-[60px]">
-                {t("Short-term Mission")}
-              </h1>
+          <div className="mt-[84px]">
+            <GalleryMosaic
+              images={[
+                {
+                  src: "/images/get-involved/teaser-mission-trip-girls.png",
+                  alt: "Students on a YEF short-term mission trip",
+                },
+                {
+                  src: "/images/get-involved/mission-school-street-outreach.png",
+                  alt: "A team sharing the Gospel through street outreach",
+                },
+                {
+                  src: "/images/get-involved/gospel-outreach-table.png",
+                  alt: "A team sharing the Gospel at an outreach table",
+                },
+              ]}
+            />
+          </div>
 
-              <p className="mt-8 max-w-[820px] text-[19px] text-black leading-[30px]">
+          <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
+            <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
+              <p>
                 {t(
                   "YEF short-term mission trips send teams of students to serve during school breaks — on their own campus, in another city, another country, or online. Teams share the Gospel, lead Bible studies, pray for the campuses and communities they visit, and serve alongside local YEF chapters and churches.",
                 )}
               </p>
-              <p className="mt-5 max-w-[820px] text-[16.6px] text-[#4b5565] leading-[27.2px]">
+              <p>
+                {t(
+                  "No one goes alone. Every trip is a team — praying, preparing, and serving together, so that the weight of the mission is carried together and the joy of it is shared together too.",
+                )}
+              </p>
+              <p>
+                {t(
+                  "A trip doesn't end when the team comes home. Students they meet are connected to Bible study and discipleship, so a short trip can grow into a lasting walk with Christ long after the team has left.",
+                )}
+              </p>
+              <p>
                 {t(
                   "It's a chance to step out in faith, grow through hands-on ministry, and see God work through students who are simply willing to go.",
                 )}
               </p>
             </div>
+
+            <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
+              {t("“Here am I. Send me!”")}
+              <br />
+              {t("— Isaiah 6:8")}
+            </p>
           </div>
         </section>
 
-        <section className={`${BAND} mt-16 pt-20 pb-24 lg:pt-[100px] lg:pb-[110px]`}>
+        <section className={`${BAND} mt-[100px] pt-20 pb-24 lg:pb-[110px]`}>
           <div className="mx-auto max-w-[1391px] px-6">
             <h2 className={BAND_HEADING}>{t("What You'll Experience")}</h2>
 
@@ -94,11 +128,46 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1391px] px-6 pt-20 pb-20 lg:pb-[101px]">
-          <div className="grid grid-cols-1 gap-[33px] lg:grid-cols-2">
-            <div className="rounded-2xl border border-v2-border bg-white px-8 pt-16 pb-12 sm:px-[62px]">
-              <h2 className={BAND_HEADING}>{t("Where You Could Serve")}</h2>
-              <ul className="mt-[38px] list-disc space-y-2 pl-6 text-[16.6px] text-[#4b5565] leading-[27.2px]">
+        <section className="mx-auto max-w-[1391px] px-6 pt-20 pb-20 lg:pt-[100px] lg:pb-[101px]">
+          <h2 className={BAND_HEADING}>{t("Preparing to Go")}</h2>
+          <p className="mt-5 max-w-[908px] text-[15px] text-[#4b5565] leading-[24px]">
+            {t(
+              "Before a team departs, they walk through preparation together, so every student arrives ready — spiritually and practically.",
+            )}
+          </p>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-[39px] lg:grid-cols-3">
+            <InfoCard
+              title={t("Team Training")}
+              body={t("Teams train together before the trip — Scripture, evangelism practice, and getting to know the people they'll serve alongside.")}
+            />
+            <InfoCard
+              title={t("Support Raising")}
+              body={t("Trips are carried by prayer and financial partnership. We'll walk you through inviting others into your trip through support raising.")}
+            />
+            <InfoCard
+              title={t("Travel & Safety Prep")}
+              body={t("From logistics to safety guidelines and cultural preparation, our team helps you get ready to serve well and serve safely.")}
+            />
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-[1391px] px-6 pb-20 lg:pb-[101px]">
+          <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
+            <div className="relative min-h-[320px] w-full lg:min-h-[480px]">
+              <Image
+                src="/images/get-involved/mission-school-bible-study.png"
+                alt={t("A team leading a Bible study on a mission trip")}
+                fill
+                sizes="(min-width: 1024px) 672px, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col justify-center px-8 py-12 lg:py-0 lg:pr-[108px] lg:pl-12">
+              <h2 className="font-display font-semibold text-3xl text-black tracking-[-0.64px] lg:text-[40px] lg:leading-[44px]">
+                {t("Where You Could Serve")}
+              </h2>
+              <ul className="mt-4 list-disc space-y-1 pl-5 font-medium text-[#4b5565] text-base leading-[30px] lg:text-[18.9px]">
                 <li>{t("Your current city or campus")}</li>
                 <li>{t("Another city")}</li>
                 <li>{t("Another country")}</li>
@@ -106,15 +175,17 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
                 <li>{t("Wherever the need is greatest")}</li>
               </ul>
             </div>
+          </div>
+        </section>
 
-            <div className="rounded-2xl border border-v2-border bg-white px-8 pt-16 pb-12 sm:px-[62px]">
-              <h2 className={BAND_HEADING}>{t("Who Can Join?")}</h2>
-              <p className="mt-[38px] whitespace-pre-line text-[16.6px] text-[#4b5565] leading-[27.2px]">
-                {t(
-                  "Short-term Mission is open to students and young adults connected to YEF.\n\nYou don't need to be an experienced evangelist — you need a willing heart and a readiness to serve as part of a team.",
-                )}
-              </p>
-            </div>
+        <section className="mx-auto max-w-[1391px] px-6 pb-20 lg:pb-[101px]">
+          <div className="rounded-2xl border border-v2-border bg-white px-8 pt-16 pb-12 sm:px-[73px]">
+            <h2 className={BAND_HEADING}>{t("Who Can Join?")}</h2>
+            <p className="mt-[38px] max-w-[760px] whitespace-pre-line text-[19px] text-[#4b5565] leading-[27.2px]">
+              {t(
+                "Short-term Mission is open to students and young adults connected to YEF.\n\nYou don't need to be an experienced evangelist — you need a willing heart and a readiness to serve as part of a team.",
+              )}
+            </p>
           </div>
         </section>
 
@@ -129,13 +200,23 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
               "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
             )}
           </p>
-          <Link
-            href="/get-involved/short-term-mission/apply"
-            className="mt-9 inline-block rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
-          >
-            {t("Apply for Short-term Mission")}
-          </Link>
+          <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href="/news"
+              className="inline-block rounded-full border border-[#0066cf] px-10 py-4 font-semibold text-[#0066cf] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+            >
+              {t("See Upcoming Trips")}
+            </Link>
+            <Link
+              href="/get-involved/short-term-mission/apply"
+              className="inline-block rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+            >
+              {t("Apply for Short-term Mission")}
+            </Link>
+          </div>
         </section>
+
+        <MissionSchoolCta />
       </main>
       <Footer />
     </>

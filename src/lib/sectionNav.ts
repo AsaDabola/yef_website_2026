@@ -17,7 +17,7 @@ export const whoWeAreLinks = [
 ];
 
 export const getInvolvedLinks = [
-  { label: "Bible Studies", href: "/get-involved#bible-studies" },
+  { label: "Bible Studies", href: "/get-involved/bible-studies" },
   { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
   { label: "Summer Training", href: "/get-involved/summer-training" },
   {
@@ -26,7 +26,7 @@ export const getInvolvedLinks = [
   },
   { label: "Internship", href: "/get-involved#internship" },
   { label: "Discipleship", href: "/get-involved/discipleship" },
-  { label: "Leadership Training", href: "/get-involved#leadership-training" },
-  { label: "Volunteer", href: "/get-involved/volunteer" },
+  { label: "Leadership Training", href: "/get-involved/leadership-retreats" },
+  { label: "Volunteer", href: "/get-involved/volunteering" },
   { label: "Submit Your Story", href: "/submit-your-story" },
 ];

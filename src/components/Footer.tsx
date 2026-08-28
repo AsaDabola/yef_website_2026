@@ -27,11 +27,12 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Get involved",
     links: [
-      { label: "Bible Studies", href: "/get-involved#bible-studies" },
+      { label: "Bible Studies", href: "/get-involved/bible-studies" },
       { label: "Summer Training", href: "/get-involved/summer-training" },
       { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
       { label: "Short-term Mission", href: "/get-involved/short-term-mission" },
-      { label: "Volunteer", href: "/get-involved/volunteer" },
+      { label: "Leadership Training", href: "/get-involved/leadership-retreats" },
+      { label: "Volunteer", href: "/get-involved/volunteering" },
       { label: "Internship", href: "/get-involved#internship" },
       { label: "Discipleship", href: "/get-involved/discipleship" },
       { label: "Submit Your Story", href: "/submit-your-story" },
