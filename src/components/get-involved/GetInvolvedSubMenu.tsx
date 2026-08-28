@@ -7,7 +7,7 @@ import { useT } from "@/lib/i18n/client";
 const links = [
   { label: "Bible Studies", href: "/get-involved#bible-studies" },
   { label: "Summer Training", href: "/get-involved#summer-training" },
-  { label: "Mission Trip", href: "/get-involved/mission-trip" },
+  { label: "Campus Evangelism", href: "/get-involved/mission-trip" },
   {
     label: "Volunteer/Short-term Projects",
     href: "/get-involved#short-term-mission",
