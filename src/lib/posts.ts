@@ -31,8 +31,8 @@ const fallbackMovementItems: MovementItem[] = [
   {
     tag: "NEW CHAPTER",
     title: "YEF St. Louis Holds Fellowship Gathering",
-    image: "/images/home-v2/movement-st-louis.jpg",
-    alt: "Students seated together at a YEF fellowship gathering in St. Louis",
+    image: "/images/home-v2/movement-st-louis.webp",
+    alt: "Students at a YEF welcome table on campus in St. Louis",
   },
 ];
 
