@@ -55,8 +55,8 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/get-involved/retreat-team-jump.png",
-                  alt: "YEF leaders leaping on the lawn outside the retreat house",
+                  src: "/images/get-involved/leadership-retreat-classroom.webp",
+                  alt: "A leader teaching a session to a room of students at a retreat",
                 },
                 {
                   src: "/images/get-involved/gallery-street-outreach.png",
@@ -106,8 +106,8 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
           <div className="mt-[132px] grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
             <div className="relative min-h-[320px] w-full lg:min-h-[640px]">
               <Image
-                src="/images/get-involved/leadership-retreat-team.png"
-                alt={t("YEF leaders gathered together at an international retreat")}
+                src="/images/get-involved/leadership-retreat-shepherd-sunset.webp"
+                alt={t("A shepherd leading sheep across a field at sunset")}
                 fill
                 sizes="(min-width: 1024px) 672px, 100vw"
                 className="object-cover"
