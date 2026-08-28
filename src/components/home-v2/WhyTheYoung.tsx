@@ -43,7 +43,9 @@ export default async function WhyTheYoung({
   return (
     <section className="font-body relative overflow-hidden bg-[#eef1f7]">
       <FlowingBackground />
-      <div className="relative mx-auto max-w-[1920px] px-6 py-24 sm:px-10 sm:pb-0 lg:px-19">
+      {/* 1920x650 frame: a 1440 column at x=240, y=110, with the rule at 227
+          and the three 480 cells from 254. */}
+      <div className="relative mx-auto max-w-[1440px] px-6 py-24 sm:px-10 sm:pb-0 lg:pt-[110px] 2xl:px-0">
         <Reveal>
           <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
             {t(c.eyebrow)}
@@ -70,7 +72,7 @@ export default async function WhyTheYoung({
                 // padding is the section's, moved inside the columns so the
                 // dividers reach the rule that closes the section.
                 className={[
-                  "pb-8 sm:row-span-2 sm:grid sm:grid-rows-subgrid sm:pt-18 sm:pb-24",
+                  "pb-8 sm:row-span-2 sm:grid sm:grid-rows-subgrid sm:pt-18 sm:pb-[45px]",
                   index > 0 && "sm:border-l sm:border-v2-border sm:pl-10",
                   index < proof.length - 1 && "sm:pr-10",
                 ]

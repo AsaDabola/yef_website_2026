@@ -20,7 +20,8 @@ export default function FindYourCampus() {
 
   return (
     <section id="find-your-campus" className="font-body bg-v2-bg scroll-mt-24">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 text-center sm:px-10 lg:px-19">
+      {/* 1920x389 frame: a 1440 column at x=240, y=110, 248 tall. */}
+      <div className="mx-auto max-w-[1440px] px-6 py-24 text-center sm:px-10 lg:pt-[110px] lg:pb-[41px] 2xl:px-0">
         <Reveal>
           <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-0.4px] sm:text-5xl lg:text-[58px]">
             {t("Find Your")}{" "}

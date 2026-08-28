@@ -11,7 +11,9 @@ export default async function AroundMovement() {
 
   return (
     <section className="font-body bg-[#f2f6fb]">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+      {/* 1920x750 frame: a 1440 column at x=240, y=49, with the three 469
+          cards on a 496 row from y=118. */}
+      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:pt-[49px] lg:pb-[94px] 2xl:px-0">
         <Reveal>
           <h2 className="font-display font-bold text-4xl text-v2-navy tracking-[-0.4px] sm:text-5xl lg:text-[54px]">
             {t("Around the")}{" "}

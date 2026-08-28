@@ -32,14 +32,14 @@ export default async function Testimonials() {
   const t = await getT();
   return (
     <section className="font-body border-t border-v2-border bg-white">
-      <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:pt-[131px] lg:pb-[112px] 2xl:px-0">
         <Reveal>
           <p className="text-center font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
             {t("Testimonials")}
           </p>
           <h2 className="mt-4 text-center font-display font-bold text-4xl text-v2-navy tracking-[-1.45px] sm:text-5xl lg:text-[58px]">
             <Rich
-              text={t("You are the Christ, the Son of the **living God**.")}
+              text={t("From Students **to Disciples**.")}
               emphasis="font-instrument-serif font-normal italic text-v2-accent"
             />
           </h2>

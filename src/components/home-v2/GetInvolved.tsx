@@ -142,7 +142,9 @@ export default function GetInvolved() {
     <section className="font-body bg-white">
       {/* A gutter at every width — the row used to run to the viewport
           edge below 1440, leaving the first and last cards flush against it. */}
-      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:px-12 lg:py-[130px]">
+      {/* 1920x1000 frame: a 1440 column at x=240, the heading from y=116 and
+          the 380-wide cards on a 666 row ending at 921. */}
+      <div className="mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:pt-[116px] lg:pb-[67px] 2xl:px-0">
         <Reveal className="flex items-end justify-between">
           <div>
             <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
@@ -178,7 +180,7 @@ export default function GetInvolved() {
           <HoverGroup
             ref={trackRef}
             className="-my-4 mt-9 flex gap-[26px] overflow-x-auto py-4 [-ms-overflow-style:none] [scrollbar-width:none] lg:mt-12 [&::-webkit-scrollbar]:hidden"
-            itemClassName="w-[74%] shrink-0 sm:w-[43%] lg:w-[26%]"
+            itemClassName="w-[74%] shrink-0 sm:w-[43%] lg:w-[26.4%]"
           >
             {/* Twice through: the drift wraps at the halfway mark onto an
                 identical frame, so the row has no visible seam or end. */}
