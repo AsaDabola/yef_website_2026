@@ -4,6 +4,7 @@ import { useState } from "react";
 import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import {
   CheckboxField,
+  FileField,
   RadioField,
   TextAreaField,
   TextField,
@@ -86,6 +87,12 @@ export default function MissionApplyForm() {
           />
           <TextField label={t("Church")} name="church" />
         </div>
+        <FileField
+          label={t("Add a photo (optional)")}
+          hint={t("JPG or PNG — up to 10MB")}
+          name="photo"
+          accept="image/*"
+        />
       </div>
 
       <div className="space-y-5">
@@ -100,6 +107,10 @@ export default function MissionApplyForm() {
             name="responsibilities"
           />
         </div>
+        <TextField
+          label={t("Who recommended YEF to you? (optional)")}
+          name="referredBy"
+        />
       </div>
 
       <div className="space-y-5">
@@ -123,6 +134,23 @@ export default function MissionApplyForm() {
           name="whyYef"
           rows={3}
         />
+        <fieldset>
+          <legend className="mb-3 font-medium text-[14px] text-[#1b1d21]">
+            {t("Have you completed a YEF discipleship program before?")}
+          </legend>
+          <div className="flex gap-3">
+            <RadioField
+              label={t("Yes")}
+              name="completedDiscipleship"
+              value="yes"
+            />
+            <RadioField
+              label={t("No")}
+              name="completedDiscipleship"
+              value="no"
+            />
+          </div>
+        </fieldset>
       </div>
 
       <div className="space-y-5">

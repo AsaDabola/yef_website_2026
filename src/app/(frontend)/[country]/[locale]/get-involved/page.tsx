@@ -33,6 +33,25 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
             <div className="min-w-0 flex-1">
               <Breadcrumb label={t("Get Involved")} />
 
+              <div className="mt-10 flex flex-col items-start justify-between gap-6 rounded-2xl border border-[#dce3f5] bg-[#f1f6ff] p-8 sm:flex-row sm:items-center">
+                <div>
+                  <h2 className="font-display font-bold text-xl text-black">
+                    {t("Not sure where to start?")}
+                  </h2>
+                  <p className="mt-2 max-w-[520px] text-[15px] text-[#4b5565] leading-[24px]">
+                    {t(
+                      "Tell us what you're interested in, and we'll help you find the right opportunity.",
+                    )}
+                  </p>
+                </div>
+                <a
+                  href="/get-involved/apply"
+                  className="shrink-0 rounded-full bg-[#0066cf] px-8 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
+                >
+                  {t("Tell Us Your Interests")}
+                </a>
+              </div>
+
               <MinistrySection
                 id="bible-studies"
                 title={t("Bible Studies")}
@@ -75,6 +94,13 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 title={t("Short-term Mission")}
                 cardTitle={t("Serve with Purpose")}
                 body={t("Interested in furthering God's kingdom with the talents God has given you? YEF provides volunteer opportunities that anyone can contribute to building the ministry together. You can share your talents with our campus ministry to reach more of the unreached student on college campuses. Volunteer positions vary from video making, Web design, technology, event-planning, communication and much more.")}
+                ctas={[
+                  {
+                    label: "Apply for Short-term Mission",
+                    href: "/get-involved/short-term-mission/apply",
+                    primary: true,
+                  },
+                ]}
                 resourceColumns={[
                   [
                     "Trip Destinations & Dates",
@@ -113,6 +139,13 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 title={t("Leadership Training")}
                 cardTitle={t("Raise Up Leaders")}
                 body={t("YEF offers leadership training regionally and nationwide to provide rich spiritual foods to the students in need. Leadership Training is open to the students who finished their discipleship program on their campus. During their training, they will be equipped as teachers and missionaries on campus by learning about mission and the practicum for instructing students.")}
+                ctas={[
+                  {
+                    label: "Apply for Leadership Training",
+                    href: "/get-involved/leadership-retreats/apply",
+                    primary: true,
+                  },
+                ]}
                 resourceColumns={[
                   [
                     "Who This Is For",

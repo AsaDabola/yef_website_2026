@@ -134,10 +134,10 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
 {t("Leadership Retreats")}
 </a>
             <a
-              href="/get-involved/apply"
+              href="/get-involved/leadership-retreats/apply"
               className="flex w-full max-w-[515px] items-center justify-center rounded-2xl border border-[#b1b1b1] bg-white px-6 py-8 text-center font-sans font-semibold text-[#0066cf] text-xl leading-[28.8px] transition-colors hover:border-[#0066cf] lg:h-[158px] lg:py-0 lg:text-[28px]"
             >
-              
+
 {t("Apply to Attend")}
 </a>
           </div>
