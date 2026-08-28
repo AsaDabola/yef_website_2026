@@ -56,7 +56,7 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
   }, [slides.length, since]);
 
   return (
-    <section className="font-body relative flex min-h-[640px] items-end overflow-hidden bg-v2-navy lg:min-h-screen">
+    <section className="font-body relative flex min-h-screen items-end overflow-hidden bg-v2-navy">
       {slides.map((slide, index) => (
         <div
           key={slide.image}
@@ -78,7 +78,7 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
 
       <HeaderV2 />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pt-24 pb-24 sm:px-10 lg:px-19 lg:pb-32">
+      <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pt-40 pb-24 sm:px-10 lg:px-19 lg:pb-32">
         <div className="grid max-w-3xl">
           {slides.map((slide, index) => (
             <div
