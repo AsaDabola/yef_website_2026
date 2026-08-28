@@ -27,7 +27,7 @@ export default async function VolunteeringPage({ params }: { params: LocaleParam
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/volunteering-donation-drive.png"
+            src="/images/get-involved/volunteering-hero.webp"
             alt=""
             fill
             priority
@@ -58,16 +58,16 @@ export default async function VolunteeringPage({ params }: { params: LocaleParam
                 <GalleryMosaic
                   images={[
                     {
-                      src: "/images/get-involved/volunteering.png",
-                      alt: "A YEF volunteer serving at a chapter event",
+                      src: "/images/get-involved/volunteering-campus-outreach.webp",
+                      alt: "A volunteer talking with students at a campus outreach table",
                     },
                     {
                       src: "/images/get-involved/volunteering-donation-drive.png",
-                      alt: "Volunteers sorting clothing at a donation drive",
+                      alt: "Volunteers waving beside a donation box at a clothing drive",
                     },
                     {
-                      src: "/images/get-involved/story-teacher.png",
-                      alt: "A volunteer teaching a group of students",
+                      src: "/images/get-involved/volunteering-clipboard.webp",
+                      alt: "A volunteer wearing a \"Volunteer\" shirt writing on a clipboard",
                     },
                   ]}
                 />
