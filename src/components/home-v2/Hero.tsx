@@ -32,7 +32,7 @@ const defaultSlides: HeroSlide[] = [
     image: "/images/home-v2/slide-2-students.webp",
     alt: "Students smiling together on a mission trip",
     heading: "Reaching Students.\nRaising Disciples.",
-    body: "A global evangelical campus fellowship sharing the Gospel, teaching the Bible, and raising disciples of Jesus Christ.",
+    body: "A global evangelical campus fellowship sharing the Gospel, teaching the Bible,\nand raising disciples of Jesus Christ.",
     button: { label: "FIND YOUR CAMPUS", href: "#find-your-campus" },
   },
 ];
@@ -97,7 +97,7 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
               <h1 className="whitespace-pre-line font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl lg:text-8xl">
                 {t(slide.heading)}
               </h1>
-              <p className="mt-8 max-w-[600px] text-[17px] text-white/82 leading-[1.7]">
+              <p className="mt-8 max-w-[600px] whitespace-pre-line text-[17px] text-white/82 leading-[1.7]">
                 {t(slide.body)}
               </p>
               <Link
