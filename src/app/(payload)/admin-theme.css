@@ -43,3 +43,105 @@ html[data-theme="dark"] .template-default__wrap {
 html[data-theme="dark"] .template-default .nav {
   border-right-color: #262626;
 }
+
+/**
+ * A Shopify-admin-style pass on top of the split above: a clean sans
+ * typeface, white bordered/rounded cards sitting on the gray canvas instead
+ * of borderless sections, pill-shaped statuses, and softer buttons and
+ * inputs. Keeps YEF's own brand blue as the accent rather than adopting
+ * Shopify's own palette — this borrows the format, not the branding.
+ */
+
+:root {
+  --font-body: var(--font-admin-inter), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html[data-theme="light"] .template-default__wrap {
+  background-color: #f4f5f7;
+}
+
+/* Cards: every block row, array row, thumbnail and upload card reads as a
+   white panel with its own edge and a hint of lift, rather than sitting
+   flush on the canvas. */
+html[data-theme="light"] .collapsible,
+html[data-theme="light"] .card,
+html[data-theme="light"] .thumbnail-card,
+html[data-theme="light"] .upload-field-card,
+html[data-theme="light"] .file-details {
+  border-radius: 10px;
+  border-color: #e3e5e8;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+html[data-theme="light"] .collapsible__header-wrap {
+  border-radius: 10px 10px 0 0;
+}
+
+/* Buttons: rounder corners, no all-caps, a touch more breathing room. */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn--style-primary {
+  background: #0066cf;
+  border-color: #0066cf;
+}
+
+.btn--style-primary:not(.btn--disabled):hover {
+  background: #0057b3;
+  border-color: #0057b3;
+}
+
+.btn--style-secondary {
+  border-radius: 8px;
+}
+
+/* Pills: fully rounded, matching Shopify's status-badge shape. */
+.pill {
+  border-radius: 999px;
+}
+
+/* Inputs: rounder, with the brand blue as the focus color instead of
+   Payload's default. */
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea,
+.textarea,
+.rich-text-lexical {
+  border-radius: 8px !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus {
+  border-color: #0066cf !important;
+  box-shadow: 0 0 0 1px #0066cf !important;
+}
+
+/* Table: a rounded, bordered container instead of full-bleed rules, with a
+   faint header tint and a hover highlight per row. */
+html[data-theme="light"] .table-wrap {
+  border: 1px solid #e3e5e8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+html[data-theme="light"] .table thead tr {
+  background: #fafbfc;
+}
+
+html[data-theme="light"] .table thead th {
+  font-weight: 600;
+  color: #4b5565;
+}
+
+html[data-theme="light"] .table tbody tr:hover {
+  background: #f7f9fc;
+}
+
+/* List header: a bit more room between the title and the table below it. */
+.list-header {
+  margin-bottom: 24px;
+}
