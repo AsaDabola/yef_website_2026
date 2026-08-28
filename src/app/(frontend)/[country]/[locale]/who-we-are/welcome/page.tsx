@@ -17,7 +17,10 @@ export default async function WelcomePage({ params }: { params: LocaleParams }) 
   return (
     <>
       <main>
-        <SubPageHero />
+        <SubPageHero
+          image="/images/who-we-are/banner-welcome.webp"
+          alt={t("A sailing yacht on calm water below green mountains")}
+        />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
             <div className="shrink-0 lg:w-[237px]">

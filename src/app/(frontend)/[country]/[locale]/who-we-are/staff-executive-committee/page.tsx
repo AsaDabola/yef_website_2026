@@ -78,7 +78,7 @@ export default async function StaffExecutiveCommitteePage({ params }: { params: 
     <>
       <main>
         <SubPageHero
-          image="/images/who-we-are/banner-staff.jpg"
+          image="/images/who-we-are/banner-staff.webp"
           alt={t("Sunlit mountain ridges receding into morning haze")}
         />
         {/* The frame insets the sub-menu 92px from the left and opens the

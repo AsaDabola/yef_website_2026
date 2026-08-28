@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import { useState } from "react";
 import type { NewsArticle } from "@/lib/news";
+import type { PhotoEvent } from "@/lib/photoEvents";
 import HoverGroup from "@/components/ui/HoverGroup";
+import PhotoEventsGrid from "@/components/news/PhotoEventsGrid";
 import { useT } from "@/lib/i18n/client";
 
-const tabs = ["View All", "News", "Story", "Event"];
+const tabs = ["View All", "News", "Story", "Photo News"];
 const PAGE_SIZE = 12;
 
 /** 1, 2, …, current-1, current, current+1, …, last — never a run of dots
@@ -23,7 +25,13 @@ function pageList(current: number, total: number): (number | "…")[] {
   return out;
 }
 
-export default function NewsGrid({ posts }: { posts: NewsArticle[] }) {
+export default function NewsGrid({
+  posts,
+  photoEvents,
+}: {
+  posts: NewsArticle[];
+  photoEvents: PhotoEvent[];
+}) {
   const t = useT();
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [page, setPage] = useState(1);
@@ -64,56 +72,62 @@ export default function NewsGrid({ posts }: { posts: NewsArticle[] }) {
             </button>
           ))}
         </div>
-        <div className="flex gap-3 pb-3 text-sm text-v2-muted-dark-2">
-          <span className="flex items-center gap-1.5 rounded-lg border border-v2-border px-4 py-2">
-            {t("Newest")}
-            <span aria-hidden="true">&#9662;</span>
-          </span>
-          <span className="flex items-center gap-1.5 rounded-lg border border-v2-border px-4 py-2">
-            12
-            <span aria-hidden="true">&#9662;</span>
-          </span>
-        </div>
+        {activeTab !== "Photo News" && (
+          <div className="flex gap-3 pb-3 text-sm text-v2-muted-dark-2">
+            <span className="flex items-center gap-1.5 rounded-lg border border-v2-border px-4 py-2">
+              {t("Newest")}
+              <span aria-hidden="true">&#9662;</span>
+            </span>
+            <span className="flex items-center gap-1.5 rounded-lg border border-v2-border px-4 py-2">
+              12
+              <span aria-hidden="true">&#9662;</span>
+            </span>
+          </div>
+        )}
       </div>
 
-      <HoverGroup className="mt-10 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
-        {articles.map((article) => (
-          <Link
-            key={article.slug}
-            href={`/news/${article.slug}`}
-            className="group"
-          >
-            <div className="relative aspect-[312/234] w-full overflow-hidden rounded-2xl">
-              <Image
-                src={article.image}
-                alt={article.title}
-                fill
-                sizes="(min-width: 1024px) 25vw, 50vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
-            <p className="mt-6 font-semibold text-[13px] text-v2-blue">
-              {t(article.tag)}
-            </p>
-            <div className="mt-2 flex items-start justify-between gap-3">
-              <h3 className="font-display font-bold text-xl text-black leading-snug">
-                {t(article.title)}
-              </h3>
-              <span
-                aria-hidden="true"
-                className="mt-1 shrink-0 text-xl text-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-              >
-                &#8599;
-              </span>
-            </div>
-            <p className="mt-3 text-[15px] text-v2-muted-dark-2 leading-relaxed">
-              {t(article.excerpt)}
-            </p>
-          </Link>
-        ))}
-      </HoverGroup>
+      {activeTab === "Photo News" ? (
+        <PhotoEventsGrid events={photoEvents} />
+      ) : (
+        <HoverGroup className="mt-10 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+          {articles.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/news/${article.slug}`}
+              className="group"
+            >
+              <div className="relative aspect-[312/234] w-full overflow-hidden rounded-2xl">
+                <Image
+                  src={article.image}
+                  alt={article.title}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <p className="mt-6 font-semibold text-[13px] text-v2-blue">
+                {t(article.tag)}
+              </p>
+              <div className="mt-2 flex items-start justify-between gap-3">
+                <h3 className="font-display font-bold text-xl text-black leading-snug">
+                  {t(article.title)}
+                </h3>
+                <span
+                  aria-hidden="true"
+                  className="mt-1 shrink-0 text-xl text-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                >
+                  &#8599;
+                </span>
+              </div>
+              <p className="mt-3 text-[15px] text-v2-muted-dark-2 leading-relaxed">
+                {t(article.excerpt)}
+              </p>
+            </Link>
+          ))}
+        </HoverGroup>
+      )}
 
-      {pageCount > 1 && (
+      {activeTab !== "Photo News" && pageCount > 1 && (
         <div className="mt-16 flex items-center justify-between border-t border-v2-border pt-6">
           <button
             type="button"

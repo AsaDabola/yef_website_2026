@@ -8,6 +8,7 @@ import sharp from "sharp";
 import { Media } from "@/payload/collections/Media";
 import { Members } from "@/payload/collections/Members";
 import { Pages } from "@/payload/collections/Pages";
+import { PhotoEvents } from "@/payload/collections/PhotoEvents";
 import { Posts } from "@/payload/collections/Posts";
 import { Resources } from "@/payload/collections/Resources";
 import { Users } from "@/payload/collections/Users";
@@ -37,7 +38,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Pages, Posts, Media, Users, Members, Resources],
+  collections: [Pages, Posts, PhotoEvents, Media, Users, Members, Resources],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

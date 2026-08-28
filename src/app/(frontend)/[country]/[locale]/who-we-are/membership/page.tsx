@@ -18,7 +18,7 @@ export default async function MembershipPage({ params }: { params: LocaleParams 
     <>
       <main>
         <SubPageHero
-          image="/images/who-we-are/banner-membership.png"
+          image="/images/who-we-are/banner-membership.webp"
           alt={t("Friends running together through a sunlit park")}
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">

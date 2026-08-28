@@ -139,7 +139,7 @@ export default function GetInvolved() {
   }, []);
 
   return (
-    <section className="font-body bg-white">
+    <section className="font-body bg-[#f2f6fb]">
       {/* A gutter at every width — the row used to run to the viewport
           edge below 1440, leaving the first and last cards flush against it. */}
       {/* 1920x1000 frame: a 1440 column at x=240, the heading from y=116 and

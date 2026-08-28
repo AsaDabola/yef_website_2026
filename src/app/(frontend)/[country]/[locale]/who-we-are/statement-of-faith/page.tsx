@@ -27,7 +27,7 @@ export default async function StatementOfFaithPage({ params }: { params: LocaleP
     <>
       <main>
         <SubPageHero
-          image="/images/shared/banner-sunrise-ridges.jpg"
+          image="/images/who-we-are/banner-statement-of-faith.webp"
           alt={t("Sunrise over layered mountain ridges")}
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">

@@ -18,22 +18,21 @@ export type MovementItem = {
 const fallbackMovementItems: MovementItem[] = [
   {
     tag: "PIONEERING MISSIONS",
-    title: "YEF Tonga Begins Romans Bible Study with Six Nursing Students at TNU",
+    title: "YEF Tonga Begins Romans Bible Study at TNU",
     image: "/images/home-v2/movement-tonga.jpg",
     alt: "YEF Tonga nursing students studying Romans around a picnic table",
   },
   {
     tag: "CONFERENCES",
-    title:
-      "YEF Hong Kong Members Renewed by God's Love and Mission at Mission Conference",
+    title: "YEF Hong Kong Renewed at Mission Conference",
     image: "/images/home-v2/movement-hong-kong.jpg",
     alt: "YEF Hong Kong members at the Great Commission Mission Conference",
   },
   {
     tag: "NEW CHAPTER",
-    title: "YEF Holds Fellowship Gathering Near Washington University in St. Louis",
-    image: "/images/home-v2/movement-st-louis.jpg",
-    alt: "Students seated together at a YEF fellowship gathering in St. Louis",
+    title: "YEF St. Louis Holds Fellowship Gathering",
+    image: "/images/home-v2/movement-st-louis.webp",
+    alt: "Students at a YEF welcome table on campus in St. Louis",
   },
 ];
 
@@ -85,7 +84,7 @@ function formatDate(value: string) {
  * two are how headquarters pushes an announcement out to the network without
  * each country having to re-type it.
  */
-function forThisCountry(where?: Where): Where {
+export function forThisCountry(where?: Where): Where {
   const code = getCountryCode();
   const visible: Where = {
     or: [

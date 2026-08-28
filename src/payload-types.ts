@@ -70,6 +70,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    'photo-events': PhotoEvent;
     media: Media;
     users: User;
     members: Member;
@@ -83,6 +84,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    'photo-events': PhotoEventsSelect<false> | PhotoEventsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     members: MembersSelect<false> | MembersSelect<true>;
@@ -736,6 +738,181 @@ export interface Post {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * A batch of photos from one event. The first photo is used as the cover tile.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photo-events".
+ */
+export interface PhotoEvent {
+  id: number;
+  country:
+    | 'int'
+    | 'ao'
+    | 'ar'
+    | 'au'
+    | 'at'
+    | 'bd'
+    | 'be'
+    | 'br'
+    | 'cm'
+    | 'ca'
+    | 'cl'
+    | 'co'
+    | 'ci'
+    | 'cz'
+    | 'cd'
+    | 'do'
+    | 'ke'
+    | 'eg'
+    | 'et'
+    | 'fj'
+    | 'fr'
+    | 'de'
+    | 'gh'
+    | 'gr'
+    | 'gt'
+    | 'ht'
+    | 'hn'
+    | 'hu'
+    | 'in'
+    | 'id'
+    | 'il'
+    | 'it'
+    | 'jp'
+    | 'kz'
+    | 'mg'
+    | 'my'
+    | 'mx'
+    | 'mn'
+    | 'mz'
+    | 'mm'
+    | 'np'
+    | 'nl'
+    | 'nz'
+    | 'ng'
+    | 'pk'
+    | 'pe'
+    | 'ph'
+    | 'pl'
+    | 'pt'
+    | 'ro'
+    | 'ru'
+    | 'rw'
+    | 'sg'
+    | 'sk'
+    | 'za'
+    | 'kr'
+    | 'es'
+    | 'lk'
+    | 'se'
+    | 'ch'
+    | 'tw'
+    | 'th'
+    | 'tr'
+    | 'ua'
+    | 'ae'
+    | 'gb'
+    | 'us'
+    | 'vn'
+    | 'zm';
+  /**
+   * Where this batch is published. A batch shown elsewhere is still edited here, by this country's team.
+   */
+  audience: 'own' | 'some' | 'all';
+  /**
+   * The other country sites that also show this batch.
+   */
+  distributeTo?:
+    | (
+        | 'int'
+        | 'ao'
+        | 'ar'
+        | 'au'
+        | 'at'
+        | 'bd'
+        | 'be'
+        | 'br'
+        | 'cm'
+        | 'ca'
+        | 'cl'
+        | 'co'
+        | 'ci'
+        | 'cz'
+        | 'cd'
+        | 'do'
+        | 'ke'
+        | 'eg'
+        | 'et'
+        | 'fj'
+        | 'fr'
+        | 'de'
+        | 'gh'
+        | 'gr'
+        | 'gt'
+        | 'ht'
+        | 'hn'
+        | 'hu'
+        | 'in'
+        | 'id'
+        | 'il'
+        | 'it'
+        | 'jp'
+        | 'kz'
+        | 'mg'
+        | 'my'
+        | 'mx'
+        | 'mn'
+        | 'mz'
+        | 'mm'
+        | 'np'
+        | 'nl'
+        | 'nz'
+        | 'ng'
+        | 'pk'
+        | 'pe'
+        | 'ph'
+        | 'pl'
+        | 'pt'
+        | 'ro'
+        | 'ru'
+        | 'rw'
+        | 'sg'
+        | 'sk'
+        | 'za'
+        | 'kr'
+        | 'es'
+        | 'lk'
+        | 'se'
+        | 'ch'
+        | 'tw'
+        | 'th'
+        | 'tr'
+        | 'ua'
+        | 'ae'
+        | 'gb'
+        | 'us'
+        | 'vn'
+        | 'zm'
+      )[]
+    | null;
+  /**
+   * e.g. Summer Mission Trip 2026 — Kenya.
+   */
+  title: string;
+  /**
+   * The web address for this batch, e.g. kenya-mission-trip-2026.
+   */
+  slug: string;
+  publishedAt: string;
+  photos: {
+    image: number | Media;
+    caption?: string | null;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Who can sign in, which country sites they are responsible for, and which parts of those sites they may edit.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -744,6 +921,10 @@ export interface Post {
 export interface User {
   id: number;
   name?: string | null;
+  /**
+   * Shown next to their name in the admin. Anyone can set their own.
+   */
+  avatar?: (number | null) | Media;
   role: 'super' | 'region-admin' | 'country-admin' | 'editor';
   /**
    * The continents this person is responsible for. Every country in them falls into their scope.
@@ -959,6 +1140,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'photo-events';
+        value: number | PhotoEvent;
       } | null)
     | ({
         relationTo: 'media';
@@ -1230,6 +1415,27 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photo-events_select".
+ */
+export interface PhotoEventsSelect<T extends boolean = true> {
+  country?: T;
+  audience?: T;
+  distributeTo?: T;
+  title?: T;
+  slug?: T;
+  publishedAt?: T;
+  photos?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -1277,6 +1483,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  avatar?: T;
   role?: T;
   regions?: T;
   countries?: T;

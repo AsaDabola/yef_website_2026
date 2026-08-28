@@ -18,7 +18,7 @@ export default async function HistoryPage({ params }: { params: LocaleParams }) 
     <>
       <main>
         <SubPageHero
-          image="/images/who-we-are/banner-history.png"
+          image="/images/who-we-are/banner-history.webp"
           alt={t("Hands holding an open world map on a forest path")}
         />
         <HistoryIntro />
