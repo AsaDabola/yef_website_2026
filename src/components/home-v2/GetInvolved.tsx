@@ -36,7 +36,7 @@ const cards = [
     image: "/images/home-v2/get-involved-summer-training.png",
   },
   {
-    tag: "Each Summer",
+    tag: "Go",
     title: "Short-term Mission",
     body: "Three to seven days in the US and Korea. Word, prayer, and long meals with students who came from the other side of the world.",
     image: "/images/home-v2/get-involved-short-term-mission.webp",
