@@ -118,7 +118,7 @@ export default async function MissionTripPage({ params }: { params: LocaleParams
                     <ResourceTeaserCard
                       image="/images/get-involved/campus-evangelism-teaser-friends.webp"
                       alt={t("Two students talking together on campus")}
-                      title={t("Bible Studies")}
+                      title={t("Share the Gospel")}
                       href="/get-involved#bible-studies"
                     />
                   </div>
