@@ -28,7 +28,7 @@ export default async function BibleStudiesPage({ params }: { params: LocaleParam
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/bible-studies-sunset.png"
+            src="/images/get-involved/bible-studies-hero.webp"
             alt=""
             fill
             priority
@@ -59,16 +59,16 @@ export default async function BibleStudiesPage({ params }: { params: LocaleParam
                 <GalleryMosaic
                   images={[
                     {
-                      src: "/images/get-involved/bible-study-large-group.png",
-                      alt: "A large group of students gathered for Bible study",
+                      src: "/images/get-involved/bible-studies-table-discussion.webp",
+                      alt: "Students gathered around a table for Bible study",
                     },
                     {
-                      src: "/images/get-involved/gallery-bible-study-bench.png",
-                      alt: "Students studying the Bible together on a bench",
+                      src: "/images/get-involved/bible-studies-rephidim-meeting.webp",
+                      alt: "A group of students at a YEF Bible study meeting",
                     },
                     {
-                      src: "/images/get-involved/teaser-bible-study-field.png",
-                      alt: "Students reading Scripture together outdoors",
+                      src: "/images/get-involved/bible-studies-group-prayer.webp",
+                      alt: "Students bowed together in prayer",
                     },
                   ]}
                 />
@@ -141,8 +141,8 @@ export default async function BibleStudiesPage({ params }: { params: LocaleParam
           <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
             <div className="relative min-h-[320px] w-full lg:min-h-[480px]">
               <Image
-                src="/images/get-involved/calvin-conversation.png"
-                alt={t("Two students in conversation over an open Bible")}
+                src="/images/get-involved/bible-studies-open-bibles.webp"
+                alt={t("Students with open Bibles studying together outdoors")}
                 fill
                 sizes="(min-width: 1024px) 672px, 100vw"
                 className="object-cover"
