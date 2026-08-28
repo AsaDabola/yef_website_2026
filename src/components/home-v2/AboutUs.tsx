@@ -29,9 +29,9 @@ export default async function AboutUs({ content }: { content?: AboutUsContent })
   const c = { ...defaults, ...content };
   const stats = c.stats?.length ? c.stats : defaults.stats;
   return (
-    <section className="font-body bg-v2-bg">
+    <section className="font-body bg-white">
       <div className="mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center lg:gap-[100px]">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
           <Reveal className="group relative aspect-[620/700] w-full cursor-pointer overflow-hidden transition-transform duration-300 hover:-translate-y-1">
             <Image
               src={c.image}
@@ -64,7 +64,7 @@ export default async function AboutUs({ content }: { content?: AboutUsContent })
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <p className="font-display font-bold text-[44px] text-v2-accent tracking-[-1.32px]">
-                    {t(stat.value)}
+                    {stat.value}
                   </p>
                   <p className="mt-2 font-semibold text-xs text-v2-muted tracking-[1.56px] uppercase">
                     {t(stat.label)}

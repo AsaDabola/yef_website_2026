@@ -1,5 +1,6 @@
 import ConvergenceLines from "./ConvergenceLines";
 import Reveal from "@/components/ui/Reveal";
+import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
 
 const defaults = {
@@ -9,8 +10,8 @@ const defaults = {
   verseAccent: "you like the morning dew.",
   reference: "Psalm 110:3",
   columns: [
-    "We exist to raise a generation that knows Jesus Christ deeply and makes Him known boldly. Not eventually — now, in the years when conviction is forming and the calendar is still open.",
-    "That work happens in ordinary places: a campus dining hall, a study room at midnight, a plane to a country whose language we are still learning. We gather in the Word, we send each other out, and we testify to the eternal love of the Lord wherever we land.",
+    "We exist to help students **know Jesus Christ deeply, build their lives on the Word of God,** and **grow into mature disciples** whose faith shapes every part of life.",
+    "From campus evangelism and Bible study to discipleship and leadership, YEF equips students to **share the Gospel, serve others**, and **carry Christ’s mission into the world.**",
   ],
 };
 
@@ -47,7 +48,7 @@ export default async function MissionStatement({
           <div className="mt-12 grid grid-cols-1 gap-10 border-t border-white/[0.18] pt-10 lg:grid-cols-2 lg:gap-16">
             {columns.map((body) => (
               <p key={body} className="text-white/70 leading-[1.8]">
-                {t(body)}
+                <Rich text={t(body)} emphasis="font-bold text-white" />
               </p>
             ))}
           </div>
