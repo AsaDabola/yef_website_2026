@@ -51,16 +51,16 @@ export default async function SummerTrainingPage({ params }: { params: LocalePar
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/get-involved/summer-training-campfire.webp",
-                  alt: "Students gathered around a campfire under a starry sky",
-                },
-                {
                   src: "/images/get-involved/summer-training-beach-run.webp",
                   alt: "Students running and laughing together on the beach at sunset",
                 },
                 {
                   src: "/images/get-involved/summer-training-zipline.webp",
                   alt: "A student ziplining through the trees",
+                },
+                {
+                  src: "/images/get-involved/summer-training-journal.webp",
+                  alt: "A student journaling by the water during a quiet moment",
                 },
               ]}
             />
@@ -131,8 +131,8 @@ export default async function SummerTrainingPage({ params }: { params: LocalePar
           <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
             <div className="relative min-h-[320px] w-full lg:min-h-[480px]">
               <Image
-                src="/images/get-involved/summer-training-journal.webp"
-                alt={t("A student journaling by the water during a quiet moment at Summer Training")}
+                src="/images/get-involved/summer-training-campfire.webp"
+                alt={t("Students gathered around a campfire under a starry sky at Summer Training")}
                 fill
                 sizes="(min-width: 1024px) 672px, 100vw"
                 className="object-cover"
