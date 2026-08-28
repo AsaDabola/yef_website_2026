@@ -23,7 +23,7 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src={header.image || "/images/get-involved/banner-worship-crowd.png"}
+            src={header.image || "/images/get-involved/leadership-retreats-hero.webp"}
             alt=""
             fill
             priority
