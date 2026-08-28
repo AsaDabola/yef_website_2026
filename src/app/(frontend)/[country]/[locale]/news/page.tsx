@@ -4,6 +4,7 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import NewsGrid from "@/components/news/NewsGrid";
 import { getNewsArticles } from "@/lib/posts";
+import { getPhotoEvents } from "@/lib/photoEvents";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
@@ -20,7 +21,10 @@ export const revalidate = 60;
 export default async function NewsPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
-  const posts = await getNewsArticles();
+  const [posts, photoEvents] = await Promise.all([
+    getNewsArticles(),
+    getPhotoEvents(),
+  ]);
 
   return (
     <>
@@ -79,7 +83,7 @@ export default async function NewsPage({ params }: { params: LocaleParams }) {
         <section className="mx-auto max-w-[1392px] px-6 pt-[74px] pb-16">
           <Breadcrumb label={t("News")} />
           <div className="mt-[98px]">
-            <NewsGrid posts={posts} />
+            <NewsGrid posts={posts} photoEvents={photoEvents} />
           </div>
         </section>
       </main>
