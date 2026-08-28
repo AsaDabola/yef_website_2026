@@ -89,7 +89,7 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
             "/images/home-v2/slide-2-students.webp",
             "Students smiling together on a mission trip",
           ),
-          heading: "Reaching Students.\nRaising Disciples.\nFor Christ.\nFor the Nations.",
+          heading: "Reaching Students.\nRaising Disciples.",
           body: "A global evangelical campus fellowship sharing the Gospel, teaching the Bible, and raising disciples of Jesus Christ.",
           buttonLabel: "FIND YOUR CAMPUS",
           buttonHref: "#find-your-campus",
