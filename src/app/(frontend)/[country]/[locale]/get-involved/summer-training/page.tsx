@@ -4,7 +4,6 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import InfoCard from "@/components/get-involved/InfoCard";
-import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import Link from "@/components/ui/LocaleLink";
@@ -162,10 +161,6 @@ export default async function SummerTrainingPage({ params }: { params: LocalePar
             </p>
           </div>
         </section>
-
-        <div className="mx-auto max-w-[1391px] px-6">
-          <StoriesTrio divider={false} />
-        </div>
 
         <section className="mx-auto max-w-[1391px] px-6 py-20 text-center lg:py-[100px]">
           <h2 className="font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
