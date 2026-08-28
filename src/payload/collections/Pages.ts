@@ -60,6 +60,53 @@ export const Pages: CollectionConfig = {
       options: [
         { label: "Home page", value: "home" },
         { label: "Who We Are", value: "who-we-are" },
+        { label: "Who We Are — Welcome", value: "who-we-are/welcome" },
+        { label: "Who We Are — Our Mission", value: "who-we-are/mission" },
+        {
+          label: "Who We Are — Statement of Faith",
+          value: "who-we-are/statement-of-faith",
+        },
+        { label: "Who We Are — History", value: "who-we-are/history" },
+        { label: "Who We Are — Membership", value: "who-we-are/membership" },
+        {
+          label: "Who We Are — Staff/Executive Committee",
+          value: "who-we-are/staff-executive-committee",
+        },
+        { label: "Get Involved", value: "get-involved" },
+        { label: "Get Involved — Connect With YEFI", value: "get-involved/apply" },
+        {
+          label: "Get Involved — Campus Evangelism",
+          value: "get-involved/campus-evangelism",
+        },
+        {
+          label: "Get Involved — Begin Your Mission Journey",
+          value: "get-involved/campus-evangelism/apply",
+        },
+        {
+          label: "Get Involved — Chapter Affiliation",
+          value: "get-involved/chapter-affiliation",
+        },
+        {
+          label: "Get Involved — International Leadership Retreats",
+          value: "get-involved/leadership-retreats",
+        },
+        { label: "Get Involved — Volunteer with YEF", value: "get-involved/volunteer" },
+        { label: "News", value: "news" },
+        { label: "Network", value: "network" },
+        { label: "Donate", value: "donate" },
+        { label: "Contact Us", value: "contact" },
+        { label: "Request Access", value: "join" },
+        { label: "Sign In", value: "login" },
+        { label: "Reaching the Campus", value: "reaching-the-campus" },
+        { label: "Resources", value: "resources" },
+        { label: "Sharing the Gospel", value: "sharing-the-gospel" },
+        { label: "Submit Your Story", value: "submit-your-story" },
+        { label: "Raising Disciples", value: "what-is-evangelical" },
+        { label: "YEF Mission School", value: "yef-mission-school" },
+        {
+          label: "YEF Mission School — Apply",
+          value: "yef-mission-school/apply",
+        },
       ],
       index: true,
       admin: {
@@ -82,10 +129,21 @@ export const Pages: CollectionConfig = {
       },
     },
     {
+      name: "builtIn",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        readOnly: true,
+        description:
+          "This page is listed so every real page of the site shows up here, but its sections are not yet wired to the CMS — editing them still means changing code. Home and Who We Are are the only pages with real section editing below.",
+      },
+    },
+    {
       name: "layout",
       type: "blocks",
       blocks: pageBlocks,
       admin: {
+        condition: (data) => data?.builtIn !== true,
         description:
           "Sections render top to bottom in this order. Removing one falls back to nothing — leave it in place to keep it.",
       },
