@@ -59,7 +59,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 image="/images/get-involved/bible-studies-sunset.png"
                 alt={t("The sun setting over a calm ocean")}
                 ctas={[
-                  { label: "More Info", href: "#bible-studies", primary: true },
+                  { label: "Learn More", href: "/get-involved/bible-studies", primary: true },
                   { label: "Apply Bible Study", href: "/get-involved/apply" },
                 ]}
               />
@@ -154,7 +154,12 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 cardTitle={t("Give Your Time")}
                 body={t("As a volunteer with YEF, you put your everyday gifts — administration, hospitality, media, prayer, and more — to work building the ministry in your local chapter. Every role matters: a volunteer setting up chairs or editing a video is part of the same mission as a student sharing the Gospel on campus. Tell us about yourself, and we'll help you find where you're needed most.")}
                 ctas={[
-                  { label: "Apply to Volunteer", href: "/get-involved/volunteer", primary: true },
+                  {
+                    label: "Learn More",
+                    href: "/get-involved/volunteering",
+                    primary: true,
+                  },
+                  { label: "Apply to Volunteer", href: "/get-involved/volunteer" },
                 ]}
                 image="/images/get-involved/volunteering-donation-drive.png"
                 alt={t("Volunteers sorting clothing at a donation drive")}
