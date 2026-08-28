@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
+import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import InfoCard from "@/components/get-involved/InfoCard";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
@@ -38,64 +39,72 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1392px] px-6 pt-[111px]">
-          <Breadcrumb label={t("Short-term Mission")} />
-
-          <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
-            {t("Short-term Mission")}
-          </h1>
-          <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
-            {t("Step Out in Faith. Go Where You're Sent.")}
-          </p>
-
-          <div className="mt-[84px]">
-            <GalleryMosaic
-              images={[
-                {
-                  src: "/images/get-involved/short-term-mission-friends.webp",
-                  alt: "Three friends with backpacks setting off from a train platform",
-                },
-                {
-                  src: "/images/get-involved/short-term-mission-signpost.webp",
-                  alt: "A signpost pointing to Short-Term and Long-Term",
-                },
-                {
-                  src: "/images/get-involved/short-term-mission-hands.webp",
-                  alt: "A team stacking hands together in unity",
-                },
-              ]}
-            />
-          </div>
-
-          <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
-            <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
-              <p>
-                {t(
-                  "YEF short-term mission trips send teams of students to serve during school breaks — on their own campus, in another city, another country, or online. Teams share the Gospel, lead Bible studies, pray for the campuses and communities they visit, and serve alongside local YEF chapters and churches.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "No one goes alone. Every trip is a team — praying, preparing, and serving together, so that the weight of the mission is carried together and the joy of it is shared together too.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "A trip doesn't end when the team comes home. Students they meet are connected to Bible study and discipleship, so a short trip can grow into a lasting walk with Christ long after the team has left.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "It's a chance to step out in faith, grow through hands-on ministry, and see God work through students who are simply willing to go.",
-                )}
-              </p>
+        <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[111px] lg:pr-[92px] lg:pl-[81px]">
+          <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
+              <GetInvolvedSubMenu />
             </div>
 
-            <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
-              {t("“Here am I. Send me!”")}
-              <br />
-              {t("— Isaiah 6:8")}
-            </p>
+            <div className="min-w-0 flex-1">
+              <Breadcrumb label={t("Short-term Mission")} />
+
+              <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
+                {t("Short-term Mission")}
+              </h1>
+              <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
+                {t("Step Out in Faith. Go Where You're Sent.")}
+              </p>
+
+              <div className="mt-[84px]">
+                <GalleryMosaic
+                  images={[
+                    {
+                      src: "/images/get-involved/short-term-mission-friends.webp",
+                      alt: "Three friends with backpacks setting off from a train platform",
+                    },
+                    {
+                      src: "/images/get-involved/short-term-mission-signpost.webp",
+                      alt: "A signpost pointing to Short-Term and Long-Term",
+                    },
+                    {
+                      src: "/images/get-involved/short-term-mission-hands.webp",
+                      alt: "A team stacking hands together in unity",
+                    },
+                  ]}
+                />
+              </div>
+
+              <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
+                <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
+                  <p>
+                    {t(
+                      "YEF short-term mission trips send teams of students to serve during school breaks — on their own campus, in another city, another country, or online. Teams share the Gospel, lead Bible studies, pray for the campuses and communities they visit, and serve alongside local YEF chapters and churches.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "No one goes alone. Every trip is a team — praying, preparing, and serving together, so that the weight of the mission is carried together and the joy of it is shared together too.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "A trip doesn't end when the team comes home. Students they meet are connected to Bible study and discipleship, so a short trip can grow into a lasting walk with Christ long after the team has left.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "It's a chance to step out in faith, grow through hands-on ministry, and see God work through students who are simply willing to go.",
+                    )}
+                  </p>
+                </div>
+
+                <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
+                  {t("“Here am I. Send me!”")}
+                  <br />
+                  {t("— Isaiah 6:8")}
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

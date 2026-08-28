@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
+import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import InfoCard from "@/components/get-involved/InfoCard";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
@@ -37,64 +38,72 @@ export default async function SummerTrainingPage({ params }: { params: LocalePar
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1392px] px-6 pt-[111px]">
-          <Breadcrumb label={t("Summer Training")} />
-
-          <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
-            {t("Summer Training")}
-          </h1>
-          <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
-            {t("A Season Set Apart to Grow in the Word, Together")}
-          </p>
-
-          <div className="mt-[84px]">
-            <GalleryMosaic
-              images={[
-                {
-                  src: "/images/get-involved/summer-training-beach-run.webp",
-                  alt: "Students running and laughing together on the beach at sunset",
-                },
-                {
-                  src: "/images/get-involved/summer-training-zipline.webp",
-                  alt: "A student ziplining through the trees",
-                },
-                {
-                  src: "/images/get-involved/summer-training-journal.webp",
-                  alt: "A student journaling by the water during a quiet moment",
-                },
-              ]}
-            />
-          </div>
-
-          <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
-            <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
-              <p>
-                {t(
-                  "Every year, during students' summer break from campus, YEF gathers students from around the world for a season of training in the Word. It's a time set apart from the school year — a chance to slow down, be surrounded by prayer and Scripture, and build friendships with believers from different countries and cultures who share the same calling.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Days are anchored in Bible study, teaching, and extended prayer, but Summer Training isn't only what happens indoors. Camping, outdoor activities, and shared meals build community alongside the more structured teaching times — friendships forged around a campfire are as much a part of the training as the sessions themselves.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Students also put what they're learning into practice through a hands-on mission practicum — evangelism, teaching, and serving others — under the guidance of experienced leaders. It's one thing to study the Great Commission; Summer Training gives students a place to begin living it out.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Program details and dates vary each year, so stay tuned to our site and events if you're interested in joining.",
-                )}
-              </p>
+        <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[111px] lg:pr-[92px] lg:pl-[81px]">
+          <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
+              <GetInvolvedSubMenu />
             </div>
 
-            <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
-              {t("“As iron sharpens iron, so one person sharpens another.”")}
-              <br />
-              {t("— Proverbs 27:17")}
-            </p>
+            <div className="min-w-0 flex-1">
+              <Breadcrumb label={t("Summer Training")} />
+
+              <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
+                {t("Summer Training")}
+              </h1>
+              <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
+                {t("A Season Set Apart to Grow in the Word, Together")}
+              </p>
+
+              <div className="mt-[84px]">
+                <GalleryMosaic
+                  images={[
+                    {
+                      src: "/images/get-involved/summer-training-beach-run.webp",
+                      alt: "Students running and laughing together on the beach at sunset",
+                    },
+                    {
+                      src: "/images/get-involved/summer-training-zipline.webp",
+                      alt: "A student ziplining through the trees",
+                    },
+                    {
+                      src: "/images/get-involved/summer-training-journal.webp",
+                      alt: "A student journaling by the water during a quiet moment",
+                    },
+                  ]}
+                />
+              </div>
+
+              <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
+                <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
+                  <p>
+                    {t(
+                      "Every year, during students' summer break from campus, YEF gathers students from around the world for a season of training in the Word. It's a time set apart from the school year — a chance to slow down, be surrounded by prayer and Scripture, and build friendships with believers from different countries and cultures who share the same calling.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Days are anchored in Bible study, teaching, and extended prayer, but Summer Training isn't only what happens indoors. Camping, outdoor activities, and shared meals build community alongside the more structured teaching times — friendships forged around a campfire are as much a part of the training as the sessions themselves.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Students also put what they're learning into practice through a hands-on mission practicum — evangelism, teaching, and serving others — under the guidance of experienced leaders. It's one thing to study the Great Commission; Summer Training gives students a place to begin living it out.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Program details and dates vary each year, so stay tuned to our site and events if you're interested in joining.",
+                    )}
+                  </p>
+                </div>
+
+                <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
+                  {t("“As iron sharpens iron, so one person sharpens another.”")}
+                  <br />
+                  {t("— Proverbs 27:17")}
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

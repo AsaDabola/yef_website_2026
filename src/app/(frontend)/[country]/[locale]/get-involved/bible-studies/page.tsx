@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
+import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import InfoCard from "@/components/get-involved/InfoCard";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
@@ -38,64 +39,72 @@ export default async function BibleStudiesPage({ params }: { params: LocaleParam
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1392px] px-6 pt-[111px]">
-          <Breadcrumb label={t("Bible Studies")} />
-
-          <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
-            {t("Bible Studies")}
-          </h1>
-          <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
-            {t("Open the Word. Ask Anything. Grow for Life.")}
-          </p>
-
-          <div className="mt-[84px]">
-            <GalleryMosaic
-              images={[
-                {
-                  src: "/images/get-involved/bible-study-large-group.png",
-                  alt: "A large group of students gathered for Bible study",
-                },
-                {
-                  src: "/images/get-involved/gallery-bible-study-bench.png",
-                  alt: "Students studying the Bible together on a bench",
-                },
-                {
-                  src: "/images/get-involved/teaser-bible-study-field.png",
-                  alt: "Students reading Scripture together outdoors",
-                },
-              ]}
-            />
-          </div>
-
-          <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
-            <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
-              <p>
-                {t(
-                  "Embrace your identity in Christ and live out your calling. YEF Bible Studies bring students together each week — one-on-one or in small groups — to open Scripture, ask honest questions, and learn to feed themselves on the Word, not just for a season, but for a lifetime.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Every study is led by a trained student leader, not a lecturer. You won't just be told what a passage means — you'll be walked through it, so that reading and understanding the Bible for yourself becomes a habit that outlasts your college years.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "No question is off-limits. Whether you're exploring faith for the first time or you've read the Bible your whole life, Bible study is a place to bring your honest doubts and questions into the light of Scripture, together with others doing the same.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Many YEF leaders trace their walk with Christ back to a single Bible study — a friend who invited them, a passage that finally made sense, a small group that became family. The Word of God has the power to change a life, and that change often starts here.",
-                )}
-              </p>
+        <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[111px] lg:pr-[92px] lg:pl-[81px]">
+          <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
+              <GetInvolvedSubMenu />
             </div>
 
-            <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
-              {t("“Your word is a lamp for my feet, a light on my path.”")}
-              <br />
-              {t("— Psalm 119:105")}
-            </p>
+            <div className="min-w-0 flex-1">
+              <Breadcrumb label={t("Bible Studies")} />
+
+              <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
+                {t("Bible Studies")}
+              </h1>
+              <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
+                {t("Open the Word. Ask Anything. Grow for Life.")}
+              </p>
+
+              <div className="mt-[84px]">
+                <GalleryMosaic
+                  images={[
+                    {
+                      src: "/images/get-involved/bible-study-large-group.png",
+                      alt: "A large group of students gathered for Bible study",
+                    },
+                    {
+                      src: "/images/get-involved/gallery-bible-study-bench.png",
+                      alt: "Students studying the Bible together on a bench",
+                    },
+                    {
+                      src: "/images/get-involved/teaser-bible-study-field.png",
+                      alt: "Students reading Scripture together outdoors",
+                    },
+                  ]}
+                />
+              </div>
+
+              <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
+                <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
+                  <p>
+                    {t(
+                      "Embrace your identity in Christ and live out your calling. YEF Bible Studies bring students together each week — one-on-one or in small groups — to open Scripture, ask honest questions, and learn to feed themselves on the Word, not just for a season, but for a lifetime.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Every study is led by a trained student leader, not a lecturer. You won't just be told what a passage means — you'll be walked through it, so that reading and understanding the Bible for yourself becomes a habit that outlasts your college years.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "No question is off-limits. Whether you're exploring faith for the first time or you've read the Bible your whole life, Bible study is a place to bring your honest doubts and questions into the light of Scripture, together with others doing the same.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Many YEF leaders trace their walk with Christ back to a single Bible study — a friend who invited them, a passage that finally made sense, a small group that became family. The Word of God has the power to change a life, and that change often starts here.",
+                    )}
+                  </p>
+                </div>
+
+                <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
+                  {t("“Your word is a lamp for my feet, a light on my path.”")}
+                  <br />
+                  {t("— Psalm 119:105")}
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

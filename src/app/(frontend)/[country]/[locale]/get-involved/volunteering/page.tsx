@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
+import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import InfoCard from "@/components/get-involved/InfoCard";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
@@ -37,64 +38,72 @@ export default async function VolunteeringPage({ params }: { params: LocaleParam
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1392px] px-6 pt-[111px]">
-          <Breadcrumb label={t("Volunteering")} />
-
-          <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
-            {t("Volunteering")}
-          </h1>
-          <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
-            {t("Every Gift, Given for the Kingdom")}
-          </p>
-
-          <div className="mt-[84px]">
-            <GalleryMosaic
-              images={[
-                {
-                  src: "/images/get-involved/volunteering.png",
-                  alt: "A YEF volunteer serving at a chapter event",
-                },
-                {
-                  src: "/images/get-involved/volunteering-donation-drive.png",
-                  alt: "Volunteers sorting clothing at a donation drive",
-                },
-                {
-                  src: "/images/get-involved/story-teacher.png",
-                  alt: "A volunteer teaching a group of students",
-                },
-              ]}
-            />
-          </div>
-
-          <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
-            <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
-              <p>
-                {t(
-                  "As a volunteer with YEF, you put your everyday gifts to work building the ministry in your local chapter — administration, hospitality, media, prayer, event support, and more.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Every role matters. The same mission that sends a student to share the Gospel on campus is carried forward by the volunteer setting up chairs, editing a video, welcoming guests at the door, or covering a shift in prayer.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Volunteering doesn't require a title or a stage — it requires availability and a willing heart. Scripture describes the body of Christ as many parts, each one necessary (1 Corinthians 12); this is that truth lived out in ordinary, faithful service.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Whether you can give an afternoon or a whole semester, there's a place for you to serve.",
-                )}
-              </p>
+        <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[111px] lg:pr-[92px] lg:pl-[81px]">
+          <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
+              <GetInvolvedSubMenu />
             </div>
 
-            <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
-              {t("“Whatever you do, work at it with all your heart, as working for the Lord.”")}
-              <br />
-              {t("— Colossians 3:23")}
-            </p>
+            <div className="min-w-0 flex-1">
+              <Breadcrumb label={t("Volunteering")} />
+
+              <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
+                {t("Volunteering")}
+              </h1>
+              <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
+                {t("Every Gift, Given for the Kingdom")}
+              </p>
+
+              <div className="mt-[84px]">
+                <GalleryMosaic
+                  images={[
+                    {
+                      src: "/images/get-involved/volunteering.png",
+                      alt: "A YEF volunteer serving at a chapter event",
+                    },
+                    {
+                      src: "/images/get-involved/volunteering-donation-drive.png",
+                      alt: "Volunteers sorting clothing at a donation drive",
+                    },
+                    {
+                      src: "/images/get-involved/story-teacher.png",
+                      alt: "A volunteer teaching a group of students",
+                    },
+                  ]}
+                />
+              </div>
+
+              <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
+                <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
+                  <p>
+                    {t(
+                      "As a volunteer with YEF, you put your everyday gifts to work building the ministry in your local chapter — administration, hospitality, media, prayer, event support, and more.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Every role matters. The same mission that sends a student to share the Gospel on campus is carried forward by the volunteer setting up chairs, editing a video, welcoming guests at the door, or covering a shift in prayer.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Volunteering doesn't require a title or a stage — it requires availability and a willing heart. Scripture describes the body of Christ as many parts, each one necessary (1 Corinthians 12); this is that truth lived out in ordinary, faithful service.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Whether you can give an afternoon or a whole semester, there's a place for you to serve.",
+                    )}
+                  </p>
+                </div>
+
+                <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
+                  {t("“Whatever you do, work at it with all your heart, as working for the Lord.”")}
+                  <br />
+                  {t("— Colossians 3:23")}
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

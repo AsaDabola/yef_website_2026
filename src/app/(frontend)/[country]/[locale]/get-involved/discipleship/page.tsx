@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
+import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import InfoCard from "@/components/get-involved/InfoCard";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
@@ -37,64 +38,72 @@ export default async function DiscipleshipPage({ params }: { params: LocaleParam
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1392px] px-6 pt-[111px]">
-          <Breadcrumb label={t("Discipleship Training")} />
-
-          <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
-            {t("Discipleship Training")}
-          </h1>
-          <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
-            {t("Not a Class You Finish — a Relationship You Grow Into")}
-          </p>
-
-          <div className="mt-[84px]">
-            <GalleryMosaic
-              images={[
-                {
-                  src: "/images/get-involved/disciples-fellowship-collage.png",
-                  alt: "Students in discipleship fellowship together",
-                },
-                {
-                  src: "/images/get-involved/disciples-library-group.png",
-                  alt: "A small group studying together in the library",
-                },
-                {
-                  src: "/images/get-involved/disciples-fall-event.png",
-                  alt: "Students gathered at a discipleship event",
-                },
-              ]}
-            />
-          </div>
-
-          <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
-            <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
-              <p>
-                {t(
-                  "Discipleship is one of the key focuses of our ministry. Jesus himself poured His life into twelve ordinary men and sent them to make disciples of the nations — not through a classroom, but through years of walking, eating, and ministering alongside them.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "Discipleship at YEF follows that same pattern. You walk with a trained mentor and a small group of your peers, working through God's Word together — so that you grow from being cared for into someone who can care for others.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "This isn't a program you complete and move past. It's a relationship — one-on-one meetings, honest conversation, and Scripture opened together — that keeps shaping you long after any one phase is finished.",
-                )}
-              </p>
-              <p>
-                {t(
-                  "You don't need to have it all figured out. You just need a willingness to follow.",
-                )}
-              </p>
+        <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[111px] lg:pr-[92px] lg:pl-[81px]">
+          <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
+              <GetInvolvedSubMenu />
             </div>
 
-            <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
-              {t("“Go therefore and make disciples of all nations… teaching them to observe all that I have commanded you.”")}
-              <br />
-              {t("— Matthew 28:19-20")}
-            </p>
+            <div className="min-w-0 flex-1">
+              <Breadcrumb label={t("Discipleship Training")} />
+
+              <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
+                {t("Discipleship Training")}
+              </h1>
+              <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
+                {t("Not a Class You Finish — a Relationship You Grow Into")}
+              </p>
+
+              <div className="mt-[84px]">
+                <GalleryMosaic
+                  images={[
+                    {
+                      src: "/images/get-involved/disciples-fellowship-collage.png",
+                      alt: "Students in discipleship fellowship together",
+                    },
+                    {
+                      src: "/images/get-involved/disciples-library-group.png",
+                      alt: "A small group studying together in the library",
+                    },
+                    {
+                      src: "/images/get-involved/disciples-fall-event.png",
+                      alt: "Students gathered at a discipleship event",
+                    },
+                  ]}
+                />
+              </div>
+
+              <div className="mt-[25px] grid grid-cols-1 lg:grid-cols-[849fr_494fr]">
+                <div className="space-y-[30px] font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19px]">
+                  <p>
+                    {t(
+                      "Discipleship is one of the key focuses of our ministry. Jesus himself poured His life into twelve ordinary men and sent them to make disciples of the nations — not through a classroom, but through years of walking, eating, and ministering alongside them.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Discipleship at YEF follows that same pattern. You walk with a trained mentor and a small group of your peers, working through God's Word together — so that you grow from being cared for into someone who can care for others.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "This isn't a program you complete and move past. It's a relationship — one-on-one meetings, honest conversation, and Scripture opened together — that keeps shaping you long after any one phase is finished.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "You don't need to have it all figured out. You just need a willingness to follow.",
+                    )}
+                  </p>
+                </div>
+
+                <p className="mt-12 text-center font-semibold text-2xl text-[#609efa] italic leading-[40px] tracking-[-0.8px] lg:mt-0 lg:pt-[81px] lg:pr-[20px] lg:pl-[56px] lg:text-[33px] lg:leading-[50px]">
+                  {t("“Go therefore and make disciples of all nations… teaching them to observe all that I have commanded you.”")}
+                  <br />
+                  {t("— Matthew 28:19-20")}
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

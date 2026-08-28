@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
+import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
@@ -33,9 +34,12 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
           <HeaderV2 />
         </section>
 
-        {/* The frame drops the Get Involved sub-menu here and runs one 1344px
-            column down the middle of the page. */}
-        <section className="mx-auto max-w-[1392px] px-6 pt-[111px]">
+        <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[111px] lg:pr-[92px] lg:pl-[81px]">
+        <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
+        <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
+          <GetInvolvedSubMenu />
+        </div>
+        <div className="min-w-0 flex-1">
           <Breadcrumb label={t("Leadership Training")} />
 
           <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
@@ -143,6 +147,8 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
 {t("Apply to Attend")}
 </a>
           </div>
+        </div>
+        </div>
         </section>
 
         <div className="mt-[178px]">
