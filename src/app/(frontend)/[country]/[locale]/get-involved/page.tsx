@@ -36,7 +36,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="bible-studies"
                 title={t("Bible Studies")}
-                body={t("Embrace your identity in Christ and live out your calling. YEF Bible Studies bring students together each week — one-on-one or in small groups — to open Scripture, ask honest questions, and learn to feed themselves on the Word, not just for a season, but for a lifetime. The Bible has the power to change lives, and we want every student on your campus to have a place to discover that for themselves.")}
+                body={t("Embrace your identity in Christ and live out your calling. YEF Bible Studies bring students together each week — one-on-one or in small groups — to open Scripture, ask honest questions, and learn to feed themselves on the Word, not just for a season, but for a lifetime. Every study is led by a trained student leader, not a lecturer, so you're walked through the text rather than simply told what it means. No question is off-limits — whether you're exploring faith for the first time or you've read the Bible your whole life, this is a place to bring your honest doubts into the light of Scripture, together with others doing the same. The Bible has the power to change lives, and we want every student on your campus to have a place to discover that for themselves.")}
                 image="/images/get-involved/bible-studies-sunset.png"
                 alt={t("The sun setting over a calm ocean")}
                 ctas={[
