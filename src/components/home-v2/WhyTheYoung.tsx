@@ -11,7 +11,7 @@ const defaultItems: ProofItem[] = [
     body: "The university years are a formative season when convictions, values, and direction for life are taking shape. YEF calls students to seek Christ and build their lives firmly upon Him.",
   },
   {
-    name: "Grow in the Word",
+    name: "Grow in the\nWord",
     body: "Through Scripture, prayer, fellowship, and discipleship, students deepen their faith, develop a biblical worldview, and learn to follow Christ in every area of life.",
   },
   {
@@ -60,7 +60,7 @@ export default async function WhyTheYoung({
           {/* Two shared rows — title, then body. Each column subscribes to
               them so every body starts on the same line however many lines a
               title runs to, in English or in translation. */}
-          <div className="mt-14 grid grid-cols-1 gap-y-10 border-t border-v2-border pt-12 sm:grid-cols-3 sm:grid-rows-[auto_1fr] sm:gap-y-0">
+          <div className="mt-14 grid grid-cols-1 gap-y-10 border-t border-v2-border pt-12 sm:grid-cols-3 sm:grid-rows-[auto_1fr] sm:gap-y-0 sm:pt-7">
             {proof.map((item, index) => (
               <div
                 key={item.name}
@@ -70,7 +70,7 @@ export default async function WhyTheYoung({
                 // padding is the section's, moved inside the columns so the
                 // dividers reach the rule that closes the section.
                 className={[
-                  "pb-8 sm:row-span-2 sm:grid sm:grid-rows-subgrid sm:pb-24",
+                  "pb-8 sm:row-span-2 sm:grid sm:grid-rows-subgrid sm:pt-18 sm:pb-24",
                   index > 0 && "sm:border-l sm:border-v2-border sm:pl-10",
                   index < proof.length - 1 && "sm:pr-10",
                 ]
