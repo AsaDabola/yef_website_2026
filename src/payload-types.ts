@@ -793,6 +793,86 @@ export interface PhotoEvent {
     | 'vn'
     | 'zm';
   /**
+   * Where this batch is published. A batch shown elsewhere is still edited here, by this country's team.
+   */
+  audience: 'own' | 'some' | 'all';
+  /**
+   * The other country sites that also show this batch.
+   */
+  distributeTo?:
+    | (
+        | 'int'
+        | 'ao'
+        | 'ar'
+        | 'au'
+        | 'at'
+        | 'bd'
+        | 'be'
+        | 'br'
+        | 'cm'
+        | 'ca'
+        | 'cl'
+        | 'co'
+        | 'ci'
+        | 'cz'
+        | 'cd'
+        | 'do'
+        | 'ke'
+        | 'eg'
+        | 'et'
+        | 'fj'
+        | 'fr'
+        | 'de'
+        | 'gh'
+        | 'gr'
+        | 'gt'
+        | 'ht'
+        | 'hn'
+        | 'hu'
+        | 'in'
+        | 'id'
+        | 'il'
+        | 'it'
+        | 'jp'
+        | 'kz'
+        | 'mg'
+        | 'my'
+        | 'mx'
+        | 'mn'
+        | 'mz'
+        | 'mm'
+        | 'np'
+        | 'nl'
+        | 'nz'
+        | 'ng'
+        | 'pk'
+        | 'pe'
+        | 'ph'
+        | 'pl'
+        | 'pt'
+        | 'ro'
+        | 'ru'
+        | 'rw'
+        | 'sg'
+        | 'sk'
+        | 'za'
+        | 'kr'
+        | 'es'
+        | 'lk'
+        | 'se'
+        | 'ch'
+        | 'tw'
+        | 'th'
+        | 'tr'
+        | 'ua'
+        | 'ae'
+        | 'gb'
+        | 'us'
+        | 'vn'
+        | 'zm'
+      )[]
+    | null;
+  /**
    * e.g. Summer Mission Trip 2026 — Kenya.
    */
   title: string;
@@ -818,6 +898,10 @@ export interface PhotoEvent {
 export interface User {
   id: number;
   name?: string | null;
+  /**
+   * Shown next to their name in the admin. Anyone can set their own.
+   */
+  avatar?: (number | null) | Media;
   role: 'super' | 'region-admin' | 'country-admin' | 'editor';
   /**
    * The continents this person is responsible for. Every country in them falls into their scope.
@@ -1228,6 +1312,8 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface PhotoEventsSelect<T extends boolean = true> {
   country?: T;
+  audience?: T;
+  distributeTo?: T;
   title?: T;
   slug?: T;
   publishedAt?: T;
@@ -1290,6 +1376,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  avatar?: T;
   role?: T;
   regions?: T;
   countries?: T;

@@ -84,7 +84,7 @@ function formatDate(value: string) {
  * two are how headquarters pushes an announcement out to the network without
  * each country having to re-type it.
  */
-function forThisCountry(where?: Where): Where {
+export function forThisCountry(where?: Where): Where {
   const code = getCountryCode();
   const visible: Where = {
     or: [
