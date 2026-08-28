@@ -122,8 +122,8 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                     "Ongoing Support",
                   ],
                 ]}
-                image="/images/get-involved/leadership-retreat-team.png"
-                alt={t("YEF leaders with arms raised at a leadership retreat")}
+                image="/images/get-involved/leadership-training-conference.webp"
+                alt={t("YEF students clapping at a leadership training conference")}
               />
 
               <MinistrySection
