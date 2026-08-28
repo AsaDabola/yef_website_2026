@@ -218,6 +218,84 @@ async function seedPage(
   payload.logger.info(`Page "${route}": created.`);
 }
 
+/**
+ * Every real page of the site that is not yet wired to the block editor —
+ * listed so Pages shows the whole site rather than just Home and Who We Are,
+ * even though editing one of these still means changing code for now. See
+ * the `builtIn` field on the Pages collection.
+ */
+const builtInPages: { route: string; title: string }[] = [
+  { route: "who-we-are/welcome", title: "Welcome" },
+  { route: "who-we-are/mission", title: "Our Mission" },
+  { route: "who-we-are/statement-of-faith", title: "Statement of Faith" },
+  { route: "who-we-are/history", title: "History" },
+  { route: "who-we-are/membership", title: "Membership" },
+  { route: "who-we-are/staff-executive-committee", title: "Staff/Executive Committee" },
+  { route: "get-involved", title: "Get Involved" },
+  { route: "get-involved/apply", title: "Connect With YEFI" },
+  { route: "get-involved/campus-evangelism", title: "Campus Evangelism" },
+  { route: "get-involved/campus-evangelism/apply", title: "Begin Your Mission Journey" },
+  { route: "get-involved/chapter-affiliation", title: "Chapter Affiliation" },
+  { route: "get-involved/leadership-retreats", title: "International Leadership Retreats" },
+  { route: "get-involved/volunteer", title: "Volunteer with YEF" },
+  { route: "news", title: "News" },
+  { route: "network", title: "Network" },
+  { route: "donate", title: "Donate" },
+  { route: "contact", title: "Contact Us" },
+  { route: "join", title: "Request Access" },
+  { route: "login", title: "Sign In" },
+  { route: "reaching-the-campus", title: "Reaching the Campus" },
+  { route: "resources", title: "Resources" },
+  { route: "sharing-the-gospel", title: "Sharing the Gospel" },
+  { route: "submit-your-story", title: "Submit Your Story" },
+  { route: "what-is-evangelical", title: "Raising Disciples" },
+  { route: "yef-mission-school", title: "YEF Mission School" },
+  { route: "yef-mission-school/apply", title: "Apply YEF Mission School" },
+];
+
+async function seedBuiltInPages(payload: Payload) {
+  let created = 0;
+  let skipped = 0;
+  let failed = 0;
+
+  for (const entry of builtInPages) {
+    const existing = await payload.find({
+      collection: "pages",
+      where: {
+        and: [
+          { route: { equals: entry.route as Page["route"] } },
+          { country: { equals: "int" } },
+        ],
+      },
+      limit: 1,
+    });
+    if (existing.docs.length > 0) {
+      skipped += 1;
+      continue;
+    }
+    try {
+      await payload.create({
+        collection: "pages",
+        data: {
+          title: entry.title,
+          route: entry.route as Page["route"],
+          country: "int",
+          builtIn: true,
+          _status: "published",
+        },
+      });
+      created += 1;
+    } catch (error) {
+      failed += 1;
+      payload.logger.error(`Page "${entry.route}" failed to seed: ${error}`);
+    }
+  }
+
+  payload.logger.info(
+    `Built-in pages seed: ${created} created, ${skipped} skipped, ${failed} failed.`,
+  );
+}
+
 async function seedPhotoEvent(
   payload: Payload,
   slug: string,
@@ -280,6 +358,7 @@ const run = async () => {
   await step(payload, 'Page "who-we-are"', () =>
     seedPage(payload, "who-we-are", "Who We Are", defaultWhoWeAreLayout),
   );
+  await step(payload, "Built-in pages seed", () => seedBuiltInPages(payload));
   await step(payload, 'Photo event "yef-hq-retreat"', () =>
     seedPhotoEvent(
       payload,

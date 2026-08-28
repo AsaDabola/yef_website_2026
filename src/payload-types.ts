@@ -161,7 +161,35 @@ export interface Page {
   /**
    * Which page of the country's site this lays out.
    */
-  route: 'home' | 'who-we-are';
+  route:
+    | 'home'
+    | 'who-we-are'
+    | 'who-we-are/welcome'
+    | 'who-we-are/mission'
+    | 'who-we-are/statement-of-faith'
+    | 'who-we-are/history'
+    | 'who-we-are/membership'
+    | 'who-we-are/staff-executive-committee'
+    | 'get-involved'
+    | 'get-involved/apply'
+    | 'get-involved/campus-evangelism'
+    | 'get-involved/campus-evangelism/apply'
+    | 'get-involved/chapter-affiliation'
+    | 'get-involved/leadership-retreats'
+    | 'get-involved/volunteer'
+    | 'news'
+    | 'network'
+    | 'donate'
+    | 'contact'
+    | 'join'
+    | 'login'
+    | 'reaching-the-campus'
+    | 'resources'
+    | 'sharing-the-gospel'
+    | 'submit-your-story'
+    | 'what-is-evangelical'
+    | 'yef-mission-school'
+    | 'yef-mission-school/apply';
   country:
     | 'int'
     | 'ao'
@@ -232,6 +260,10 @@ export interface Page {
     | 'us'
     | 'vn'
     | 'zm';
+  /**
+   * This page is listed so every real page of the site shows up here, but its sections are not yet wired to the CMS — editing them still means changing code. Home and Who We Are are the only pages with real section editing below.
+   */
+  builtIn?: boolean | null;
   /**
    * Sections render top to bottom in this order. Removing one falls back to nothing — leave it in place to keep it.
    */
@@ -1221,6 +1253,7 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   route?: T;
   country?: T;
+  builtIn?: T;
   layout?:
     | T
     | {

@@ -5,6 +5,7 @@ import * as migration_20260828_044527 from './20260828_044527';
 import * as migration_20260828_051447 from './20260828_051447';
 import * as migration_20260828_051555 from './20260828_051555';
 import * as migration_20260828_055144_members_resources from './20260828_055144_members_resources';
+import * as migration_20260828_184254_pages_builtin_route_expansion from './20260828_184254_pages_builtin_route_expansion';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20260828_055144_members_resources.up,
     down: migration_20260828_055144_members_resources.down,
-    name: '20260828_055144_members_resources'
+    name: '20260828_055144_members_resources',
+  },
+  {
+    up: migration_20260828_184254_pages_builtin_route_expansion.up,
+    down: migration_20260828_184254_pages_builtin_route_expansion.down,
+    name: '20260828_184254_pages_builtin_route_expansion'
   },
 ];
