@@ -11,6 +11,7 @@ import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Get Involved | Youth Evangelical Fellowship",
@@ -19,10 +20,11 @@ export const metadata: Metadata = {
 export default async function GetInvolvedPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("get-involved");
   return (
     <>
       <main>
-        <GetInvolvedHero />
+        <GetInvolvedHero image={header.image} heading={header.heading} />
 
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">

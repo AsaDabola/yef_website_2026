@@ -6,6 +6,7 @@ import FeatureCard from "@/components/who-we-are/FeatureCard";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Welcome | Youth Evangelical Fellowship",
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
 export default async function WelcomePage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("who-we-are/welcome");
   return (
     <>
       <main>
         <SubPageHero
-          image="/images/who-we-are/banner-welcome.webp"
+          image={header.image || "/images/who-we-are/banner-welcome.webp"}
           alt={t("A sailing yacht on calm water below green mountains")}
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">

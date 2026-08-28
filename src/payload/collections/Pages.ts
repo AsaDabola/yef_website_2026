@@ -135,8 +135,23 @@ export const Pages: CollectionConfig = {
       admin: {
         readOnly: true,
         description:
-          "This page is listed so every real page of the site shows up here, but its sections are not yet wired to the CMS — editing them still means changing code. Home and Who We Are are the only pages with real section editing below.",
+          "This page is listed so every real page of the site shows up here. Its sections aren't wired to the CMS one by one yet — only Home and Who We Are have that — but its banner photo, heading, and intro line below are.",
       },
+    },
+    {
+      name: "header",
+      label: "Page Header",
+      type: "group",
+      admin: {
+        condition: (data) => data?.builtIn === true,
+        description:
+          "Overrides this page's banner photo, heading, and intro line. Leave a field empty to keep what the page ships with in code.",
+      },
+      fields: [
+        { name: "image", type: "upload", relationTo: "media" },
+        { name: "heading", type: "text" },
+        { name: "intro", type: "textarea" },
+      ],
     },
     {
       name: "layout",

@@ -8,6 +8,7 @@ import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Begin Your Mission Journey | Youth Evangelical Fellowship",
@@ -20,12 +21,13 @@ export default async function MissionApplyPage({
 }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("get-involved/campus-evangelism/apply");
   return (
     <>
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-crowd.png"
+            src={header.image || "/images/get-involved/banner-crowd.png"}
             alt=""
             fill
             priority
@@ -50,11 +52,11 @@ export default async function MissionApplyPage({
 
               <div className="mt-[41px] max-w-[900px] lg:ml-10">
                 <h1 className="font-display font-extrabold text-3xl text-black leading-[1.2] tracking-[-0.72px] lg:text-[40px] lg:leading-[52px]">
-                  {t("Begin Your Mission Journey")}
+                  {t(header.heading || "Begin Your Mission Journey")}
                 </h1>
                 <p className="mt-5 max-w-[772px] text-[17px] text-[#4b5565] leading-[1.7]">
                   {t(
-                    "Tell us a little about yourself and where you sense God leading you. Every answer helps our missions team walk with you toward the right opportunity.",
+                    header.intro || "Tell us a little about yourself and where you sense God leading you. Every answer helps our missions team walk with you toward the right opportunity.",
                   )}
                 </p>
                 <MissionApplyForm />

@@ -8,6 +8,7 @@ import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Reaching the Campus | Youth Evangelical Fellowship",
@@ -16,12 +17,13 @@ export const metadata: Metadata = {
 export default async function ReachingTheCampusPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("reaching-the-campus");
   return (
     <>
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-reaching-the-campus.png"
+            src={header.image || "/images/get-involved/banner-reaching-the-campus.png"}
             alt=""
             fill
             priority
@@ -36,8 +38,8 @@ export default async function ReachingTheCampusPage({ params }: { params: Locale
           <Breadcrumb label={t("Why Campus Mission?")} />
 
           <h1 className="mt-10 text-center font-display font-extrabold text-4xl text-black leading-[1.15] tracking-[-0.96px] sm:text-5xl lg:text-[46px] lg:leading-[60px]">
-            
-{t("Reaching the Campus")}
+
+{t(header.heading || "Reaching the Campus")}
 </h1>
 
           <p className="mx-auto mt-8 max-w-[1109px] text-center font-medium text-[26px] text-[#0066cf] italic leading-[38px] tracking-[-0.8px] lg:text-[38px] lg:leading-[50px]">

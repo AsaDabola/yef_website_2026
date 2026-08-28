@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Raising Disciples | Youth Evangelical Fellowship",
@@ -17,12 +18,13 @@ export const metadata: Metadata = {
 export default async function RaisingDisciplesPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("what-is-evangelical");
   return (
     <>
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-raising-disciples.png"
+            src={header.image || "/images/get-involved/banner-raising-disciples.png"}
             alt=""
             fill
             priority
@@ -37,8 +39,8 @@ export default async function RaisingDisciplesPage({ params }: { params: LocaleP
           <Breadcrumb label={t("What is Evangelical?")} />
 
           <h1 className="mt-10 font-display font-extrabold text-4xl text-black leading-[1.15] tracking-[-0.96px] sm:text-5xl lg:text-[46px] lg:leading-[60px]">
-            
-{t("Raising Disciples")}
+
+{t(header.heading || "Raising Disciples")}
 </h1>
 
           <div className="mt-10">

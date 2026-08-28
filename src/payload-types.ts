@@ -261,9 +261,17 @@ export interface Page {
     | 'vn'
     | 'zm';
   /**
-   * This page is listed so every real page of the site shows up here, but its sections are not yet wired to the CMS — editing them still means changing code. Home and Who We Are are the only pages with real section editing below.
+   * This page is listed so every real page of the site shows up here. Its sections aren't wired to the CMS one by one yet — only Home and Who We Are have that — but its banner photo, heading, and intro line below are.
    */
   builtIn?: boolean | null;
+  /**
+   * Overrides this page's banner photo, heading, and intro line. Leave a field empty to keep what the page ships with in code.
+   */
+  header?: {
+    image?: (number | null) | Media;
+    heading?: string | null;
+    intro?: string | null;
+  };
   /**
    * Sections render top to bottom in this order. Removing one falls back to nothing — leave it in place to keep it.
    */
@@ -1262,6 +1270,13 @@ export interface PagesSelect<T extends boolean = true> {
   route?: T;
   country?: T;
   builtIn?: T;
+  header?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        intro?: T;
+      };
   layout?:
     | T
     | {

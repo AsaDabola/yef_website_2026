@@ -6,6 +6,7 @@ import ContinuingMission from "@/components/who-we-are/ContinuingMission";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "History | Youth Evangelical Fellowship",
@@ -14,14 +15,15 @@ export const metadata: Metadata = {
 export default async function HistoryPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("who-we-are/history");
   return (
     <>
       <main>
         <SubPageHero
-          image="/images/who-we-are/banner-history.webp"
+          image={header.image || "/images/who-we-are/banner-history.webp"}
           alt={t("Hands holding an open world map on a forest path")}
         />
-        <HistoryIntro />
+        <HistoryIntro heading={header.heading} />
         <HistoryTimeline />
         <ContinuingMission />
       </main>

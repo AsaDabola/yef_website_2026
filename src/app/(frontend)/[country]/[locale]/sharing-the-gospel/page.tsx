@@ -9,6 +9,7 @@ import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Sharing the Gospel | Youth Evangelical Fellowship",
@@ -17,12 +18,13 @@ export const metadata: Metadata = {
 export default async function SharingTheGospelPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("sharing-the-gospel");
   return (
     <>
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-sharing-the-gospel.png"
+            src={header.image || "/images/get-involved/banner-sharing-the-gospel.png"}
             alt=""
             fill
             priority
@@ -37,12 +39,12 @@ export default async function SharingTheGospelPage({ params }: { params: LocaleP
           <Breadcrumb label={t("Why Do We Evangelize?")} />
 
           <h1 className="mt-6 font-display font-extrabold text-4xl text-black tracking-[-0.8px] sm:text-5xl">
-            
-{t("Sharing the Gospel")}
+
+{t(header.heading || "Sharing the Gospel")}
 </h1>
           <p className="mt-6 max-w-[849px] font-medium text-[19.2px] text-[#4b5565] leading-[30px]">
-            
-{t("We join together for the betterment of this world through the Word of God, evangelism, and the deep study of the Word and constant prayer. It is part of the outworking of the love we see on the cross.")}
+
+{t(header.intro || "We join together for the betterment of this world through the Word of God, evangelism, and the deep study of the Word and constant prayer. It is part of the outworking of the love we see on the cross.")}
 </p>
 
           <div className="mt-14">

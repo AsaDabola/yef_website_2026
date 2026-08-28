@@ -3,12 +3,22 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 import { getT } from "@/lib/i18n/server";
 import SiteName from "@/components/ui/SiteName";
 
-export default async function GetInvolvedHero() {
+type GetInvolvedHeroProps = {
+  /** Banner photo. Defaults to the shared beach aerial. */
+  image?: string;
+  /** Main heading. Defaults to "Get Involved". */
+  heading?: string;
+};
+
+export default async function GetInvolvedHero({
+  image,
+  heading,
+}: GetInvolvedHeroProps = {}) {
   const t = await getT();
   return (
     <section className="relative flex min-h-[560px] items-center overflow-hidden bg-[#00203f] lg:min-h-[61vw]">
       <Image
-        src="/images/get-involved/hero-beach.png"
+        src={image || "/images/get-involved/hero-beach.png"}
         alt={t("Aerial view of waves washing onto a sandy shore")}
         fill
         priority
@@ -27,7 +37,7 @@ export default async function GetInvolvedHero() {
       <div className="relative z-10 mx-auto grid w-full max-w-[1920px] grid-cols-1 gap-14 px-6 pt-40 pb-16 sm:px-10 lg:grid-cols-2 lg:gap-10 lg:px-[8.33%] lg:pt-[17.7%] lg:pb-[12.4%]">
         <div className="max-w-[600px]">
           <h1 className="font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl xl:text-[96px]">
-            {t("Get Involved")}
+            {t(heading || "Get Involved")}
           </h1>
           <p className="mt-8 font-medium text-lg text-white leading-[30px] xl:mt-[31px] xl:text-[19px]">
             {t(

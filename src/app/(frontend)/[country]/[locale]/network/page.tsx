@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import SiteName from "@/components/ui/SiteName";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Network | Youth Evangelical Fellowship",
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 export default async function NetworkPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("network");
   return (
     <>
       <main>
@@ -36,10 +38,10 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
             <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[572px_653px] lg:justify-between lg:gap-0">
               <div>
                 <h1 className="font-display font-extrabold text-5xl text-white leading-[1.05] tracking-[-1.5px] sm:text-6xl lg:text-[72px]">
-                  
+
 {t("Our Global")}
 <br />
-                  
+
 {t("Network")}
 </h1>
                 <div className="mt-8 max-w-[572px] space-y-6 text-[17px] text-white/80 leading-[30px] lg:text-[19px]">
@@ -60,7 +62,7 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
 
               <div className="relative aspect-[653/492] w-full overflow-hidden rounded-2xl shadow-[0_30px_80px_rgba(2,8,16,0.55)]">
                 <Image
-                  src="/images/network/hero-global-network.png"
+                  src={header.image || "/images/network/hero-global-network.png"}
                   alt={t("A circle of YEF members with their arms around one another in prayer")}
                   fill
                   priority

@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import type { Resource } from "@/payload-types";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Sign In | Youth Evangelical Fellowship",
@@ -50,12 +51,13 @@ const categories: {
 export default async function LoginPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("login");
   return (
     <>
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-resources.webp"
+            src={header.image || "/images/get-involved/banner-resources.webp"}
             alt=""
             fill
             priority
@@ -72,11 +74,11 @@ export default async function LoginPage({ params }: { params: LocaleParams }) {
           <div className="mt-10 grid grid-cols-1 gap-16 lg:grid-cols-[1fr_420px]">
             <div>
               <h1 className="font-display font-extrabold text-4xl text-black tracking-[-0.8px]">
-                {t("YEF Resources")}
+                {t(header.heading || "YEF Resources")}
               </h1>
               <p className="mt-4 max-w-[560px] text-[16px] text-[#6b737d] leading-[26px]">
                 {t(
-                  "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers. Sign in with your approved YEF member account to get access.",
+                  header.intro || "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers. Sign in with your approved YEF member account to get access.",
                 )}
               </p>
 

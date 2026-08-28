@@ -7,6 +7,7 @@ import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Apply YEF Mission School | Youth Evangelical Fellowship",
@@ -15,12 +16,13 @@ export const metadata: Metadata = {
 export default async function MissionSchoolApplyPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("yef-mission-school/apply");
   return (
     <>
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/subpage-hero-bonfire.png"
+            src={header.image || "/images/get-involved/subpage-hero-bonfire.png"}
             alt=""
             fill
             priority
