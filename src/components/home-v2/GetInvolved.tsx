@@ -12,6 +12,12 @@ const DRIFT_SPEED = 34;
 
 const cards = [
   {
+    tag: "Ongoing",
+    title: "Campus Evangelism",
+    body: "Every campus is a mission field — Campus Evangelism exists to ignite that faith right where students already are.",
+    image: "/images/get-involved/gospel-campus-conversation.png",
+  },
+  {
     tag: "Weekly",
     title: "Bible Study",
     body: "One-on-one and in groups. A teacher meets you where your schedule allows and walks the text with you — no prior background assumed.",
@@ -28,12 +34,6 @@ const cards = [
     title: "Leadership Training",
     body: "For those who have finished discipleship and are ready to teach. You become a missionary to the campus you already attend.",
     image: "/images/home-v2/get-involved-leadership-training.png",
-  },
-  {
-    tag: "Short Term",
-    title: "Mission Trip",
-    body: "Local and overseas. The fastest way to learn what mission actually costs — and what it is actually worth.",
-    image: "/images/home-v2/get-involved-mission-trip-cross-map.jpg",
   },
   {
     tag: "Each Summer",
