@@ -1,14 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useI18n, useT } from "@/lib/i18n/client";
-import {
-  countriesByRegion,
-  defaultLocaleFor,
-  getCountry,
-} from "@/lib/i18n/countries";
-import { getLocale, locales } from "@/lib/i18n/locales";
+import { countriesByRegion, defaultLocaleFor } from "@/lib/i18n/countries";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 import { stripLocalePath } from "@/lib/i18n/paths";
 import { countryName, flag } from "@/lib/i18n/display";
@@ -190,78 +185,6 @@ export function CountryPicker({
               </div>
             </div>
           ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-/**
- * Language picker. It lists only the languages the current country's site is
- * published in — the headquarters site offers all of them.
- */
-export function LanguagePicker({
-  tone = "light",
-  placement = "down",
-}: {
-  tone?: Tone;
-  placement?: Placement;
-}) {
-  const { country, locale } = useI18n();
-  const router = useRouter();
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const ref = useDismiss(() => setOpen(false));
-
-  const offered =
-    country === INTERNATIONAL
-      ? locales
-      : (getCountry(country)?.locales ?? ["en"]).map(getLocale);
-  const rest = stripLocalePath(pathname);
-
-  const go = (code: string) => {
-    setOpen(false);
-    router.push(`/${country}/${code}${rest === "/" ? "" : rest}`);
-  };
-
-  return (
-    <div className="relative" ref={ref}>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        className={`flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-medium text-sm transition-colors ${trigger(tone)}`}
-      >
-        <Globe />
-        <span>{getLocale(locale).name}</span>
-        <Chevron />
-      </button>
-
-      {open && (
-        <div
-          role="menu"
-          className={`z-50 max-h-[70vh] overflow-y-auto rounded-2xl border border-black/10 bg-white p-3 shadow-2xl ${menu(placement, "sm:w-[min(92vw,420px)]")}`}
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2">
-            {offered.map((l) => (
-              <button
-                key={l.code}
-                type="button"
-                role="menuitem"
-                onClick={() => go(l.code)}
-                lang={l.code}
-                dir={l.dir}
-                className={`rounded-lg px-3 py-2 text-start text-sm hover:bg-black/5 ${
-                  l.code === locale
-                    ? "font-semibold text-yef-primary"
-                    : "text-v2-navy"
-                }`}
-              >
-                {l.name}
-              </button>
-            ))}
-          </div>
         </div>
       )}
     </div>

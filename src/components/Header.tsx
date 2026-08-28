@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
-import { CountryPicker, LanguagePicker } from "@/components/i18n/SitePicker";
+import { CountryPicker } from "@/components/i18n/SitePicker";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -96,7 +96,6 @@ export default function Header() {
 
           <div className="hidden items-center gap-2 lg:flex">
             <CountryPicker />
-            <LanguagePicker />
           </div>
 
           <Link
@@ -146,7 +145,6 @@ export default function Header() {
           ))}
           <div className="mt-2 flex flex-wrap items-center gap-2 border-t border-white/15 px-3 pt-4">
             <CountryPicker />
-            <LanguagePicker />
           </div>
           <div className="flex items-center gap-4 px-3 pt-2">
             {socialLinks.map(({ label, href, Icon }) => (
