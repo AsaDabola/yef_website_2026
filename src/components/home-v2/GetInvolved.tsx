@@ -24,16 +24,16 @@ const cards = [
     image: "/images/home-v2/get-involved-bible-study.png",
   },
   {
-    tag: "Each Summer",
-    title: "Summer Training",
-    body: "Three to seven days in the US and Korea. Word, prayer, and long meals with students who came from the other side of the world.",
-    image: "/images/home-v2/get-involved-summer-training.png",
-  },
-  {
     tag: "By Invitation",
     title: "Leadership Training",
-    body: "For those who have finished discipleship and are ready to teach. You become a missionary to the campus you already attend.",
+    body: "Learn to teach the Word, care for others, lead fellowship, and make disciples.",
     image: "/images/home-v2/get-involved-leadership-training.png",
+  },
+  {
+    tag: "Each Summer",
+    title: "Summer Training",
+    body: "Grow through focused Bible study, prayer, fellowship, evangelism, and mission training.",
+    image: "/images/home-v2/get-involved-summer-training.png",
   },
   {
     tag: "Each Summer",
@@ -42,15 +42,15 @@ const cards = [
     image: "/images/home-v2/get-involved-short-term-mission.webp",
   },
   {
-    tag: "By Invitation",
+    tag: "Growth",
     title: "Discipleship Training",
-    body: "For those who have finished discipleship and are ready to teach. You become a missionary to the campus you already attend.",
+    body: "A hands-on training to grow as a disciple and step into leadership — becoming a missionary to the campus you already call home.",
     image: "/images/home-v2/get-involved-discipleship-training.webp",
   },
   {
-    tag: "Year Round",
+    tag: "Serve",
     title: "Volunteering",
-    body: "Help build the movement in your local chapter with the talents you already have — video, design, tech, events, and more.",
+    body: "Show up for one another and your community through small, consistent acts of service.",
     image: "/images/home-v2/get-involved-volunteering.png",
   },
 ];
