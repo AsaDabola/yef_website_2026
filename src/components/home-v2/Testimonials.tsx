@@ -17,14 +17,14 @@ const testimonials = [
       "I joined for the free dinner. I stayed because someone read Romans with me every week for a year and never once made me feel behind.",
     name: "James Wong",
     place: "Hong Kong",
-    image: "/images/home-v2/testimonial-james.png",
+    image: "/images/home-v2/testimonial-james.webp",
   },
   {
     quote:
       "Before YEF my faith was something I inherited. Now it is something I carry — to my campus, to my family, to the students coming after me.",
     name: "Esther Niyonzima",
     place: "Bujumbura, Burundi",
-    image: "/images/home-v2/testimonial-esther.png",
+    image: "/images/home-v2/testimonial-esther.webp",
   },
 ];
 

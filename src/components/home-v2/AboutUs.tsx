@@ -4,7 +4,7 @@ import Reveal from "@/components/ui/Reveal";
 import { getT } from "@/lib/i18n/server";
 
 const defaults = {
-  image: "/images/home-v2/about-us-photo.png",
+  image: "/images/home-v2/about-us-photo.webp",
   imageAlt: "Students celebrating together on campus",
   eyebrow: "About Us",
   heading: "A global campus",

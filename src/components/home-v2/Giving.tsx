@@ -54,7 +54,7 @@ export default async function Giving() {
             className="group relative aspect-[700/520] w-full cursor-pointer overflow-hidden"
           >
             <Image
-              src="/images/home-v2/giving-bg.png"
+              src="/images/home-v2/giving-bg.webp"
               alt={t(
                 "An aerial forest canopy forming the shape of a world map",
               )}

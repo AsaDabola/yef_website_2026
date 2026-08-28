@@ -21,19 +21,19 @@ const cards = [
     tag: "Weekly",
     title: "Bible Study",
     body: "Study Scripture personally and together, building a faith firmly grounded in the Gospel.",
-    image: "/images/home-v2/get-involved-bible-study.png",
+    image: "/images/home-v2/get-involved-bible-study.webp",
   },
   {
     tag: "By Invitation",
     title: "Leadership Training",
     body: "Learn to teach the Word, care for others, lead fellowship, and make disciples.",
-    image: "/images/home-v2/get-involved-leadership-training.png",
+    image: "/images/home-v2/get-involved-leadership-training.webp",
   },
   {
     tag: "Each Summer",
     title: "Summer Training",
     body: "Grow through focused Bible study, prayer, fellowship, evangelism, and mission training.",
-    image: "/images/home-v2/get-involved-summer-training.png",
+    image: "/images/home-v2/get-involved-summer-training.webp",
   },
   {
     tag: "Go",
