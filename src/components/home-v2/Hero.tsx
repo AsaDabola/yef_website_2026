@@ -79,7 +79,12 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
       <HeaderV2 />
 
       <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pt-40 pb-24 sm:px-10 lg:px-19 lg:pb-32">
-        <div className="grid max-w-3xl">
+        {/* The column is sized between two headings, both at 96px in the
+            shipped face: "Reaching Students." (882) has to fit on one line,
+            while "To Make Him Known." (939) is meant to fold onto a third.
+            Anything from 882 to 938 does that; a 3xl column was under both
+            and folded them alike. */}
+        <div className="grid max-w-[900px]">
           {slides.map((slide, index) => (
             <div
               key={slide.image}
