@@ -281,6 +281,11 @@ export interface Page {
                    */
                   heading: string;
                   body: string;
+                  /**
+                   * Optional — leave both empty for no button.
+                   */
+                  buttonLabel?: string | null;
+                  buttonHref?: string | null;
                   id?: string | null;
                 }[]
               | null;
@@ -335,7 +340,10 @@ export interface Page {
             heading?: string | null;
             items?:
               | {
-                  number: string;
+                  /**
+                   * Optional — leave empty for no number shown.
+                   */
+                  number?: string | null;
                   name: string;
                   body: string;
                   id?: string | null;
@@ -1266,6 +1274,8 @@ export interface PagesSelect<T extends boolean = true> {
                     image?: T;
                     heading?: T;
                     body?: T;
+                    buttonLabel?: T;
+                    buttonHref?: T;
                     id?: T;
                   };
               id?: T;

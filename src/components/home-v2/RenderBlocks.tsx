@@ -51,6 +51,8 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
               image: Upload;
               heading: string;
               body: string;
+              buttonLabel?: string;
+              buttonHref?: string;
             }[];
             const slides: HeroSlide[] = rows
               .map((row) => ({
@@ -58,6 +60,10 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 alt: altOf(row.image) ?? "",
                 heading: row.heading,
                 body: row.body,
+                button:
+                  row.buttonLabel && row.buttonHref
+                    ? { label: row.buttonLabel, href: row.buttonHref }
+                    : undefined,
               }))
               .filter((slide) => slide.image);
             return <Hero key={key} slides={slides.length ? slides : undefined} />;

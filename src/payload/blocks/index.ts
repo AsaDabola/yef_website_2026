@@ -31,6 +31,20 @@ export const HeroBlock: Block = {
           admin: { description: "A line break here breaks the headline." },
         },
         { name: "body", type: "text", required: true },
+        {
+          type: "row",
+          fields: [
+            {
+              name: "buttonLabel",
+              type: "text",
+              admin: {
+                width: "50%",
+                description: "Optional — leave both empty for no button.",
+              },
+            },
+            { name: "buttonHref", type: "text", admin: { width: "50%" } },
+          ],
+        },
       ],
     },
   ],
@@ -120,7 +134,11 @@ export const ProofBlock: Block = {
         {
           type: "row",
           fields: [
-            { name: "number", type: "text", required: true },
+            {
+              name: "number",
+              type: "text",
+              admin: { description: "Optional — leave empty for no number shown." },
+            },
             { name: "name", type: "text", required: true },
           ],
         },
