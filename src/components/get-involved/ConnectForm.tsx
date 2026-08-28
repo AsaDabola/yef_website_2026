@@ -14,12 +14,12 @@ const interests = [
   "Bible Studies",
   "Discipleship",
   "Mission Trip",
+  "Campus Evangelism",
   "Summer Training",
   "Internship",
   "Leadership Training",
-  "Volunteer / Short-term Projects",
-  "Large Group",
-  "Vision Trip",
+  "Volunteer",
+  "Short-term Mission",
 ];
 
 const growthAreas = [
