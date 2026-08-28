@@ -26,8 +26,8 @@ export default async function InternshipSection() {
       id="internship"
       title={t("Internship")}
       intro="Work under a trained professional in any field and learn the ropes from them! Internships at YEF HQ are open to YEF members from local chapters who have finished their leadership training and are willing to serve in building the ministry together. You can intern in video making, web design, technology, event-planning, communications, and more."
-      image="/images/get-involved/internship-cross-bible.png"
-      alt={t("A cross silhouetted above an open Bible at sunset")}
+      image="/images/get-involved/internship-outreach-table.webp"
+      alt={t("An intern smiling and helping a student at an outreach table")}
       items={pillars}
       inlineItems
       link={{
