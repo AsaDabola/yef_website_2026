@@ -6,7 +6,6 @@ import GetInvolvedHero from "@/components/get-involved/GetInvolvedHero";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import InternshipSection from "@/components/get-involved/InternshipSection";
 import MinistrySection from "@/components/get-involved/MinistrySection";
-import MissionTripPromo from "@/components/get-involved/MissionTripPromo";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
@@ -54,13 +53,10 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
 
               <StoriesTrio />
 
-              <div className="border-t border-black/10 py-16">
-                <MissionTripPromo />
-              </div>
-
               <MinistrySection
                 id="summer-training"
                 title={t("Summer Training")}
+                cardTitle={t("Grow in Christ")}
                 body={t("Every year, YEF offers summer training in the U.S. and South Korea. This training of 3 to 7 days, will allow students to be surrounded in the Word and prayer, while in fellowship with others from all around the world. These days usually consist of Bible studies, camping, visiting attractions, as well as, practicum of mission such as evangelism, teaching etc. Stay tuned to our site events, if you're interested! Program may vary each year.")}
                 resourceColumns={[
                   ["Application Form", "Camp Guidelines", "Scholarship Request"],
@@ -77,6 +73,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="short-term-mission"
                 title={t("Short-term Mission")}
+                cardTitle={t("Serve with Purpose")}
                 body={t("Interested in furthering God's kingdom with the talents God has given you? YEF provides volunteer opportunities that anyone can contribute to building the ministry together. You can share your talents with our campus ministry to reach more of the unreached student on college campuses. Volunteer positions vary from video making, Web design, technology, event-planning, communication and much more.")}
                 resourceColumns={[
                   [
@@ -96,6 +93,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="discipleship"
                 title={t("Discipleship Training")}
+                cardTitle={t("Follow Jesus Daily")}
                 body={t("Discipleship is one of the key focuses of our ministry. Jesus also raised twelve disciples among the many crowds that followed. Those who are willing to follow the life of Jesus, by overcoming all the hindrances of the world were selected and preciously guided with Word of Jesus. YEF is dedicated to raising students on campus into disciples of Jesus with a more adaptable program for campus life. With small group and personal mentoring, the Bible can guide us to know the heart of God and His amazing salvation. Through our program, you can discover the meaning of salvation, the cross, the calling of God in our lives and much more. Yes, just as Jesus said, “Go, make disciples!”")}
                 resourceColumns={[
                   [
@@ -113,6 +111,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="leadership-training"
                 title={t("Leadership Training")}
+                cardTitle={t("Raise Up Leaders")}
                 body={t("YEF offers leadership training regionally and nationwide to provide rich spiritual foods to the students in need. Leadership Training is open to the students who finished their discipleship program on their campus. During their training, they will be equipped as teachers and missionaries on campus by learning about mission and the practicum for instructing students.")}
                 resourceColumns={[
                   [
@@ -130,6 +129,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="volunteering"
                 title={t("Volunteering")}
+                cardTitle={t("Give Your Time")}
                 body={t("As a volunteer with YEF, you will be helping build or start a spiritual movement in your local chapter. Contact your local YEF leader for further information.")}
                 resourceColumns={[
                   [

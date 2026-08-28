@@ -31,7 +31,7 @@ export default async function CampusEvangelismPromo() {
       items={steps}
       link={{
         label: "Learn more about Campus Evangelism",
-        href: "/get-involved#campus-evangelism",
+        href: "/get-involved/campus-evangelism",
       }}
     />
   );

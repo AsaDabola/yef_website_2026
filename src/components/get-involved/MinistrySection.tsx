@@ -10,6 +10,7 @@ export default async function MinistrySection({
   image,
   alt,
   ctas,
+  cardTitle,
 }: {
   id: string;
   title: string;
@@ -18,6 +19,8 @@ export default async function MinistrySection({
   image: string;
   alt: string;
   ctas?: { label: string; href: string; primary?: boolean }[];
+  /** Overrides the caption on the photo card when it should differ from the section heading. */
+  cardTitle?: string;
 }) {
   const t = await getT();
   return (
@@ -95,7 +98,7 @@ export default async function MinistrySection({
           image={image}
           alt={alt}
           eyebrow={t("Get Involved")}
-          title={title}
+          title={cardTitle ?? title}
           className="justify-self-center lg:justify-self-end"
         />
       </div>
