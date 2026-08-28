@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "@/components/ui/LocaleLink";
 import {
+  FacebookIcon,
   InstagramIcon,
-  LinkArrowIcon,
-  PinIcon,
+  XIcon,
 } from "@/components/ui/SocialIcons";
 import { CountryPicker } from "@/components/i18n/SitePicker";
 import { getSiteName } from "@/components/ui/SiteWordmark";
@@ -55,9 +55,17 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
 ];
 
 const socialLinks = [
-  { label: "Pinterest", href: "#", Icon: PinIcon },
-  { label: "Link", href: "#", Icon: LinkArrowIcon },
-  { label: "Instagram", href: "#", Icon: InstagramIcon },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/youthevangelicalfellowship/",
+    Icon: FacebookIcon,
+  },
+  { label: "X", href: "https://x.com/YEF_Intl", Icon: XIcon },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/yef_international/",
+    Icon: InstagramIcon,
+  },
 ];
 
 export default async function Footer() {
@@ -111,6 +119,8 @@ export default async function Footer() {
                   <Link
                     key={label}
                     href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={t(label)}
                     className="flex size-8 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:border-white"
                   >
