@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { getPayload } from "payload";
 import config from "@payload-config";
@@ -6,6 +7,9 @@ import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import Link from "@/components/ui/LocaleLink";
+import CategoryIcon from "@/components/resources/CategoryIcon";
+import ResourceCard from "@/components/resources/ResourceCard";
+import ResourcesSubMenu from "@/components/resources/ResourcesSubMenu";
 import { getT } from "@/lib/i18n/server";
 import { currentViewer } from "@/lib/members";
 import { cmsConfigured } from "@/lib/posts";
@@ -16,55 +20,37 @@ export const metadata: Metadata = {
   title: "Resources | Youth Evangelical Fellowship",
 };
 
-const categories: { key: Resource["category"]; label: string }[] = [
-  { key: "policy", label: "Policy" },
-  { key: "training", label: "Training Resources" },
-  { key: "forms", label: "Forms" },
-  { key: "worship", label: "Worship & Order" },
-  { key: "media", label: "Media" },
+const categories: {
+  key: Resource["category"];
+  label: string;
+  blurb: string;
+}[] = [
+  {
+    key: "policy",
+    label: "Policy",
+    blurb: "Governance, guidelines, and how YEF operates.",
+  },
+  {
+    key: "training",
+    label: "Training Resources",
+    blurb: "Curricula, toolkits, and study materials for every ministry.",
+  },
+  {
+    key: "forms",
+    label: "Forms",
+    blurb: "Applications, requests, and other paperwork in one place.",
+  },
+  {
+    key: "worship",
+    label: "Worship & Order",
+    blurb: "Praise sets and order-of-service materials.",
+  },
+  {
+    key: "media",
+    label: "Media",
+    blurb: "Recorded messages members can listen to or watch online.",
+  },
 ];
-
-function ResourceRow({ resource, t }: { resource: Resource; t: (s: string) => string }) {
-  const href =
-    resource.kind === "link" ? resource.externalUrl || "#" : resource.url || "#";
-
-  return (
-    <li className="flex flex-col gap-3 border-black/10 border-b py-5 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <p className="font-semibold text-[15.8px] text-black">
-          {resource.title}
-          {resource.visibility === "public" && (
-            <span className="ml-2 rounded-full bg-[#eff5ff] px-2.5 py-0.5 text-[10px] text-[#0066cf] uppercase tracking-[1px]">
-              {t("Public")}
-            </span>
-          )}
-        </p>
-        {resource.description && (
-          <p className="mt-1 text-[14px] text-[#6b737d]">{resource.description}</p>
-        )}
-      </div>
-
-      {resource.kind === "audio" && resource.url ? (
-        <audio controls src={resource.url} className="w-full sm:w-[280px]" />
-      ) : resource.kind === "video" && resource.url ? (
-        <video controls src={resource.url} className="w-full sm:w-[280px] rounded-lg" />
-      ) : href !== "#" ? (
-        <a
-          href={href}
-          target={resource.kind === "link" ? "_blank" : undefined}
-          rel={resource.kind === "link" ? "noopener noreferrer" : undefined}
-          className="inline-flex shrink-0 items-center justify-center rounded-full border border-[#00203f] px-6 py-2.5 font-semibold text-[12px] text-[#00203f] tracking-[1.2px] uppercase transition-transform duration-200 hover:scale-105"
-        >
-          {resource.kind === "link" ? t("Open Link") : t("Download")}
-        </a>
-      ) : (
-        <span className="shrink-0 text-[13px] text-[#6b737d] italic">
-          {t("Coming soon")}
-        </span>
-      )}
-    </li>
-  );
-}
 
 export default async function ResourcesPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
@@ -94,53 +80,87 @@ export default async function ResourcesPage({ params }: { params: LocaleParams }
   return (
     <>
       <main>
-        <section className="relative h-[176px] bg-v2-navy">
+        <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
+          <Image
+            src="/images/get-involved/banner-resources.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
           <HeaderV2 />
         </section>
 
-        <section className="mx-auto max-w-[1000px] px-6 py-16 lg:px-0">
-          <Breadcrumb label={t("Resources")} />
-          <h1 className="mt-6 font-display font-extrabold text-4xl text-black">
-            {t("YEF Resources")}
-          </h1>
-          <p className="mt-3 max-w-[640px] text-[16px] text-[#6b737d]">
-            {t(
-              "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers.",
-            )}
-          </p>
+        <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[110px] lg:pr-[92px] lg:pl-[81px]">
+          <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
+            <div className="shrink-0 lg:w-[237px]">
+              <ResourcesSubMenu />
+            </div>
 
-          <div className="mt-12 space-y-14">
-            {categories.map(({ key, label }) => {
-              const items = byCategory.get(key) ?? [];
-              if (items.length === 0) return null;
-              return (
-                <div key={key}>
-                  <h2 className="font-display font-bold text-2xl text-black">
-                    {t(label)}
-                  </h2>
-                  <ul className="mt-4">
-                    {items.map((resource) => (
-                      <ResourceRow key={resource.id} resource={resource} t={t} />
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
+            <div className="min-w-0 flex-1">
+              <Breadcrumb label={t("Resources")} />
 
-            {resources.length === 0 && (
-              <p className="text-[15px] text-[#6b737d]">
-                {t("Resources will appear here as the team adds them.")}
+              <h1 className="mt-6 font-display font-extrabold text-4xl text-black tracking-[-0.8px] sm:text-[46px] sm:leading-[60px]">
+                {t("YEF Resources")}
+              </h1>
+              <p className="mt-3 max-w-[640px] text-[16px] text-[#6b737d]">
+                {t(
+                  "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers.",
+                )}
               </p>
-            )}
-          </div>
 
-          <p className="mt-16 text-[13px] text-[#6b737d]">
-            {t("Not seeing what you need?")}{" "}
-            <Link href="/contact" className="text-[#0066cf] underline">
-              {t("Contact the YEF team")}
-            </Link>
-          </p>
+              <div className="mt-14 space-y-10">
+                {categories.map(({ key, label, blurb }) => {
+                  const items = byCategory.get(key) ?? [];
+                  return (
+                    <div
+                      key={key}
+                      id={key}
+                      className="scroll-mt-32 rounded-[24px] bg-[#f1f6ff] px-6 py-10 sm:px-10 sm:py-12"
+                    >
+                      <div className="flex items-start gap-5">
+                        <div className="flex size-[52px] shrink-0 items-center justify-center rounded-2xl bg-white text-yef-primary shadow-sm">
+                          <CategoryIcon category={key} className="size-6" />
+                        </div>
+                        <div>
+                          <h2 className="font-display font-bold text-2xl text-black sm:text-[28px]">
+                            {t(label)}
+                          </h2>
+                          <p className="mt-1 text-[14.5px] text-[#4b5565]">
+                            {t(blurb)}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="mt-8 space-y-4">
+                        {items.length > 0 ? (
+                          items.map((resource) => (
+                            <ResourceCard key={resource.id} resource={resource} t={t} />
+                          ))
+                        ) : (
+                          <p className="rounded-2xl border border-white/60 border-dashed bg-white/40 px-6 py-8 text-[14px] text-[#4b5565] italic">
+                            {t("Nothing here yet — check back soon.")}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <p className="mt-16 text-[13px] text-[#6b737d]">
+                {t("Not seeing what you need?")}{" "}
+                <Link href="/contact" className="text-[#0066cf] underline">
+                  {t("Contact the YEF team")}
+                </Link>
+              </p>
+            </div>
+          </div>
         </section>
+
+        <div className="mt-16" />
       </main>
       <Footer />
     </>
