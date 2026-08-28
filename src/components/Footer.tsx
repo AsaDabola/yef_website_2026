@@ -9,9 +9,14 @@ import { CountryPicker } from "@/components/i18n/SitePicker";
 import { getSiteName } from "@/components/ui/SiteWordmark";
 import { getT } from "@/lib/i18n/server";
 
-const columns: { title: string; links: { label: string; href: string }[] }[] = [
+const columns: {
+  title: string;
+  href: string;
+  links: { label: string; href: string }[];
+}[] = [
   {
     title: "Who we are",
+    href: "/who-we-are",
     links: [
       { label: "Welcome", href: "/who-we-are/welcome" },
       { label: "Our Mission", href: "/who-we-are/mission" },
@@ -26,6 +31,7 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
   },
   {
     title: "Get involved",
+    href: "/get-involved",
     links: [
       { label: "Bible Studies", href: "/get-involved/bible-studies" },
       { label: "Summer Training", href: "/get-involved/summer-training" },
@@ -40,6 +46,7 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
   },
   {
     title: "Resources",
+    href: "/resources",
     links: [
       { label: "Sharing the Gospel", href: "/sharing-the-gospel" },
       { label: "Reaching the Campus", href: "/reaching-the-campus" },
@@ -49,6 +56,7 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
   },
   {
     title: "Network",
+    href: "/network",
     links: [
       { label: "News", href: "/news" },
       { label: "Network", href: "/network" },
@@ -135,9 +143,12 @@ export default async function Footer() {
 
             {columns.map((column) => (
               <div key={column.title}>
-                <p className="font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
+                <Link
+                  href={column.href}
+                  className="font-normal text-sm uppercase tracking-[0.7px] text-yef-gray transition-opacity hover:opacity-80"
+                >
                   {t(column.title)}
-                </p>
+                </Link>
                 <ul className="mt-4 space-y-3">
                   {column.links.map((link) => (
                     <li key={link.label}>
