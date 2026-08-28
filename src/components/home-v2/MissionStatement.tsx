@@ -30,24 +30,27 @@ export default async function MissionStatement({
   return (
     <section className="font-body relative overflow-hidden bg-gradient-to-br from-v2-navy via-v2-blue to-v2-navy">
       <ConvergenceLines />
-      <div className="relative mx-auto max-w-[1920px] px-6 py-24 sm:px-10 lg:px-19">
+      {/* The frame is 1920x740 with its content 1440 wide at x=240 — so the
+          column is capped at 1440 and the 240px margin is what is left over
+          at that width, rather than a padding that would shrink it further. */}
+      <div className="relative mx-auto max-w-[1440px] px-6 py-24 sm:px-10 lg:pt-[150px] lg:pb-[164px] 2xl:px-0">
         <Reveal>
           <p className="font-semibold text-[11px] text-white/50 tracking-[2.42px] uppercase">
             {t(c.eyebrow)}
           </p>
-          <p className="mt-8 max-w-[1200px] whitespace-pre-line font-display font-bold text-4xl text-[#f2f6fb] leading-[1.12] tracking-[-1.8px] sm:text-5xl lg:text-[60px]">
+          <p className="mt-[26px] max-w-[1143px] whitespace-pre-line font-display font-bold text-4xl text-[#f2f6fb] leading-[1.12] tracking-[-1.8px] sm:text-5xl lg:text-[60px]">
             {t(c.verse)}{" "}
             <span className="font-instrument-serif font-normal italic">
               {t(c.verseAccent)}
             </span>
           </p>
-          <p className="mt-6 font-semibold text-base text-white/45 tracking-[2.88px] uppercase">
+          <p className="mt-[26px] font-semibold text-base text-white/45 tracking-[2.88px] uppercase">
             {t(c.reference)}
           </p>
         </Reveal>
 
         <Reveal delay={150}>
-          <div className="mt-12 grid grid-cols-1 gap-10 border-t border-white/[0.18] pt-10 lg:grid-cols-2 lg:gap-16">
+          <div className="mt-[26px] grid grid-cols-1 gap-10 border-t border-white/[0.18] pt-14 lg:grid-cols-2 lg:gap-[70px]">
             {columns.map((body) => (
               <p key={body} className="text-white/70 leading-[1.8]">
                 <Rich text={t(body)} emphasis="font-bold text-white" />
