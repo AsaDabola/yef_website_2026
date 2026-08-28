@@ -27,7 +27,7 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/short-term-mission.webp"
+            src="/images/get-involved/short-term-mission-hero.webp"
             alt=""
             fill
             priority
@@ -52,16 +52,16 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/get-involved/teaser-mission-trip-girls.png",
-                  alt: "Students on a YEF short-term mission trip",
+                  src: "/images/get-involved/short-term-mission-friends.webp",
+                  alt: "Three friends with backpacks setting off from a train platform",
                 },
                 {
-                  src: "/images/get-involved/mission-school-street-outreach.png",
-                  alt: "A team sharing the Gospel through street outreach",
+                  src: "/images/get-involved/short-term-mission-signpost.webp",
+                  alt: "A signpost pointing to Short-Term and Long-Term",
                 },
                 {
-                  src: "/images/get-involved/gospel-outreach-table.png",
-                  alt: "A team sharing the Gospel at an outreach table",
+                  src: "/images/get-involved/short-term-mission-hands.webp",
+                  alt: "A team stacking hands together in unity",
                 },
               ]}
             />
@@ -156,8 +156,8 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
           <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
             <div className="relative min-h-[320px] w-full lg:min-h-[480px]">
               <Image
-                src="/images/get-involved/mission-school-bible-study.png"
-                alt={t("A team leading a Bible study on a mission trip")}
+                src="/images/get-involved/short-term-mission-kids.webp"
+                alt={t("Children running joyfully to greet a mission team")}
                 fill
                 sizes="(min-width: 1024px) 672px, 100vw"
                 className="object-cover"
