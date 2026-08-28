@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
+import { FileField } from "@/components/forms/FormField";
 import { LabeledTextField } from "@/components/forms/LabeledField";
+import { PrivacyNote } from "@/components/forms/PrivacyNote";
 import { useT } from "@/lib/i18n/client";
 
 export default function TestimonySubmission() {
@@ -80,6 +82,18 @@ export default function TestimonySubmission() {
 
       <div className="space-y-3.5">
         <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
+          {t("Photo")}
+        </p>
+        <FileField
+          label={t("Add a photo (optional)")}
+          hint={t("JPG or PNG — up to 10MB")}
+          name="photo"
+          accept="image/*"
+        />
+      </div>
+
+      <div className="space-y-3.5">
+        <p className="font-semibold text-[16px] leading-[19px] text-[#1b1d21]">
           {t("Sharing Permission")}
         </p>
         <label className="flex items-center gap-2.5 text-[13px] leading-[18px] text-[#1b1d21]">
@@ -96,6 +110,12 @@ export default function TestimonySubmission() {
           </span>
         </label>
       </div>
+
+      <PrivacyNote>
+        {t(
+          "YEF collects the information in this form only to review your story and, with your permission above, publish it. We do not sell, rent, or share your personal information with third parties, and it will not be used for any purpose beyond what is described here without your consent. By submitting this form, you agree to YEF’s Privacy Policy and Terms of Use.",
+        )}
+      </PrivacyNote>
 
       <button
         type="submit"

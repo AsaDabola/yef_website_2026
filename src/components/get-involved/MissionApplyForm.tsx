@@ -4,10 +4,12 @@ import { useState } from "react";
 import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import {
   CheckboxField,
+  FileField,
   RadioField,
   TextAreaField,
   TextField,
 } from "@/components/forms/FormField";
+import { PrivacyNote } from "@/components/forms/PrivacyNote";
 import { useT } from "@/lib/i18n/client";
 
 /** The numbered rule the frame puts above each section. */
@@ -85,6 +87,12 @@ export default function MissionApplyForm() {
           />
           <TextField label={t("Church")} name="church" />
         </div>
+        <FileField
+          label={t("Add a photo (optional)")}
+          hint={t("JPG or PNG — up to 10MB")}
+          name="photo"
+          accept="image/*"
+        />
       </div>
 
       <div className="space-y-5">
@@ -99,6 +107,10 @@ export default function MissionApplyForm() {
             name="responsibilities"
           />
         </div>
+        <TextField
+          label={t("Who recommended YEF to you? (optional)")}
+          name="referredBy"
+        />
       </div>
 
       <div className="space-y-5">
@@ -122,6 +134,23 @@ export default function MissionApplyForm() {
           name="whyYef"
           rows={3}
         />
+        <fieldset>
+          <legend className="mb-3 font-medium text-[14px] text-[#1b1d21]">
+            {t("Have you completed a YEF discipleship program before?")}
+          </legend>
+          <div className="flex gap-3">
+            <RadioField
+              label={t("Yes")}
+              name="completedDiscipleship"
+              value="yes"
+            />
+            <RadioField
+              label={t("No")}
+              name="completedDiscipleship"
+              value="no"
+            />
+          </div>
+        </fieldset>
       </div>
 
       <div className="space-y-5">
@@ -210,18 +239,25 @@ export default function MissionApplyForm() {
         />
       </div>
 
-      <div className="border-t border-black/10 pt-8">
-        <button
-          type="submit"
-          className="rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
-        >
-          {t("Submit Application")}
-        </button>
-        <p className="mt-6 text-[14px] text-[#6b737d]">
+      <div className="space-y-5 border-t border-black/10 pt-8">
+        <PrivacyNote>
           {t(
-            "Thank you for stepping toward this calling. A member of the YEF missions team will follow up with you shortly.",
+            "YEF collects the information in this form only to process your mission application and coordinate with our missions team. We do not sell, rent, or share your personal information with third parties, and it will not be used for any purpose beyond what is described here without your consent. By submitting this form, you agree to YEF’s Privacy Policy and Terms of Use.",
           )}
-        </p>
+        </PrivacyNote>
+        <div>
+          <button
+            type="submit"
+            className="rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+          >
+            {t("Submit Application")}
+          </button>
+          <p className="mt-6 text-[14px] text-[#6b737d]">
+            {t(
+              "Thank you for stepping toward this calling. A member of the YEF missions team will follow up with you shortly.",
+            )}
+          </p>
+        </div>
       </div>
     </form>
   );

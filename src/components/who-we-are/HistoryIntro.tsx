@@ -81,7 +81,7 @@ export default async function HistoryIntro() {
             </p>
             <p>
               {t(
-                "By the grace of God, the ministry continued expanding internationally. By 2015, YEF’s mission had reached more than 40 countries across North America, South America, Europe, Africa, Asia Pacific, Southeast Asia, and South Asia. The growth of YEF reflects Jesus’ description of the Kingdom of God:",
+                "By the grace of God, the ministry continued expanding internationally. By 2015, YEF’s mission had reached campuses across North America, South America, Europe, Africa, Asia Pacific, Southeast Asia, and South Asia. The growth of YEF reflects Jesus’ description of the Kingdom of God:",
               )}
             </p>
             <blockquote className="border-l-4 border-yef-primary pl-6 text-xl italic text-yef-navy">

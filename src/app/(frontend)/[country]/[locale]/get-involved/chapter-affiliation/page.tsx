@@ -39,7 +39,7 @@ export default async function ChapterAffiliationPage({ params }: { params: Local
 </p>
               <p className="mt-[38px] max-w-[760px] text-[20px] text-black leading-[27.2px]">
                 
-{t("Every YEF chapter is a seedbed—a witnessing community planted on one campus, connected to a movement spanning 40+ countries. Affiliating your chapter is a three-step process: chapter information, leadership contact, and agreement.")}
+{t("Every YEF chapter is a seedbed—a witnessing community planted on one campus, connected to a wider movement of chapters around the world. Affiliating your chapter is a three-step process: chapter information, leadership contact, and agreement.")}
 </p>
 
               <h2 className="mt-11 font-display font-extrabold text-[30px] text-black tracking-[-0.5px]">

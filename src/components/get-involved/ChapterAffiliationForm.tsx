@@ -8,6 +8,7 @@ import {
   TextAreaField,
   TextField,
 } from "@/components/forms/FormField";
+import { PrivacyNote } from "@/components/forms/PrivacyNote";
 import { useT } from "@/lib/i18n/client";
 
 function StepHeader({ number, title }: { number: string; title: string }) {
@@ -119,11 +120,11 @@ export default function ChapterAffiliationForm() {
           name="agreement"
           required
         />
-        <p className="text-[13px] text-black/45 leading-[18px]">
+        <PrivacyNote>
           {t(
             "YEF collects the information in this form only to process your chapter’s affiliation request and to stay in contact with your chapter’s leadership. We do not sell, rent, or share your personal information with third parties, and it will not be used for any purpose beyond what is described here without your consent. By submitting this form, you agree to YEF’s Privacy Policy and Terms of Use.",
           )}
-        </p>
+        </PrivacyNote>
         <button
           type="submit"
           className="w-[358px] max-w-full rounded-full bg-[#0066cf] px-10 py-[18px] font-semibold text-[14px] text-white tracking-[2.24px] uppercase transition-transform duration-200 hover:scale-105"
