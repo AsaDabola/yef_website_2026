@@ -7,6 +7,7 @@ import Testimonials from "@/components/home-v2/Testimonials";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Submit Your Story | Youth Evangelical Fellowship",
@@ -15,12 +16,13 @@ export const metadata: Metadata = {
 export default async function SubmitYourStoryPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("submit-your-story");
   return (
     <>
       <main>
         <section className="relative h-[260px] overflow-hidden bg-v2-navy sm:h-[360px] lg:h-[450px]">
           <Image
-            src="/images/submit-story/banner-campfire.png"
+            src={header.image || "/images/submit-story/banner-campfire.png"}
             alt=""
             fill
             priority
@@ -37,12 +39,12 @@ export default async function SubmitYourStoryPage({ params }: { params: LocalePa
           <Breadcrumb label={t("Submit Your Story")} />
 
           <h1 className="mt-[66px] text-center font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
-            
-{t("Submit Your Story")}
+
+{t(header.heading || "Submit Your Story")}
 </h1>
           <p className="mx-auto mt-[25px] max-w-[724px] text-center font-semibold text-xl text-[#4b5565] leading-[1.6] tracking-[-0.8px] lg:text-[28px] lg:leading-[50px]">
-            
-{t("God has been at work in your life — we’d love to hear about it. Share the grace you’ve received, and how it’s shaped your walk with Him.")}
+
+{t(header.intro || "God has been at work in your life — we’d love to hear about it. Share the grace you’ve received, and how it’s shaped your walk with Him.")}
 </p>
 
           <div className="mx-auto mt-[15px] max-w-[922px]">

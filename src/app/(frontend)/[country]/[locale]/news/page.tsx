@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import SiteName from "@/components/ui/SiteName";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "News | Youth Evangelical Fellowship",
@@ -21,6 +22,7 @@ export const revalidate = 60;
 export default async function NewsPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("news");
   const [posts, photoEvents] = await Promise.all([
     getNewsArticles(),
     getPhotoEvents(),
@@ -33,7 +35,7 @@ export default async function NewsPage({ params }: { params: LocaleParams }) {
             edge to edge with the copy scrimmed over its left side. */}
         <section className="relative flex min-h-[640px] flex-col overflow-hidden bg-v2-navy lg:h-[1173px]">
           <Image
-            src="/images/news/hero-lake-jump.jpg"
+            src={header.image || "/images/news/hero-lake-jump.jpg"}
             alt=""
             fill
             priority
@@ -53,7 +55,7 @@ export default async function NewsPage({ params }: { params: LocaleParams }) {
             <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[572px_653px] lg:justify-between lg:gap-0">
               <div>
                 <h1 className="font-display font-extrabold text-5xl whitespace-pre-line text-white leading-[1.1] tracking-[-1.5px] sm:text-6xl lg:text-[86px] lg:leading-[96px]">
-                  {t("Welcome\nNews\nfrom Afar")}
+                  {t(header.heading || "Welcome\nNews\nfrom Afar")}
                 </h1>
                 <p className="mt-6 whitespace-pre-line text-[17px] text-white/85 leading-[38px] lg:text-[20px]">
                   {t("“to a weary soul, so is good news from a distant land.”\n— Proverbs 25:25")}

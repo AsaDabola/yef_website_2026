@@ -9,6 +9,7 @@ import SiteName from "@/components/ui/SiteName";
 import { getT } from "@/lib/i18n/server";
 import type { Resource } from "@/payload-types";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Sign In | Youth Evangelical Fellowship",
@@ -51,12 +52,13 @@ const categories: {
 export default async function LoginPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("login");
   return (
     <>
       <main>
         <section className="relative flex min-h-[560px] items-center overflow-hidden bg-v2-navy lg:min-h-[50vw]">
           <Image
-            src="/images/get-involved/banner-resources.webp"
+            src={header.image || "/images/get-involved/banner-resources.webp"}
             alt=""
             fill
             priority
@@ -70,11 +72,11 @@ export default async function LoginPage({ params }: { params: LocaleParams }) {
 
           <div className="relative z-10 mx-auto w-full max-w-[1920px] px-6 pt-40 pb-16 sm:px-10 lg:px-[8.33%] lg:pt-[15%] lg:pb-[10%]">
             <h1 className="max-w-[720px] font-display font-extrabold text-6xl leading-[0.98] tracking-[-2.4px] text-white sm:text-7xl xl:text-[88px]">
-              {t("YEF Resources")}
+              {t(header.heading || "YEF Resources")}
             </h1>
             <p className="mt-8 max-w-[620px] font-medium text-lg text-white leading-[30px] xl:text-[19px]">
               {t(
-                "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers.",
+                header.intro || "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers.",
               )}
             </p>
             <p className="mt-10 max-w-[640px] font-semibold text-2xl text-[#9fc9ff] italic leading-[38px] xl:mt-[52px] xl:text-[29px] xl:leading-[42px]">

@@ -6,6 +6,7 @@ import ChapterAffiliationForm from "@/components/get-involved/ChapterAffiliation
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Chapter Affiliation | Youth Evangelical Fellowship",
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
 export default async function ChapterAffiliationPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("get-involved/chapter-affiliation");
   return (
     <>
       <main>
         <SubPageHero
-          image="/images/get-involved/banner-chapter-affiliation.webp"
+          image={header.image || "/images/get-involved/banner-chapter-affiliation.webp"}
           alt={t("Hands raised and joined together against green foliage")}
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
@@ -30,8 +32,8 @@ export default async function ChapterAffiliationPage({ params }: { params: Local
             <div className="flex-1">
               <Breadcrumb label={t("Chapter Affiliation")} />
               <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
-                
-{t("Chapter Affiliation")}
+
+{t(header.heading || "Chapter Affiliation")}
 </h1>
               <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px] uppercase">
                 

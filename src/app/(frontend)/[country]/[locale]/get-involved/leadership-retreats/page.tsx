@@ -7,6 +7,7 @@ import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "International Leadership Retreats | Youth Evangelical Fellowship",
@@ -15,12 +16,13 @@ export const metadata: Metadata = {
 export default async function LeadershipRetreatsPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("get-involved/leadership-retreats");
   return (
     <>
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-worship-crowd.png"
+            src={header.image || "/images/get-involved/banner-worship-crowd.png"}
             alt=""
             fill
             priority
@@ -37,12 +39,12 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
           <Breadcrumb label={t("Leadership Training")} />
 
           <h1 className="mt-[73px] font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
-            
-{t("International Leadership Retreats")}
+
+{t(header.heading || "International Leadership Retreats")}
 </h1>
           <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
-            
-{t("Strengthening Leaders. Building the Mission. Preparing the Next Generation.")}
+
+{t(header.intro || "Strengthening Leaders. Building the Mission. Preparing the Next Generation.")}
 </p>
 
           <div className="mt-[84px]">

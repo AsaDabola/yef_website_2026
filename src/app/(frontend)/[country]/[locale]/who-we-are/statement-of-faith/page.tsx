@@ -5,6 +5,7 @@ import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Statement of Faith | Youth Evangelical Fellowship",
@@ -23,11 +24,12 @@ const beliefs = [
 export default async function StatementOfFaithPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("who-we-are/statement-of-faith");
   return (
     <>
       <main>
         <SubPageHero
-          image="/images/who-we-are/banner-statement-of-faith.webp"
+          image={header.image || "/images/who-we-are/banner-statement-of-faith.webp"}
           alt={t("Sunrise over layered mountain ridges")}
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
@@ -39,8 +41,8 @@ export default async function StatementOfFaithPage({ params }: { params: LocaleP
             <div className="flex-1">
               <Breadcrumb label={t("Statement of Faith")} />
               <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
-                
-{t("Statement of Faith")}
+
+{t(header.heading || "Statement of Faith")}
 </h1>
               <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px]">
                 

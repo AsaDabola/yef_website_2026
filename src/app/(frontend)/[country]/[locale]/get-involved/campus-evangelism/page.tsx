@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import Link from "@/components/ui/LocaleLink";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Campus Evangelism | Youth Evangelical Fellowship",
@@ -34,12 +35,13 @@ function HeadingRule() {
 export default async function CampusEvangelismPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("get-involved/campus-evangelism");
   return (
     <>
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-campus-evangelism.webp"
+            src={header.image || "/images/get-involved/banner-campus-evangelism.webp"}
             alt=""
             fill
             priority
@@ -63,7 +65,7 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
 
               <h1 className="mt-[42px] font-display font-extrabold text-4xl text-black tracking-[-0.8px] sm:text-[46px] sm:leading-[60px]">
 
-{t("Campus Evangelism")}
+{t(header.heading || "Campus Evangelism")}
 </h1>
 
               {/* Reach Students. Share Christ. Make Disciples. */}

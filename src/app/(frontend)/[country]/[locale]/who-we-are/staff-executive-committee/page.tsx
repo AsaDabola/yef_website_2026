@@ -6,6 +6,7 @@ import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Staff/Executive Committee | Youth Evangelical Fellowship",
@@ -74,11 +75,12 @@ const people = [
 export default async function StaffExecutiveCommitteePage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("who-we-are/staff-executive-committee");
   return (
     <>
       <main>
         <SubPageHero
-          image="/images/who-we-are/banner-staff.webp"
+          image={header.image || "/images/who-we-are/banner-staff.webp"}
           alt={t("Sunlit mountain ridges receding into morning haze")}
         />
         {/* The frame insets the sub-menu 92px from the left and opens the
@@ -93,8 +95,8 @@ export default async function StaffExecutiveCommitteePage({ params }: { params: 
               <Breadcrumb label={t("Staff/Executive Committee")} />
 
               <h1 className="mt-6 font-display font-extrabold text-4xl text-black tracking-[-0.5px] sm:text-[40px]">
-                
-{t("Staff/Executive Committee")}
+
+{t(header.heading || "Staff/Executive Committee")}
 </h1>
 
               <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">

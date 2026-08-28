@@ -7,6 +7,7 @@ import Testimonials from "@/components/home-v2/Testimonials";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Volunteer with YEF | Youth Evangelical Fellowship",
@@ -19,12 +20,13 @@ export default async function VolunteerPage({
 }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("get-involved/volunteer");
   return (
     <>
       <main>
         <section className="relative h-[185px] overflow-hidden bg-v2-navy sm:h-[270px] lg:h-[378px]">
           <Image
-            src="/images/submit-story/banner-campfire.png"
+            src={header.image || "/images/submit-story/banner-campfire.png"}
             alt=""
             fill
             priority
@@ -41,11 +43,11 @@ export default async function VolunteerPage({
           <Breadcrumb label={t("Volunteer with YEF")} />
 
           <h1 className="mt-[66px] text-center font-display font-extrabold text-4xl text-black leading-[1.2] tracking-[-0.96px] lg:text-[46px] lg:leading-[60px]">
-            {t("Volunteer with YEF")}
+            {t(header.heading || "Volunteer with YEF")}
           </h1>
           <p className="mx-auto mt-[25px] max-w-[640px] text-center text-lg text-[#4b5565] leading-[1.7] lg:text-[19px]">
             {t(
-              "Use your gifts for the Gospel. Whether you can serve regularly or support a special project, there is a place for you to participate in YEF’s mission.",
+              header.intro || "Use your gifts for the Gospel. Whether you can serve regularly or support a special project, there is a place for you to participate in YEF’s mission.",
             )}
           </p>
 

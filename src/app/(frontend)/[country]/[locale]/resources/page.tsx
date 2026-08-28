@@ -15,6 +15,7 @@ import { currentViewer } from "@/lib/members";
 import { cmsConfigured } from "@/lib/posts";
 import type { Resource } from "@/payload-types";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Resources | Youth Evangelical Fellowship",
@@ -55,6 +56,7 @@ const categories: {
 export default async function ResourcesPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const header = await getPageHeader("resources");
 
   const viewer = await currentViewer();
   if (!viewer) redirect("/login");
@@ -82,7 +84,7 @@ export default async function ResourcesPage({ params }: { params: LocaleParams }
       <main>
         <section className="relative h-[220px] overflow-hidden bg-v2-navy sm:h-[320px] lg:h-[378px]">
           <Image
-            src="/images/get-involved/banner-resources.webp"
+            src={header.image || "/images/get-involved/banner-resources.webp"}
             alt=""
             fill
             priority
@@ -103,11 +105,11 @@ export default async function ResourcesPage({ params }: { params: LocaleParams }
               <Breadcrumb label={t("Resources")} />
 
               <h1 className="mt-6 font-display font-extrabold text-4xl text-black tracking-[-0.8px] sm:text-[46px] sm:leading-[60px]">
-                {t("YEF Resources")}
+                {t(header.heading || "YEF Resources")}
               </h1>
               <p className="mt-3 max-w-[640px] text-[16px] text-[#6b737d]">
                 {t(
-                  "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers.",
+                  header.intro || "Policy, training, forms, worship, and recorded messages in one place — YEF's spiritual library for students, leaders, staff, and ministers.",
                 )}
               </p>
 
