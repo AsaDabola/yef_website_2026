@@ -25,7 +25,7 @@ export const getInvolvedLinks = [
     href: "/get-involved/short-term-mission",
   },
   { label: "Internship", href: "/get-involved#internship" },
-  { label: "Discipleship", href: "/get-involved#discipleship" },
+  { label: "Discipleship", href: "/get-involved/discipleship" },
   { label: "Leadership Training", href: "/get-involved#leadership-training" },
   { label: "Volunteer", href: "/get-involved/volunteer" },
   { label: "Submit Your Story", href: "/submit-your-story" },

@@ -55,7 +55,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
               <MinistrySection
                 id="bible-studies"
                 title={t("Bible Studies")}
-                body={t("Embrace your identity in Christ and live out your calling. Offering individual and group studies, YEF is proud to offer deep and extensive Bible studies. Join us and go deeper in the Word during your college years, which will stay with you for many years to come. The Word of God has the power to change lives and so we aim to give you this great blessing that will surely change your whole life. Transform your lives with the power of His love.")}
+                body={t("Embrace your identity in Christ and live out your calling. YEF Bible Studies bring students together each week — one-on-one or in small groups — to open Scripture, ask honest questions, and learn to feed themselves on the Word, not just for a season, but for a lifetime. The Bible has the power to change lives, and we want every student on your campus to have a place to discover that for themselves.")}
                 image="/images/get-involved/bible-studies-sunset.png"
                 alt={t("The sun setting over a calm ocean")}
                 ctas={[
@@ -115,15 +115,14 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 id="discipleship"
                 title={t("Discipleship Training")}
                 cardTitle={t("Follow Jesus Daily")}
-                body={t("Discipleship is one of the key focuses of our ministry. Jesus also raised twelve disciples among the many crowds that followed. Those who are willing to follow the life of Jesus, by overcoming all the hindrances of the world were selected and preciously guided with Word of Jesus. YEF is dedicated to raising students on campus into disciples of Jesus with a more adaptable program for campus life. With small group and personal mentoring, the Bible can guide us to know the heart of God and His amazing salvation. Through our program, you can discover the meaning of salvation, the cross, the calling of God in our lives and much more. Yes, just as Jesus said, “Go, make disciples!”")}
-                resourceColumns={[
-                  [
-                    "Program Overview",
-                    "Start a Bible Study",
-                    "Study Materials by Phase",
-                    "Meet Your Teacher",
-                    "What Comes Next",
-                  ],
+                body={t("Discipleship is one of the key focuses of our ministry. Jesus himself poured His life into twelve ordinary men and sent them to make disciples of the nations. At YEF, discipleship means walking with a trained mentor and a small group of your peers, working through the Word phase by phase — so you grow from being cared for into someone who can care for others. You don't need to have it all figured out. You just need a willingness to follow. Just as Jesus said, “Go, make disciples!”")}
+                ctas={[
+                  {
+                    label: "Learn More",
+                    href: "/get-involved/discipleship",
+                    primary: true,
+                  },
+                  { label: "Start Discipleship", href: "/get-involved/apply" },
                 ]}
                 image="/images/get-involved/discipleship.webp"
                 alt={t("A student in discipleship training")}
@@ -133,22 +132,17 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 id="leadership-training"
                 title={t("Leadership Training")}
                 cardTitle={t("Raise Up Leaders")}
-                body={t("YEF offers leadership training regionally and nationwide to provide rich spiritual foods to the students in need. Leadership Training is open to the students who finished their discipleship program on their campus. During their training, they will be equipped as teachers and missionaries on campus by learning about mission and the practicum for instructing students.")}
+                body={t("YEF offers leadership training regionally and internationally to equip students with rich spiritual food for the road ahead. Leadership Training is open to students who have completed their discipleship program on their campus. During their training, they are formed as teachers and missionaries on campus — learning both the theology of mission and the practical craft of instructing and shepherding other students.")}
                 ctas={[
+                  {
+                    label: "Learn More",
+                    href: "/get-involved/leadership-retreats",
+                    primary: true,
+                  },
                   {
                     label: "Apply for Leadership Training",
                     href: "/get-involved/leadership-retreats/apply",
-                    primary: true,
                   },
-                ]}
-                resourceColumns={[
-                  [
-                    "Who This Is For",
-                    "Training Application",
-                    "Leader's Toolkit",
-                    "Starting a Chapter",
-                    "Ongoing Support",
-                  ],
                 ]}
                 image="/images/get-involved/leadership-training-conference.webp"
                 alt={t("YEF students clapping at a leadership training conference")}
@@ -158,17 +152,9 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 id="volunteering"
                 title={t("Volunteering")}
                 cardTitle={t("Give Your Time")}
-                body={t("As a volunteer with YEF, you will be helping build or start a spiritual movement in your local chapter. Contact your local YEF leader for further information.")}
+                body={t("As a volunteer with YEF, you put your everyday gifts — administration, hospitality, media, prayer, and more — to work building the ministry in your local chapter. Every role matters: a volunteer setting up chairs or editing a video is part of the same mission as a student sharing the Gospel on campus. Tell us about yourself, and we'll help you find where you're needed most.")}
                 ctas={[
                   { label: "Apply to Volunteer", href: "/get-involved/volunteer", primary: true },
-                ]}
-                resourceColumns={[
-                  [
-                    "Sign Up",
-                    "Time Commitment",
-                    "Recommendation Letter",
-                    "Volunteer Stories",
-                  ],
                 ]}
                 image="/images/get-involved/volunteering-donation-drive.png"
                 alt={t("Volunteers sorting clothing at a donation drive")}

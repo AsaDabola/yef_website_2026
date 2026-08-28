@@ -5,17 +5,17 @@ const steps = [
   {
     icon: "/images/icons/icon-christ.svg",
     title: "01. Step Out & Share",
-    body: "Step Beyond Your Comfort Zone and Experience the Joy of Sharing the Gospel with Fellow Students",
+    body: "Step beyond your comfort zone and experience the joy of sharing the Gospel with fellow students, right where they already are.",
   },
   {
     icon: "/images/icons/icon-church.svg",
     title: "02. Engage & Grow",
-    body: "Step Beyond Your Comfort Zone and Experience the Joy of Sharing the Gospel with Fellow Students",
+    body: "Follow up with the students you meet through Bible study and discipleship, so a single conversation grows into a lasting walk with Christ.",
   },
   {
     icon: "/images/icons/icon-child.svg",
     title: "03. Equip & Go",
-    body: "Receive Biblical and Practical Training and Take Your Next Step into Campus Evangelism",
+    body: "Receive Biblical and practical training and take your next step into campus evangelism.",
   },
 ];
 
