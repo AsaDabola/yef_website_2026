@@ -7,16 +7,16 @@ type ProofItem = { number?: string; name: string; body: string };
 
 const defaultItems: ProofItem[] = [
   {
-    name: "The Best of\nTimes",
-    body: "The days of youth are when we can meet God first, and meet Him deepest.",
+    name: "Know Christ",
+    body: "The university years are a formative season when convictions, values, and direction for life are taking shape. YEF calls students to seek Christ and build their lives firmly upon Him.",
   },
   {
-    name: "A Calling That\nComes Now",
-    body: "God does not wait for the perfect moment. He is calling, right now, in the midst of this youth.",
+    name: "Grow in the\nWord",
+    body: "Through Scripture, prayer, fellowship, and discipleship, students deepen their faith, develop a biblical worldview, and learn to follow Christ in every area of life.",
   },
   {
-    name: "Grace for\nThose Who Seek",
-    body: "For those who sought Him in their youth, revival has always come in abundance.",
+    name: "Live on Mission",
+    body: "Faith is meant to be lived and shared. Students are encouraged to serve others, make disciples, and carry the Gospel to their friends, campuses, communities, and beyond.",
   },
 ];
 
@@ -72,7 +72,7 @@ export default async function WhyTheYoung({
                     {item.number}
                   </p>
                 )}
-                <p className="whitespace-pre-line font-display font-bold text-[21px] text-v2-navy leading-[1.24]">
+                <p className="whitespace-pre-line font-display font-bold text-[21px] text-v2-navy uppercase leading-[1.24]">
                   {t(item.name)}
                 </p>
                 <p className="mt-4 text-[14px] text-v2-muted-dark leading-[1.65]">
