@@ -96,7 +96,7 @@ export function forThisCountry(where?: Where): Where {
   return where ? { and: [visible, where] } : visible;
 }
 
-async function findPosts(where?: Where, limit = 100) {
+async function findPosts(where?: Where, limit = 1000) {
   const [{ getPayload }, { default: config }] = await Promise.all([
     import("payload"),
     import("@payload-config"),
