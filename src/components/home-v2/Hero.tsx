@@ -12,6 +12,7 @@ export type HeroSlide = {
   alt: string;
   heading: string;
   body: string;
+  button?: { label: string; href: string };
 };
 
 const defaultSlides: HeroSlide[] = [
@@ -24,14 +25,15 @@ const defaultSlides: HeroSlide[] = [
   {
     image: "/images/home-v2/hero-headquarters.webp",
     alt: "Youth Evangelical Fellowship headquarters building",
-    heading: "Join Us\nToday",
-    body: "Be part of YEF, Become True Disciples of Christ.",
+    heading: "For Christ.\nFor the Campus.\nFor the Nations.",
+    body: "We exist to help students know Christ, live for Him on campus, and carry the Gospel to the nations.",
   },
   {
     image: "/images/home-v2/slide-2-students.webp",
     alt: "Students smiling together on a mission trip",
-    heading: "Grow Together\nin Christ.",
-    body: "Join YEF Campus Chapter, Fellowship in Christ",
+    heading: "Reaching Students.\nRaising Disciples.",
+    body: "A global evangelical campus fellowship sharing the Gospel, teaching the Bible, and raising disciples of Jesus Christ.",
+    button: { label: "FIND YOUR CAMPUS", href: "#find-your-campus" },
   },
 ];
 
@@ -99,10 +101,10 @@ export default function Hero({ slides: fromCms }: { slides?: HeroSlide[] }) {
                 {t(slide.body)}
               </p>
               <Link
-                href="/who-we-are"
+                href={slide.button?.href ?? "/who-we-are"}
                 className="mt-10 inline-flex h-[47px] items-center justify-center rounded-full border border-white/55 px-[34px] py-4 font-semibold text-xs tracking-[1.92px] text-white transition-colors hover:bg-white hover:text-v2-navy"
               >
-                {t("LEARN MORE")}
+                {t(slide.button?.label ?? "LEARN MORE")}
               </Link>
             </div>
           ))}
