@@ -55,8 +55,8 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
             <GalleryMosaic
               images={[
                 {
-                  src: "/images/get-involved/retreat-team-jump.png",
-                  alt: "YEF leaders leaping on the lawn outside the retreat house",
+                  src: "/images/get-involved/leadership-retreat-classroom.webp",
+                  alt: "A leader teaching a session to a room of students at a retreat",
                 },
                 {
                   src: "/images/get-involved/gallery-street-outreach.png",
