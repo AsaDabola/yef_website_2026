@@ -89,23 +89,23 @@ export default async function Footer() {
     <footer className="bg-black">
       <div className="bg-yef-navy">
         <div className="mx-auto max-w-[1800px] px-6 pb-16 pt-16 lg:px-16 lg:pt-20">
-          <Link href="/" className="relative block h-8 w-[88px] sm:h-[60px] sm:w-42">
-            <Image
-              src="/images/icons/logo-yef.svg"
-              alt={t("Youth Evangelical Fellowship")}
-              fill
-              sizes="168px"
-              className="object-contain object-left"
-            />
-          </Link>
-
-          <div className="mt-6 text-base text-yef-gray">
-            <p>{t("519 S Park Ave. Sanford, FL 32771 USA")}</p>
-          </div>
-
-          <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.7fr_1fr_1fr_1fr_1fr]">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.7fr_1fr_1fr_1fr_1fr]">
             <div>
-              <p className="font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
+              <Link href="/" className="relative block h-8 w-[88px] sm:h-[60px] sm:w-42">
+                <Image
+                  src="/images/icons/logo-yef.svg"
+                  alt={t("Youth Evangelical Fellowship")}
+                  fill
+                  sizes="168px"
+                  className="object-contain object-left"
+                />
+              </Link>
+
+              <p className="mt-6 text-base text-yef-gray">
+                {t("519 S Park Ave. Sanford, FL 32771 USA")}
+              </p>
+
+              <p className="mt-10 font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
                 {t("Subscribe for news, updates, and events")}
               </p>
               <form className="mt-6 flex max-w-xs flex-col items-start gap-3">
