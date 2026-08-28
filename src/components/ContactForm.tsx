@@ -5,6 +5,7 @@ import {
   LabeledTextAreaField,
   LabeledTextField,
 } from "@/components/forms/LabeledField";
+import { PrivacyNote } from "@/components/forms/PrivacyNote";
 import { useT } from "@/lib/i18n/client";
 
 export default function ContactForm() {
@@ -93,6 +94,12 @@ export default function ContactForm() {
           />
         </div>
       </div>
+
+      <PrivacyNote>
+        {t(
+          "YEF collects the information in this form only to respond to your message. We do not sell, rent, or share your personal information with third parties, and it will not be used for any purpose beyond what is described here without your consent. By submitting this form, you agree to YEF’s Privacy Policy and Terms of Use.",
+        )}
+      </PrivacyNote>
 
       <button
         type="submit"

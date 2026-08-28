@@ -9,6 +9,7 @@ import {
   TextAreaField,
   TextField,
 } from "@/components/forms/FormField";
+import { PrivacyNote } from "@/components/forms/PrivacyNote";
 import { useT } from "@/lib/i18n/client";
 
 /** The numbered rule the frame puts above each section. */
@@ -178,18 +179,25 @@ export default function VolunteerForm() {
         />
       </div>
 
-      <div className="border-t border-black/10 pt-8">
-        <button
-          type="submit"
-          className="rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
-        >
-          {t("Submit Application")}
-        </button>
-        <p className="mt-6 text-[14px] text-[#6b737d]">
+      <div className="space-y-5 border-t border-black/10 pt-8">
+        <PrivacyNote>
           {t(
-            "Thank you for your willingness to serve. A member of the YEF team will follow up with you shortly.",
+            "YEF collects the information in this form only to process your volunteer application and coordinate your service opportunities. We do not sell, rent, or share your personal information with third parties, and it will not be used for any purpose beyond what is described here without your consent. By submitting this form, you agree to YEF’s Privacy Policy and Terms of Use.",
           )}
-        </p>
+        </PrivacyNote>
+        <div>
+          <button
+            type="submit"
+            className="rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+          >
+            {t("Submit Application")}
+          </button>
+          <p className="mt-6 text-[14px] text-[#6b737d]">
+            {t(
+              "Thank you for your willingness to serve. A member of the YEF team will follow up with you shortly.",
+            )}
+          </p>
+        </div>
       </div>
     </form>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import SubmissionSuccess from "@/components/forms/SubmissionSuccess";
 import { FileField } from "@/components/forms/FormField";
 import { LabeledTextField } from "@/components/forms/LabeledField";
+import { PrivacyNote } from "@/components/forms/PrivacyNote";
 import { useT } from "@/lib/i18n/client";
 
 export default function TestimonySubmission() {
@@ -109,6 +110,12 @@ export default function TestimonySubmission() {
           </span>
         </label>
       </div>
+
+      <PrivacyNote>
+        {t(
+          "YEF collects the information in this form only to review your story and, with your permission above, publish it. We do not sell, rent, or share your personal information with third parties, and it will not be used for any purpose beyond what is described here without your consent. By submitting this form, you agree to YEF’s Privacy Policy and Terms of Use.",
+        )}
+      </PrivacyNote>
 
       <button
         type="submit"

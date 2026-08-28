@@ -8,6 +8,7 @@ import {
   LabeledTextAreaField,
   LabeledTextField,
 } from "@/components/forms/LabeledField";
+import { PrivacyNote } from "@/components/forms/PrivacyNote";
 import { useT } from "@/lib/i18n/client";
 
 const interests = [
@@ -171,6 +172,12 @@ export default function ConnectForm({
           />
         </div>
       </div>
+
+      <PrivacyNote>
+        {t(
+          "YEF collects the information in this form only to respond to your inquiry and connect you with the right ministry opportunity. We do not sell, rent, or share your personal information with third parties, and it will not be used for any purpose beyond what is described here without your consent. By submitting this form, you agree to YEF’s Privacy Policy and Terms of Use.",
+        )}
+      </PrivacyNote>
 
       <button
         type="submit"
