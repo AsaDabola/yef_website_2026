@@ -131,6 +131,9 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 title={t("Volunteering")}
                 cardTitle={t("Give Your Time")}
                 body={t("As a volunteer with YEF, you will be helping build or start a spiritual movement in your local chapter. Contact your local YEF leader for further information.")}
+                ctas={[
+                  { label: "Apply to Volunteer", href: "/get-involved/volunteer", primary: true },
+                ]}
                 resourceColumns={[
                   [
                     "Sign Up",
