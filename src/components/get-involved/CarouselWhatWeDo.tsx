@@ -85,13 +85,10 @@ export default function CarouselWhatWeDo() {
   };
 
   return (
-    <section
-      id="bible-study-programs"
-      className="scroll-mt-32 border-t border-black/10 py-16"
-    >
+    <section id="bible-study-programs" className="scroll-mt-32 pt-4 pb-16">
       <Reveal>
         <h2 className="font-display font-extrabold text-3xl text-v2-navy tracking-[-0.5px] sm:text-4xl">
-          {t("Bible Study Programs")}
+          {t("Programs")}
         </h2>
       </Reveal>
 
