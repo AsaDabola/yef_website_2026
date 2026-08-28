@@ -7,6 +7,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { Media } from "@/payload/collections/Media";
 import { Pages } from "@/payload/collections/Pages";
+import { PhotoEvents } from "@/payload/collections/PhotoEvents";
 import { Posts } from "@/payload/collections/Posts";
 import { Users } from "@/payload/collections/Users";
 
@@ -35,7 +36,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Pages, Posts, Media, Users],
+  collections: [Pages, Posts, PhotoEvents, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
