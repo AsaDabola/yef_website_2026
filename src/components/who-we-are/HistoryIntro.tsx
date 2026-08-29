@@ -16,7 +16,7 @@ export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) 
         <div className="shrink-0 lg:w-[237px]">
           <WhoWeAreSubMenu />
         </div>
-        
+
         <div className="flex-1">
           <Breadcrumb label={t("History")} />
           <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
@@ -37,15 +37,6 @@ export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) 
               />
             </div>
           </div>
-        
-        <div className="flex-1">
-          <Breadcrumb label={t("History")} />
-          <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
-            {t(heading || "History")}
-          </h1>
-          <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px]">
-            {t("Our Story So Far")}
-          </p>
 
           <h2 className="mt-16 max-w-3xl font-semibold text-3xl text-black sm:text-4xl">
             {t("From a Small Campus Mission to a Global Youth Fellowship")}
