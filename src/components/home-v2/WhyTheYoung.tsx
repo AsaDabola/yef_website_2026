@@ -23,7 +23,7 @@ const defaults = {
   eyebrow: "The Call",
   // ** ** marks the phrase that is set in the italic serif accent.
   heading:
-    "In the days of your youth, before the days of trouble come, **remember your Creator**.",
+    "In the days of your youth, **remember your Creator**.",
 };
 
 export type ProofContent = Partial<typeof defaults> & {
