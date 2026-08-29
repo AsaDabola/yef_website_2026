@@ -1,5 +1,9 @@
 import { INTERNATIONAL } from "./constants";
-import { singleLocaleFor } from "./countries";
+import { countryCodes, singleLocaleFor } from "./countries";
+import { localeCodes } from "./locales";
+
+const countrySet = new Set([INTERNATIONAL, ...countryCodes]);
+const localeSet = new Set(localeCodes);
 
 /**
  * Prefixes a site-relative path with the current country and language, so
@@ -29,8 +33,20 @@ export function localePath(
 export function stripLocalePath(pathname: string): string {
   const parts = pathname.split("/").filter(Boolean);
   if (parts.length === 0) return "/";
-  const skip = singleLocaleFor(parts[0]) ? 1 : 2;
-  return "/" + parts.slice(skip).join("/");
+
+  let i = 0;
+  if (countrySet.has(parts[i])) {
+    i++;
+    if (i < parts.length && localeSet.has(parts[i])) {
+      i++;
+    }
+  } else if (localeSet.has(parts[i])) {
+    i++;
+  }
+
+  const rest = parts.slice(i).join("/");
+  return rest ? `/${rest}` : "/";
 }
 
 export { INTERNATIONAL };
+
