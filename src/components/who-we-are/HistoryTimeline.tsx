@@ -76,7 +76,7 @@ const timeline: Entry[] = [
     title: "A New Chapter in International Campus Mission",
     body: [
       "YEF was inaugurated in New York City with students from Columbia University who began gathering for small-group Bible studies and witnessing Jesus Christ to fellow students.",
-      "During the same year, the Korea Evangelical College Students Association became affiliated with YEF International as its Korean branch. Jongwon Lee was appointed as the representative of YEF Korea.",
+      "During the same year, the Korea Evangelical College Students Association became affiliated with YEF International as its Korean branch.",
       "YEF participated as a partner organization in the NEXT WAVE CONVENTION and attended the third Asia Emerging Leaders Summit.",
     ],
   },
@@ -95,7 +95,7 @@ const timeline: Entry[] = [
     side: "left",
     title: "Strengthening Mission Partnerships",
     body: [
-      "Kyungil Ahn was appointed as the representative of YEF Korea.",
+      
       "YEF Korea became an official member organization of the Korea World Missions Association (KWMA).",
       "Throughout the year, YEF held the Easter Gathering, Pentecost Gathering, Summer Gathering, and Winter Christmas Gathering.",
     ],
@@ -124,10 +124,6 @@ const timeline: Entry[] = [
     year: "2014",
     side: "right",
     title: "Developing Discipleship and Bible Education",
-    image: {
-      src: "/images/history/yef-5th-anniversary-nyc.jpg",
-      alt: "YEF's 5th anniversary celebration in New York City",
-    },
     body: [
       "YEF held the Easter Gathering 2014 and Pentecost Gathering 2014.",
       "The ministry developed and published structured Bible education and member-training programs, including MTC, DTC, and LTC courses designed to support progressive stages of discipleship and ministry development.",
@@ -138,14 +134,10 @@ const timeline: Entry[] = [
     year: "2015",
     side: "left",
     title: "Global Expansion and Leadership Development",
-    image: {
-      src: "/images/history/uganda-yef.jpg",
-      alt: "YEF ministry in Uganda",
-    },
     body: [
       "By 2015, YEF's international mission had expanded to campuses across North America, South America, Europe, Africa, Asia Pacific, Southeast Asia, and South Asia.",
       "This period also marked the beginning of YEF's first Leadership Conference series in Korea, bringing leaders together for biblical training, fellowship, mission planning, and preparation for continued international expansion.",
-      "YEF held the Easter Gathering, Pentecost Gathering, and Christmas Retreat and participated in the 25th General Assembly of KWMA. Chris Park",
+      "YEF held the Easter Gathering, Pentecost Gathering, and Christmas Retreat and participated in the 25th General Assembly of KWMA.",
     ],
   },
   {
@@ -192,10 +184,6 @@ const timeline: Entry[] = [
     year: "2020",
     side: "right",
     title: "YEF Headquarters Established in Orlando",
-    image: {
-      src: "/images/history/yef-hq-orlando-signboard.jpg",
-      alt: "New signboard at YEF Headquarters in Orlando",
-    },
     body: [
       "A significant milestone in YEF's international development came in 2020 with the acquisition of YEF Headquarters in Orlando, Florida. The headquarters provided a permanent base for international mission coordination, leadership development, training, worship, fellowship, and missionary preparation.",
       "During the same year, YEF Korea established a mission center serving Kyungpook National University in Daegu and another center in Busan serving Pukyong National University and Kyungsung University.",
@@ -209,7 +197,7 @@ const timeline: Entry[] = [
     body: [
       "YEF established centers serving KAIST in Daejeon and Kyungpook National University.",
       "A YEF Mission Center was also established in Macau, strengthening the ministry's presence in Asia.",
-      "YEF hosted the Online Easter Retreat 2021, Online Summer Retreat 2021, and Christmas Retreat 2021. The ministry participated as a member organization in the 31st General Assembly of the Korea World Missions Association. Chanyu Kim was appointed as the representative of YEF Korea.",
+      "YEF hosted the Online Easter Retreat 2021, Online Summer Retreat 2021, and Christmas Retreat 2021. The ministry participated as a member organization in the 31st General Assembly of the Korea World Missions Association.",
     ],
   },
   {
@@ -219,7 +207,7 @@ const timeline: Entry[] = [
     body: [
       "YEF held its 2022 Summer Retreat.",
       "Rev. Myunghyuk Kim, senior pastor emeritus of Riverside Church, was appointed as an advising professor for YEF Korea.",
-      "Minwook Hwang was appointed as the representative of YEF Korea.",
+      
     ],
   },
   {
@@ -229,7 +217,7 @@ const timeline: Entry[] = [
     body: [
       "YEF held its 2023 Summer Retreat.",
       "Representatives participated in the 33rd General Assembly of the Korea World Missions Association.",
-      "Rev. Haejoo Kang was appointed as the representative of YEF Korea.",
+      
     ],
   },
   {
