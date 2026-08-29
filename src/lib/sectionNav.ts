@@ -16,17 +16,47 @@ export const whoWeAreLinks = [
   },
 ];
 
-export const getInvolvedLinks = [
-  { label: "Bible Studies", href: "/get-involved/bible-studies" },
-  { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
-  { label: "Summer Training", href: "/get-involved/summer-training" },
+/**
+ * The Get Involved sidebar and mobile submenu now follow the JOIN → GROW →
+ * REACH → TRAIN → SERVE journey rather than listing every program page.
+ * `href` scrolls to that stage's section on /get-involved; `activePaths`
+ * lets the sidebar still highlight a stage while a visitor is reading one of
+ * its program's own detail pages.
+ */
+export const getInvolvedLinks: {
+  label: string;
+  href: string;
+  activePaths?: string[];
+}[] = [
   {
-    label: "Short-term Mission",
-    href: "/get-involved/short-term-mission",
+    label: "Join YEF",
+    href: "/get-involved#join-yef",
+    activePaths: ["/who-we-are/membership"],
   },
-  { label: "Internship", href: "/get-involved#internship" },
-  { label: "Discipleship", href: "/get-involved/discipleship" },
-  { label: "Leadership Training", href: "/get-involved/leadership-retreats" },
-  { label: "Volunteer", href: "/get-involved/volunteering" },
-  { label: "Submit Your Story", href: "/submit-your-story" },
+  {
+    label: "Grow",
+    href: "/get-involved#grow",
+    activePaths: ["/get-involved/bible-studies", "/get-involved/discipleship"],
+  },
+  {
+    label: "Reach",
+    href: "/get-involved#reach",
+    activePaths: [
+      "/get-involved/campus-evangelism",
+      "/get-involved/short-term-mission",
+    ],
+  },
+  {
+    label: "Train",
+    href: "/get-involved#train",
+    activePaths: [
+      "/get-involved/summer-training",
+      "/get-involved/leadership-retreats",
+    ],
+  },
+  {
+    label: "Serve",
+    href: "/get-involved#serve",
+    activePaths: ["/get-involved/volunteering"],
+  },
 ];

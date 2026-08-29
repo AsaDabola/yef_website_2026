@@ -12,8 +12,8 @@ import { getInvolvedLinks, whoWeAreLinks } from "@/lib/sectionNav";
 const navLinks = [
   { label: "Who we are", href: "/who-we-are", subLinks: whoWeAreLinks },
   { label: "Get Involved", href: "/get-involved", subLinks: getInvolvedLinks },
-  { label: "News", href: "/news" },
-  { label: "Network", href: "/network" },
+  { label: "Chapters", href: "/network" },
+  { label: "Stories", href: "/submit-your-story" },
   { label: "Resources", href: "/resources" },
 ];
 
