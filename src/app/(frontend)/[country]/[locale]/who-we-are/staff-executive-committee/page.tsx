@@ -87,7 +87,7 @@ export default async function StaffExecutiveCommitteePage({ params }: { params: 
             people grid at 451px. */}
         <section className="mx-auto max-w-[1920px] px-6 pt-[111px] pb-16 lg:px-[92px]">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-[122px]">
-            <div className="shrink-0 lg:w-[237px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
               <WhoWeAreSubMenu />
             </div>
 

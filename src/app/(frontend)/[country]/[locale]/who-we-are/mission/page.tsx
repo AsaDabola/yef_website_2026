@@ -32,7 +32,7 @@ export default async function OurMissionPage({ params }: { params: LocaleParams 
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
-            <div className="shrink-0 lg:w-[237px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
               <WhoWeAreSubMenu />
             </div>
 
