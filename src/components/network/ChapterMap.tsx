@@ -68,6 +68,22 @@ function ChapterMapContent() {
         setCountry(match.country);
       }
     }
+
+    if (
+      countryParam ||
+      chapterParam ||
+      cityParam ||
+      (typeof window !== "undefined" &&
+        window.location.hash.includes("chapters-map"))
+    ) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById("chapters-map");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 120);
+      return () => clearTimeout(timer);
+    }
   }, [countryParam, cityParam, chapterParam, countries]);
 
   const cities = useMemo(() => {
