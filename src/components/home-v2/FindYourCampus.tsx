@@ -7,9 +7,9 @@ import { useT } from "@/lib/i18n/client";
 const chips = [
   { label: "United States", href: "/us" },
   { label: "Korea", href: "/kr" },
-  { label: "Hong Kong", href: "/network" },
+  { label: "Hong Kong", href: "/tw" },
   { label: "Burundi", href: "/ke" },
-  { label: "Tonga", href: "/fj" },
+  { label: "Tonga", href: "/int/en" },
   { label: "Ethiopia", href: "/et" },
 ];
 
