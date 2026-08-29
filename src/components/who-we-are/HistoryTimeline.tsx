@@ -76,7 +76,7 @@ const timeline: Entry[] = [
     title: "A New Chapter in International Campus Mission",
     body: [
       "YEF was inaugurated in New York City with students from Columbia University who began gathering for small-group Bible studies and witnessing Jesus Christ to fellow students.",
-      "During the same year, the Korea Evangelical College Students Association became affiliated with YEF International as its Korean branch. Jongwon Lee was appointed as the representative of YEF Korea.",
+      "During the same year, the Korea Evangelical College Students Association became affiliated with YEF International as its Korean branch.",
       "YEF participated as a partner organization in the NEXT WAVE CONVENTION and attended the third Asia Emerging Leaders Summit.",
     ],
   },
@@ -95,7 +95,6 @@ const timeline: Entry[] = [
     side: "left",
     title: "Strengthening Mission Partnerships",
     body: [
-      "Kyungil Ahn was appointed as the representative of YEF Korea.",
       "YEF Korea became an official member organization of the Korea World Missions Association (KWMA).",
       "Throughout the year, YEF held the Easter Gathering, Pentecost Gathering, Summer Gathering, and Winter Christmas Gathering.",
     ],
@@ -209,7 +208,7 @@ const timeline: Entry[] = [
     body: [
       "YEF established centers serving KAIST in Daejeon and Kyungpook National University.",
       "A YEF Mission Center was also established in Macau, strengthening the ministry's presence in Asia.",
-      "YEF hosted the Online Easter Retreat 2021, Online Summer Retreat 2021, and Christmas Retreat 2021. The ministry participated as a member organization in the 31st General Assembly of the Korea World Missions Association. Chanyu Kim was appointed as the representative of YEF Korea.",
+      "YEF hosted the Online Easter Retreat 2021, Online Summer Retreat 2021, and Christmas Retreat 2021. The ministry participated as a member organization in the 31st General Assembly of the Korea World Missions Association.",
     ],
   },
   {
@@ -219,7 +218,6 @@ const timeline: Entry[] = [
     body: [
       "YEF held its 2022 Summer Retreat.",
       "Rev. Myunghyuk Kim, senior pastor emeritus of Riverside Church, was appointed as an advising professor for YEF Korea.",
-      "Minwook Hwang was appointed as the representative of YEF Korea.",
     ],
   },
   {
@@ -229,7 +227,6 @@ const timeline: Entry[] = [
     body: [
       "YEF held its 2023 Summer Retreat.",
       "Representatives participated in the 33rd General Assembly of the Korea World Missions Association.",
-      "Rev. Haejoo Kang was appointed as the representative of YEF Korea.",
     ],
   },
   {
