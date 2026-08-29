@@ -256,12 +256,12 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                   ctas={[
                     {
                       label: "Learn More",
-                      href: "/get-involved/leadership-retreats",
+                      href: "/get-involved/leadership-training",
                       primary: true,
                     },
                     {
                       label: "Apply for Leadership Training",
-                      href: "/get-involved/leadership-retreats/apply",
+                      href: "/get-involved/leadership-training/apply",
                     },
                   ]}
                   image="/images/get-involved/leadership-training-conference.webp"
