@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { defaultLocaleFor, getCountry } from "@/lib/i18n/countries";
+import { localePath } from "@/lib/i18n/paths";
 import { cmsConfigured } from "@/lib/posts";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 
@@ -37,6 +38,6 @@ export async function GET(request: Request): Promise<Response> {
   const locale =
     country === INTERNATIONAL ? "en" : defaultLocaleFor(country);
   const known = country === INTERNATIONAL || Boolean(getCountry(country));
-  const path = route === "home" ? "" : `/${route}`;
-  redirect(`/${known ? country : INTERNATIONAL}/${locale}${path}`);
+  const path = route === "home" ? "/" : `/${route}`;
+  redirect(localePath(path, known ? country : INTERNATIONAL, locale));
 }

@@ -1,22 +1,20 @@
 import Reveal from "@/components/ui/Reveal";
-import { countriesByRegion, countries } from "@/lib/i18n/countries";
+import { countriesByRegion, countries, defaultLocaleFor } from "@/lib/i18n/countries";
 import { countryName, flag } from "@/lib/i18n/display";
-import { defaultLocaleFor } from "@/lib/i18n/countries";
-import { getRequestLocale, INTERNATIONAL } from "@/lib/i18n/request";
+import { localePath } from "@/lib/i18n/paths";
+import { getRequestLocale } from "@/lib/i18n/request";
 import { getT } from "@/lib/i18n/server";
 
 /**
  * Every country site, grouped by region. Unlike the header picker this is a
  * flat directory the reader can scan and link into, so it lists the whole
- * platform rather than a scrolling menu.
+ * platform rather than a scrolling menu. Shown on every site, not just
+ * headquarters — a visitor on any country's own site can still find the rest
+ * of the network from here.
  */
 export default async function CountryDirectory() {
   const t = await getT();
-  const { country, locale } = getRequestLocale();
-
-  // The directory is the headquarters site's hub. A country site presents
-  // itself as its own entity, so it does not list the others.
-  if (country !== INTERNATIONAL) return null;
+  const { locale } = getRequestLocale();
 
   const groups = countriesByRegion();
 
@@ -52,7 +50,7 @@ export default async function CountryDirectory() {
                   {list.map((c) => (
                     <li key={c.code}>
                       <a
-                        href={`/${c.code}/${defaultLocaleFor(c.code)}`}
+                        href={localePath("/", c.code, defaultLocaleFor(c.code))}
                         target="_blank"
                         rel="noopener"
                         className="-mx-3 flex items-center gap-3 rounded-lg px-3 py-2 text-[15px] text-v2-muted-dark transition-colors hover:bg-v2-bg hover:text-yef-primary"
