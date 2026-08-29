@@ -25,6 +25,14 @@ import VisionMission, {
 } from "@/components/who-we-are/VisionMission";
 import StoriesNews from "@/components/who-we-are/StoriesNews";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
+import GenericText from "@/components/generic/GenericText";
+import GenericCards from "@/components/generic/GenericCards";
+import GenericImageText from "@/components/generic/GenericImageText";
+import GenericGallery from "@/components/generic/GenericGallery";
+import GenericStats from "@/components/generic/GenericStats";
+import GenericTimeline from "@/components/generic/GenericTimeline";
+import GenericCta from "@/components/generic/GenericCta";
+import GenericQuote from "@/components/generic/GenericQuote";
 
 /** A media upload as Payload returns it once populated. */
 type Upload = { url?: string | null; alt?: string | null } | number | null;
@@ -173,6 +181,123 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
             return <StoriesNews key={key} />;
           case "missionSchoolCta":
             return <MissionSchoolCta key={key} />;
+          case "genericText": {
+            const rows = (block.paragraphs ?? []) as { body: string }[];
+            if (!rows.length) return null;
+            return (
+              <GenericText
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                paragraphs={rows.map((row) => row.body)}
+              />
+            );
+          }
+          case "genericCards": {
+            const cards = (block.cards ?? []) as {
+              title: string;
+              body: string;
+              quote?: string;
+            }[];
+            if (!cards.length) return null;
+            return (
+              <GenericCards
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                cards={cards}
+              />
+            );
+          }
+          case "genericImageText": {
+            const image = imageOf(block.image as Upload);
+            if (!image || !block.heading || !block.body) return null;
+            const buttonLabel = block.buttonLabel as string | undefined;
+            const buttonHref = block.buttonHref as string | undefined;
+            return (
+              <GenericImageText
+                key={key}
+                image={image}
+                imageAlt={(block.imageAlt as string) || altOf(block.image as Upload)}
+                imageSide={block.imageSide as "left" | "right" | undefined}
+                heading={block.heading as string}
+                body={block.body as string}
+                button={
+                  buttonLabel && buttonHref
+                    ? { label: buttonLabel, href: buttonHref }
+                    : undefined
+                }
+              />
+            );
+          }
+          case "genericGallery": {
+            const rows = (block.images ?? []) as {
+              image: Upload;
+              alt?: string;
+            }[];
+            const images = rows
+              .map((row) => ({ src: imageOf(row.image) ?? "", alt: row.alt ?? altOf(row.image) ?? "" }))
+              .filter((image) => image.src);
+            if (images.length !== 3) return null;
+            return (
+              <GenericGallery
+                key={key}
+                images={images as [typeof images[0], typeof images[0], typeof images[0]]}
+              />
+            );
+          }
+          case "genericStats": {
+            const stats = (block.stats ?? []) as { value: string; label: string }[];
+            if (!stats.length) return null;
+            return (
+              <GenericStats
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                stats={stats}
+              />
+            );
+          }
+          case "genericTimeline": {
+            const items = (block.items ?? []) as {
+              year: string;
+              title: string;
+              body: string;
+            }[];
+            if (!items.length) return null;
+            return (
+              <GenericTimeline
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                items={items}
+              />
+            );
+          }
+          case "genericCta": {
+            if (!block.heading || !block.buttonLabel || !block.buttonHref) return null;
+            return (
+              <GenericCta
+                key={key}
+                heading={block.heading as string}
+                body={block.body as string | undefined}
+                button={{
+                  label: block.buttonLabel as string,
+                  href: block.buttonHref as string,
+                }}
+              />
+            );
+          }
+          case "genericQuote": {
+            if (!block.quote) return null;
+            return (
+              <GenericQuote
+                key={key}
+                quote={block.quote as string}
+                reference={block.reference as string | undefined}
+              />
+            );
+          }
           default:
             return null;
         }

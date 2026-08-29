@@ -48,7 +48,7 @@ export async function getLayout(
   route = "home",
   draft = false,
 ): Promise<PageBlock[]> {
-  const fallback = defaultLayouts[route] ?? defaultHomeLayout;
+  const fallback = defaultLayouts[route] ?? [];
   if (!cmsConfigured) return fallback;
   try {
     const [{ getPayload }, { default: config }] = await Promise.all([

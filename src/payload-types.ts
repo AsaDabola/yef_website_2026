@@ -261,7 +261,7 @@ export interface Page {
     | 'vn'
     | 'zm';
   /**
-   * This page is listed so every real page of the site shows up here. Its sections aren't wired to the CMS one by one yet — only Home and Who We Are have that — but its banner photo, heading, and intro line below are.
+   * This page is listed so every real page of the site shows up here. Its banner photo, heading, and intro line below are always editable; the sections underneath are edited as blocks in Layout below.
    */
   builtIn?: boolean | null;
   /**
@@ -273,7 +273,7 @@ export interface Page {
     intro?: string | null;
   };
   /**
-   * Sections render top to bottom in this order. Removing one falls back to nothing — leave it in place to keep it.
+   * Sections render top to bottom in this order, below the banner. Removing one falls back to nothing — leave it in place to keep it. Pick a block under “Generic sections” to add a new section to a built-in page.
    */
   layout?:
     | (
@@ -465,6 +465,115 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'missionSchoolCta';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            /**
+             * Shown one after another, in this order.
+             */
+            paragraphs?:
+              | {
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericText';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            cards?:
+              | {
+                  title: string;
+                  body: string;
+                  /**
+                   * Optional — an italic pull-quote under the card body.
+                   */
+                  quote?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericCards';
+          }
+        | {
+            image: number | Media;
+            imageAlt?: string | null;
+            imageSide?: ('left' | 'right') | null;
+            heading: string;
+            body: string;
+            /**
+             * Optional — leave both empty for no button.
+             */
+            buttonLabel?: string | null;
+            buttonHref?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericImageText';
+          }
+        | {
+            /**
+             * Exactly three photos: one large, two stacked beside it.
+             */
+            images?:
+              | {
+                  image: number | Media;
+                  alt?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericGallery';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            stats?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericStats';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            items?:
+              | {
+                  year: string;
+                  title: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericTimeline';
+          }
+        | {
+            heading: string;
+            body?: string | null;
+            buttonLabel: string;
+            buttonHref: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericCta';
+          }
+        | {
+            quote: string;
+            reference?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericQuote';
           }
       )[]
     | null;
@@ -1442,6 +1551,111 @@ export interface PagesSelect<T extends boolean = true> {
         missionSchoolCta?:
           | T
           | {
+              id?: T;
+              blockName?: T;
+            };
+        genericText?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              paragraphs?:
+                | T
+                | {
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericCards?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    quote?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericImageText?:
+          | T
+          | {
+              image?: T;
+              imageAlt?: T;
+              imageSide?: T;
+              heading?: T;
+              body?: T;
+              buttonLabel?: T;
+              buttonHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+        genericGallery?:
+          | T
+          | {
+              images?:
+                | T
+                | {
+                    image?: T;
+                    alt?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericStats?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericTimeline?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    year?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericCta?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              buttonLabel?: T;
+              buttonHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+        genericQuote?:
+          | T
+          | {
+              quote?: T;
+              reference?: T;
               id?: T;
               blockName?: T;
             };

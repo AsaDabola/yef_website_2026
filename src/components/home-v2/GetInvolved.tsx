@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import HoverGroup from "@/components/ui/HoverGroup";
 import Reveal from "@/components/ui/Reveal";
+import Link from "@/components/ui/LocaleLink";
 import { useT } from "@/lib/i18n/client";
 
 const CARD_GAP = 26;
@@ -12,46 +13,53 @@ const DRIFT_SPEED = 34;
 
 const cards = [
   {
-    tag: "Ongoing",
+    tag: "Reach",
     title: "Campus Evangelism",
     body: "Every campus is a mission field — Campus Evangelism exists to ignite that faith right where students already are.",
     image: "/images/home-v2/get-involved-campus-evangelism.webp",
+    href: "/get-involved/campus-evangelism",
   },
   {
-    tag: "Weekly",
+    tag: "Grow",
     title: "Bible Study",
     body: "Study Scripture personally and together, building a faith firmly grounded in the Gospel.",
     image: "/images/home-v2/get-involved-bible-study.webp",
+    href: "/get-involved/bible-studies",
   },
   {
-    tag: "By Invitation",
+    tag: "Train",
     title: "Leadership Training",
     body: "Learn to teach the Word, care for others, lead fellowship, and make disciples.",
     image: "/images/home-v2/get-involved-leadership-training.webp",
+    href: "/get-involved/leadership-retreats",
   },
   {
-    tag: "Each Summer",
+    tag: "Train",
     title: "Summer Training",
     body: "Grow through focused Bible study, prayer, fellowship, evangelism, and mission training.",
     image: "/images/home-v2/get-involved-summer-training.webp",
+    href: "/get-involved/summer-training",
   },
   {
-    tag: "Go",
+    tag: "Reach",
     title: "Short-term Mission",
     body: "Three to seven days in the US and Korea. Word, prayer, and long meals with students who came from the other side of the world.",
     image: "/images/home-v2/get-involved-short-term-mission.webp",
+    href: "/get-involved/short-term-mission",
   },
   {
-    tag: "Growth",
+    tag: "Grow",
     title: "Discipleship Training",
     body: "A hands-on training to grow as a disciple and step into leadership — becoming a missionary to the campus you already call home.",
     image: "/images/home-v2/get-involved-discipleship-training.webp",
+    href: "/get-involved/discipleship",
   },
   {
     tag: "Serve",
     title: "Volunteering",
     body: "Show up for one another and your community through small, consistent acts of service.",
     image: "/images/home-v2/get-involved-volunteering.png",
+    href: "/get-involved/volunteering",
   },
 ];
 
@@ -185,9 +193,12 @@ export default function GetInvolved() {
             {/* Twice through: the drift wraps at the halfway mark onto an
                 identical frame, so the row has no visible seam or end. */}
             {[...cards, ...cards].map((card, index) => (
-              <div
+              <Link
                 key={`${card.title}-${index}`}
+                href={card.href}
                 aria-hidden={index >= cards.length}
+                tabIndex={index >= cards.length ? -1 : undefined}
+                className="block"
               >
                 <div className="group relative aspect-[380/507] w-full cursor-pointer overflow-hidden bg-v2-navy">
                   <Image
@@ -209,7 +220,7 @@ export default function GetInvolved() {
                 <p className="mt-3 text-[14.5px] text-[#4a6076] leading-[24.65px]">
                   {t(card.body)}
                 </p>
-              </div>
+              </Link>
             ))}
           </HoverGroup>
         </Reveal>
