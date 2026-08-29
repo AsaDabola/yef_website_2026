@@ -16,7 +16,19 @@ export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) 
         <div className="shrink-0 lg:w-[237px]">
           <WhoWeAreSubMenu />
         </div>
-
+        
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[849fr_477fr]">
+            <div className="relative aspect-[849/637] w-full overflow-hidden rounded-2xl">
+              <Image
+                src="/images/history/hero-large.png"
+                alt={t("Youth Evangelical Fellowship headquarters building")}
+                fill
+                sizes="(min-width: 640px) 45vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+        </div>
+        
         <div className="flex-1">
           <Breadcrumb label={t("History")} />
           <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
