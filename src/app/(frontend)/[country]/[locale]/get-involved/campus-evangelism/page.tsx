@@ -5,12 +5,13 @@ import Breadcrumb from "@/components/Breadcrumb";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import ResourceTeaserCard from "@/components/get-involved/ResourceTeaserCard";
 import InfoCard from "@/components/get-involved/InfoCard";
+import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
-import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
+import Link from "@/components/ui/LocaleLink";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getLayout, getPageHeader } from "@/lib/pages";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Campus Evangelism | Youth Evangelical Fellowship",
@@ -35,10 +36,6 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("get-involved/campus-evangelism");
-  // [0] is the gallery mosaic rendered mid-page; [1] is the closing CTA —
-  // the two sections of this page converted to generic blocks, rendered
-  // individually because everything between them stays hardcoded JSX.
-  const layout = await getLayout("get-involved/campus-evangelism");
   return (
     <>
       <main>
@@ -181,7 +178,24 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
         </section>
 
         {/* Gallery */}
-        <RenderBlocks layout={layout.slice(0, 1)} />
+        <section className="mx-auto max-w-[1391px] px-6 pt-[68px] pb-20 lg:pb-[125px]">
+          <GalleryMosaic
+            images={[
+              {
+                src: "/images/get-involved/gallery-campus-evangelism-table.webp",
+                alt: t("YEF students sharing the Gospel at a campus outreach table"),
+              },
+              {
+                src: "/images/get-involved/gallery-campus-evangelism-trees.webp",
+                alt: t("Students walking together beneath campus trees"),
+              },
+              {
+                src: "/images/get-involved/gallery-campus-evangelism-walk.webp",
+                alt: t("Students walking across a sunlit campus path"),
+              },
+            ]}
+          />
+        </section>
 
         {/* Where We Serve */}
         <section className={`${BAND} pt-20 pb-20 lg:pt-[110px] lg:pb-[86px]`}>
@@ -360,7 +374,22 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
 
         {/* The application frame lives on its own page; this is the only door
             to it from the Mission Trip story. */}
-        <RenderBlocks layout={layout.slice(1, 2)} />
+        <section className="mx-auto max-w-[1391px] px-6 py-20 text-center lg:py-[100px]">
+          <h2 className="font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
+            {t("Begin Your Mission Journey")}
+          </h2>
+          <p className="mx-auto mt-5 max-w-[640px] text-[16.6px] text-black leading-[27.2px]">
+            {t(
+              "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
+            )}
+          </p>
+          <Link
+            href="/get-involved/campus-evangelism/apply"
+            className="mt-9 inline-block rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+          >
+            {t("Apply for a Campus Mission")}
+          </Link>
+        </section>
 
         <MissionSchoolCta />
       </main>

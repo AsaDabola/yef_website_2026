@@ -4,10 +4,9 @@ import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import FeatureCard from "@/components/who-we-are/FeatureCard";
 import Footer from "@/components/Footer";
-import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getLayout, getPageHeader } from "@/lib/pages";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Welcome | Youth Evangelical Fellowship",
@@ -17,7 +16,6 @@ export default async function WelcomePage({ params }: { params: LocaleParams }) 
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("who-we-are/welcome");
-  const layout = await getLayout("who-we-are/welcome");
   return (
     <>
       <main>
@@ -39,8 +37,19 @@ export default async function WelcomePage({ params }: { params: LocaleParams }) 
 </p>
 
               <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
-                <div className="[&_section]:mx-0! [&_section]:max-w-none! [&_section]:px-0! [&_section]:py-0!">
-                  <RenderBlocks layout={layout} />
+                <div className="space-y-6 text-lg text-black">
+                  <p>
+                    
+{t("Youth Evangelical Fellowship is a group of proactive, outreaching Christians, whose youth and passion are spent on bringing glory to God’s name. We want to see the Great Commission of Jesus fulfilled in each and every major city in the world as he promised in his prayer, “thy kingdom come, thy will be done on earth as it is in heaven.” (Matthew 6:10) YEF has been a symbol of revival in urban mission since its establishment, working to redeem college campuses for the greater cause of Jesus Christ.")}
+</p>
+                  <p>
+                    
+{t("You are about to dive into the deep Word of God with our members at your local fellowships and university campuses. I sincerely pray that YEF will strengthen you spiritually and that you will be fully equipped in spirit and truth while you walk on this faith journey. We thank you for your continued prayers for YEF as we work to make meaningful changes in the lives of many.")}
+</p>
+                  <p>
+                    
+{t("Welcome to the beginning of an amazing journey with God! We are excited to help you on your journey of faith to grow closer to God!")}
+</p>
                 </div>
 
                 <FeatureCard

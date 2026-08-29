@@ -5,10 +5,9 @@ import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import MembershipForm from "@/components/who-we-are/MembershipForm";
 import MembershipJourney from "@/components/who-we-are/MembershipJourney";
 import Footer from "@/components/Footer";
-import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getLayout, getPageHeader } from "@/lib/pages";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Membership | Youth Evangelical Fellowship",
@@ -18,7 +17,6 @@ export default async function MembershipPage({ params }: { params: LocaleParams 
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("who-we-are/membership");
-  const layout = await getLayout("who-we-are/membership");
   return (
     <>
       <main>
@@ -49,9 +47,41 @@ export default async function MembershipPage({ params }: { params: LocaleParams 
 
               <MembershipJourney />
 
-              <div className="mt-16 max-w-[760px] [&_section]:mx-0! [&_section]:max-w-none! [&_section]:px-0! [&_section]:py-0!">
-                <RenderBlocks layout={layout} />
-              </div>
+              <h2 className="mt-16 font-display font-extrabold text-[30px] text-black tracking-[-0.5px]">
+
+{t("What Membership Means")}
+</h2>
+              <p className="mt-5 max-w-[760px] text-[19px] text-black leading-[27.2px]">
+
+{t("Becoming a YEF member means committing to grow in your walk with Christ alongside a local chapter, while staying connected to YEF’s wider international fellowship. Members affirm the YEF Statement of Faith and sign the Membership Covenant, which lays out what we believe and how we commit to living and serving together.")}
+</p>
+              <ul className="mt-6 max-w-[760px] space-y-3 text-[17px] text-black leading-[26px]">
+                <li>
+
+{t("Bible studies, discipleship, and mentorship within your local chapter")}
+</li>
+                <li>
+
+{t("A voice in your chapter’s life and leadership")}
+</li>
+                <li>
+
+{t("Invitations to YEF trainings, retreats, and mission opportunities")}
+</li>
+                <li>
+
+{t("Connection to a wider fellowship of YEF chapters and members")}
+</li>
+              </ul>
+
+              <h2 className="mt-16 font-display font-extrabold text-[30px] text-black tracking-[-0.5px]">
+
+{t("Apply to join")}
+</h2>
+              <p className="mt-5 max-w-[760px] text-[17px] text-[#4b5565] leading-[26px]">
+
+{t("Fill out the application below. As part of joining, you’ll also be asked to review and sign the YEF Membership Covenant.")}
+</p>
               <MembershipForm />
             </div>
           </div>
