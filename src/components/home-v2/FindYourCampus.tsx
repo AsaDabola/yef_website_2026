@@ -5,12 +5,12 @@ import Reveal from "@/components/ui/Reveal";
 import { useT } from "@/lib/i18n/client";
 
 const chips = [
-  { label: "United States", href: "/us" },
-  { label: "Korea", href: "/kr" },
-  { label: "Hong Kong", href: "/tw" },
-  { label: "Burundi", href: "/ke" },
-  { label: "Tonga", href: "/int/en" },
-  { label: "Ethiopia", href: "/et" },
+  { label: "United States", href: "/network?country=United+States#chapters-map" },
+  { label: "Korea", href: "/network?country=Korea#chapters-map" },
+  { label: "Hong Kong", href: "/network?country=Hong+Kong#chapters-map" },
+  { label: "Burundi", href: "/network?country=Burundi#chapters-map" },
+  { label: "Tonga", href: "/network?country=Tonga#chapters-map" },
+  { label: "Ethiopia", href: "/network?country=Ethiopia#chapters-map" },
 ];
 
 export default function FindYourCampus() {
@@ -39,20 +39,16 @@ export default function FindYourCampus() {
           className="mt-6 flex flex-wrap items-center justify-center gap-3"
         >
           {chips.map((chip) => (
-            <a
+            <Link
               key={chip.label}
               href={chip.href}
-              target="_blank"
-              rel="noopener noreferrer"
               className="rounded-full border border-v2-navy/13 px-7.5 py-3.5 font-medium text-[13.5px] text-v2-navy transition-all duration-200 hover:scale-105 hover:border-v2-navy hover:bg-v2-navy hover:text-v2-bg"
             >
               {t(chip.label)}
-            </a>
+            </Link>
           ))}
           <Link
-            href="/network"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/network#chapters-map"
             className="rounded-full border border-v2-navy/13 px-7.5 py-3.5 font-medium text-[13.5px] text-v2-navy transition-all duration-200 hover:scale-105 hover:border-v2-navy hover:bg-v2-navy hover:text-v2-bg"
           >
             {t("All Chapters →")}

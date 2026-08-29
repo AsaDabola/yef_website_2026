@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { chapters } from "@/lib/chapters";
 import { useT } from "@/lib/i18n/client";
 
@@ -23,8 +24,13 @@ function PinIcon({ className }: { className?: string }) {
   );
 }
 
-export default function ChapterMap() {
+function ChapterMapContent() {
   const t = useT();
+  const searchParams = useSearchParams();
+  const countryParam = searchParams.get("country");
+  const cityParam = searchParams.get("city");
+  const chapterParam = searchParams.get("chapter");
+
   const [selectedId, setSelectedId] = useState(chapters[0].id);
   const [query, setQuery] = useState("");
   const [country, setCountry] = useState("All");
@@ -34,6 +40,35 @@ export default function ChapterMap() {
     () => ["All", ...Array.from(new Set(chapters.map((c) => c.country)))],
     [],
   );
+
+  useEffect(() => {
+    if (countryParam) {
+      const matchedCountry = countries.find(
+        (c) => c.toLowerCase() === countryParam.toLowerCase(),
+      );
+      if (matchedCountry) {
+        setCountry(matchedCountry);
+        const match = chapters.find(
+          (c) => c.country.toLowerCase() === countryParam.toLowerCase(),
+        );
+        if (match) setSelectedId(match.id);
+      }
+    }
+    if (cityParam) {
+      setCity(cityParam);
+    }
+    if (chapterParam) {
+      const match = chapters.find(
+        (c) =>
+          c.id === chapterParam ||
+          c.name.toLowerCase().includes(chapterParam.toLowerCase()),
+      );
+      if (match) {
+        setSelectedId(match.id);
+        setCountry(match.country);
+      }
+    }
+  }, [countryParam, cityParam, chapterParam, countries]);
 
   const cities = useMemo(() => {
     const pool =
@@ -199,3 +234,16 @@ export default function ChapterMap() {
     </div>
   );
 }
+
+export default function ChapterMap() {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-[640px] w-full animate-pulse rounded-2xl bg-v2-bg" />
+      }
+    >
+      <ChapterMapContent />
+    </Suspense>
+  );
+}
+

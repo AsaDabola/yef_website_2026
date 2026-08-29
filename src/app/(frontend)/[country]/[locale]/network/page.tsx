@@ -79,7 +79,10 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
 </p>
         </section>
 
-        <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
+        <section
+          id="chapters-map"
+          className="mx-auto max-w-[1800px] scroll-mt-24 px-6 py-16 lg:px-16"
+        >
           <Breadcrumb label={t("Network")} />
           <h1 className="mt-6 max-w-2xl font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
             
