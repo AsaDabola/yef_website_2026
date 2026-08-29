@@ -17,7 +17,16 @@ export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) 
           <WhoWeAreSubMenu />
         </div>
         
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[849fr_477fr]">
+        div className="flex-1">
+          <Breadcrumb label={t("History")} />
+          <h1 className="mt-[46px] font-display font-extrabold text-4xl text-black leading-[1.1] tracking-[-0.96px] sm:text-5xl lg:text-[54px] lg:leading-[60px]">
+            {t(heading || "History")}
+          </h1>
+          <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px]">
+            {t("Our Story So Far")}
+          </p>
+
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[849fr_477fr]">
             <div className="relative aspect-[849/637] w-full overflow-hidden rounded-2xl">
               <Image
                 src="/images/history/hero-large.png"
@@ -27,7 +36,7 @@ export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) 
                 className="object-cover"
               />
             </div>
-        </div>
+          </div>
         
         <div className="flex-1">
           <Breadcrumb label={t("History")} />
