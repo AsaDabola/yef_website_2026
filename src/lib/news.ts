@@ -17,42 +17,6 @@ export type NewsArticle = {
 
 const curatedNewsArticles: NewsArticle[] = [
   {
-    slug: "campus-missionaries-philippines",
-    tag: "News",
-    title: "Meet a New Generation of Campus Missionaries in the Philippines",
-    excerpt:
-      "A growing YEF chapter in Manila is reaching students one conversation at a time. Meet the young leaders carrying the Gospel to their campus.",
-    image: "/images/news/article-philippines.png",
-    date: "Aug 21 2026",
-  },
-  {
-    slug: "story-only-i-can-tell-ana",
-    tag: "Story",
-    title: "The Story Only I Can Tell: Meet Ana Restrepo",
-    excerpt:
-      "Ana is a YEF Colombia staff member who spends her days documenting the stories of students and families across the region. But she has her own story to tell too.",
-    image: "/images/news/article-colombia.png",
-    date: "Aug 18 2026",
-  },
-  {
-    slug: "finding-refuge-uganda",
-    tag: "Story",
-    title: "Finding Family: A Mother's Journey to Faith in Uganda",
-    excerpt:
-      "After fleeing conflict, one mother and her son found more than shelter in a YEF-supported community in Uganda — they found a new family in Christ.",
-    image: "/images/news/article-uganda-refuge.png",
-    date: "Aug 14 2026",
-  },
-  {
-    slug: "reaching-the-next-generation-thailand",
-    tag: "News",
-    title: "Reaching the Next Generation in Thailand",
-    excerpt:
-      "From village Bible studies to city campuses, YEF Thailand is discipling a new generation of young believers across the country.",
-    image: "/images/news/article-thailand.png",
-    date: "Aug 10 2026",
-  },
-  {
     slug: "encourage-a-student-on-mission",
     tag: "News",
     title: "6 Ways to Encourage a Student on Mission",
