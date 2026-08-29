@@ -8,10 +8,11 @@ import InternshipSection from "@/components/get-involved/InternshipSection";
 import MinistrySection from "@/components/get-involved/MinistrySection";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getLayout, getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Get Involved | Youth Evangelical Fellowship",
@@ -21,6 +22,7 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("get-involved");
+  const layout = await getLayout("get-involved");
   return (
     <>
       <main>
@@ -148,23 +150,8 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 alt={t("Volunteers sorting clothing at a donation drive")}
               />
 
-              <div className="mt-16 flex flex-col items-start justify-between gap-5 rounded-2xl bg-v2-navy px-8 py-7 sm:flex-row sm:items-center">
-                <div>
-                  <h2 className="font-display font-bold text-lg text-white">
-                    {t("Still Not Sure Where to Start?")}
-                  </h2>
-                  <p className="mt-1 max-w-[440px] text-[14px] text-white/70 leading-[21px]">
-                    {t(
-                      "Tell us what you're interested in, and we'll help you find the right opportunity.",
-                    )}
-                  </p>
-                </div>
-                <a
-                  href="/get-involved/apply"
-                  className="shrink-0 rounded-full bg-white px-7 py-3.5 font-semibold text-[#00203f] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
-                >
-                  {t("Tell Us Your Interests")}
-                </a>
+              <div className="mt-16">
+                <RenderBlocks layout={layout} />
               </div>
             </div>
           </div>

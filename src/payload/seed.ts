@@ -245,6 +245,80 @@ async function buildDefaultWhoWeAreLayout(uploadMedia: MediaUploader) {
   ];
 }
 
+async function buildDefaultGetInvolvedLayout() {
+  return [
+    {
+      blockType: "genericCta",
+      heading: "Still Not Sure Where to Start?",
+      body: "Tell us what you're interested in, and we'll help you find the right opportunity.",
+      buttonLabel: "Tell Us Your Interests",
+      buttonHref: "/get-involved/apply",
+    },
+  ];
+}
+
+/**
+ * The Campus Evangelism page's gallery mosaic and closing CTA — the two
+ * sections of this content-heavy page that map cleanly onto generic blocks.
+ * The narrative sections (two-column text + teaser card, banded info-card
+ * grids with an intro paragraph the generic cards block has no field for,
+ * the typical-day timeline with its own side photo) stay hardcoded JSX.
+ */
+async function buildDefaultCampusEvangelismLayout(uploadMedia: MediaUploader) {
+  return [
+    {
+      blockType: "genericGallery",
+      images: [
+        {
+          image: await uploadMedia(
+            "/images/get-involved/gallery-campus-evangelism-table.webp",
+            "YEF students sharing the Gospel at a campus outreach table",
+          ),
+        },
+        {
+          image: await uploadMedia(
+            "/images/get-involved/gallery-campus-evangelism-trees.webp",
+            "Students walking together beneath campus trees",
+          ),
+        },
+        {
+          image: await uploadMedia(
+            "/images/get-involved/gallery-campus-evangelism-walk.webp",
+            "Students walking across a sunlit campus path",
+          ),
+        },
+      ],
+    },
+    {
+      blockType: "genericCta",
+      heading: "Begin Your Mission Journey",
+      body: "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
+      buttonLabel: "Apply for a Campus Mission",
+      buttonHref: "/get-involved/campus-evangelism/apply",
+    },
+  ];
+}
+
+/**
+ * The Chapter Affiliation page's intro copy — its only section that isn't
+ * the application form itself (kept as code) or the already-editable
+ * banner/heading (`getPageHeader`).
+ */
+async function buildDefaultChapterAffiliationLayout() {
+  return [
+    {
+      blockType: "genericText",
+      eyebrow: "Bring YEF to Your Campus",
+      paragraphs: [
+        {
+          body: "Every YEF chapter is a seedbed—a witnessing community planted on one campus, connected to a wider movement of chapters around the world. Affiliating your chapter is a three-step process: chapter information, leadership contact, and agreement.",
+        },
+      ],
+    },
+  ];
+}
+
+
 
 /** The real, current bundled copy for the six Who We Are subpages that have
  *  been converted to the generic block library, built the same way as
@@ -1395,6 +1469,7 @@ function isUntouchedLayout(layout: unknown): boolean {
 }
 
 
+
 async function seedPage(
   payload: Payload,
   route: Page["route"],
@@ -1455,14 +1530,12 @@ const builtInPages: { route: string; title: string }[] = [
   // /membership are seeded further down with real `buildLayout` thunks
   // (like home and who-we-are above) now that they're converted to the
   // generic block library — they're deliberately not listed here. So are
-  // get-involved/bible-studies, /discipleship, /leadership-retreats,
+  // get-involved, get-involved/campus-evangelism, /chapter-affiliation,
+  // /bible-studies, /discipleship, /leadership-retreats,
   // /short-term-mission, /summer-training, and /volunteering.
   { route: "who-we-are/staff-executive-committee", title: "Staff/Executive Committee" },
-  { route: "get-involved", title: "Get Involved" },
   { route: "get-involved/apply", title: "Connect With YEFI" },
-  { route: "get-involved/campus-evangelism", title: "Campus Evangelism" },
   { route: "get-involved/campus-evangelism/apply", title: "Begin Your Mission Journey" },
-  { route: "get-involved/chapter-affiliation", title: "Chapter Affiliation" },
   { route: "get-involved/volunteer", title: "Volunteer with YEF" },
   { route: "news", title: "News" },
   { route: "network", title: "Network" },
@@ -1663,6 +1736,33 @@ const run = async () => {
   await step(payload, 'Page "get-involved/volunteering"', () =>
     seedPage(payload, "get-involved/volunteering", "Volunteering", () =>
       buildDefaultVolunteeringLayout(uploadMedia),
+    ),
+  );
+  await step(payload, 'Page "get-involved"', () =>
+    seedPage(
+      payload,
+      "get-involved",
+      "Get Involved",
+      () => buildDefaultGetInvolvedLayout(),
+      true,
+    ),
+  );
+  await step(payload, 'Page "get-involved/campus-evangelism"', () =>
+    seedPage(
+      payload,
+      "get-involved/campus-evangelism",
+      "Campus Evangelism",
+      () => buildDefaultCampusEvangelismLayout(uploadMedia),
+      true,
+    ),
+  );
+  await step(payload, 'Page "get-involved/chapter-affiliation"', () =>
+    seedPage(
+      payload,
+      "get-involved/chapter-affiliation",
+      "Chapter Affiliation",
+      () => buildDefaultChapterAffiliationLayout(),
+      true,
     ),
   );
   await step(payload, "Built-in pages seed", () => seedBuiltInPages(payload));
