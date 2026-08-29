@@ -1,5 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { countries, countryCodes, defaultLocaleFor } from "@/lib/i18n/countries";
+import {
+  countries,
+  countryCodes,
+  defaultLocaleFor,
+  singleLocaleFor,
+} from "@/lib/i18n/countries";
 import { defaultLocale, localeCodes } from "@/lib/i18n/locales";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 
@@ -43,6 +48,34 @@ export function middleware(request: NextRequest) {
   const segments = pathname.split("/").filter(Boolean);
   const [first, second] = segments;
 
+  // A single-language country's site routes on its country code alone —
+  // there is no language to pick, so no second segment ever appears in a
+  // URL a visitor sees. The page tree underneath still lives at
+  // /<country>/<language>/..., so a matching request is rewritten to that
+  // internal path rather than redirected: the address bar keeps the short
+  // form while Next resolves the route it actually has.
+  if (countrySet.has(first)) {
+    const only = singleLocaleFor(first);
+    if (only) {
+      // An old-style /<country>/<language>/... link (or one built for any
+      // other language) collapses onto the short form instead of 404ing.
+      if (localeSet.has(second)) {
+        const url = request.nextUrl.clone();
+        url.pathname = `/${first}/${segments.slice(2).join("/")}`;
+        return NextResponse.redirect(url);
+      }
+      const url = request.nextUrl.clone();
+      url.pathname = `/${first}/${only}/${segments.slice(1).join("/")}`;
+      const response = NextResponse.rewrite(url);
+      response.cookies.set("yef-site", `${first}/${only}`, {
+        maxAge: 60 * 60 * 24 * 365,
+        sameSite: "lax",
+        path: "/",
+      });
+      return response;
+    }
+  }
+
   // Already addressed as /<country>/<language>/...
   if (countrySet.has(first) && localeSet.has(second)) {
     const country = countries.find((c) => c.code === first);
@@ -66,7 +99,10 @@ export function middleware(request: NextRequest) {
   // is sent to the visitor's site with the rest of the path intact.
   const { country, locale } = preferred(request);
   const url = request.nextUrl.clone();
-  url.pathname = `/${country}/${locale}${pathname === "/" ? "" : pathname}`;
+  const rest = pathname === "/" ? "" : pathname;
+  url.pathname = singleLocaleFor(country)
+    ? `/${country}${rest}`
+    : `/${country}/${locale}${rest}`;
   url.search = search;
   return NextResponse.redirect(url);
 }
