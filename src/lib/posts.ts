@@ -116,6 +116,7 @@ export async function getNewsArticles(): Promise<NewsArticle[]> {
   if (!cmsConfigured) return newsArticles;
   try {
     const docs = await findPosts();
+    if (docs.length === 0) return newsArticles;
     return docs.map((doc) => ({
       slug: doc.slug,
       tag: doc.category,
@@ -134,6 +135,7 @@ export async function getMovementItems(): Promise<MovementItem[]> {
   if (!cmsConfigured) return fallbackMovementItems;
   try {
     const docs = await findPosts({ showOnHome: { equals: true } }, 3);
+    if (docs.length === 0) return fallbackMovementItems;
     return docs.map((doc) => ({
       tag: doc.homeEyebrow || doc.category,
       title: doc.title,
@@ -170,7 +172,6 @@ export async function getArticle(
           body: doc.body ?? null,
         };
       }
-      return null;
     } catch (error) {
       console.error("Falling back to the bundled article: ", error);
     }
