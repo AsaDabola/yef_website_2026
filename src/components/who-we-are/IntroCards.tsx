@@ -68,7 +68,7 @@ export default async function IntroCards({
     <section className="font-body bg-white">
       <div className="mx-auto max-w-[1920px] px-6 pt-20 pb-16 sm:px-10 lg:px-[4.27%] lg:pt-[155px] lg:pb-[116px]">
         <div className="flex flex-col gap-12 lg:flex-row lg:gap-[13.85%]">
-          <div className="shrink-0 lg:w-[237px]">
+          <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
             <WhoWeAreSubMenu />
           </div>
 
