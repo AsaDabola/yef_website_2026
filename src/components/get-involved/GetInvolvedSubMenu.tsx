@@ -3,11 +3,14 @@
 import { usePathname } from "next/navigation";
 import { useT } from "@/lib/i18n/client";
 import { getInvolvedLinks as links } from "@/lib/sectionNav";
+import { stripLocalePath } from "@/lib/i18n/paths";
 import SectionSubMenu from "@/components/SectionSubMenu";
 
 export default function GetInvolvedSubMenu() {
   const t = useT();
-  const pathname = usePathname();
+  // usePathname() includes the /<country>/<locale> prefix; the sidebar's own
+  // hrefs and activePaths are bare, so strip it before comparing.
+  const pathname = stripLocalePath(usePathname());
 
   return (
     <SectionSubMenu
@@ -15,9 +18,7 @@ export default function GetInvolvedSubMenu() {
       ariaLabel={t("Get Involved section navigation")}
       links={links}
       isActive={(href) =>
-        href.startsWith("/get-involved/")
-          ? pathname === href
-          : pathname === "/get-involved" && href === "/get-involved"
+        links.find((link) => link.href === href)?.activePaths?.includes(pathname) ?? false
       }
       desktopLinkClassName={(active) =>
         `block border-b py-3 text-lg transition-colors ${

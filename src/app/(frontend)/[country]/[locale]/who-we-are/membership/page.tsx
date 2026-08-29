@@ -3,6 +3,7 @@ import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import MembershipForm from "@/components/who-we-are/MembershipForm";
+import MembershipJourney from "@/components/who-we-are/MembershipJourney";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
@@ -43,6 +44,8 @@ export default async function MembershipPage({ params }: { params: LocaleParams 
 
 {t("YEF exists to raise up a generation who follow the passionate life of Jesus Christ and carry that fire into the lives of others. By joining, you become part of a witnessing community on your campus, connected to a movement of students and staff doing kingdom-building work together.")}
 </p>
+
+              <MembershipJourney />
 
               <h2 className="mt-16 font-display font-extrabold text-[30px] text-black tracking-[-0.5px]">
 
