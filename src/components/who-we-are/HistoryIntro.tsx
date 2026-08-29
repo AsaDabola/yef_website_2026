@@ -32,7 +32,7 @@ export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) 
                 src="/images/history/hero-large.png"
                 alt={t("Youth Evangelical Fellowship headquarters building")}
                 fill
-                sizes="(min-width: 720px) 45vw, 100vw"
+                sizes="(min-width: 720px) 45vw, 120vw"
                 className="object-cover"
               />
             </div>
