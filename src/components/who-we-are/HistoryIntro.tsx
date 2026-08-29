@@ -21,44 +21,8 @@ export default async function HistoryIntro() {
             {t("Our Story So Far")}
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[849fr_477fr]">
-            <div className="relative aspect-[849/637] w-full overflow-hidden rounded-2xl">
-              <Image
-                src="/images/history/hero-large.png"
-                alt={t("Youth Evangelical Fellowship headquarters building")}
-                fill
-                sizes="(min-width: 640px) 45vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <div className="relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
-                <Image
-                  src="/images/history/hero-small-top.png"
-                  alt={t("YEF international staff gathered together")}
-                  fill
-                  sizes="(min-width: 640px) 26vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="group relative aspect-[477/311] w-full overflow-hidden rounded-2xl">
-                <Image
-                  src="/images/history/hero-small-bottom.png"
-                  alt={t("Students on a campus mission trip")}
-                  fill
-                  sizes="(min-width: 640px) 26vw, 100vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/60 font-medium text-lg text-white transition-opacity group-hover:bg-black/70">
-                  {t("See More")}
-                  <Image
-                    src="/images/icons/icon-arrow-right-24-white.svg"
-                    alt=""
-                    width={28}
-                    height={28}
-                    aria-hidden="true"
-                  />
+    </div>
+                 
                 </div>
               </div>
             </div>
