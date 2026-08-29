@@ -10,7 +10,7 @@ import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
 import Link from "@/components/ui/LocaleLink";
-import { ChevronDownIcon } from "@/components/ui/SocialIcons";
+import JourneyTimeline from "@/components/ui/JourneyTimeline";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
@@ -19,23 +19,53 @@ export const metadata: Metadata = {
   title: "Get Involved | Youth Evangelical Fellowship",
 };
 
-/** The five-stage YEF journey. Drives both the compact overview strip at the
- *  top of the page and the section headings that group the existing program
- *  cards below — the cards themselves are untouched, only regrouped. */
+/** The five-stage YEF journey, in the same connected-timeline visual as the
+ *  Membership Journey. Drives the compact overview at the top of the page;
+ *  the section headings below group the existing program cards — the cards
+ *  themselves are untouched, only regrouped. Colors match the Membership
+ *  Journey's progression so the two "at a glance" diagrams read as one
+ *  visual language. */
 const journeySteps = [
-  { id: "join-yef", label: "Join", summary: "Become a Member" },
-  { id: "grow", label: "Grow", summary: "Bible Studies · Discipleship" },
   {
-    id: "reach",
+    number: "01",
+    label: "Join",
+    title: "Become a Member",
+    body: "Start your journey with YEF.",
+    color: "#3D9BE9",
+    href: "#join-yef",
+  },
+  {
+    number: "02",
+    label: "Grow",
+    title: "Bible Studies · Discipleship",
+    body: "Grow in Christ, His Word, and community.",
+    color: "#0066CF",
+    href: "#grow",
+  },
+  {
+    number: "03",
     label: "Reach",
-    summary: "Campus Evangelism · Short-term Mission",
+    title: "Campus Evangelism · Short-term Mission",
+    body: "Share Christ on campus, and carry it beyond.",
+    color: "#2F5FA8",
+    href: "#reach",
   },
   {
-    id: "train",
+    number: "04",
     label: "Train",
-    summary: "Summer Training · Leadership Training",
+    title: "Summer Training · Leadership Training",
+    body: "Get equipped for ministry and leadership.",
+    color: "#5B4B8A",
+    href: "#train",
   },
-  { id: "serve", label: "Serve", summary: "Volunteer · Internship" },
+  {
+    number: "05",
+    label: "Serve",
+    title: "Volunteer · Internship",
+    body: "Give your gifts, time, and calling to serve.",
+    color: "#B4823C",
+    href: "#serve",
+  },
 ];
 
 const STAGE_HEADING =
@@ -82,32 +112,18 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
             <div className="min-w-0 flex-1">
               <Breadcrumb label={t("Get Involved")} />
 
-              {/* A compact, at-a-glance map of the whole journey — not a
-                  large infographic, just five linked stopping points. */}
-              <nav
-                aria-label={t("Get Involved journey overview")}
-                className="mt-10 flex flex-col divide-y divide-black/10 rounded-2xl border border-v2-border bg-white sm:flex-row sm:divide-x sm:divide-y-0"
-              >
-                {journeySteps.map((step, index) => (
-                  <a
-                    key={step.id}
-                    href={`#${step.id}`}
-                    className="group flex flex-1 items-center justify-between gap-2 px-5 py-4 transition-colors hover:bg-[#f6f9fd] sm:flex-col sm:items-start sm:justify-center"
-                  >
-                    <div>
-                      <p className="font-semibold text-[11px] text-yef-primary tracking-[1.92px] uppercase">
-                        {t(step.label)}
-                      </p>
-                      <p className="mt-1 font-medium text-[13px] text-black leading-[18px]">
-                        {t(step.summary)}
-                      </p>
-                    </div>
-                    {index < journeySteps.length - 1 && (
-                      <ChevronDownIcon className="size-4 shrink-0 -rotate-90 text-black/25 sm:hidden" />
-                    )}
-                  </a>
-                ))}
-              </nav>
+              {/* A compact, at-a-glance map of the whole journey, in the
+                  same connected-timeline style as the Membership Journey. */}
+              <div className="mt-10">
+                <JourneyTimeline
+                  stages={journeySteps.map((step) => ({
+                    ...step,
+                    label: t(step.label),
+                    title: t(step.title),
+                    body: t(step.body),
+                  }))}
+                />
+              </div>
 
               {/* JOIN YEF — a compact CTA, not a program card. */}
               <div
@@ -121,12 +137,17 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                   <h2 className="mt-1 font-display font-bold text-2xl text-white">
                     {t("Become a Member")}
                   </h2>
+                  <p className="mt-1.5 max-w-[440px] text-[14px] text-white/70 leading-[21px]">
+                    {t(
+                      "Take your first step and join a community of students following Jesus together.",
+                    )}
+                  </p>
                 </div>
                 <Link
                   href="/who-we-are/membership"
                   className="shrink-0 rounded-full bg-white px-7 py-3.5 font-semibold text-[#00203f] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
                 >
-                  {t("Become a Member")}
+                  {t("Apply Now")}
                 </Link>
               </div>
 
