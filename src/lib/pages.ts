@@ -34,9 +34,73 @@ export const defaultWhoWeAreLayout: PageBlock[] = [
   { blockType: "missionSchoolCta" },
 ];
 
+/** The Get Involved landing page's one generic-block section: its closing
+ *  CTA. Everything else on that page is bespoke code, not part of this
+ *  bundled layout. */
+export const defaultGetInvolvedLayout: PageBlock[] = [
+  {
+    blockType: "genericCta",
+    heading: "Still Not Sure Where to Start?",
+    body: "Tell us what you're interested in, and we'll help you find the right opportunity.",
+    buttonLabel: "Tell Us Your Interests",
+    buttonHref: "/get-involved/apply",
+  },
+];
+
+/** The Campus Evangelism page's gallery mosaic and closing CTA — the two
+ *  sections of that page converted to generic blocks. */
+export const defaultCampusEvangelismLayout: PageBlock[] = [
+  {
+    blockType: "genericGallery",
+    images: [
+      {
+        image: {
+          url: "/images/get-involved/gallery-campus-evangelism-table.webp",
+          alt: "YEF students sharing the Gospel at a campus outreach table",
+        },
+      },
+      {
+        image: {
+          url: "/images/get-involved/gallery-campus-evangelism-trees.webp",
+          alt: "Students walking together beneath campus trees",
+        },
+      },
+      {
+        image: {
+          url: "/images/get-involved/gallery-campus-evangelism-walk.webp",
+          alt: "Students walking across a sunlit campus path",
+        },
+      },
+    ],
+  },
+  {
+    blockType: "genericCta",
+    heading: "Begin Your Mission Journey",
+    body: "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
+    buttonLabel: "Apply for a Campus Mission",
+    buttonHref: "/get-involved/campus-evangelism/apply",
+  },
+];
+
+/** The Chapter Affiliation page's intro copy, its only converted section. */
+export const defaultChapterAffiliationLayout: PageBlock[] = [
+  {
+    blockType: "genericText",
+    eyebrow: "Bring YEF to Your Campus",
+    paragraphs: [
+      {
+        body: "Every YEF chapter is a seedbed—a witnessing community planted on one campus, connected to a wider movement of chapters around the world. Affiliating your chapter is a three-step process: chapter information, leadership contact, and agreement.",
+      },
+    ],
+  },
+];
+
 const defaultLayouts: Record<string, PageBlock[]> = {
   home: defaultHomeLayout,
   "who-we-are": defaultWhoWeAreLayout,
+  "get-involved": defaultGetInvolvedLayout,
+  "get-involved/campus-evangelism": defaultCampusEvangelismLayout,
+  "get-involved/chapter-affiliation": defaultChapterAffiliationLayout,
 };
 
 /**

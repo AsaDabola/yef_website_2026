@@ -245,6 +245,86 @@ async function buildDefaultWhoWeAreLayout(uploadMedia: MediaUploader) {
   ];
 }
 
+/**
+ * The Get Involved landing page's closing CTA — the one section of the page
+ * that is a clean fit for a generic block. Everything else on this page
+ * (the ministry sections, carousel, promo bands, stories trio) is bespoke
+ * layout with multi-CTA/icon/hover behavior that no generic block covers
+ * without losing real content or interaction.
+ */
+async function buildDefaultGetInvolvedLayout() {
+  return [
+    {
+      blockType: "genericCta",
+      heading: "Still Not Sure Where to Start?",
+      body: "Tell us what you're interested in, and we'll help you find the right opportunity.",
+      buttonLabel: "Tell Us Your Interests",
+      buttonHref: "/get-involved/apply",
+    },
+  ];
+}
+
+/**
+ * The Campus Evangelism page's gallery mosaic and closing CTA — the two
+ * sections of this content-heavy page that map cleanly onto generic blocks.
+ * The narrative sections (two-column text + teaser card, banded info-card
+ * grids with an intro paragraph the generic cards block has no field for,
+ * the typical-day timeline with its own side photo) stay hardcoded JSX.
+ */
+async function buildDefaultCampusEvangelismLayout(uploadMedia: MediaUploader) {
+  return [
+    {
+      blockType: "genericGallery",
+      images: [
+        {
+          image: await uploadMedia(
+            "/images/get-involved/gallery-campus-evangelism-table.webp",
+            "YEF students sharing the Gospel at a campus outreach table",
+          ),
+        },
+        {
+          image: await uploadMedia(
+            "/images/get-involved/gallery-campus-evangelism-trees.webp",
+            "Students walking together beneath campus trees",
+          ),
+        },
+        {
+          image: await uploadMedia(
+            "/images/get-involved/gallery-campus-evangelism-walk.webp",
+            "Students walking across a sunlit campus path",
+          ),
+        },
+      ],
+    },
+    {
+      blockType: "genericCta",
+      heading: "Begin Your Mission Journey",
+      body: "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
+      buttonLabel: "Apply for a Campus Mission",
+      buttonHref: "/get-involved/campus-evangelism/apply",
+    },
+  ];
+}
+
+/**
+ * The Chapter Affiliation page's intro copy — its only section that isn't
+ * the application form itself (kept as code) or the already-editable
+ * banner/heading (`getPageHeader`).
+ */
+async function buildDefaultChapterAffiliationLayout() {
+  return [
+    {
+      blockType: "genericText",
+      eyebrow: "Bring YEF to Your Campus",
+      paragraphs: [
+        {
+          body: "Every YEF chapter is a seedbed—a witnessing community planted on one campus, connected to a wider movement of chapters around the world. Affiliating your chapter is a three-step process: chapter information, leadership contact, and agreement.",
+        },
+      ],
+    },
+  ];
+}
+
 /** Uploads an image fetched from a remote URL as Media once per URL — used
  *  for the real WordPress-hosted photos, which are more authoritative than
  *  the Drive-matched placeholders under public/. */
@@ -573,6 +653,27 @@ const run = async () => {
     ),
   );
   await step(payload, "Built-in pages seed", () => seedBuiltInPages(payload));
+  await step(payload, 'Page "get-involved"', () =>
+    seedPage(payload, "get-involved", "Get Involved", () =>
+      buildDefaultGetInvolvedLayout(),
+    ),
+  );
+  await step(payload, 'Page "get-involved/campus-evangelism"', () =>
+    seedPage(
+      payload,
+      "get-involved/campus-evangelism",
+      "Campus Evangelism",
+      () => buildDefaultCampusEvangelismLayout(uploadMedia),
+    ),
+  );
+  await step(payload, 'Page "get-involved/chapter-affiliation"', () =>
+    seedPage(
+      payload,
+      "get-involved/chapter-affiliation",
+      "Chapter Affiliation",
+      () => buildDefaultChapterAffiliationLayout(),
+    ),
+  );
   await step(payload, 'Photo event "yef-hq-retreat"', () =>
     seedPhotoEvent(
       payload,
