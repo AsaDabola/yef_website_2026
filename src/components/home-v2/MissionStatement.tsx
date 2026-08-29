@@ -9,7 +9,7 @@ const defaults = {
   // rather than left to the container width, which lands on four.
   verse:
     "Young people will come to you",
-  verseAccent: "like the morning dew.",
+  verseAccent: "/nlike the morning dew.",
   reference: "Psalm 110:3",
   columns: [
     "We exist to help students **know Jesus Christ deeply, build their lives on the Word of God,** and **grow into mature disciples** whose faith shapes every part of life.",
