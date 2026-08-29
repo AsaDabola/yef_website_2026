@@ -13,7 +13,7 @@ const navLinks = [
   { label: "Who we are", href: "/who-we-are", subLinks: whoWeAreLinks },
   { label: "Get Involved", href: "/get-involved", subLinks: getInvolvedLinks },
   { label: "Chapters", href: "/network" },
-  { label: "Stories", href: "/submit-your-story" },
+  { label: "Stories", href: "/news" },
   { label: "Resources", href: "/resources" },
 ];
 

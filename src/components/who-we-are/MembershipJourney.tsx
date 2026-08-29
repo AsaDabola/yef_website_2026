@@ -1,4 +1,5 @@
 import { getT } from "@/lib/i18n/server";
+import JourneyTimeline from "@/components/ui/JourneyTimeline";
 
 /**
  * Five coordinated stops on one path rather than five unrelated ranks — the
@@ -48,92 +49,17 @@ const stages = [
 export default async function MembershipJourney() {
   const t = await getT();
   return (
-    <section className="mt-16 rounded-2xl border border-v2-border bg-[#f7f9fc] px-6 py-10 sm:px-10 sm:py-12">
-      <p className="font-semibold text-[11px] text-yef-primary tracking-[1.92px] uppercase">
-        {t("The Membership Journey")}
-      </p>
-      <h2 className="mt-2 font-display font-extrabold text-[28px] text-black tracking-[-0.5px]">
-        {t("How You Grow at YEF")}
-      </h2>
-
-      {/* Desktop / tablet: one connected horizontal line running through
-          every numbered stage, each segment picking up that stage's color. */}
-      <div className="mt-10 hidden md:flex md:items-start">
-        {stages.map((stage, index) => (
-          <div key={stage.label} className="flex flex-1 flex-col items-center text-center">
-            <div className="flex w-full items-center">
-              <div
-                className="h-[2px] flex-1"
-                style={{
-                  background: index === 0 ? "transparent" : stages[index - 1].color,
-                }}
-              />
-              <div
-                className="flex size-12 shrink-0 items-center justify-center rounded-full font-display font-bold text-sm text-white lg:size-14 lg:text-base"
-                style={{ background: stage.color }}
-              >
-                {stage.number}
-              </div>
-              <div
-                className="h-[2px] flex-1"
-                style={{
-                  background: index === stages.length - 1 ? "transparent" : stage.color,
-                }}
-              />
-            </div>
-
-            <p
-              className="mt-4 font-semibold text-[11px] tracking-[1.92px] uppercase"
-              style={{ color: stage.color }}
-            >
-              {t(stage.label)}
-            </p>
-            <h3 className="mt-1 font-display font-bold text-[15px] text-black lg:text-base">
-              {t(stage.title)}
-            </h3>
-            <p className="mt-2 max-w-[190px] text-[#4b5565] text-[12.5px] leading-[18px] lg:max-w-[210px]">
-              {t(stage.body)}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* Mobile: the same journey as a vertical connected timeline, never
-          five stacked cards. */}
-      <div className="mt-10 flex flex-col md:hidden">
-        {stages.map((stage, index) => (
-          <div key={stage.label} className="flex gap-4">
-            <div className="flex flex-col items-center">
-              <div
-                className="flex size-11 shrink-0 items-center justify-center rounded-full font-display font-bold text-sm text-white"
-                style={{ background: stage.color }}
-              >
-                {stage.number}
-              </div>
-              {index < stages.length - 1 && (
-                <div
-                  className="my-1 w-[2px] flex-1"
-                  style={{ background: stage.color, minHeight: "28px" }}
-                />
-              )}
-            </div>
-            <div className={index < stages.length - 1 ? "pb-7" : undefined}>
-              <p
-                className="font-semibold text-[11px] tracking-[1.92px] uppercase"
-                style={{ color: stage.color }}
-              >
-                {t(stage.label)}
-              </p>
-              <h3 className="mt-1 font-display font-bold text-base text-black">
-                {t(stage.title)}
-              </h3>
-              <p className="mt-1.5 max-w-[420px] text-[#4b5565] text-sm leading-[21px]">
-                {t(stage.body)}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+    <div className="mt-16">
+      <JourneyTimeline
+        eyebrow={t("The Membership Journey")}
+        heading={t("How You Grow at YEF")}
+        stages={stages.map((stage) => ({
+          ...stage,
+          label: t(stage.label),
+          title: t(stage.title),
+          body: t(stage.body),
+        }))}
+      />
+    </div>
   );
 }
