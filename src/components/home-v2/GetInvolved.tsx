@@ -13,42 +13,42 @@ const DRIFT_SPEED = 34;
 
 const cards = [
   {
-    tag: "Ongoing",
+    tag: "Reach",
     title: "Campus Evangelism",
     body: "Every campus is a mission field — Campus Evangelism exists to ignite that faith right where students already are.",
     image: "/images/home-v2/get-involved-campus-evangelism.webp",
     href: "/get-involved/campus-evangelism",
   },
   {
-    tag: "Weekly",
+    tag: "Grow",
     title: "Bible Study",
     body: "Study Scripture personally and together, building a faith firmly grounded in the Gospel.",
     image: "/images/home-v2/get-involved-bible-study.webp",
     href: "/get-involved/bible-studies",
   },
   {
-    tag: "By Invitation",
+    tag: "Train",
     title: "Leadership Training",
     body: "Learn to teach the Word, care for others, lead fellowship, and make disciples.",
     image: "/images/home-v2/get-involved-leadership-training.webp",
     href: "/get-involved/leadership-retreats",
   },
   {
-    tag: "Each Summer",
+    tag: "Train",
     title: "Summer Training",
     body: "Grow through focused Bible study, prayer, fellowship, evangelism, and mission training.",
     image: "/images/home-v2/get-involved-summer-training.webp",
     href: "/get-involved/summer-training",
   },
   {
-    tag: "Go",
+    tag: "Reach",
     title: "Short-term Mission",
     body: "Three to seven days in the US and Korea. Word, prayer, and long meals with students who came from the other side of the world.",
     image: "/images/home-v2/get-involved-short-term-mission.webp",
     href: "/get-involved/short-term-mission",
   },
   {
-    tag: "Growth",
+    tag: "Grow",
     title: "Discipleship Training",
     body: "A hands-on training to grow as a disciple and step into leadership — becoming a missionary to the campus you already call home.",
     image: "/images/home-v2/get-involved-discipleship-training.webp",
