@@ -135,7 +135,7 @@ export const Pages: CollectionConfig = {
       admin: {
         readOnly: true,
         description:
-          "This page is listed so every real page of the site shows up here. Its sections aren't wired to the CMS one by one yet — only Home and Who We Are have that — but its banner photo, heading, and intro line below are.",
+          "This page is listed so every real page of the site shows up here. Its banner photo, heading, and intro line below are always editable; the sections underneath are edited as blocks in Layout below.",
       },
     },
     {
@@ -158,9 +158,8 @@ export const Pages: CollectionConfig = {
       type: "blocks",
       blocks: pageBlocks,
       admin: {
-        condition: (data) => data?.builtIn !== true,
         description:
-          "Sections render top to bottom in this order. Removing one falls back to nothing — leave it in place to keep it.",
+          "Sections render top to bottom in this order, below the banner. Removing one falls back to nothing — leave it in place to keep it. Pick a block under “Generic sections” to add a new section to a built-in page.",
       },
     },
   ],

@@ -1,5 +1,6 @@
 import type { Block } from "payload";
 import { whoWeAreBlocks } from "@/payload/blocks/whoWeAre";
+import { genericBlocks } from "@/payload/blocks/generic";
 
 /**
  * The home page's sections, as blocks an editor can reorder and edit.
@@ -195,4 +196,8 @@ export const homeBlocks: Block[] = [
  * the picker (by `admin.group`), rather than each route needing its own
  * field and its own migration.
  */
-export const pageBlocks: Block[] = [...homeBlocks, ...whoWeAreBlocks];
+export const pageBlocks: Block[] = [
+  ...homeBlocks,
+  ...whoWeAreBlocks,
+  ...genericBlocks,
+];
