@@ -87,8 +87,8 @@ export const Pages: CollectionConfig = {
           value: "get-involved/chapter-affiliation",
         },
         {
-          label: "Get Involved — International Leadership Retreats",
-          value: "get-involved/leadership-retreats",
+          label: "Get Involved — Leadership Training",
+          value: "get-involved/leadership-training",
         },
         { label: "Get Involved — Volunteer with YEF", value: "get-involved/volunteer" },
         { label: "News", value: "news" },

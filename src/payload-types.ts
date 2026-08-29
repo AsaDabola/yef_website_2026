@@ -175,7 +175,7 @@ export interface Page {
     | 'get-involved/campus-evangelism'
     | 'get-involved/campus-evangelism/apply'
     | 'get-involved/chapter-affiliation'
-    | 'get-involved/leadership-retreats'
+    | 'get-involved/leadership-training'
     | 'get-involved/volunteer'
     | 'news'
     | 'network'

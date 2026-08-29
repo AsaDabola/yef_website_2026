@@ -447,7 +447,7 @@ const builtInPages: { route: string; title: string }[] = [
   { route: "get-involved/campus-evangelism", title: "Campus Evangelism" },
   { route: "get-involved/campus-evangelism/apply", title: "Begin Your Mission Journey" },
   { route: "get-involved/chapter-affiliation", title: "Chapter Affiliation" },
-  { route: "get-involved/leadership-retreats", title: "International Leadership Retreats" },
+  { route: "get-involved/leadership-training", title: "International Leadership Retreats" },
   { route: "get-involved/volunteer", title: "Volunteer with YEF" },
   { route: "news", title: "News" },
   { route: "network", title: "Network" },

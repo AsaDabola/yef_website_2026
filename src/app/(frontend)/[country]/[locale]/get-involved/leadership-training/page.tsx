@@ -6,6 +6,7 @@ import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
+import Link from "@/components/ui/LocaleLink";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
@@ -14,10 +15,10 @@ export const metadata: Metadata = {
   title: "International Leadership Retreats | Youth Evangelical Fellowship",
 };
 
-export default async function LeadershipRetreatsPage({ params }: { params: LocaleParams }) {
+export default async function LeadershipTrainingPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
-  const header = await getPageHeader("get-involved/leadership-retreats");
+  const header = await getPageHeader("get-involved/leadership-training");
   return (
     <>
       <main>
@@ -128,24 +129,14 @@ export default async function LeadershipRetreatsPage({ params }: { params: Local
             </div>
           </div>
 
-          <div className="mt-[122px] flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-[83px]">
-            <a
-              href="/get-involved/apply"
+          <div className="mt-[122px] flex flex-col items-center justify-center gap-6 lg:flex-row">
+            <Link
+              href="/get-involved/leadership-training/apply"
               className="flex w-full max-w-[515px] items-center justify-center rounded-2xl border border-[#0066cf] bg-[#0066cf] px-6 py-8 text-center font-sans font-semibold text-white text-xl leading-[28.8px] transition-opacity hover:opacity-90 lg:h-[158px] lg:py-0 lg:text-[28px]"
-            >
-              
-{t("View Upcoming")}
-<br />
-              
-{t("Leadership Retreats")}
-</a>
-            <a
-              href="/get-involved/leadership-retreats/apply"
-              className="flex w-full max-w-[515px] items-center justify-center rounded-2xl border border-[#b1b1b1] bg-white px-6 py-8 text-center font-sans font-semibold text-[#0066cf] text-xl leading-[28.8px] transition-colors hover:border-[#0066cf] lg:h-[158px] lg:py-0 lg:text-[28px]"
             >
 
 {t("Apply to Attend")}
-</a>
+</Link>
           </div>
         </div>
         </div>
