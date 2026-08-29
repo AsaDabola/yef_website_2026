@@ -25,7 +25,7 @@ export default async function HistoryIntro() {
                  
                 </div>
               </div>
-            </div>
+          
           </div>
 
           <h2 className="mt-16 max-w-3xl font-semibold text-3xl text-black sm:text-4xl">
