@@ -23,7 +23,7 @@ const PROSE_FIELDS = new Set([
   // Field names the page blocks standardise on, so a section's bundled
   // defaults stay visible to the catalog once its copy moves into an object.
   "imageAlt", "headingAccent", "lead", "verse", "verseAccent", "reference",
-  "buttonLabel", "columns",
+  "buttonLabel", "columns", "place", "missionBody", "portraitAlt", "signature",
 ]);
 
 const files = [];
@@ -51,6 +51,25 @@ for (const file of files) {
     file, text, ts.ScriptTarget.Latest, true,
     file.endsWith(".tsx") ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
   );
+
+  // A field name only needs to be in PROSE_FIELDS if nothing in this same
+  // file ever calls t(something.<thatField>) — when it does, that call site
+  // is the proof the field holds prose, so pick it up automatically instead
+  // of relying on someone remembering to extend the whitelist by hand.
+  const fileProseFields = new Set(PROSE_FIELDS);
+  (function findFieldsPassedToT(n) {
+    if (
+      ts.isCallExpression(n) &&
+      ts.isIdentifier(n.expression) &&
+      n.expression.text === "t"
+    ) {
+      for (const arg of n.arguments) {
+        if (ts.isPropertyAccessExpression(arg)) fileProseFields.add(arg.name.text);
+      }
+    }
+    ts.forEachChild(n, findFieldsPassedToT);
+  })(src);
+
   (function visit(n) {
     if (
       ts.isCallExpression(n) &&
@@ -76,7 +95,7 @@ for (const file of files) {
       }
     } else if (
       ts.isPropertyAssignment(n) &&
-      PROSE_FIELDS.has(n.name.getText().replace(/['"]/g, ""))
+      fileProseFields.has(n.name.getText().replace(/['"]/g, ""))
     ) {
       // A prose field is usually one string, but some hold an array of
       // paragraphs; both reach the page through t(), so collect either shape.
