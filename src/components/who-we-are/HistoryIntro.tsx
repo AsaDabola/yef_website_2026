@@ -26,13 +26,13 @@ export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) 
             {t("Our Story So Far")}
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[849fr_477fr]">
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-[1000fr_300fr]">
             <div className="relative aspect-[849/637] w-full overflow-hidden rounded-2xl">
               <Image
-                src="/images/history/hero-large.png"
+                src="/images/history/yef_1.webp"
                 alt={t("Youth Evangelical Fellowship headquarters building")}
                 fill
-                sizes="(min-width: 720px) 45vw, 120vw"
+                sizes="(min-width: 720px) 75vw, 120vw"
                 className="object-cover"
               />
             </div>
