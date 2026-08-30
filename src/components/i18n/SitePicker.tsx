@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useI18n, useT } from "@/lib/i18n/client";
-import {
-  countriesByRegion,
-  defaultLocaleFor,
-  singleLocaleFor,
-} from "@/lib/i18n/countries";
+import { countriesByRegion } from "@/lib/i18n/countries";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 import { stripLocalePath } from "@/lib/i18n/paths";
 import { countryName, flag } from "@/lib/i18n/display";
@@ -85,7 +81,7 @@ function InternationalLink({ tone }: { tone: Tone }) {
   const rest = stripLocalePath(pathname);
   return (
     <a
-      href={`/${INTERNATIONAL}/en${rest === "/" ? "" : rest}`}
+      href={`/${INTERNATIONAL}${rest === "/" ? "" : rest}`}
       className={`flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-medium text-sm transition-colors ${trigger(tone)}`}
     >
       <Globe />
@@ -120,13 +116,7 @@ export function CountryPicker({
   // A country site never offers other countries — only the way home.
   if (country !== INTERNATIONAL) return <InternationalLink tone={tone} />;
 
-  const href = (code: string) => {
-    const suffix = rest === "/" ? "" : rest;
-    const only = code === INTERNATIONAL ? undefined : singleLocaleFor(code);
-    if (only) return `/${code}${suffix}`;
-    const target = code === INTERNATIONAL ? "en" : defaultLocaleFor(code);
-    return `/${code}/${target}${suffix}`;
-  };
+  const href = (code: string) => `/${code}${rest === "/" ? "" : rest}`;
 
   return (
     <div className="relative" ref={ref}>
