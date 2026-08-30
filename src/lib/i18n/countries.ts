@@ -324,17 +324,6 @@ export function defaultLocaleFor(code: string): string {
   return getCountry(code)?.locales[0] ?? "en";
 }
 
-/**
- * The one locale a single-language country's site is ever shown in, or
- * `undefined` for a country that offers a choice (or for the headquarters
- * site, which offers all of them). A country in this set drops the locale
- * segment from its URLs entirely — there is nothing for it to disambiguate.
- */
-export function singleLocaleFor(code: string): string | undefined {
-  const country = getCountry(code);
-  return country && country.locales.length === 1 ? country.locales[0] : undefined;
-}
-
 /** Countries grouped for the picker, alphabetical within each region. */
 export function countriesByRegion(): [Region, Country[]][] {
   const groups = new Map<Region, Country[]>();

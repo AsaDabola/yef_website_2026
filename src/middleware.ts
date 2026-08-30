@@ -1,11 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import {
-  countries,
-  countryCodes,
-  defaultLocaleFor,
-  singleLocaleFor,
-} from "@/lib/i18n/countries";
-import { defaultLocale, localeCodes } from "@/lib/i18n/locales";
+import { countryCodes, defaultLocaleFor, getCountry } from "@/lib/i18n/countries";
+import { localeCodes } from "@/lib/i18n/locales";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
 
 const countrySet = new Set([INTERNATIONAL, ...countryCodes]);
@@ -15,18 +10,25 @@ const localeSet = new Set(localeCodes);
 const PASSTHROUGH =
   /^\/(_next|api|admin|images|data|media|favicon\.ico|icon\.svg|apple-icon\.png|robots\.txt|sitemap\.xml)(\/|$)/;
 
-/** Picks the best country/language for a first-time visitor. */
-function preferred(request: NextRequest): { country: string; locale: string } {
+/** The languages a site may resolve to — every one of them for the
+ *  headquarters site, just the country's own short list everywhere else. */
+function localesFor(country: string): string[] {
+  if (country === INTERNATIONAL) return localeCodes;
+  return getCountry(country)?.locales ?? [defaultLocaleFor(country)];
+}
+
+/**
+ * The language a site renders in, decided without ever touching the URL:
+ * a remembered choice first, then the browser's own language list narrowed
+ * to what that site offers, then the site's own default.
+ */
+function resolveLocale(request: NextRequest, country: string): string {
+  const allowed = localesFor(country);
+
   const saved = request.cookies.get("yef-site")?.value;
   if (saved) {
-    const [country, locale] = saved.split("/");
-    if (countrySet.has(country) && localeSet.has(locale)) return { country, locale };
-  }
-
-  // Vercel resolves the visitor's country; fall back to Accept-Language.
-  const geo = request.headers.get("x-vercel-ip-country")?.toLowerCase();
-  if (geo && countrySet.has(geo)) {
-    return { country: geo, locale: defaultLocaleFor(geo) };
+    const [savedCountry, savedLocale] = saved.split("/");
+    if (savedCountry === country && allowed.includes(savedLocale)) return savedLocale;
   }
 
   const accepted = (request.headers.get("accept-language") ?? "")
@@ -34,11 +36,28 @@ function preferred(request: NextRequest): { country: string; locale: string } {
     .map((part) => part.split(";")[0].trim().toLowerCase());
   for (const tag of accepted) {
     const base = tag.split("-")[0];
-    if (localeSet.has(tag)) return { country: INTERNATIONAL, locale: tag };
-    if (localeSet.has(base)) return { country: INTERNATIONAL, locale: base };
+    if (allowed.includes(tag)) return tag;
+    if (allowed.includes(base)) return base;
   }
 
-  return { country: INTERNATIONAL, locale: defaultLocale };
+  return defaultLocaleFor(country);
+}
+
+/** Picks the best site for a first-time visitor with no country in the URL. */
+function preferredCountry(request: NextRequest): string {
+  const saved = request.cookies.get("yef-site")?.value;
+  if (saved) {
+    const [country] = saved.split("/");
+    if (countrySet.has(country)) return country;
+  }
+
+  // Vercel resolves the visitor's country; fall back to the headquarters
+  // site, which offers every language, so a browser's language always lands
+  // somewhere sensible even when its country doesn't have its own site.
+  const geo = request.headers.get("x-vercel-ip-country")?.toLowerCase();
+  if (geo && countrySet.has(geo)) return geo;
+
+  return INTERNATIONAL;
 }
 
 export function middleware(request: NextRequest) {
@@ -48,46 +67,27 @@ export function middleware(request: NextRequest) {
   const segments = pathname.split("/").filter(Boolean);
   const [first, second] = segments;
 
-  // A single-language country's site routes on its country code alone —
-  // there is no language to pick, so no second segment ever appears in a
-  // URL a visitor sees. The page tree underneath still lives at
-  // /<country>/<language>/..., so a matching request is rewritten to that
+  // Every site routes on its country code alone — there is no language
+  // segment in a URL a visitor sees, ever. The page tree underneath still
+  // lives at /<country>/<language>/..., so a request is rewritten to that
   // internal path rather than redirected: the address bar keeps the short
-  // form while Next resolves the route it actually has.
+  // form while Next resolves the route it actually has. The language comes
+  // from resolveLocale() alone — a remembered cookie, then Accept-Language,
+  // then the site's default — never from anything in the URL.
   if (countrySet.has(first)) {
-    const only = singleLocaleFor(first);
-    if (only) {
-      // An old-style /<country>/<language>/... link (or one built for any
-      // other language) collapses onto the short form instead of 404ing.
-      if (localeSet.has(second)) {
-        const url = request.nextUrl.clone();
-        url.pathname = `/${first}/${segments.slice(2).join("/")}`;
-        return NextResponse.redirect(url);
-      }
+    // An old-style /<country>/<language>/... link collapses onto the short
+    // form instead of 404ing or double-counting the language.
+    if (localeSet.has(second)) {
       const url = request.nextUrl.clone();
-      url.pathname = `/${first}/${only}/${segments.slice(1).join("/")}`;
-      const response = NextResponse.rewrite(url);
-      response.cookies.set("yef-site", `${first}/${only}`, {
-        maxAge: 60 * 60 * 24 * 365,
-        sameSite: "lax",
-        path: "/",
-      });
-      return response;
-    }
-  }
-
-  // Already addressed as /<country>/<language>/...
-  if (countrySet.has(first) && localeSet.has(second)) {
-    const country = countries.find((c) => c.code === first);
-    // A country only serves its own languages; anything else is a typo or an
-    // old link, so send it to that country's default rather than 404.
-    if (country && !country.locales.includes(second)) {
-      const url = request.nextUrl.clone();
-      url.pathname = `/${first}/${defaultLocaleFor(first)}/${segments.slice(2).join("/")}`;
+      url.pathname = `/${first}/${segments.slice(2).join("/")}`;
       return NextResponse.redirect(url);
     }
-    const response = NextResponse.next();
-    response.cookies.set("yef-site", `${first}/${second}`, {
+
+    const locale = resolveLocale(request, first);
+    const url = request.nextUrl.clone();
+    url.pathname = `/${first}/${locale}/${segments.slice(1).join("/")}`;
+    const response = NextResponse.rewrite(url);
+    response.cookies.set("yef-site", `${first}/${locale}`, {
       maxAge: 60 * 60 * 24 * 365,
       sameSite: "lax",
       path: "/",
@@ -97,12 +97,9 @@ export function middleware(request: NextRequest) {
 
   // Anything else — "/" or a link written before the country sites existed —
   // is sent to the visitor's site with the rest of the path intact.
-  const { country, locale } = preferred(request);
+  const country = preferredCountry(request);
   const url = request.nextUrl.clone();
-  const rest = pathname === "/" ? "" : pathname;
-  url.pathname = singleLocaleFor(country)
-    ? `/${country}${rest}`
-    : `/${country}/${locale}${rest}`;
+  url.pathname = `/${country}${pathname === "/" ? "" : pathname}`;
   url.search = search;
   return NextResponse.redirect(url);
 }
