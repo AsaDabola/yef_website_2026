@@ -31,7 +31,7 @@ const cards = [
     title: "Leadership Training",
     body: "Learn to teach the Word, care for others, lead fellowship, and make disciples.",
     image: "/images/home-v2/get-involved-leadership-training.webp",
-    href: "/get-involved/leadership-retreats",
+    href: "/get-involved/leadership-training",
   },
   {
     tag: "Train",

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default async function LeadershipTrainingPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
-  const header = await getPageHeader("get-involved/leadership-training");
+  const header = await getPageHeader("get-involved/leadership-retreats");
   return (
     <>
       <main>
