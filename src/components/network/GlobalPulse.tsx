@@ -5,12 +5,18 @@ import { CHAPTER_COUNTRIES } from "@/lib/network/chapterCountries";
 import { flag } from "@/lib/i18n/display";
 
 /**
- * The globe behind the Network hero: a smooth, Google-Earth-style sphere in
- * one blue palette — a lit ocean body, real continents as soft overlapping
- * discs that blend into continuous coastlines (not a stippled dot cloud or
- * a hard-edged pixel grid), an atmospheric rim glow, and coloured long-haul
- * arcs between hub cities. A glowing marker sits at every one of YEF's 68
- * chapter countries.
+ * The globe behind the Network hero: a lit, Google-Earth-style ocean sphere
+ * in one blue palette, real continents filled in as solid, nearly-opaque
+ * shapes (not a stippled dot cloud), an atmospheric rim glow, and coloured
+ * long-haul arcs between hub cities. A glowing marker sits at every one of
+ * YEF's 68 chapter countries.
+ *
+ * The land data is a coarse equal-area sample of land/ocean cells (each
+ * point is a cell centre, with the cell's angular size widening toward the
+ * poles to match its native sampling density); each is drawn as a quad
+ * sized to butt up against its neighbours, so adjoining land cells merge
+ * into one crisp, continuous coastline instead of leaving gaps or blurring
+ * into the ocean.
  *
  * It is draggable and the markers are hoverable/clickable — a reader can
  * spin it to see the span of the network for themselves, not just watch it
@@ -20,6 +26,10 @@ import { flag } from "@/lib/i18n/display";
 type Vec3 = { x: number; y: number; z: number };
 
 const COASTLINE_URL = "/data/globe-coastline.json";
+
+/** Native spacing of the land-cell sample, in degrees — see file doc above. */
+const LAND_LAT_STEP = 1.35;
+const LAND_LON_STEP_AT_EQUATOR = 1.36;
 
 // One blue family throughout, Google-Earth style — the routes vary in
 // brightness, not hue.
@@ -112,8 +122,8 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
 
     const hubPoints = HUBS.map((h) => toXYZ(h.lat, h.lon));
 
-    /** Each land cell's sphere position, filled in once the data arrives. */
-    let landCells: { pos: Vec3 }[] = [];
+    /** Each land cell's four corners, pre-computed once the data arrives. */
+    let landCells: Vec3[][] = [];
 
     let W = 0;
     let H = 0;
@@ -247,10 +257,10 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
         cy,
         bodyR * 1.05,
       );
-      body.addColorStop(0, "rgba(150,205,245,0.95)");
-      body.addColorStop(0.32, "rgba(70,145,205,0.92)");
-      body.addColorStop(0.68, "rgba(22,80,140,0.92)");
-      body.addColorStop(1, "rgba(6,32,64,0.92)");
+      body.addColorStop(0, "rgba(110,180,230,0.95)");
+      body.addColorStop(0.32, "rgba(55,125,190,0.92)");
+      body.addColorStop(0.68, "rgba(18,68,124,0.92)");
+      body.addColorStop(1, "rgba(5,26,54,0.92)");
       ctx.beginPath();
       ctx.arc(cx, cy, bodyR, 0, Math.PI * 2);
       ctx.fillStyle = body;
@@ -269,19 +279,25 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       ctx.fill();
 
       // Real continents, filled as solid shapes rather than scattered dots.
-      // Each cell is a soft-edged, generously overlapping circle — the
-      // antialiased curves blend into smooth, continuous coastlines instead
-      // of the hard pixel edges a grid of squares would leave. A pale,
-      // sun-lit blue against the deeper ocean, same palette throughout.
-      for (const cell of landCells) {
-        const r = rotate(cell.pos);
-        const vis = smoothstep(-0.05, 0.14, r[2]);
+      // Each cell is a quad sized to butt against its neighbours, so
+      // adjoining land reads as one crisp, continuous coastline — and land
+      // is nearly opaque, so it stays clearly distinct from the ocean
+      // beneath it instead of washing into a shared pale grey.
+      for (const corners of landCells) {
+        let sumZ = 0;
+        const q: (readonly [number, number])[] = [];
+        for (const c of corners) {
+          const r = rotate(c);
+          sumZ += r[2];
+          q.push(project(r));
+        }
+        const vis = smoothstep(-0.04, 0.14, sumZ / corners.length);
         if (vis <= 0.02) continue;
-        const q = project(r);
-        const rad = (0.9 + 0.75 * Math.max(0, r[2])) * (R / 36);
         ctx.beginPath();
-        ctx.arc(q[0], q[1], rad, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(210,235,255,${(0.55 + vis * 0.4).toFixed(2)})`;
+        ctx.moveTo(q[0][0], q[0][1]);
+        for (let k = 1; k < q.length; k++) ctx.lineTo(q[k][0], q[k][1]);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(225,242,255,${(0.82 + vis * 0.18).toFixed(2)})`;
         ctx.fill();
       }
 
@@ -511,7 +527,17 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     fetch(COASTLINE_URL, { signal: controller.signal })
       .then((res) => res.json())
       .then((cells: [number, number][]) => {
-        landCells = cells.map(([lat, lon]) => ({ pos: toXYZ(lat, lon) }));
+        landCells = cells.map(([lat, lon]) => {
+          const cosLat = Math.max(0.06, Math.cos((lat * Math.PI) / 180));
+          const latHalf = (LAND_LAT_STEP / 2) * 1.15;
+          const lonHalf = Math.min(20, ((LAND_LON_STEP_AT_EQUATOR / cosLat) / 2) * 1.15);
+          return [
+            toXYZ(lat - latHalf, lon - lonHalf),
+            toXYZ(lat - latHalf, lon + lonHalf),
+            toXYZ(lat + latHalf, lon + lonHalf),
+            toXYZ(lat + latHalf, lon - lonHalf),
+          ];
+        });
       })
       .catch(() => {
         // The ocean sphere and markers still carry the globe if the land data
