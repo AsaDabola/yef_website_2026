@@ -8,8 +8,9 @@ import { flag } from "@/lib/i18n/display";
  * The globe behind the Network hero: a lit, Google-Earth-style ocean sphere
  * in one blue palette, real continents filled in as solid, nearly-opaque
  * shapes (not a stippled dot cloud), an atmospheric rim glow, and coloured
- * long-haul arcs between hub cities. A glowing marker sits at every one of
- * YEF's 68 chapter countries.
+ * long-haul arcs that all originate from headquarters in Orlando and reach
+ * out to a random chapter country. A glowing marker sits at every one of
+ * YEF's chapter countries, with a brighter beacon at Orlando itself.
  *
  * The land data is a coarse equal-area sample of land/ocean cells (each
  * point is a cell centre, with the cell's angular size widening toward the
@@ -40,20 +41,9 @@ const ROUTE_COLORS = [
   "50,140,230", // deeper blue
 ];
 
-const HUBS = [
-  { lat: 40.71, lon: -74.01 }, // New York
-  { lat: 51.51, lon: -0.13 }, // London
-  { lat: 52.52, lon: 13.4 }, // Berlin
-  { lat: 6.52, lon: 3.38 }, // Lagos
-  { lat: 25.2, lon: 55.27 }, // Dubai
-  { lat: 19.08, lon: 72.88 }, // Mumbai
-  { lat: 1.35, lon: 103.82 }, // Singapore
-  { lat: 37.57, lon: 126.98 }, // Seoul
-  { lat: 35.68, lon: 139.69 }, // Tokyo
-  { lat: -33.87, lon: 151.21 }, // Sydney
-  { lat: -23.55, lon: -46.63 }, // São Paulo
-  { lat: 37.77, lon: -122.42 }, // San Francisco
-];
+/** YEF's headquarters — every route arcs out from here, not from a
+ *  scattered list of world cities. */
+const HQ = { lat: 28.6, lon: -81.2 }; // Orlando, FL
 
 function toXYZ(lat: number, lon: number): Vec3 {
   const phi = (lat * Math.PI) / 180;
@@ -64,6 +54,60 @@ function toXYZ(lat: number, lon: number): Vec3 {
     y: Math.sin(phi),
     z: cphi * Math.cos(lambda),
   };
+}
+
+/**
+ * Which land cells sit on the coast, so the shoreline can be traced with a
+ * crisp bright line instead of leaving the whole landmass reading as one
+ * undifferentiated fill. The land sample has no political borders in it —
+ * this can only draw the coastline itself, not country-to-country
+ * boundaries — but it does give every landmass a clear, separated edge.
+ *
+ * A cell counts as coastal if it is missing a neighbour on any of its four
+ * sides, checked against this cell's own row (for east/west) and the
+ * nearest existing row roughly one native step away (for north/south) —
+ * see the LAND_LAT_STEP/LAND_LON_STEP_AT_EQUATOR doc above for why the
+ * east/west step widens toward the poles.
+ */
+function findCoastline(cells: [number, number][]): [number, number][] {
+  const byLat = new Map<number, number[]>();
+  for (const [lat, lon] of cells) {
+    const row = byLat.get(lat);
+    if (row) row.push(lon);
+    else byLat.set(lat, [lon]);
+  }
+  const lats = [...byLat.keys()].sort((a, b) => a - b);
+  const nearestLat = (target: number) => {
+    let best: number | null = null;
+    let bestDist = Infinity;
+    for (const l of lats) {
+      const d = Math.abs(l - target);
+      if (d < bestDist) {
+        bestDist = d;
+        best = l;
+      }
+    }
+    return bestDist < LAND_LAT_STEP * 0.6 ? best : null;
+  };
+
+  const coastline: [number, number][] = [];
+  for (const [lat, lons] of byLat) {
+    const cosLat = Math.max(0.06, Math.cos((lat * Math.PI) / 180));
+    const lonStep = LAND_LON_STEP_AT_EQUATOR / cosLat;
+    const upLat = nearestLat(lat + LAND_LAT_STEP);
+    const downLat = nearestLat(lat - LAND_LAT_STEP);
+    const lonsUp = upLat !== null ? byLat.get(upLat)! : [];
+    const lonsDown = downLat !== null ? byLat.get(downLat)! : [];
+    for (const lon of lons) {
+      const hasLeft = lons.some((o) => Math.abs(o - (lon - lonStep)) < lonStep * 0.6);
+      const hasRight = lons.some((o) => Math.abs(o - (lon + lonStep)) < lonStep * 0.6);
+      const hasUp = lonsUp.some((o) => Math.abs(o - lon) < lonStep * 0.8);
+      const hasDown = lonsDown.some((o) => Math.abs(o - lon) < lonStep * 0.8);
+      const neighborCount = [hasLeft, hasRight, hasUp, hasDown].filter(Boolean).length;
+      if (neighborCount < 4) coastline.push([lat, lon]);
+    }
+  }
+  return coastline;
 }
 
 function angDist(a: Vec3, b: Vec3) {
@@ -120,10 +164,12 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       pos: toXYZ(c.lat, c.lon),
     }));
 
-    const hubPoints = HUBS.map((h) => toXYZ(h.lat, h.lon));
+    const hq = toXYZ(HQ.lat, HQ.lon);
 
     /** Each land cell's four corners, pre-computed once the data arrives. */
     let landCells: Vec3[][] = [];
+    /** The coastal cells only, for a crisp outline pass over the fill. */
+    let coastlinePoints: Vec3[] = [];
 
     let W = 0;
     let H = 0;
@@ -195,12 +241,9 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
 
     const spawnRoute = (now: number) => {
       if (routes.length >= 15) return;
-      const a = hubPoints[(Math.random() * hubPoints.length) | 0];
-      const b =
-        Math.random() < 0.6
-          ? markers[(Math.random() * markers.length) | 0].pos
-          : hubPoints[(Math.random() * hubPoints.length) | 0];
-      if (a === b || angDist(a, b) < 0.5) return;
+      const a = hq;
+      const b = markers[(Math.random() * markers.length) | 0].pos;
+      if (angDist(a, b) < 0.5) return;
       const samples = 44;
       const height = 0.14 + Math.min(0.34, angDist(a, b) * 0.16);
       const pts: Vec3[] = [];
@@ -319,6 +362,20 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
         ctx.globalCompositeOperation = "lighter";
         ctx.drawImage(landBuffer, 0, 0);
         ctx.restore();
+
+        // A crisp coastline trace over the fill — the data has no political
+        // borders, but this at least gives every landmass a clear, distinct
+        // edge against the ocean rather than reading as one soft blob.
+        for (const p of coastlinePoints) {
+          const r = rotate(p);
+          const vis = smoothstep(-0.04, 0.14, r[2]);
+          if (vis <= 0.03) continue;
+          const q = project(r);
+          ctx.beginPath();
+          ctx.arc(q[0], q[1], Math.max(0.9, R / 220), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(220,245,255,${(0.55 + vis * 0.4).toFixed(2)})`;
+          ctx.fill();
+        }
       }
 
       // A crisp atmospheric rim right at the sphere's silhouette edge — the
@@ -360,6 +417,29 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
         ctx.fill();
       }
       markerScreen = nextMarkerScreen;
+
+      // Headquarters: a brighter, whiter beacon than the chapter markers —
+      // every route on the globe originates here, so it reads as the source.
+      {
+        const r = rotate(hq);
+        const vis = smoothstep(-0.06, 0.18, r[2]);
+        if (vis > 0.02) {
+          const q = project(r);
+          const rad = 3.2 * (R / 300);
+          const hg = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rad * 7);
+          hg.addColorStop(0, `rgba(220,245,255,${(vis * 0.6).toFixed(2)})`);
+          hg.addColorStop(1, "rgba(220,245,255,0)");
+          ctx.beginPath();
+          ctx.arc(q[0], q[1], rad * 7, 0, Math.PI * 2);
+          ctx.fillStyle = hg;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(q[0], q[1], rad, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${(0.7 + vis * 0.3).toFixed(2)})`;
+          ctx.fill();
+        }
+      }
 
       for (let ri = routes.length - 1; ri >= 0; ri--) {
         const route = routes[ri];
@@ -571,6 +651,7 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
             toXYZ(lat + latHalf, lon - lonHalf),
           ];
         });
+        coastlinePoints = findCoastline(cells).map(([lat, lon]) => toXYZ(lat, lon));
       })
       .catch(() => {
         // The ocean sphere and markers still carry the globe if the land data
