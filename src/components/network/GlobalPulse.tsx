@@ -5,27 +5,30 @@ import { CHAPTER_COUNTRIES } from "@/lib/network/chapterCountries";
 import { flag } from "@/lib/i18n/display";
 
 /**
- * The dot-matrix globe behind the Network hero: coastline points traced from
- * real data, a sparse plexus mesh with travelling signal pulses, coloured
- * long-haul arcs between hub cities, and a glowing marker for every one of
- * YEF's 68 chapter countries. The 6,500 coastline points are fetched rather
- * than bundled so the hero paints before they arrive.
+ * The globe behind the Network hero: real continents filled in as solid
+ * shapes (not a stippled dot cloud) over a lit ocean sphere, a faint
+ * latitude/longitude graticule, coloured long-haul arcs between hub cities,
+ * and a glowing marker for every one of YEF's 68 chapter countries. It reads
+ * as an actual map, not a point-cloud texture.
  *
- * It is draggable and the markers are hoverable/clickable — a reader can spin
- * it to see the span of the network for themselves, not just watch it turn.
+ * The land data is a coarse equal-area sample of land/ocean cells (each
+ * point is a cell centre, with the cell's angular size widening toward the
+ * poles to match its native sampling density); each is drawn as a small
+ * quad sized to butt up against its neighbours, so adjoining land cells
+ * merge into one continuous coastline instead of leaving gaps between dots.
+ *
+ * It is draggable and the markers are hoverable/clickable — a reader can
+ * spin it to see the span of the network for themselves, not just watch it
+ * turn.
  */
 
 type Vec3 = { x: number; y: number; z: number };
 
 const COASTLINE_URL = "/data/globe-coastline.json";
 
-const DOT_PALETTE = [
-  "95,227,255", // bright cyan
-  "31,126,201", // mid blue
-  "12,58,99", // dim navy
-  "150,200,255", // pale blue
-  "210,235,255", // pale blue-white
-];
+/** Native spacing of the land-cell sample, in degrees — see file doc above. */
+const LAND_LAT_STEP = 1.35;
+const LAND_LON_STEP_AT_EQUATOR = 1.36;
 
 const ROUTE_COLORS = [
   "255,214,10", // yellow
@@ -50,7 +53,11 @@ const HUBS = [
   { lat: 37.77, lon: -122.42 }, // San Francisco
 ];
 
-const MESH_N = 230;
+/** Parallels (fixed latitude) and meridians (fixed longitude), the classic
+ *  globe wireframe — lines, not a scattered point cloud. */
+const PARALLEL_LATS = [-60, -30, 0, 30, 60];
+const MERIDIAN_LONS = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+const GRATICULE_STEPS = 72;
 
 function toXYZ(lat: number, lon: number): Vec3 {
   const phi = (lat * Math.PI) / 180;
@@ -63,15 +70,18 @@ function toXYZ(lat: number, lon: number): Vec3 {
   };
 }
 
-function fibonacciSphere(n: number): Vec3[] {
+function parallel(lat: number): Vec3[] {
   const pts: Vec3[] = [];
-  const offset = 2 / n;
-  const increment = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < n; i++) {
-    const y = i * offset - 1 + offset / 2;
-    const r = Math.sqrt(Math.max(0, 1 - y * y));
-    const phi = i * increment;
-    pts.push({ x: Math.cos(phi) * r, y, z: Math.sin(phi) * r });
+  for (let i = 0; i <= GRATICULE_STEPS; i++) {
+    pts.push(toXYZ(lat, (i / GRATICULE_STEPS) * 360));
+  }
+  return pts;
+}
+
+function meridian(lon: number): Vec3[] {
+  const pts: Vec3[] = [];
+  for (let i = 0; i <= GRATICULE_STEPS; i++) {
+    pts.push(toXYZ((i / GRATICULE_STEPS) * 180 - 90, lon));
   }
   return pts;
 }
@@ -130,35 +140,15 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       pos: toXYZ(c.lat, c.lon),
     }));
 
-    const meshNodes = fibonacciSphere(MESH_N).map((p, i) => ({
-      ...p,
-      hub: (i * 37) % MESH_N < MESH_N * 0.09,
-    }));
-
-    const meshEdges: [number, number][] = [];
-    const seen = new Set<string>();
-    for (let i = 0; i < meshNodes.length; i++) {
-      const dists: [number, number][] = [];
-      for (let j = 0; j < meshNodes.length; j++) {
-        if (i === j) continue;
-        dists.push([angDist(meshNodes[i], meshNodes[j]), j]);
-      }
-      dists.sort((a, b) => a[0] - b[0]);
-      for (let n = 0; n < Math.min(3, dists.length); n++) {
-        if (dists[n][0] > 0.55) continue;
-        const a = Math.min(i, dists[n][1]);
-        const b = Math.max(i, dists[n][1]);
-        const key = `${a}_${b}`;
-        if (seen.has(key)) continue;
-        seen.add(key);
-        meshEdges.push([a, b]);
-      }
-    }
+    const graticule = [
+      ...PARALLEL_LATS.map((lat) => ({ pts: parallel(lat), major: lat === 0 })),
+      ...MERIDIAN_LONS.map((lon) => ({ pts: meridian(lon), major: lon === 0 })),
+    ];
 
     const hubPoints = HUBS.map((h) => toXYZ(h.lat, h.lon));
 
-    let landPoints: Vec3[] = [];
-    let landColors: string[] = [];
+    /** Each cell's four corners, pre-computed once the land data arrives. */
+    let landCells: Vec3[][] = [];
 
     let W = 0;
     let H = 0;
@@ -213,34 +203,17 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       return [cx + p[0] * R * scale, cy - p[1] * R * scale] as const;
     };
 
-    type Pulse = { a: Vec3; b: Vec3; start: number; dur: number };
     type Route = { pts: Vec3[]; start: number; dur: number; col: string };
-    const pulses: Pulse[] = [];
     const routes: Route[] = [];
-    let nextSpawn = 0;
     let nextRouteSpawn = 0;
-
-    const spawnPulse = (now: number) => {
-      if (pulses.length >= 10 || meshEdges.length === 0) return;
-      const e = meshEdges[(Math.random() * meshEdges.length) | 0];
-      pulses.push({
-        a: meshNodes[e[0]],
-        b: meshNodes[e[1]],
-        start: now,
-        dur: 900 + Math.random() * 900,
-      });
-    };
 
     const spawnRoute = (now: number) => {
       if (routes.length >= 15) return;
       const a = hubPoints[(Math.random() * hubPoints.length) | 0];
-      const roll = Math.random();
       const b =
-        roll < 0.45
+        Math.random() < 0.6
           ? markers[(Math.random() * markers.length) | 0].pos
-          : roll < 0.75 || landPoints.length === 0
-            ? hubPoints[(Math.random() * hubPoints.length) | 0]
-            : landPoints[(Math.random() * landPoints.length) | 0];
+          : hubPoints[(Math.random() * hubPoints.length) | 0];
       if (a === b || angDist(a, b) < 0.5) return;
       const samples = 44;
       const height = 0.14 + Math.min(0.34, angDist(a, b) * 0.16);
@@ -296,67 +269,75 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, W, H);
 
-      ctx.lineWidth = Math.max(0.6, R / 780);
-      for (const e of meshEdges) {
-        const pa = rotate(meshNodes[e[0]]);
-        const pb = rotate(meshNodes[e[1]]);
-        const v = Math.min(
-          smoothstep(-0.08, 0.18, pa[2]),
-          smoothstep(-0.08, 0.18, pb[2]),
-        );
-        if (v <= 0.02) continue;
-        const qa = project(pa);
-        const qb = project(pb);
+      // A solid, lit sphere body — the silhouette of the globe itself, not a
+      // point cloud standing in for one. Lit from the upper-left so it reads
+      // as a volume, darkening toward its lower-right rim.
+      const bodyR = R * (camD / Math.sqrt(Math.max(1, camD * camD - R * R)));
+      const body = ctx.createRadialGradient(
+        cx - bodyR * 0.35,
+        cy - bodyR * 0.45,
+        bodyR * 0.05,
+        cx,
+        cy,
+        bodyR * 1.05,
+      );
+      body.addColorStop(0, "rgba(120,190,240,0.9)");
+      body.addColorStop(0.35, "rgba(46,110,175,0.85)");
+      body.addColorStop(0.7, "rgba(16,54,96,0.85)");
+      body.addColorStop(1, "rgba(4,18,38,0.85)");
+      ctx.beginPath();
+      ctx.arc(cx, cy, bodyR, 0, Math.PI * 2);
+      ctx.fillStyle = body;
+      ctx.fill();
+
+      // Real continents, filled as solid shapes rather than scattered dots —
+      // adjoining cells share edges so the coastline reads as one shape.
+      for (const corners of landCells) {
+        let sumZ = 0;
+        const q: (readonly [number, number])[] = [];
+        for (const c of corners) {
+          const r = rotate(c);
+          sumZ += r[2];
+          q.push(project(r));
+        }
+        const vis = smoothstep(-0.04, 0.14, sumZ / corners.length);
+        if (vis <= 0.02) continue;
         ctx.beginPath();
-        ctx.moveTo(qa[0], qa[1]);
-        ctx.lineTo(qb[0], qb[1]);
-        ctx.strokeStyle = `rgba(140,205,255,${(v * 0.32).toFixed(2)})`;
+        ctx.moveTo(q[0][0], q[0][1]);
+        for (let k = 1; k < q.length; k++) ctx.lineTo(q[k][0], q[k][1]);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(214,199,164,${(0.5 + vis * 0.45).toFixed(2)})`;
+        ctx.fill();
+      }
+
+      // Graticule: parallels and meridians, only the front-facing arcs.
+      for (const line of graticule) {
+        ctx.lineWidth = (line.major ? 1.1 : 0.6) * Math.max(1, R / 420);
+        ctx.beginPath();
+        let started = false;
+        for (const pt of line.pts) {
+          const r = rotate(pt);
+          const vis = smoothstep(-0.04, 0.12, r[2]);
+          const q = project(r);
+          if (vis <= 0.02) {
+            started = false;
+            continue;
+          }
+          if (!started) {
+            ctx.moveTo(q[0], q[1]);
+            started = true;
+          } else {
+            ctx.lineTo(q[0], q[1]);
+          }
+        }
+        ctx.strokeStyle = line.major
+          ? "rgba(180,220,255,0.22)"
+          : "rgba(150,200,255,0.1)";
         ctx.stroke();
       }
 
-      for (const node of meshNodes) {
-        const pr = rotate(node);
-        const vn = smoothstep(-0.08, 0.18, pr[2]);
-        if (vn <= 0.02) continue;
-        const qn = project(pr);
-        const rad = node.hub ? Math.max(1.4, R / 190) : Math.max(0.8, R / 320);
-        if (node.hub) {
-          const hg = ctx.createRadialGradient(
-            qn[0],
-            qn[1],
-            0,
-            qn[0],
-            qn[1],
-            rad * 5,
-          );
-          hg.addColorStop(0, `rgba(191,233,255,${(0.5 * vn).toFixed(2)})`);
-          hg.addColorStop(1, "rgba(191,233,255,0)");
-          ctx.beginPath();
-          ctx.arc(qn[0], qn[1], rad * 5, 0, Math.PI * 2);
-          ctx.fillStyle = hg;
-          ctx.fill();
-        }
-        ctx.beginPath();
-        ctx.arc(qn[0], qn[1], rad, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(210,240,255,${(0.75 * vn).toFixed(2)})`;
-        ctx.fill();
-      }
-
-      for (let i = 0; i < landPoints.length; i++) {
-        const r = rotate(landPoints[i]);
-        const vis = smoothstep(-0.1, 0.16, r[2]);
-        if (vis <= 0.01) continue;
-        const proj = project(r);
-        const radd = (0.85 + 0.85 * Math.max(0, r[2])) * (R / 320);
-        ctx.beginPath();
-        ctx.arc(proj[0], proj[1], Math.max(0.5, radd), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${landColors[i]},${(0.22 + vis * 0.72).toFixed(2)})`;
-        ctx.fill();
-      }
-
-      // Real chapter countries: brighter and larger than the coastline dots,
-      // so the network's actual span reads at a glance. Screen positions are
-      // recorded for this frame's hover/click hit-testing.
+      // Real chapter countries: glowing markers, screen positions recorded
+      // this frame for hover/click hit-testing.
       const nextMarkerScreen: typeof markerScreen = [];
       for (let i = 0; i < markers.length; i++) {
         const r = rotate(markers[i].pos);
@@ -364,7 +345,7 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
         if (vis <= 0.02) continue;
         const q = project(r);
         const hovered = i === hoverIndex;
-        const rad = (hovered ? 3.4 : 2.3) * (R / 300);
+        const rad = (hovered ? 3.6 : 2.6) * (R / 300);
         nextMarkerScreen.push({ x: q[0], y: q[1], r: Math.max(9, rad * 2.6), i });
 
         const hg = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rad * (hovered ? 6 : 4));
@@ -381,49 +362,6 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
         ctx.fill();
       }
       markerScreen = nextMarkerScreen;
-
-      for (let pi = pulses.length - 1; pi >= 0; pi--) {
-        const pulse = pulses[pi];
-        const t = (now - pulse.start) / pulse.dur;
-        if (t >= 1) {
-          pulses.splice(pi, 1);
-          continue;
-        }
-        const fade = t < 0.2 ? t / 0.2 : t > 0.75 ? (1 - t) / 0.25 : 1;
-        const mix = {
-          x: pulse.a.x + (pulse.b.x - pulse.a.x) * t,
-          y: pulse.a.y + (pulse.b.y - pulse.a.y) * t,
-          z: pulse.a.z + (pulse.b.z - pulse.a.z) * t,
-        };
-        const len =
-          Math.sqrt(mix.x * mix.x + mix.y * mix.y + mix.z * mix.z) || 1;
-        mix.x /= len;
-        mix.y /= len;
-        mix.z /= len;
-        const pm = rotate(mix);
-        const vp = smoothstep(-0.08, 0.18, pm[2]);
-        if (vp <= 0.04) continue;
-        const qp = project(pm);
-        const prad = Math.max(1.2, R / 260);
-        const pg = ctx.createRadialGradient(
-          qp[0],
-          qp[1],
-          0,
-          qp[0],
-          qp[1],
-          prad * 5,
-        );
-        pg.addColorStop(0, `rgba(230,252,255,${(vp * fade).toFixed(2)})`);
-        pg.addColorStop(1, "rgba(230,252,255,0)");
-        ctx.beginPath();
-        ctx.arc(qp[0], qp[1], prad * 5, 0, Math.PI * 2);
-        ctx.fillStyle = pg;
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(qp[0], qp[1], prad, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${(vp * fade).toFixed(2)})`;
-        ctx.fill();
-      }
 
       for (let ri = routes.length - 1; ri >= 0; ri--) {
         const route = routes[ri];
@@ -518,15 +456,9 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       ctx.fillStyle = vig;
       ctx.fillRect(0, 0, W, H);
 
-      if (!reduceMotion) {
-        if (now >= nextSpawn) {
-          spawnPulse(now);
-          nextSpawn = now + 140 + Math.random() * 220;
-        }
-        if (now >= nextRouteSpawn) {
-          spawnRoute(now);
-          nextRouteSpawn = now + 120 + Math.random() * 180;
-        }
+      if (!reduceMotion && now >= nextRouteSpawn) {
+        spawnRoute(now);
+        nextRouteSpawn = now + 120 + Math.random() * 180;
       }
 
       raf = requestAnimationFrame(frame);
@@ -629,14 +561,22 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     const controller = new AbortController();
     fetch(COASTLINE_URL, { signal: controller.signal })
       .then((res) => res.json())
-      .then((dots: [number, number][]) => {
-        landPoints = dots.map((d) => toXYZ(d[0], d[1]));
-        landColors = landPoints.map(
-          () => DOT_PALETTE[(Math.random() * DOT_PALETTE.length) | 0],
-        );
+      .then((cells: [number, number][]) => {
+        landCells = cells.map(([lat, lon]) => {
+          const cosLat = Math.max(0.06, Math.cos((lat * Math.PI) / 180));
+          const latHalf = (LAND_LAT_STEP / 2) * 1.15;
+          const lonHalf = Math.min(20, ((LAND_LON_STEP_AT_EQUATOR / cosLat) / 2) * 1.15);
+          return [
+            toXYZ(lat - latHalf, lon - lonHalf),
+            toXYZ(lat - latHalf, lon + lonHalf),
+            toXYZ(lat + latHalf, lon + lonHalf),
+            toXYZ(lat + latHalf, lon - lonHalf),
+          ];
+        });
       })
       .catch(() => {
-        // The mesh and arcs still carry the hero if the coastline never lands.
+        // The graticule and markers still carry the globe if the land data
+        // never lands.
       });
 
     return () => {
