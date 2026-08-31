@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { revalidateAfterChange, revalidateAfterDelete } from "@/payload/hooks/revalidate";
 
 /**
  * The Resources hub's library: policies, training materials, forms, worship
@@ -13,6 +14,10 @@ import type { CollectionConfig } from "payload";
 export const Resources: CollectionConfig = {
   slug: "resources",
   labels: { singular: "Resource", plural: "Resources" },
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
+  },
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "category", "kind", "visibility"],

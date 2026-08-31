@@ -9,6 +9,7 @@ import {
   scopeOf,
   type AdminUser,
 } from "@/payload/access";
+import { revalidateAfterChange, revalidateAfterDelete } from "@/payload/hooks/revalidate";
 
 /**
  * A page as an ordered list of sections.
@@ -45,6 +46,10 @@ export const Pages: CollectionConfig = {
     delete: countryScoped("home"),
   },
   versions: { drafts: true },
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
+  },
   fields: [
     {
       name: "title",
