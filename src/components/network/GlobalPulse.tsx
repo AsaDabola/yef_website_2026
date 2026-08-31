@@ -1,12 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { CHAPTER_COUNTRIES } from "@/lib/network/chapterCountries";
+import { flag } from "@/lib/i18n/display";
 
 /**
  * The dot-matrix globe behind the Network hero: coastline points traced from
- * real data, a sparse plexus mesh with travelling signal pulses, and coloured
- * long-haul arcs between hub cities. The 6,500 coastline points are fetched
- * rather than bundled so the hero paints before they arrive.
+ * real data, a sparse plexus mesh with travelling signal pulses, coloured
+ * long-haul arcs between hub cities, and a glowing marker for every one of
+ * YEF's 68 chapter countries. The 6,500 coastline points are fetched rather
+ * than bundled so the hero paints before they arrive.
+ *
+ * It is draggable and the markers are hoverable/clickable — a reader can spin
+ * it to see the span of the network for themselves, not just watch it turn.
  */
 
 type Vec3 = { x: number; y: number; z: number };
@@ -99,8 +105,14 @@ function smoothstep(a: number, b: number, x: number) {
   return t * t * (3 - 2 * t);
 }
 
+/** A chapter country marker, positioned on the sphere and ready to hit-test. */
+type Marker = { code: string; name: string; pos: Vec3 };
+
+type Tooltip = { x: number; y: number; label: string; code: string };
+
 export default function GlobalPulse({ className = "" }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -111,6 +123,12 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     const reduceMotion = window.matchMedia?.(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+
+    const markers: Marker[] = CHAPTER_COUNTRIES.map((c) => ({
+      code: c.code,
+      name: c.name,
+      pos: toXYZ(c.lat, c.lon),
+    }));
 
     const meshNodes = fibonacciSphere(MESH_N).map((p, i) => ({
       ...p,
@@ -166,6 +184,16 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     let pitch = 0.58;
     const autoSpeed = reduceMotion ? 0 : 0.00065;
 
+    // Dragging (and hovering a marker) holds the auto-rotate for a beat so a
+    // reader's own spin doesn't immediately get fought or lost.
+    let dragging = false;
+    let dragMoved = 0;
+    let lastPointerX = 0;
+    let lastPointerY = 0;
+    let lastInteraction = 0;
+    let hoverIndex = -1;
+    let markerScreen: { x: number; y: number; r: number; i: number }[] = [];
+
     const rotate = (p: Vec3) => {
       const cy = Math.cos(yaw);
       const sy = Math.sin(yaw);
@@ -206,10 +234,13 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     const spawnRoute = (now: number) => {
       if (routes.length >= 15) return;
       const a = hubPoints[(Math.random() * hubPoints.length) | 0];
+      const roll = Math.random();
       const b =
-        Math.random() < 0.55 || landPoints.length === 0
-          ? hubPoints[(Math.random() * hubPoints.length) | 0]
-          : landPoints[(Math.random() * landPoints.length) | 0];
+        roll < 0.45
+          ? markers[(Math.random() * markers.length) | 0].pos
+          : roll < 0.75 || landPoints.length === 0
+            ? hubPoints[(Math.random() * hubPoints.length) | 0]
+            : landPoints[(Math.random() * landPoints.length) | 0];
       if (a === b || angDist(a, b) < 0.5) return;
       const samples = 44;
       const height = 0.14 + Math.min(0.34, angDist(a, b) * 0.16);
@@ -231,7 +262,7 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     let raf = 0;
 
     const frame = (now: number) => {
-      yaw += autoSpeed;
+      if (!dragging && now - lastInteraction > 1200) yaw += autoSpeed;
 
       // Framed for the hero: the dome sits low and right of centre so its
       // top edge crosses behind the copy and it runs off the bottom corner.
@@ -322,6 +353,34 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
         ctx.fillStyle = `rgba(${landColors[i]},${(0.22 + vis * 0.72).toFixed(2)})`;
         ctx.fill();
       }
+
+      // Real chapter countries: brighter and larger than the coastline dots,
+      // so the network's actual span reads at a glance. Screen positions are
+      // recorded for this frame's hover/click hit-testing.
+      const nextMarkerScreen: typeof markerScreen = [];
+      for (let i = 0; i < markers.length; i++) {
+        const r = rotate(markers[i].pos);
+        const vis = smoothstep(-0.06, 0.18, r[2]);
+        if (vis <= 0.02) continue;
+        const q = project(r);
+        const hovered = i === hoverIndex;
+        const rad = (hovered ? 3.4 : 2.3) * (R / 300);
+        nextMarkerScreen.push({ x: q[0], y: q[1], r: Math.max(9, rad * 2.6), i });
+
+        const hg = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rad * (hovered ? 6 : 4));
+        hg.addColorStop(0, `rgba(255,205,110,${(vis * (hovered ? 0.55 : 0.32)).toFixed(2)})`);
+        hg.addColorStop(1, "rgba(255,205,110,0)");
+        ctx.beginPath();
+        ctx.arc(q[0], q[1], rad * (hovered ? 6 : 4), 0, Math.PI * 2);
+        ctx.fillStyle = hg;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(q[0], q[1], rad, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,230,180,${(0.55 + vis * 0.45).toFixed(2)})`;
+        ctx.fill();
+      }
+      markerScreen = nextMarkerScreen;
 
       for (let pi = pulses.length - 1; pi >= 0; pi--) {
         const pulse = pulses[pi];
@@ -475,6 +534,98 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
 
     raf = requestAnimationFrame(frame);
 
+    const findMarkerAt = (x: number, y: number) => {
+      let best = -1;
+      let bestDist = Infinity;
+      for (const m of markerScreen) {
+        const d = Math.hypot(m.x - x, m.y - y);
+        if (d <= m.r && d < bestDist) {
+          best = m.i;
+          bestDist = d;
+        }
+      }
+      return best;
+    };
+
+    const pointerPos = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    };
+
+    const onPointerDown = (e: PointerEvent) => {
+      dragging = true;
+      dragMoved = 0;
+      lastInteraction = performance.now();
+      const { x, y } = pointerPos(e);
+      lastPointerX = x;
+      lastPointerY = y;
+      canvas.setPointerCapture(e.pointerId);
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      const { x, y } = pointerPos(e);
+      if (dragging) {
+        const dx = x - lastPointerX;
+        const dy = y - lastPointerY;
+        dragMoved += Math.abs(dx) + Math.abs(dy);
+        yaw += dx * 0.006;
+        pitch = Math.max(-1.2, Math.min(1.2, pitch - dy * 0.006));
+        lastPointerX = x;
+        lastPointerY = y;
+        lastInteraction = performance.now();
+        return;
+      }
+      const hit = findMarkerAt(x, y);
+      if (hit !== hoverIndex) {
+        hoverIndex = hit;
+        lastInteraction = performance.now();
+        canvas.style.cursor = hit >= 0 ? "pointer" : "grab";
+        setTooltip(
+          hit >= 0
+            ? { x, y, label: markers[hit].name, code: markers[hit].code }
+            : null,
+        );
+      } else if (hit >= 0) {
+        // Keep the tooltip pinned to the marker's current screen position
+        // as the globe keeps turning under a held cursor.
+        const m = markerScreen.find((s) => s.i === hit);
+        if (m) setTooltip({ x: m.x, y: m.y, label: markers[hit].name, code: markers[hit].code });
+      }
+    };
+
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = false;
+      lastInteraction = performance.now();
+    };
+
+    const onClick = (e: PointerEvent) => {
+      if (dragMoved > 6) return;
+      const { x, y } = pointerPos(e);
+      const hit = findMarkerAt(x, y);
+      if (hit >= 0) {
+        window.open(`/${markers[hit].code}`, "_blank", "noopener");
+      }
+    };
+
+    const onPointerLeave = () => {
+      endDrag();
+      if (hoverIndex >= 0) {
+        hoverIndex = -1;
+        setTooltip(null);
+        canvas.style.cursor = "grab";
+      }
+    };
+
+    canvas.style.cursor = "grab";
+    canvas.style.touchAction = "none";
+    canvas.addEventListener("pointerdown", onPointerDown);
+    canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerup", endDrag);
+    canvas.addEventListener("pointercancel", endDrag);
+    canvas.addEventListener("pointerleave", onPointerLeave);
+    canvas.addEventListener("click", onClick);
+
     const controller = new AbortController();
     fetch(COASTLINE_URL, { signal: controller.signal })
       .then((res) => res.json())
@@ -492,14 +643,28 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       cancelAnimationFrame(raf);
       observer.disconnect();
       controller.abort();
+      canvas.removeEventListener("pointerdown", onPointerDown);
+      canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerup", endDrag);
+      canvas.removeEventListener("pointercancel", endDrag);
+      canvas.removeEventListener("pointerleave", onPointerLeave);
+      canvas.removeEventListener("click", onClick);
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className={`block size-full ${className}`}
-    />
+    <div className="relative size-full">
+      <canvas ref={canvasRef} aria-hidden="true" className={`block size-full ${className}`} />
+      {tooltip && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute z-10 flex -translate-x-1/2 -translate-y-[calc(100%+14px)] items-center gap-2 rounded-full border border-white/15 bg-[#030a16]/90 px-3 py-1.5 text-sm text-white shadow-[0_8px_24px_rgba(0,0,0,0.45)] backdrop-blur-sm"
+          style={{ left: tooltip.x, top: tooltip.y }}
+        >
+          <span aria-hidden="true">{flag(tooltip.code)}</span>
+          <span className="font-medium">{tooltip.label}</span>
+        </div>
+      )}
+    </div>
   );
 }

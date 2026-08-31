@@ -34,7 +34,7 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
 
           <HeaderV2 />
 
-          <div className="relative mx-auto flex w-full max-w-[1920px] flex-1 items-center px-6 pt-32 pb-24 sm:px-10 lg:px-[196px] lg:pt-0 lg:pb-0">
+          <div className="pointer-events-none relative mx-auto flex w-full max-w-[1920px] flex-1 items-center px-6 pt-32 pb-24 sm:px-10 lg:px-[196px] lg:pt-0 lg:pb-0">
             <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[572px_653px] lg:justify-between lg:gap-0">
               <div>
                 <h1 className="font-display font-extrabold text-5xl text-white leading-[1.05] tracking-[-1.5px] sm:text-6xl lg:text-[72px]">
