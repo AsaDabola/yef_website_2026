@@ -235,6 +235,9 @@ export const countries: Country[] = [
   // M40 — Oceania
   { code: "nz", name: "New Zealand", region: "Oceania", locales: ["en"] },
   { code: "fj", name: "Fiji", region: "Oceania", locales: ["en", "fj", "hif"] },
+  { code: "to", name: "Tonga", region: "Oceania", locales: ["en"] },
+  { code: "ws", name: "Samoa", region: "Oceania", locales: ["en"] },
+  { code: "sb", name: "Solomon Islands", region: "Oceania", locales: ["en"] },
 
   // M40 — South Asia
   { code: "bd", name: "Bangladesh", region: "South Asia", locales: ["bn"] },
