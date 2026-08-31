@@ -129,6 +129,14 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     let H = 0;
     let dpr = 1;
 
+    // Land is drawn onto this offscreen buffer first, then composited onto
+    // the main canvas with a small blur — that rounds the coarse data's
+    // sharp quad corners into the smooth, satellite-photo-like coastlines a
+    // Google-Earth-style globe calls for, without the whole shape melting
+    // together the way a much larger blur (or big overlapping circles) did.
+    const landBuffer = document.createElement("canvas");
+    const landCtx = landBuffer.getContext("2d");
+
     const resize = () => {
       const rect = wrap.getBoundingClientRect();
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -139,6 +147,9 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       canvas.style.width = `${W}px`;
       canvas.style.height = `${H}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      landBuffer.width = canvas.width;
+      landBuffer.height = canvas.height;
+      landCtx?.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
 
@@ -266,40 +277,62 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       ctx.fillStyle = body;
       ctx.fill();
 
-      // A soft atmospheric rim right at the sphere's silhouette edge — the
-      // glowing blue halo that makes a Google-Earth-style globe read as an
-      // actual planet rather than a flat disc.
-      const rim = ctx.createRadialGradient(cx, cy, bodyR * 0.82, cx, cy, bodyR * 1.16);
-      rim.addColorStop(0, "rgba(140,205,255,0)");
-      rim.addColorStop(0.75, "rgba(140,205,255,0.16)");
-      rim.addColorStop(1, "rgba(140,205,255,0)");
+      // Real continents, filled as solid shapes rather than scattered dots.
+      // Drawn onto the offscreen buffer first (sharp quads, opaque enough to
+      // read clearly against the ocean), then composited below with a small
+      // blur — that rounds the coarse data's corners into smooth, satellite
+      // -photo-like coastlines instead of either hard pixel edges or a
+      // washed-out blob.
+      if (landCtx) {
+        landCtx.clearRect(0, 0, W, H);
+        for (const corners of landCells) {
+          let sumZ = 0;
+          const q: (readonly [number, number])[] = [];
+          for (const c of corners) {
+            const r = rotate(c);
+            sumZ += r[2];
+            q.push(project(r));
+          }
+          const vis = smoothstep(-0.04, 0.14, sumZ / corners.length);
+          if (vis <= 0.02) continue;
+          landCtx.beginPath();
+          landCtx.moveTo(q[0][0], q[0][1]);
+          for (let k = 1; k < q.length; k++) landCtx.lineTo(q[k][0], q[k][1]);
+          landCtx.closePath();
+          landCtx.fillStyle = `rgba(225,242,255,${(0.82 + vis * 0.18).toFixed(2)})`;
+          landCtx.fill();
+        }
+
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.beginPath();
+        ctx.arc(cx * dpr, cy * dpr, bodyR * dpr, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.filter = `blur(${Math.max(1, 3.2 * dpr).toFixed(1)}px)`;
+        // Drawn twice, additively: the blur alone would leave every edge —
+        // and the interior — equally soft. Compositing it again with
+        // "lighter" pushes what was solid land back toward fully opaque
+        // while the thin, once-jagged edges (which only pick up the blur's
+        // faint tail from one pass) stay a soft gradient — smooth coastlines
+        // without turning the whole shape hazy.
+        ctx.drawImage(landBuffer, 0, 0);
+        ctx.globalCompositeOperation = "lighter";
+        ctx.drawImage(landBuffer, 0, 0);
+        ctx.restore();
+      }
+
+      // A crisp atmospheric rim right at the sphere's silhouette edge — the
+      // thin, bright limb glow that makes a Google-Earth-style globe read as
+      // an actual lit planet rather than a flat disc.
+      const rim = ctx.createRadialGradient(cx, cy, bodyR * 0.94, cx, cy, bodyR * 1.09);
+      rim.addColorStop(0, "rgba(170,220,255,0)");
+      rim.addColorStop(0.7, "rgba(170,220,255,0.5)");
+      rim.addColorStop(0.92, "rgba(210,240,255,0.75)");
+      rim.addColorStop(1, "rgba(210,240,255,0)");
       ctx.beginPath();
-      ctx.arc(cx, cy, bodyR * 1.16, 0, Math.PI * 2);
+      ctx.arc(cx, cy, bodyR * 1.09, 0, Math.PI * 2);
       ctx.fillStyle = rim;
       ctx.fill();
-
-      // Real continents, filled as solid shapes rather than scattered dots.
-      // Each cell is a quad sized to butt against its neighbours, so
-      // adjoining land reads as one crisp, continuous coastline — and land
-      // is nearly opaque, so it stays clearly distinct from the ocean
-      // beneath it instead of washing into a shared pale grey.
-      for (const corners of landCells) {
-        let sumZ = 0;
-        const q: (readonly [number, number])[] = [];
-        for (const c of corners) {
-          const r = rotate(c);
-          sumZ += r[2];
-          q.push(project(r));
-        }
-        const vis = smoothstep(-0.04, 0.14, sumZ / corners.length);
-        if (vis <= 0.02) continue;
-        ctx.beginPath();
-        ctx.moveTo(q[0][0], q[0][1]);
-        for (let k = 1; k < q.length; k++) ctx.lineTo(q[k][0], q[k][1]);
-        ctx.closePath();
-        ctx.fillStyle = `rgba(225,242,255,${(0.82 + vis * 0.18).toFixed(2)})`;
-        ctx.fill();
-      }
 
       // Real chapter countries: glowing markers, screen positions recorded
       // this frame for hover/click hit-testing.
