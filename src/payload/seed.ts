@@ -96,7 +96,6 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
         },
       ],
     },
-    { blockType: "campusFinder" },
     {
       blockType: "about",
       image: await uploadMedia(
@@ -150,6 +149,7 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
       ],
     },
     { blockType: "getInvolved" },
+    { blockType: "campusFinder" },
     { blockType: "testimonials" },
     { blockType: "giving" },
     { blockType: "movement" },
