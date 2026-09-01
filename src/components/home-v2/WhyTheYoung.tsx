@@ -1,33 +1,42 @@
+import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
 import Rich from "@/components/ui/Rich";
 import { getT } from "@/lib/i18n/server";
 
-type ProofItem = { number?: string; name: string; body: string };
+type ProofItem = {
+  number?: string;
+  /** The bundled icon and its native SVG size — kept together so the
+      rendered width scales from a fixed 50px height without distortion. */
+  icon?: { src: string; width: number; height: number };
+  name: string;
+  body: string;
+};
 
 const defaultItems: ProofItem[] = [
   {
-    name: "Know Christ",
-    body: "The university years are a formative season when convictions, values, and direction for life are taking shape. YEF calls students to seek Christ and build their lives firmly upon Him.",
+    icon: { src: "/images/icons/icon-share-gospel.svg", width: 47, height: 61 },
+    name: "Share the\nGospel",
+    body: "We meet students on university campuses and invite them to know Jesus Christ through the Gospel.",
   },
   {
-    name: "Grow in the\nWord",
-    body: "Through Scripture, prayer, fellowship, and discipleship, students deepen their faith, develop a biblical worldview, and learn to follow Christ in every area of life.",
+    name: "Teach the Bible",
+    body: "We help students grow in faith through Scripture, prayer, and Christian fellowship.",
   },
   {
-    name: "Live on Mission",
-    body: "Faith is meant to be lived and shared. Students are encouraged to serve others, make disciples, and carry the Gospel to their friends, campuses, communities, and beyond.",
+    icon: { src: "/images/icons/icon-raise-disciples.svg", width: 67, height: 53 },
+    name: "Raise Disciples",
+    body: "We equip students to follow Christ, lead others, and carry the Gospel to the nations.",
   },
 ];
 
 const defaults = {
   eyebrow: "The Call",
   // ** ** marks the phrase that is set in the italic serif accent.
-  heading:
-    "In the days of your youth, **remember your Creator**.",
+  heading: "From the campus **to the nations**.",
 };
 
 export type ProofContent = Partial<typeof defaults> & {
-  /** `number` is optional — the columns carry a title alone in this design. */
+  /** `number` and `icon` are optional — a column carries at most one of the two. */
   items?: ProofItem[];
 };
 
@@ -38,7 +47,13 @@ export default async function WhyTheYoung({
 }) {
   const t = await getT();
   const c = { ...defaults, ...content };
-  const proof = content?.items?.length ? content.items : defaultItems;
+  // Icons are a fixed, bundled set — an editor's saved item (name/body/number)
+  // merges over the default by index, but never displaces its icon since the
+  // CMS schema has no field for one.
+  const proof = defaultItems.map((item, i) => ({
+    ...item,
+    ...(content?.items?.[i] ?? {}),
+  }));
   return (
     <section className="font-body relative overflow-hidden bg-[#f2f6fb]">
       {/* 1920x650 frame: a 1440 column at x=240, y=110, with the rule at 227
@@ -80,6 +95,16 @@ export default async function WhyTheYoung({
                     <p className="font-display font-bold text-5xl text-yef-primary tracking-[-1.92px] lg:text-[64px]">
                       {item.number}
                     </p>
+                  )}
+                  {item.icon && (
+                    <Image
+                      src={item.icon.src}
+                      width={item.icon.width}
+                      height={item.icon.height}
+                      alt=""
+                      aria-hidden="true"
+                      className="mb-3 h-[50px] w-auto"
+                    />
                   )}
                   <p className="whitespace-pre-line font-display font-bold text-[21px] text-v2-navy uppercase leading-[1.24]">
                     {t(item.name)}

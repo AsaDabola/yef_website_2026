@@ -14,14 +14,14 @@ export type PageBlock = {
  */
 export const defaultHomeLayout: PageBlock[] = [
   { blockType: "hero" },
-  { blockType: "campusFinder" },
   { blockType: "about" },
   { blockType: "mission" },
-  { blockType: "proof" },
+  { blockType: "campusFinder" },
   { blockType: "getInvolved" },
+  { blockType: "proof" },
+  { blockType: "movement" },
   { blockType: "testimonials" },
   { blockType: "giving" },
-  { blockType: "movement" },
   { blockType: "signup" },
 ];
 

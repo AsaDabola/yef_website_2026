@@ -96,7 +96,6 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
         },
       ],
     },
-    { blockType: "campusFinder" },
     {
       blockType: "about",
       image: await uploadMedia(
@@ -116,9 +115,8 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
     {
       blockType: "mission",
       eyebrow: "Mission Statement",
-      verse:
-        "Your people will offer themselves freely on\nthe day of your power; young people will\ncome to",
-      verseAccent: "you like the morning dew.",
+      verse: "Young people will come to you",
+      verseAccent: "\nlike the morning dew.",
       reference: "Psalm 110:3",
       columns: [
         {
@@ -129,30 +127,30 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
         },
       ],
     },
+    { blockType: "campusFinder" },
+    { blockType: "getInvolved" },
     {
       blockType: "proof",
       eyebrow: "The Call",
-      heading:
-        "In the days of your youth, before the days of trouble come, **remember your Creator**.",
+      heading: "From the campus **to the nations**.",
       items: [
         {
-          name: "Know Christ",
-          body: "The university years are a formative season when convictions, values, and direction for life are taking shape. YEF calls students to seek Christ and build their lives firmly upon Him.",
+          name: "Share the\nGospel",
+          body: "We meet students on university campuses and invite them to know Jesus Christ through the Gospel.",
         },
         {
-          name: "Grow in the\nWord",
-          body: "Through Scripture, prayer, fellowship, and discipleship, students deepen their faith, develop a biblical worldview, and learn to follow Christ in every area of life.",
+          name: "Teach the Bible",
+          body: "We help students grow in faith through Scripture, prayer, and Christian fellowship.",
         },
         {
-          name: "Live on Mission",
-          body: "Faith is meant to be lived and shared. Students are encouraged to serve others, make disciples, and carry the Gospel to their friends, campuses, communities, and beyond.",
+          name: "Raise Disciples",
+          body: "We equip students to follow Christ, lead others, and carry the Gospel to the nations.",
         },
       ],
     },
-    { blockType: "getInvolved" },
+    { blockType: "movement" },
     { blockType: "testimonials" },
     { blockType: "giving" },
-    { blockType: "movement" },
     {
       blockType: "signup",
       eyebrow: "Stay Up to Date",
@@ -394,6 +392,114 @@ async function deleteRemovedPosts(payload: Payload) {
   payload.logger.info(`Removed-article cleanup: ${deleted} deleted.`);
 }
 
+const HOME_BLOCK_ORDER = [
+  "hero",
+  "about",
+  "mission",
+  "campusFinder",
+  "getInvolved",
+  "proof",
+  "movement",
+  "testimonials",
+  "giving",
+  "signup",
+];
+
+/** Verbatim text this page's Mission Statement and Call blocks were seeded
+ *  with the first time — used only to detect that live state below, never
+ *  written anywhere. */
+const OLD_MISSION_VERSE =
+  "Your people will offer themselves freely on\nthe day of your power; young people will\ncome to";
+const OLD_PROOF_HEADING =
+  "In the days of your youth, before the days of trouble come, **remember your Creator**.";
+
+/**
+ * A one-time fix-up for the "home" page's live database record, which
+ * predates this round of Figma changes: seedPage() never re-applies a page
+ * that already has real content (see isUntouchedLayout below), so editing
+ * this file's defaults alone does nothing for a site already seeded. This
+ * reorders the existing blocks to match Figma's section order and refreshes
+ * the specific fields Figma changed (the mission verse, the Call section,
+ * and the About Us photo), leaving every other block's saved content as an
+ * editor left it. Detects its own prior run via the mission verse already
+ * matching the new text, so it is safe to leave in place going forward.
+ */
+async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
+  const existing = await payload.find({
+    collection: "pages",
+    where: { and: [{ route: { equals: "home" } }, { country: { equals: "int" } }] },
+    limit: 1,
+    depth: 0,
+  });
+  const doc = existing.docs[0];
+  if (!doc || !Array.isArray(doc.layout)) {
+    payload.logger.info('Home layout fix: no "home" page found, skipped.');
+    return;
+  }
+
+  const layout = doc.layout as Array<Record<string, unknown>>;
+  const currentOrder = layout.map((block) => block.blockType as string);
+  const canonicalOrder = [...currentOrder].sort(
+    (a, b) => HOME_BLOCK_ORDER.indexOf(a) - HOME_BLOCK_ORDER.indexOf(b),
+  );
+  const orderMatches = currentOrder.join() === canonicalOrder.join();
+
+  const mission = layout.find((block) => block.blockType === "mission");
+  const proof = layout.find((block) => block.blockType === "proof");
+  const needsFix =
+    !orderMatches ||
+    mission?.verse === OLD_MISSION_VERSE ||
+    proof?.heading === OLD_PROOF_HEADING;
+  if (!needsFix) {
+    payload.logger.info("Home layout fix: already applied, skipped.");
+    return;
+  }
+
+  const reordered = [...layout].sort(
+    (a, b) =>
+      HOME_BLOCK_ORDER.indexOf(a.blockType as string) -
+      HOME_BLOCK_ORDER.indexOf(b.blockType as string),
+  );
+
+  if (mission && mission.verse === OLD_MISSION_VERSE) {
+    mission.verse = "Young people will come to you";
+    mission.verseAccent = "\nlike the morning dew.";
+  }
+
+  if (proof && proof.heading === OLD_PROOF_HEADING) {
+    proof.heading = "From the campus **to the nations**.";
+    proof.items = [
+      {
+        name: "Share the\nGospel",
+        body: "We meet students on university campuses and invite them to know Jesus Christ through the Gospel.",
+      },
+      {
+        name: "Teach the Bible",
+        body: "We help students grow in faith through Scripture, prayer, and Christian fellowship.",
+      },
+      {
+        name: "Raise Disciples",
+        body: "We equip students to follow Christ, lead others, and carry the Gospel to the nations.",
+      },
+    ];
+  }
+
+  const about = reordered.find((block) => block.blockType === "about");
+  if (about) {
+    about.image = await uploadMedia(
+      "/images/home-v2/about-us-photo.webp",
+      "Students celebrating together on campus",
+    );
+  }
+
+  await payload.update({
+    collection: "pages",
+    id: doc.id,
+    data: { layout: reordered as Page["layout"] },
+  });
+  payload.logger.info("Home layout fix: reordered sections and refreshed Figma content.");
+}
+
 /** True once every block in a saved layout carries only the fields Payload
  *  itself adds (`id`, `blockType`) — i.e. the placeholder layout this same
  *  script used to seed before it filled in real content, never touched by
@@ -605,6 +711,7 @@ const run = async () => {
   await step(payload, 'Page "home"', () =>
     seedPage(payload, "home", "Home", () => buildDefaultHomeLayout(uploadMedia)),
   );
+  await step(payload, "Home layout fix", () => fixHomePageLayout(payload, uploadMedia));
   await step(payload, 'Page "who-we-are"', () =>
     seedPage(payload, "who-we-are", "Who We Are", () =>
       buildDefaultWhoWeAreLayout(uploadMedia),
