@@ -1,50 +1,49 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { CHAPTER_COUNTRIES } from "@/lib/network/chapterCountries";
+import { flag } from "@/lib/i18n/display";
 
 /**
- * The dot-matrix globe behind the Network hero: coastline points traced from
- * real data, a sparse plexus mesh with travelling signal pulses, and coloured
- * long-haul arcs between hub cities. The 6,500 coastline points are fetched
- * rather than bundled so the hero paints before they arrive.
+ * The globe behind the Network hero: a lit, Google-Earth-style ocean sphere
+ * in one blue palette, real continents filled in as solid, nearly-opaque
+ * shapes (not a stippled dot cloud), an atmospheric rim glow, and coloured
+ * long-haul arcs that all originate from headquarters in Orlando and reach
+ * out to a random chapter country. A glowing marker sits at every one of
+ * YEF's chapter countries, with a brighter beacon at Orlando itself.
+ *
+ * The land data is a coarse equal-area sample of land/ocean cells (each
+ * point is a cell centre, with the cell's angular size widening toward the
+ * poles to match its native sampling density); each is drawn as a quad
+ * sized to butt up against its neighbours, so adjoining land cells merge
+ * into one crisp, continuous coastline instead of leaving gaps or blurring
+ * into the ocean.
+ *
+ * It is draggable and the markers are hoverable/clickable — a reader can
+ * spin it to see the span of the network for themselves, not just watch it
+ * turn.
  */
 
 type Vec3 = { x: number; y: number; z: number };
 
 const COASTLINE_URL = "/data/globe-coastline.json";
 
-const DOT_PALETTE = [
-  "95,227,255", // bright cyan
-  "31,126,201", // mid blue
-  "12,58,99", // dim navy
-  "150,200,255", // pale blue
-  "210,235,255", // pale blue-white
-];
+/** Native spacing of the land-cell sample, in degrees — see file doc above. */
+const LAND_LAT_STEP = 1.35;
+const LAND_LON_STEP_AT_EQUATOR = 1.36;
 
+// One blue family throughout, Google-Earth style — the routes vary in
+// brightness, not hue.
 const ROUTE_COLORS = [
-  "255,214,10", // yellow
-  "255,69,58", // red
-  "255,138,26", // orange
-  "48,209,120", // green
-  "64,169,255", // blue
+  "120,210,255", // bright sky
+  "80,170,255", // mid azure
+  "160,225,255", // pale cyan
+  "50,140,230", // deeper blue
 ];
 
-const HUBS = [
-  { lat: 40.71, lon: -74.01 }, // New York
-  { lat: 51.51, lon: -0.13 }, // London
-  { lat: 52.52, lon: 13.4 }, // Berlin
-  { lat: 6.52, lon: 3.38 }, // Lagos
-  { lat: 25.2, lon: 55.27 }, // Dubai
-  { lat: 19.08, lon: 72.88 }, // Mumbai
-  { lat: 1.35, lon: 103.82 }, // Singapore
-  { lat: 37.57, lon: 126.98 }, // Seoul
-  { lat: 35.68, lon: 139.69 }, // Tokyo
-  { lat: -33.87, lon: 151.21 }, // Sydney
-  { lat: -23.55, lon: -46.63 }, // São Paulo
-  { lat: 37.77, lon: -122.42 }, // San Francisco
-];
-
-const MESH_N = 230;
+/** YEF's headquarters — every route arcs out from here, not from a
+ *  scattered list of world cities. */
+const HQ = { lat: 28.6, lon: -81.2 }; // Orlando, FL
 
 function toXYZ(lat: number, lon: number): Vec3 {
   const phi = (lat * Math.PI) / 180;
@@ -57,17 +56,58 @@ function toXYZ(lat: number, lon: number): Vec3 {
   };
 }
 
-function fibonacciSphere(n: number): Vec3[] {
-  const pts: Vec3[] = [];
-  const offset = 2 / n;
-  const increment = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < n; i++) {
-    const y = i * offset - 1 + offset / 2;
-    const r = Math.sqrt(Math.max(0, 1 - y * y));
-    const phi = i * increment;
-    pts.push({ x: Math.cos(phi) * r, y, z: Math.sin(phi) * r });
+/**
+ * Which land cells sit on the coast, so the shoreline can be traced with a
+ * crisp bright line instead of leaving the whole landmass reading as one
+ * undifferentiated fill. The land sample has no political borders in it —
+ * this can only draw the coastline itself, not country-to-country
+ * boundaries — but it does give every landmass a clear, separated edge.
+ *
+ * A cell counts as coastal if it is missing a neighbour on any of its four
+ * sides, checked against this cell's own row (for east/west) and the
+ * nearest existing row roughly one native step away (for north/south) —
+ * see the LAND_LAT_STEP/LAND_LON_STEP_AT_EQUATOR doc above for why the
+ * east/west step widens toward the poles.
+ */
+function findCoastline(cells: [number, number][]): [number, number][] {
+  const byLat = new Map<number, number[]>();
+  for (const [lat, lon] of cells) {
+    const row = byLat.get(lat);
+    if (row) row.push(lon);
+    else byLat.set(lat, [lon]);
   }
-  return pts;
+  const lats = [...byLat.keys()].sort((a, b) => a - b);
+  const nearestLat = (target: number) => {
+    let best: number | null = null;
+    let bestDist = Infinity;
+    for (const l of lats) {
+      const d = Math.abs(l - target);
+      if (d < bestDist) {
+        bestDist = d;
+        best = l;
+      }
+    }
+    return bestDist < LAND_LAT_STEP * 0.6 ? best : null;
+  };
+
+  const coastline: [number, number][] = [];
+  for (const [lat, lons] of byLat) {
+    const cosLat = Math.max(0.06, Math.cos((lat * Math.PI) / 180));
+    const lonStep = LAND_LON_STEP_AT_EQUATOR / cosLat;
+    const upLat = nearestLat(lat + LAND_LAT_STEP);
+    const downLat = nearestLat(lat - LAND_LAT_STEP);
+    const lonsUp = upLat !== null ? byLat.get(upLat)! : [];
+    const lonsDown = downLat !== null ? byLat.get(downLat)! : [];
+    for (const lon of lons) {
+      const hasLeft = lons.some((o) => Math.abs(o - (lon - lonStep)) < lonStep * 0.6);
+      const hasRight = lons.some((o) => Math.abs(o - (lon + lonStep)) < lonStep * 0.6);
+      const hasUp = lonsUp.some((o) => Math.abs(o - lon) < lonStep * 0.8);
+      const hasDown = lonsDown.some((o) => Math.abs(o - lon) < lonStep * 0.8);
+      const neighborCount = [hasLeft, hasRight, hasUp, hasDown].filter(Boolean).length;
+      if (neighborCount < 4) coastline.push([lat, lon]);
+    }
+  }
+  return coastline;
 }
 
 function angDist(a: Vec3, b: Vec3) {
@@ -99,8 +139,14 @@ function smoothstep(a: number, b: number, x: number) {
   return t * t * (3 - 2 * t);
 }
 
+/** A chapter country marker, positioned on the sphere and ready to hit-test. */
+type Marker = { code: string; name: string; pos: Vec3 };
+
+type Tooltip = { x: number; y: number; label: string; code: string };
+
 export default function GlobalPulse({ className = "" }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -112,39 +158,30 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    const meshNodes = fibonacciSphere(MESH_N).map((p, i) => ({
-      ...p,
-      hub: (i * 37) % MESH_N < MESH_N * 0.09,
+    const markers: Marker[] = CHAPTER_COUNTRIES.map((c) => ({
+      code: c.code,
+      name: c.name,
+      pos: toXYZ(c.lat, c.lon),
     }));
 
-    const meshEdges: [number, number][] = [];
-    const seen = new Set<string>();
-    for (let i = 0; i < meshNodes.length; i++) {
-      const dists: [number, number][] = [];
-      for (let j = 0; j < meshNodes.length; j++) {
-        if (i === j) continue;
-        dists.push([angDist(meshNodes[i], meshNodes[j]), j]);
-      }
-      dists.sort((a, b) => a[0] - b[0]);
-      for (let n = 0; n < Math.min(3, dists.length); n++) {
-        if (dists[n][0] > 0.55) continue;
-        const a = Math.min(i, dists[n][1]);
-        const b = Math.max(i, dists[n][1]);
-        const key = `${a}_${b}`;
-        if (seen.has(key)) continue;
-        seen.add(key);
-        meshEdges.push([a, b]);
-      }
-    }
+    const hq = toXYZ(HQ.lat, HQ.lon);
 
-    const hubPoints = HUBS.map((h) => toXYZ(h.lat, h.lon));
-
-    let landPoints: Vec3[] = [];
-    let landColors: string[] = [];
+    /** Each land cell's four corners, pre-computed once the data arrives. */
+    let landCells: Vec3[][] = [];
+    /** The coastal cells only, for a crisp outline pass over the fill. */
+    let coastlinePoints: Vec3[] = [];
 
     let W = 0;
     let H = 0;
     let dpr = 1;
+
+    // Land is drawn onto this offscreen buffer first, then composited onto
+    // the main canvas with a small blur — that rounds the coarse data's
+    // sharp quad corners into the smooth, satellite-photo-like coastlines a
+    // Google-Earth-style globe calls for, without the whole shape melting
+    // together the way a much larger blur (or big overlapping circles) did.
+    const landBuffer = document.createElement("canvas");
+    const landCtx = landBuffer.getContext("2d");
 
     const resize = () => {
       const rect = wrap.getBoundingClientRect();
@@ -156,6 +193,9 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       canvas.style.width = `${W}px`;
       canvas.style.height = `${H}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      landBuffer.width = canvas.width;
+      landBuffer.height = canvas.height;
+      landCtx?.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
 
@@ -165,6 +205,16 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     let yaw = 1.55;
     let pitch = 0.58;
     const autoSpeed = reduceMotion ? 0 : 0.00065;
+
+    // Dragging (and hovering a marker) holds the auto-rotate for a beat so a
+    // reader's own spin doesn't immediately get fought or lost.
+    let dragging = false;
+    let dragMoved = 0;
+    let lastPointerX = 0;
+    let lastPointerY = 0;
+    let lastInteraction = 0;
+    let hoverIndex = -1;
+    let markerScreen: { x: number; y: number; r: number; i: number }[] = [];
 
     const rotate = (p: Vec3) => {
       const cy = Math.cos(yaw);
@@ -185,32 +235,15 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       return [cx + p[0] * R * scale, cy - p[1] * R * scale] as const;
     };
 
-    type Pulse = { a: Vec3; b: Vec3; start: number; dur: number };
     type Route = { pts: Vec3[]; start: number; dur: number; col: string };
-    const pulses: Pulse[] = [];
     const routes: Route[] = [];
-    let nextSpawn = 0;
     let nextRouteSpawn = 0;
-
-    const spawnPulse = (now: number) => {
-      if (pulses.length >= 10 || meshEdges.length === 0) return;
-      const e = meshEdges[(Math.random() * meshEdges.length) | 0];
-      pulses.push({
-        a: meshNodes[e[0]],
-        b: meshNodes[e[1]],
-        start: now,
-        dur: 900 + Math.random() * 900,
-      });
-    };
 
     const spawnRoute = (now: number) => {
       if (routes.length >= 15) return;
-      const a = hubPoints[(Math.random() * hubPoints.length) | 0];
-      const b =
-        Math.random() < 0.55 || landPoints.length === 0
-          ? hubPoints[(Math.random() * hubPoints.length) | 0]
-          : landPoints[(Math.random() * landPoints.length) | 0];
-      if (a === b || angDist(a, b) < 0.5) return;
+      const a = hq;
+      const b = markers[(Math.random() * markers.length) | 0].pos;
+      if (angDist(a, b) < 0.5) return;
       const samples = 44;
       const height = 0.14 + Math.min(0.34, angDist(a, b) * 0.16);
       const pts: Vec3[] = [];
@@ -231,7 +264,7 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
     let raf = 0;
 
     const frame = (now: number) => {
-      yaw += autoSpeed;
+      if (!dragging && now - lastInteraction > 1200) yaw += autoSpeed;
 
       // Framed for the hero: the dome sits low and right of centre so its
       // top edge crosses behind the copy and it runs off the bottom corner.
@@ -265,105 +298,147 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, W, H);
 
-      ctx.lineWidth = Math.max(0.6, R / 780);
-      for (const e of meshEdges) {
-        const pa = rotate(meshNodes[e[0]]);
-        const pb = rotate(meshNodes[e[1]]);
-        const v = Math.min(
-          smoothstep(-0.08, 0.18, pa[2]),
-          smoothstep(-0.08, 0.18, pb[2]),
-        );
-        if (v <= 0.02) continue;
-        const qa = project(pa);
-        const qb = project(pb);
-        ctx.beginPath();
-        ctx.moveTo(qa[0], qa[1]);
-        ctx.lineTo(qb[0], qb[1]);
-        ctx.strokeStyle = `rgba(140,205,255,${(v * 0.32).toFixed(2)})`;
-        ctx.stroke();
-      }
+      // A solid, lit sphere body — the silhouette of the globe itself, not a
+      // point cloud standing in for one. Lit from the upper-left so it reads
+      // as a volume, darkening toward its lower-right rim. Deep ocean blue
+      // throughout, Google-Earth style, rather than a dark navy backdrop.
+      const bodyR = R * (camD / Math.sqrt(Math.max(1, camD * camD - R * R)));
+      const body = ctx.createRadialGradient(
+        cx - bodyR * 0.35,
+        cy - bodyR * 0.45,
+        bodyR * 0.05,
+        cx,
+        cy,
+        bodyR * 1.05,
+      );
+      body.addColorStop(0, "rgba(110,180,230,0.95)");
+      body.addColorStop(0.32, "rgba(55,125,190,0.92)");
+      body.addColorStop(0.68, "rgba(18,68,124,0.92)");
+      body.addColorStop(1, "rgba(5,26,54,0.92)");
+      ctx.beginPath();
+      ctx.arc(cx, cy, bodyR, 0, Math.PI * 2);
+      ctx.fillStyle = body;
+      ctx.fill();
 
-      for (const node of meshNodes) {
-        const pr = rotate(node);
-        const vn = smoothstep(-0.08, 0.18, pr[2]);
-        if (vn <= 0.02) continue;
-        const qn = project(pr);
-        const rad = node.hub ? Math.max(1.4, R / 190) : Math.max(0.8, R / 320);
-        if (node.hub) {
-          const hg = ctx.createRadialGradient(
-            qn[0],
-            qn[1],
-            0,
-            qn[0],
-            qn[1],
-            rad * 5,
-          );
-          hg.addColorStop(0, `rgba(191,233,255,${(0.5 * vn).toFixed(2)})`);
-          hg.addColorStop(1, "rgba(191,233,255,0)");
+      // Real continents, filled as solid shapes rather than scattered dots.
+      // Drawn onto the offscreen buffer first (sharp quads, opaque enough to
+      // read clearly against the ocean), then composited below with a small
+      // blur — that rounds the coarse data's corners into smooth, satellite
+      // -photo-like coastlines instead of either hard pixel edges or a
+      // washed-out blob.
+      if (landCtx) {
+        landCtx.clearRect(0, 0, W, H);
+        for (const corners of landCells) {
+          let sumZ = 0;
+          const q: (readonly [number, number])[] = [];
+          for (const c of corners) {
+            const r = rotate(c);
+            sumZ += r[2];
+            q.push(project(r));
+          }
+          const vis = smoothstep(-0.04, 0.14, sumZ / corners.length);
+          if (vis <= 0.02) continue;
+          landCtx.beginPath();
+          landCtx.moveTo(q[0][0], q[0][1]);
+          for (let k = 1; k < q.length; k++) landCtx.lineTo(q[k][0], q[k][1]);
+          landCtx.closePath();
+          landCtx.fillStyle = `rgba(225,242,255,${(0.82 + vis * 0.18).toFixed(2)})`;
+          landCtx.fill();
+        }
+
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.beginPath();
+        ctx.arc(cx * dpr, cy * dpr, bodyR * dpr, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.filter = `blur(${Math.max(1, 3.2 * dpr).toFixed(1)}px)`;
+        // Drawn twice, additively: the blur alone would leave every edge —
+        // and the interior — equally soft. Compositing it again with
+        // "lighter" pushes what was solid land back toward fully opaque
+        // while the thin, once-jagged edges (which only pick up the blur's
+        // faint tail from one pass) stay a soft gradient — smooth coastlines
+        // without turning the whole shape hazy.
+        ctx.drawImage(landBuffer, 0, 0);
+        ctx.globalCompositeOperation = "lighter";
+        ctx.drawImage(landBuffer, 0, 0);
+        ctx.restore();
+
+        // A crisp coastline trace over the fill — the data has no political
+        // borders, but this at least gives every landmass a clear, distinct
+        // edge against the ocean rather than reading as one soft blob.
+        for (const p of coastlinePoints) {
+          const r = rotate(p);
+          const vis = smoothstep(-0.04, 0.14, r[2]);
+          if (vis <= 0.03) continue;
+          const q = project(r);
           ctx.beginPath();
-          ctx.arc(qn[0], qn[1], rad * 5, 0, Math.PI * 2);
-          ctx.fillStyle = hg;
+          ctx.arc(q[0], q[1], Math.max(0.9, R / 220), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(220,245,255,${(0.55 + vis * 0.4).toFixed(2)})`;
           ctx.fill();
         }
-        ctx.beginPath();
-        ctx.arc(qn[0], qn[1], rad, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(210,240,255,${(0.75 * vn).toFixed(2)})`;
-        ctx.fill();
       }
 
-      for (let i = 0; i < landPoints.length; i++) {
-        const r = rotate(landPoints[i]);
-        const vis = smoothstep(-0.1, 0.16, r[2]);
-        if (vis <= 0.01) continue;
-        const proj = project(r);
-        const radd = (0.85 + 0.85 * Math.max(0, r[2])) * (R / 320);
+      // A crisp atmospheric rim right at the sphere's silhouette edge — the
+      // thin, bright limb glow that makes a Google-Earth-style globe read as
+      // an actual lit planet rather than a flat disc.
+      const rim = ctx.createRadialGradient(cx, cy, bodyR * 0.94, cx, cy, bodyR * 1.09);
+      rim.addColorStop(0, "rgba(170,220,255,0)");
+      rim.addColorStop(0.7, "rgba(170,220,255,0.5)");
+      rim.addColorStop(0.92, "rgba(210,240,255,0.75)");
+      rim.addColorStop(1, "rgba(210,240,255,0)");
+      ctx.beginPath();
+      ctx.arc(cx, cy, bodyR * 1.09, 0, Math.PI * 2);
+      ctx.fillStyle = rim;
+      ctx.fill();
+
+      // Real chapter countries: glowing markers, screen positions recorded
+      // this frame for hover/click hit-testing.
+      const nextMarkerScreen: typeof markerScreen = [];
+      for (let i = 0; i < markers.length; i++) {
+        const r = rotate(markers[i].pos);
+        const vis = smoothstep(-0.06, 0.18, r[2]);
+        if (vis <= 0.02) continue;
+        const q = project(r);
+        const hovered = i === hoverIndex;
+        const rad = (hovered ? 3.6 : 2.6) * (R / 300);
+        nextMarkerScreen.push({ x: q[0], y: q[1], r: Math.max(9, rad * 2.6), i });
+
+        const hg = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rad * (hovered ? 6 : 4));
+        hg.addColorStop(0, `rgba(255,205,110,${(vis * (hovered ? 0.55 : 0.32)).toFixed(2)})`);
+        hg.addColorStop(1, "rgba(255,205,110,0)");
         ctx.beginPath();
-        ctx.arc(proj[0], proj[1], Math.max(0.5, radd), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${landColors[i]},${(0.22 + vis * 0.72).toFixed(2)})`;
+        ctx.arc(q[0], q[1], rad * (hovered ? 6 : 4), 0, Math.PI * 2);
+        ctx.fillStyle = hg;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(q[0], q[1], rad, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,230,180,${(0.55 + vis * 0.45).toFixed(2)})`;
         ctx.fill();
       }
+      markerScreen = nextMarkerScreen;
 
-      for (let pi = pulses.length - 1; pi >= 0; pi--) {
-        const pulse = pulses[pi];
-        const t = (now - pulse.start) / pulse.dur;
-        if (t >= 1) {
-          pulses.splice(pi, 1);
-          continue;
+      // Headquarters: a brighter, whiter beacon than the chapter markers —
+      // every route on the globe originates here, so it reads as the source.
+      {
+        const r = rotate(hq);
+        const vis = smoothstep(-0.06, 0.18, r[2]);
+        if (vis > 0.02) {
+          const q = project(r);
+          const rad = 3.2 * (R / 300);
+          const hg = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rad * 7);
+          hg.addColorStop(0, `rgba(220,245,255,${(vis * 0.6).toFixed(2)})`);
+          hg.addColorStop(1, "rgba(220,245,255,0)");
+          ctx.beginPath();
+          ctx.arc(q[0], q[1], rad * 7, 0, Math.PI * 2);
+          ctx.fillStyle = hg;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(q[0], q[1], rad, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${(0.7 + vis * 0.3).toFixed(2)})`;
+          ctx.fill();
         }
-        const fade = t < 0.2 ? t / 0.2 : t > 0.75 ? (1 - t) / 0.25 : 1;
-        const mix = {
-          x: pulse.a.x + (pulse.b.x - pulse.a.x) * t,
-          y: pulse.a.y + (pulse.b.y - pulse.a.y) * t,
-          z: pulse.a.z + (pulse.b.z - pulse.a.z) * t,
-        };
-        const len =
-          Math.sqrt(mix.x * mix.x + mix.y * mix.y + mix.z * mix.z) || 1;
-        mix.x /= len;
-        mix.y /= len;
-        mix.z /= len;
-        const pm = rotate(mix);
-        const vp = smoothstep(-0.08, 0.18, pm[2]);
-        if (vp <= 0.04) continue;
-        const qp = project(pm);
-        const prad = Math.max(1.2, R / 260);
-        const pg = ctx.createRadialGradient(
-          qp[0],
-          qp[1],
-          0,
-          qp[0],
-          qp[1],
-          prad * 5,
-        );
-        pg.addColorStop(0, `rgba(230,252,255,${(vp * fade).toFixed(2)})`);
-        pg.addColorStop(1, "rgba(230,252,255,0)");
-        ctx.beginPath();
-        ctx.arc(qp[0], qp[1], prad * 5, 0, Math.PI * 2);
-        ctx.fillStyle = pg;
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(qp[0], qp[1], prad, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${(vp * fade).toFixed(2)})`;
-        ctx.fill();
       }
 
       for (let ri = routes.length - 1; ri >= 0; ri--) {
@@ -459,15 +534,9 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
       ctx.fillStyle = vig;
       ctx.fillRect(0, 0, W, H);
 
-      if (!reduceMotion) {
-        if (now >= nextSpawn) {
-          spawnPulse(now);
-          nextSpawn = now + 140 + Math.random() * 220;
-        }
-        if (now >= nextRouteSpawn) {
-          spawnRoute(now);
-          nextRouteSpawn = now + 120 + Math.random() * 180;
-        }
+      if (!reduceMotion && now >= nextRouteSpawn) {
+        spawnRoute(now);
+        nextRouteSpawn = now + 120 + Math.random() * 180;
       }
 
       raf = requestAnimationFrame(frame);
@@ -475,31 +544,146 @@ export default function GlobalPulse({ className = "" }: { className?: string }) 
 
     raf = requestAnimationFrame(frame);
 
+    const findMarkerAt = (x: number, y: number) => {
+      let best = -1;
+      let bestDist = Infinity;
+      for (const m of markerScreen) {
+        const d = Math.hypot(m.x - x, m.y - y);
+        if (d <= m.r && d < bestDist) {
+          best = m.i;
+          bestDist = d;
+        }
+      }
+      return best;
+    };
+
+    const pointerPos = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    };
+
+    const onPointerDown = (e: PointerEvent) => {
+      dragging = true;
+      dragMoved = 0;
+      lastInteraction = performance.now();
+      const { x, y } = pointerPos(e);
+      lastPointerX = x;
+      lastPointerY = y;
+      canvas.setPointerCapture(e.pointerId);
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      const { x, y } = pointerPos(e);
+      if (dragging) {
+        const dx = x - lastPointerX;
+        const dy = y - lastPointerY;
+        dragMoved += Math.abs(dx) + Math.abs(dy);
+        yaw += dx * 0.006;
+        pitch = Math.max(-1.2, Math.min(1.2, pitch - dy * 0.006));
+        lastPointerX = x;
+        lastPointerY = y;
+        lastInteraction = performance.now();
+        return;
+      }
+      const hit = findMarkerAt(x, y);
+      if (hit !== hoverIndex) {
+        hoverIndex = hit;
+        lastInteraction = performance.now();
+        canvas.style.cursor = hit >= 0 ? "pointer" : "grab";
+        setTooltip(
+          hit >= 0
+            ? { x, y, label: markers[hit].name, code: markers[hit].code }
+            : null,
+        );
+      } else if (hit >= 0) {
+        // Keep the tooltip pinned to the marker's current screen position
+        // as the globe keeps turning under a held cursor.
+        const m = markerScreen.find((s) => s.i === hit);
+        if (m) setTooltip({ x: m.x, y: m.y, label: markers[hit].name, code: markers[hit].code });
+      }
+    };
+
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = false;
+      lastInteraction = performance.now();
+    };
+
+    const onClick = (e: PointerEvent) => {
+      if (dragMoved > 6) return;
+      const { x, y } = pointerPos(e);
+      const hit = findMarkerAt(x, y);
+      if (hit >= 0) {
+        window.open(`/${markers[hit].code}`, "_blank", "noopener");
+      }
+    };
+
+    const onPointerLeave = () => {
+      endDrag();
+      if (hoverIndex >= 0) {
+        hoverIndex = -1;
+        setTooltip(null);
+        canvas.style.cursor = "grab";
+      }
+    };
+
+    canvas.style.cursor = "grab";
+    canvas.style.touchAction = "none";
+    canvas.addEventListener("pointerdown", onPointerDown);
+    canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerup", endDrag);
+    canvas.addEventListener("pointercancel", endDrag);
+    canvas.addEventListener("pointerleave", onPointerLeave);
+    canvas.addEventListener("click", onClick);
+
     const controller = new AbortController();
     fetch(COASTLINE_URL, { signal: controller.signal })
       .then((res) => res.json())
-      .then((dots: [number, number][]) => {
-        landPoints = dots.map((d) => toXYZ(d[0], d[1]));
-        landColors = landPoints.map(
-          () => DOT_PALETTE[(Math.random() * DOT_PALETTE.length) | 0],
-        );
+      .then((cells: [number, number][]) => {
+        landCells = cells.map(([lat, lon]) => {
+          const cosLat = Math.max(0.06, Math.cos((lat * Math.PI) / 180));
+          const latHalf = (LAND_LAT_STEP / 2) * 1.15;
+          const lonHalf = Math.min(20, ((LAND_LON_STEP_AT_EQUATOR / cosLat) / 2) * 1.15);
+          return [
+            toXYZ(lat - latHalf, lon - lonHalf),
+            toXYZ(lat - latHalf, lon + lonHalf),
+            toXYZ(lat + latHalf, lon + lonHalf),
+            toXYZ(lat + latHalf, lon - lonHalf),
+          ];
+        });
+        coastlinePoints = findCoastline(cells).map(([lat, lon]) => toXYZ(lat, lon));
       })
       .catch(() => {
-        // The mesh and arcs still carry the hero if the coastline never lands.
+        // The ocean sphere and markers still carry the globe if the land data
+        // never lands.
       });
 
     return () => {
       cancelAnimationFrame(raf);
       observer.disconnect();
       controller.abort();
+      canvas.removeEventListener("pointerdown", onPointerDown);
+      canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerup", endDrag);
+      canvas.removeEventListener("pointercancel", endDrag);
+      canvas.removeEventListener("pointerleave", onPointerLeave);
+      canvas.removeEventListener("click", onClick);
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className={`block size-full ${className}`}
-    />
+    <div className="relative size-full">
+      <canvas ref={canvasRef} aria-hidden="true" className={`block size-full ${className}`} />
+      {tooltip && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute z-10 flex -translate-x-1/2 -translate-y-[calc(100%+14px)] items-center gap-2 rounded-full border border-white/15 bg-[#030a16]/90 px-3 py-1.5 text-sm text-white shadow-[0_8px_24px_rgba(0,0,0,0.45)] backdrop-blur-sm"
+          style={{ left: tooltip.x, top: tooltip.y }}
+        >
+          <span aria-hidden="true">{flag(tooltip.code)}</span>
+          <span className="font-medium">{tooltip.label}</span>
+        </div>
+      )}
+    </div>
   );
 }
