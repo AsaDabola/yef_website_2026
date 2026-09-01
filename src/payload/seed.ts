@@ -132,7 +132,7 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
     {
       blockType: "proof",
       eyebrow: "The Call",
-      heading: "From the campus **to the nations**.",
+      heading: "From the **campus** to the **nations**.",
       items: [
         {
           name: "Share the\nGospel",
@@ -412,6 +412,9 @@ const OLD_MISSION_VERSE =
   "Your people will offer themselves freely on\nthe day of your power; young people will\ncome to";
 const OLD_PROOF_HEADING =
   "In the days of your youth, **remember your Creator**.";
+/** The Call heading's first correction only italicized "to the nations" —
+ *  Figma actually italicizes "campus" and "nations" individually. */
+const SINGLE_EMPHASIS_PROOF_HEADING = "From the campus **to the nations**.";
 
 /**
  * A one-time fix-up for the "home" page's live database record, which
@@ -446,10 +449,14 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
 
   const mission = layout.find((block) => block.blockType === "mission");
   const proof = layout.find((block) => block.blockType === "proof");
-  const needsFix =
+  // The condition this fix originally shipped with — kept separate from the
+  // later heading-only correction below so a photo already fixed once
+  // doesn't get re-uploaded (and duplicated) on a touch-up run.
+  const needsOriginalFix =
     !orderMatches ||
     mission?.verse === OLD_MISSION_VERSE ||
     proof?.heading === OLD_PROOF_HEADING;
+  const needsFix = needsOriginalFix || proof?.heading === SINGLE_EMPHASIS_PROOF_HEADING;
   if (!needsFix) {
     payload.logger.info("Home layout fix: already applied, skipped.");
     return;
@@ -466,8 +473,12 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
     mission.verseAccent = "\nlike the morning dew.";
   }
 
+  if (proof && proof.heading === SINGLE_EMPHASIS_PROOF_HEADING) {
+    proof.heading = "From the **campus** to the **nations**.";
+  }
+
   if (proof && proof.heading === OLD_PROOF_HEADING) {
-    proof.heading = "From the campus **to the nations**.";
+    proof.heading = "From the **campus** to the **nations**.";
     proof.items = [
       {
         name: "Share the\nGospel",
@@ -485,7 +496,7 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
   }
 
   const about = reordered.find((block) => block.blockType === "about");
-  if (about) {
+  if (about && needsOriginalFix) {
     about.image = await uploadMedia(
       "/images/home-v2/about-us-photo.webp",
       "Students celebrating together on campus",
