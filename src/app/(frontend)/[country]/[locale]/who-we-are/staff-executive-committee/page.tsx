@@ -22,7 +22,7 @@ const people = [
   {
     name: "Danielle White",
     title: "General Secretary",
-    image: "/images/staff/Headshot.webp",
+    image: "/images/staff/Danielle_white.jpg",
   },
   {
     name: "Selemon Trife",
