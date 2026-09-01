@@ -10,6 +10,7 @@ import * as migration_20260828_185937_hero_button_proof_number_optional from './
 import * as migration_20260828_194213_page_header_override from './20260828_194213_page_header_override';
 import * as migration_20260829_015231_generic_page_blocks from './20260829_015231_generic_page_blocks';
 import * as migration_20260829_021607_who_we_are_get_involved_blocks from './20260829_021607_who_we_are_get_involved_blocks';
+import * as migration_20260901_032836_oceania_countries_enum from './20260901_032836_oceania_countries_enum';
 
 export const migrations = [
   {
@@ -71,5 +72,10 @@ export const migrations = [
     up: migration_20260829_021607_who_we_are_get_involved_blocks.up,
     down: migration_20260829_021607_who_we_are_get_involved_blocks.down,
     name: '20260829_021607_who_we_are_get_involved_blocks'
+  },
+  {
+    up: migration_20260901_032836_oceania_countries_enum.up,
+    down: migration_20260901_032836_oceania_countries_enum.down,
+    name: '20260901_032836_oceania_countries_enum',
   },
 ];
