@@ -150,9 +150,9 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
     },
     { blockType: "getInvolved" },
     { blockType: "campusFinder" },
+    { blockType: "movement" },
     { blockType: "testimonials" },
     { blockType: "giving" },
-    { blockType: "movement" },
     {
       blockType: "signup",
       eyebrow: "Stay Up to Date",
