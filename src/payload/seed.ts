@@ -132,7 +132,7 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
     {
       blockType: "proof",
       eyebrow: "The Call",
-      heading: "From the **campus** to the **nations**.",
+      heading: "From the **campus**\nto the **nations**.",
       items: [
         {
           name: "Share the\nGospel",
@@ -415,6 +415,9 @@ const OLD_PROOF_HEADING =
 /** The Call heading's first correction only italicized "to the nations" —
  *  Figma actually italicizes "campus" and "nations" individually. */
 const SINGLE_EMPHASIS_PROOF_HEADING = "From the campus **to the nations**.";
+/** The second correction fixed the emphasis but kept it on one line — Figma
+ *  breaks it across two. */
+const UNBROKEN_PROOF_HEADING = "From the **campus** to the **nations**.";
 
 /**
  * A one-time fix-up for the "home" page's live database record, which
@@ -456,7 +459,10 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
     !orderMatches ||
     mission?.verse === OLD_MISSION_VERSE ||
     proof?.heading === OLD_PROOF_HEADING;
-  const needsFix = needsOriginalFix || proof?.heading === SINGLE_EMPHASIS_PROOF_HEADING;
+  const needsFix =
+    needsOriginalFix ||
+    proof?.heading === SINGLE_EMPHASIS_PROOF_HEADING ||
+    proof?.heading === UNBROKEN_PROOF_HEADING;
   if (!needsFix) {
     payload.logger.info("Home layout fix: already applied, skipped.");
     return;
@@ -473,12 +479,15 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
     mission.verseAccent = "\nlike the morning dew.";
   }
 
-  if (proof && proof.heading === SINGLE_EMPHASIS_PROOF_HEADING) {
-    proof.heading = "From the **campus** to the **nations**.";
+  if (
+    proof &&
+    (proof.heading === SINGLE_EMPHASIS_PROOF_HEADING || proof.heading === UNBROKEN_PROOF_HEADING)
+  ) {
+    proof.heading = "From the **campus**\nto the **nations**.";
   }
 
   if (proof && proof.heading === OLD_PROOF_HEADING) {
-    proof.heading = "From the **campus** to the **nations**.";
+    proof.heading = "From the **campus**\nto the **nations**.";
     proof.items = [
       {
         name: "Share the\nGospel",

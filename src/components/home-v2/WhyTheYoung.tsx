@@ -33,7 +33,7 @@ const defaultItems: ProofItem[] = [
 const defaults = {
   eyebrow: "The Call",
   // ** ** marks the phrase that is set in the italic serif accent.
-  heading: "From the **campus** to the **nations**.",
+  heading: "From the **campus**\nto the **nations**.",
 };
 
 export type ProofContent = Partial<typeof defaults> & {
@@ -64,7 +64,7 @@ export default async function WhyTheYoung({
           <p className="font-semibold text-[11px] text-v2-muted tracking-[2.42px] uppercase">
             {t(c.eyebrow)}
           </p>
-          <h2 className="mt-4 max-w-3xl font-display font-bold text-4xl text-v2-navy leading-[1.05] tracking-[-1.3px] sm:text-5xl lg:text-[52px]">
+          <h2 className="mt-4 max-w-3xl whitespace-pre-line font-display font-bold text-4xl text-v2-navy leading-[1.05] tracking-[-1.3px] sm:text-5xl lg:text-[52px]">
             <Rich
               text={t(c.heading)}
               emphasis="font-serif font-normal italic text-v2-accent"
