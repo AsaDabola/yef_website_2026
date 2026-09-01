@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import ChapterMap from "@/components/network/ChapterMap";
@@ -45,17 +46,19 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
                 <div className="mt-8 max-w-[572px] space-y-6 text-[17px] text-v2-muted-dark leading-[30px] lg:text-[19px]">
                   <p>
 
-{t("YEF is a growing global fellowship of young people who are seeking to know Christ, grow together in His Word, and make Him known in their communities.")}
+{t("YEF is a growing global fellowship of young people seeking to know Christ, grow together in His Word, and make Him known in their communities.")}
 </p>
                   <p>
 
-{t("From college campuses to cities around the world, each YEF chapter is a local expression of the same vision: to raise a generation of young people who live for Christ and bring the Gospel to others.")}
-</p>
-                  <p>
-
-{t("Our chapters connect students and young adults through Bible study, fellowship, discipleship, prayer, leadership training, and mission. While every chapter has its own local culture and community, we are united by one faith, one hope, and one mission.")}
+{t("From college campuses to cities around the world, every chapter is united by one faith, one hope, and one mission.")}
 </p>
                 </div>
+                <Link
+                  href="#find-a-chapter"
+                  className="mt-10 inline-flex items-center justify-center rounded-full bg-yef-primary px-8 py-4 font-semibold text-white text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
+                >
+                  {t("Find a Chapter")}
+                </Link>
               </div>
 
               <div className="relative w-full">
@@ -70,7 +73,7 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
 </p>
         </section>
 
-        <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
+        <section id="find-a-chapter" className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <Breadcrumb label={t("Network")} />
           <h1 className="mt-6 max-w-2xl font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
 
