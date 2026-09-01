@@ -2,9 +2,25 @@ import { NextResponse, type NextRequest } from "next/server";
 import { countryCodes, defaultLocaleFor, getCountry } from "@/lib/i18n/countries";
 import { localeCodes } from "@/lib/i18n/locales";
 import { INTERNATIONAL } from "@/lib/i18n/constants";
+import { REMOVED_ARTICLE_SLUGS } from "@/lib/news";
 
 const countrySet = new Set([INTERNATIONAL, ...countryCodes]);
 const localeSet = new Set(localeCodes);
+const removedArticleSlugSet = new Set<string>(REMOVED_ARTICLE_SLUGS);
+
+/**
+ * These article URLs specifically used to exist — invented placeholder
+ * stories with fabricated bylines and uncredited stock photography, removed
+ * for good — so a plain 404 would undersell it: the page isn't merely
+ * missing, it was intentionally taken down and isn't coming back.
+ */
+function isRemovedArticlePath(pathname: string): boolean {
+  const segments = pathname.split("/").filter(Boolean);
+  const newsIndex = segments.indexOf("news");
+  if (newsIndex === -1) return false;
+  const slug = segments[newsIndex + 1];
+  return slug != null && removedArticleSlugSet.has(slug);
+}
 
 /** Paths that are not part of the localized site. */
 const PASSTHROUGH =
@@ -63,6 +79,13 @@ function preferredCountry(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   if (PASSTHROUGH.test(pathname)) return NextResponse.next();
+
+  if (isRemovedArticlePath(pathname)) {
+    return new NextResponse(
+      "<!doctype html><title>410 Gone</title><h1>410 Gone</h1><p>This article has been permanently removed.</p>",
+      { status: 410, headers: { "content-type": "text/html; charset=utf-8" } },
+    );
+  }
 
   const segments = pathname.split("/").filter(Boolean);
   const [first, second] = segments;

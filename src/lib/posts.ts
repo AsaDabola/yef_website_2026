@@ -122,7 +122,7 @@ export async function getNewsArticles(): Promise<NewsArticle[]> {
       tag: doc.category,
       title: doc.title,
       excerpt: doc.excerpt,
-      image: mediaUrl(doc.image, "card") ?? "/images/news/article-philippines.png",
+      image: mediaUrl(doc.image, "card") ?? "/images/news/article-placeholder.png",
       date: formatDate(doc.publishedAt),
     }));
   } catch (error) {
@@ -166,7 +166,7 @@ export async function getArticle(
             title: doc.title,
             excerpt: doc.excerpt,
             image:
-              mediaUrl(doc.image) ?? "/images/news/article-philippines.png",
+              mediaUrl(doc.image) ?? "/images/news/article-placeholder.png",
             date: formatDate(doc.publishedAt),
           },
           body: doc.body ?? null,

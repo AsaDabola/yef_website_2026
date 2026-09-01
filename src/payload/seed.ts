@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { newsArticles } from "@/lib/news";
+import { newsArticles, REMOVED_ARTICLE_SLUGS } from "@/lib/news";
 import type { Page } from "@/payload-types";
 import newsRealImages from "@/payload/newsRealImages.json";
 
@@ -357,6 +357,43 @@ async function seedPosts(payload: Payload) {
   );
 }
 
+/**
+ * Deletes any Post (and its uploaded cover Media) previously seeded for a
+ * slug in REMOVED_ARTICLE_SLUGS — invented placeholder "articles" (fabricated
+ * bylines, uncredited stock photography) that never belonged on the site.
+ * Runs before seedPosts on every deploy so a copy already sitting in the
+ * database gets purged even though the slug no longer appears in
+ * newsArticles for seedPosts to touch.
+ */
+async function deleteRemovedPosts(payload: Payload) {
+  let deleted = 0;
+  for (const slug of REMOVED_ARTICLE_SLUGS) {
+    const existing = await payload.find({
+      collection: "posts",
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 0,
+    });
+    const doc = existing.docs[0];
+    if (!doc) continue;
+
+    const imageId =
+      typeof doc.image === "object" && doc.image ? doc.image.id : doc.image;
+
+    await payload.delete({ collection: "posts", id: doc.id });
+    if (imageId) {
+      try {
+        await payload.delete({ collection: "media", id: imageId });
+      } catch (error) {
+        payload.logger.error(`Removed post "${slug}": media delete failed: ${error}`);
+      }
+    }
+    deleted += 1;
+    payload.logger.info(`Removed post "${slug}": deleted.`);
+  }
+  payload.logger.info(`Removed-article cleanup: ${deleted} deleted.`);
+}
+
 /** True once every block in a saved layout carries only the fields Payload
  *  itself adds (`id`, `blockType`) — i.e. the placeholder layout this same
  *  script used to seed before it filled in real content, never touched by
@@ -562,6 +599,7 @@ async function step(payload: Payload, label: string, fn: () => Promise<void>) {
 const run = async () => {
   const payload = await getPayload({ config });
 
+  await step(payload, "Removed-article cleanup", () => deleteRemovedPosts(payload));
   await step(payload, "Posts seed", () => seedPosts(payload));
   const uploadMedia = mediaUploader(payload);
   await step(payload, 'Page "home"', () =>

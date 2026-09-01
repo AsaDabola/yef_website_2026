@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import { getArticle, getNewsArticles } from "@/lib/posts";
-import { forgivenessArticleBody } from "@/lib/articleContent";
 import { ShareIcon } from "@/components/ui/SocialIcons";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale } from "@/lib/i18n/request";
@@ -74,7 +73,6 @@ export default async function NewsArticlePage({
     .filter((item) => item.slug !== slug)
     .slice(0, 3);
 
-  const isForgiveness = slug === "forgiveness-in-the-bible";
   const tags = article.tags ?? [article.tag, "Christian Faith", "Discipleship"];
 
   return (
@@ -117,96 +115,6 @@ export default async function NewsArticlePage({
             <div className="max-w-2xl space-y-6 text-lg text-black leading-relaxed">
               {body ? (
                 <RichText data={body as SerializedEditorState} />
-              ) : isForgiveness ? (
-                <>
-                  <p>
-                    
-{t("We’ve all said the words “I forgive you” a time or two. But do we truly know what they mean? Let’s dive into the meaning of forgiveness in the Bible. Spoiler alert: it’s so much more than a polite phrase.")}
-</p>
-
-                  <h2
-                    id="meaning"
-                    className="pt-4 font-display font-bold text-2xl text-black"
-                  >
-                    
-{t("Exploring the Meaning of Forgiveness in the Bible")}
-</h2>
-                  <h3 className="font-display font-semibold text-xl text-black">
-                    
-{t("Forgiveness in the Bible: Hebrew and Greek")}
-</h3>
-                  <p>
-                    
-{t("In Hebrew (the original language of the Old Testament), there are two main words used for “forgive,” nasa and salach.")}
-</p>
-                  <ul className="list-disc space-y-3 pl-6">
-                    <li>
-                      <span className="font-semibold">{t("Nasa: ")} </span>
-                      
-{t("Nasa is a word that means “to lift” or “to carry.” When used in the context of forgiveness, it means to lift away sin and guilt or actively carry them away. This Old Testament word points to the New Testament cross, where Jesus carried our sin and shame on our behalf, bringing us ultimate forgiveness. Beautiful, right?")}
-</li>
-                    <li>
-                      <span className="font-semibold">{t("Salach: ")} </span>
-                      
-{t("Salach translates directly to “forgive” but can also mean “pardon” or “spare.” In the Old Testament, this word is directly linked to God’s forgiveness every time it’s used. This makes sense because God is the only one who can truly pardon us.")}
-</li>
-                  </ul>
-
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
-                    <Image
-                      src="/images/news/forgiveness-praying.png"
-                      alt={t("A young woman praying with an open Bible")}
-                      fill
-                      sizes="(min-width: 1024px) 60vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <p className="text-sm text-v2-muted">
-                    
-{t("Photo by: Celia Oropeza")}
-</p>
-
-                  <h2
-                    id="verses"
-                    className="pt-4 font-display font-bold text-2xl text-black"
-                  >
-                    
-{t("13 Bible Verses About Forgiveness")}
-</h2>
-                  <p>
-                    
-{t("Scripture returns to the theme of forgiveness again and again. Here are thirteen verses to carry with you:")}
-</p>
-                  <ul className="grid list-disc grid-cols-2 gap-x-6 gap-y-2 pl-6 text-base">
-                    {forgivenessArticleBody.verses.map((verse) => (
-                      <li key={verse}>{verse}</li>
-                    ))}
-                  </ul>
-
-                  <h2
-                    id="practice"
-                    className="pt-4 font-display font-bold text-2xl text-black"
-                  >
-                    
-{t("How to Practice Biblical Forgiveness")}
-</h2>
-                  <h3 className="font-display font-semibold text-xl text-black">
-                    
-{t("Repeat These Steps")}
-</h3>
-                  <p>
-                    
-{t("Forgiveness isn’t a one-time thing. Sometimes, you’ll need to forgive someone who hurt you over and over again until your heart is freed from the pain they caused. Take heart in knowing this: forgiveness isn’t a feeling — it’s a choice. And it’s one you might have to make daily.")}
-</p>
-                  <blockquote className="border-l-4 border-v2-blue pl-6 italic text-v2-navy">
-                    
-{t("Then Peter came to Jesus and asked, “Lord, how many times shall my brother or sister sin against me and I forgive them? Up to seven times?” Jesus answered, “I tell you, not seven times, but seventy-seven times.” — Matthew 18:21-22, NIV")}
-</blockquote>
-                  <div className="rounded-2xl bg-v2-bg p-6 text-v2-navy">
-                    
-{t("Forgiveness is a life-changing practice that mirrors God’s heart. As we remember how he has forgiven us, bring our hurts to him and choose to release others again and again, we step into the freedom we have in Jesus.")}
-</div>
-                </>
               ) : article.paragraphs ? (
                 article.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{t(paragraph)}</p>
@@ -228,26 +136,6 @@ export default async function NewsArticlePage({
             </div>
 
             <aside className="h-fit">
-              {isForgiveness && (
-                <div className="border-b border-[#dcdfe5] pb-6">
-                  <p className="font-semibold text-[19px] text-black">
-                    
-{t("Table of Contents")}
-</p>
-                  <ul className="mt-4 space-y-3">
-                    {forgivenessArticleBody.toc.map((item) => (
-                      <li key={item.id}>
-                        <a
-                          href={`#${item.id}`}
-                          className="text-[15px] text-v2-blue hover:underline"
-                        >
-                          {t(item.label)}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
 
               <p className="mt-6 font-semibold text-[19px] text-[#4b5565]">
                 
