@@ -54,7 +54,7 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
 </p>
                 </div>
                 <Link
-                  href="#find-a-chapter"
+                  href="#chapters-map"
                   className="mt-10 inline-flex items-center justify-center rounded-full bg-yef-primary px-8 py-4 font-semibold text-white text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105 hover:opacity-90"
                 >
                   {t("Find a Chapter")}
@@ -73,7 +73,10 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
 </p>
         </section>
 
-        <section id="find-a-chapter" className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
+        <section
+          id="chapters-map"
+          className="mx-auto max-w-[1800px] scroll-mt-24 px-6 py-16 lg:px-16"
+        >
           <Breadcrumb label={t("Network")} />
           <h1 className="mt-6 max-w-2xl font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
 

@@ -8,8 +8,8 @@ const defaults = {
   // The frame sets the verse in three lines; the breaks are placed here
   // rather than left to the container width, which lands on four.
   verse:
-    "Your people will offer themselves freely on\nthe day of your power; young people will\ncome to",
-  verseAccent: "you like the morning dew.",
+    "Young people will come to you",
+  verseAccent: "\nlike the morning dew.",
   reference: "Psalm 110:3",
   columns: [
     "We exist to help students **know Jesus Christ deeply, build their lives on the Word of God,** and **grow into mature disciples** whose faith shapes every part of life.",

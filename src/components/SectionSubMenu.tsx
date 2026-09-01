@@ -39,7 +39,10 @@ export default function SectionSubMenu({
   const current = links.find((link) => isActive(link.href));
 
   return (
-    <nav aria-label={ariaLabel} className="font-body w-full lg:max-w-[237px]">
+    <nav
+      aria-label={ariaLabel}
+      className="font-body w-full lg:sticky lg:top-32 lg:max-w-[237px] lg:self-start"
+    >
       <p className="font-bold text-[15px] leading-[16.62px] text-yef-primary">
         {t(title)}
       </p>

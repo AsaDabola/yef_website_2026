@@ -97,7 +97,7 @@ export default async function ResourcesPage({ params }: { params: LocaleParams }
 
         <section className="mx-auto max-w-[1920px] px-6 pt-16 lg:pt-[110px] lg:pr-[92px] lg:pl-[81px]">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 min-[1728px]:gap-[167px]">
-            <div className="shrink-0 lg:w-[237px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
               <ResourcesSubMenu />
             </div>
 

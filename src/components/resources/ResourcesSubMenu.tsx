@@ -19,7 +19,7 @@ export default function ResourcesSubMenu() {
   return (
     <nav
       aria-label={t("Resource categories")}
-      className="w-full max-w-[237px]"
+      className="w-full max-w-[237px] lg:sticky lg:top-32 lg:self-start"
     >
       <p className="font-bold text-sm text-yef-primary">{t("Resources")}</p>
       <ul className="mt-4">

@@ -3,20 +3,28 @@ import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import Footer from "@/components/Footer";
-import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getLayout, getPageHeader } from "@/lib/pages";
+import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Statement of Faith | Youth Evangelical Fellowship",
 };
 
+const beliefs = [
+  "We believe in the Holy Scriptures as originally given by God, divinely inspired, infallible, entirely trustworthy; and the supreme authority in all matters of faith and conduct.",
+  "We believe in One God, eternally existent in three persons, Father, Son, and Holy Spirit.",
+  "We believe in Our Lord Jesus Christ, God manifest in the flesh, His virgin birth, His sinless human life, His divine miracles, His vicarious and atoning death, His bodily resurrection, His ascension, His mediatorial work, and His Personal return in power and glory.",
+  "We believe in the Salvation of lost and sinful man through the shed blood of the Lord Jesus Christ by faith apart from works, and regeneration by the Holy Spirit.",
+  "We believe in The Holy Spirit, by whose indwelling the believer is enabled to live a holy life, to witness and work for the Lord Jesus Christ.",
+  "We believe in the Unity of the Spirit of all true believers, the Church, the Body of Christ.",
+  "We believe in the Resurrection of both the saved and the lost; they that are saved unto the resurrection of life, they that are lost unto the resurrection of damnation.",
+];
+
 export default async function StatementOfFaithPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("who-we-are/statement-of-faith");
-  const layout = await getLayout("who-we-are/statement-of-faith");
   return (
     <>
       <main>
@@ -26,7 +34,7 @@ export default async function StatementOfFaithPage({ params }: { params: LocaleP
         />
         <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
           <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
-            <div className="shrink-0 lg:w-[237px]">
+            <div className="shrink-0 lg:sticky lg:top-32 lg:w-[237px] lg:self-start">
               <WhoWeAreSubMenu />
             </div>
 
@@ -41,8 +49,10 @@ export default async function StatementOfFaithPage({ params }: { params: LocaleP
 {t("WE BELIEVE:")}
 </p>
 
-              <div className="mt-[96px] [&_section]:mx-0! [&_section]:max-w-[1126px]! [&_section]:px-0! [&_section]:py-0!">
-                <RenderBlocks layout={layout} />
+              <div className="mt-[96px] max-w-[1126px] space-y-[27.2px] text-[20px] text-black leading-[27.2px]">
+                {beliefs.map((belief) => (
+                  <p key={belief}>{t(belief)}</p>
+                ))}
               </div>
             </div>
           </div>

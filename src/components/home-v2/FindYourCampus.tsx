@@ -1,22 +1,20 @@
 "use client";
 
 import Link from "@/components/ui/LocaleLink";
-import { useState } from "react";
 import Reveal from "@/components/ui/Reveal";
 import { useT } from "@/lib/i18n/client";
 
 const chips = [
-  "United States",
-  "Korea",
-  "Hong Kong",
-  "Burundi",
-  "Tonga",
-  "Ethiopia",
+  { label: "United States", href: "/network?country=United+States#chapters-map" },
+  { label: "Korea", href: "/network?country=Korea#chapters-map" },
+  { label: "Hong Kong", href: "/network?country=Hong+Kong#chapters-map" },
+  { label: "Burundi", href: "/network?country=Burundi#chapters-map" },
+  { label: "Tonga", href: "/network?country=Tonga#chapters-map" },
+  { label: "Ethiopia", href: "/network?country=Ethiopia#chapters-map" },
 ];
 
 export default function FindYourCampus() {
   const t = useT();
-  const [active, setActive] = useState(chips[0]);
 
   return (
     <section id="find-your-campus" className="font-body bg-v2-bg scroll-mt-24">
@@ -41,22 +39,17 @@ export default function FindYourCampus() {
           className="mt-6 flex flex-wrap items-center justify-center gap-3"
         >
           {chips.map((chip) => (
-            <button
-              key={chip}
-              type="button"
-              onClick={() => setActive(chip)}
-              className={`rounded-full px-7.5 py-3.5 font-medium text-[13.5px] transition-all duration-200 hover:scale-105 ${
-                chip === active
-                  ? "bg-v2-navy text-v2-bg"
-                  : "border border-v2-navy/13 text-v2-navy hover:border-v2-navy"
-              }`}
+            <Link
+              key={chip.label}
+              href={chip.href}
+              className="rounded-full border border-v2-navy/13 px-7.5 py-3.5 font-medium text-[13.5px] text-v2-navy transition-all duration-200 hover:scale-105 hover:border-v2-navy hover:bg-v2-navy hover:text-v2-bg"
             >
-              {t(chip)}
-            </button>
+              {t(chip.label)}
+            </Link>
           ))}
           <Link
-            href="/network"
-            className="rounded-full border border-v2-navy/13 px-7.5 py-3.5 font-medium text-[13.5px] text-v2-navy transition-all duration-200 hover:scale-105 hover:border-v2-navy"
+            href="/network#chapters-map"
+            className="rounded-full border border-v2-navy/13 px-7.5 py-3.5 font-medium text-[13.5px] text-v2-navy transition-all duration-200 hover:scale-105 hover:border-v2-navy hover:bg-v2-navy hover:text-v2-bg"
           >
             {t("All Chapters →")}
           </Link>

@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/SocialIcons";
 import { CountryPicker } from "@/components/i18n/SitePicker";
 import { getSiteName } from "@/components/ui/SiteWordmark";
+import { getRequestLocale, INTERNATIONAL } from "@/lib/i18n/request";
 import { getT } from "@/lib/i18n/server";
 
 const columns: {
@@ -37,7 +38,7 @@ const columns: {
       { label: "Summer Training", href: "/get-involved/summer-training" },
       { label: "Campus Evangelism", href: "/get-involved/campus-evangelism" },
       { label: "Short-term Mission", href: "/get-involved/short-term-mission" },
-      { label: "Leadership Training", href: "/get-involved/leadership-retreats" },
+      { label: "Leadership Training", href: "/get-involved/leadership-training" },
       { label: "Volunteer", href: "/get-involved/volunteering" },
       { label: "Internship", href: "/get-involved#internship" },
       { label: "Discipleship", href: "/get-involved/discipleship" },
@@ -81,6 +82,8 @@ const socialLinks = [
 
 export default async function Footer() {
   const t = await getT();
+  const { country } = getRequestLocale();
+  const isInternational = country === INTERNATIONAL;
   // Headquarters signs off as "International"; a country site signs off with
   // its own name, in the reader's language.
   const siteName = await getSiteName();
@@ -101,9 +104,11 @@ export default async function Footer() {
                 />
               </Link>
 
-              <p className="mt-6 text-base text-yef-gray">
-                {t("519 S Park Ave. Sanford, FL 32771 USA")}
-              </p>
+              {isInternational && (
+                <p className="mt-6 text-base text-yef-gray">
+                  {t("519 S Park Ave. Sanford, FL 32771 USA")}
+                </p>
+              )}
 
               <p className="mt-10 font-normal text-sm uppercase tracking-[0.7px] text-yef-gray">
                 {t("Subscribe for news, updates, and events")}

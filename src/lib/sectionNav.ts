@@ -63,11 +63,11 @@ export const getInvolvedLinks: {
     href: "/get-involved#train",
     activePaths: [
       "/get-involved/summer-training",
-      "/get-involved/leadership-retreats",
+      "/get-involved/leadership-training",
     ],
     items: [
       { label: "Summer Training", href: "/get-involved/summer-training" },
-      { label: "Leadership Training", href: "/get-involved/leadership-retreats" },
+      { label: "Leadership Training", href: "/get-involved/leadership-training" },
     ],
   },
   {
