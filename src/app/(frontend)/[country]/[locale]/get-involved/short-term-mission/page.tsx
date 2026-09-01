@@ -13,7 +13,7 @@ import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
-  title: "Short-term Mission | Youth Evangelical Fellowship",
+  title: "Short-term Mission",
 };
 
 const BAND = "bg-[#eff5ff]";

@@ -9,7 +9,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Welcome | Youth Evangelical Fellowship",
+  title: "Welcome",
 };
 
 export default async function WelcomePage({ params }: { params: LocaleParams }) {

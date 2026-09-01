@@ -10,7 +10,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Volunteer with YEF | Youth Evangelical Fellowship",
+  title: "Volunteer with YEF",
 };
 
 export default async function VolunteerPage({

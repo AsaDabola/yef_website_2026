@@ -16,7 +16,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Get Involved | Youth Evangelical Fellowship",
+  title: "Get Involved",
 };
 
 /** The five-stage YEF journey, in the same connected-timeline visual as the

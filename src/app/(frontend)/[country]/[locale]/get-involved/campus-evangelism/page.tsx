@@ -14,7 +14,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Campus Evangelism | Youth Evangelical Fellowship",
+  title: "Campus Evangelism",
 };
 
 /** The pale blue the frame uses behind the three banded sections. */

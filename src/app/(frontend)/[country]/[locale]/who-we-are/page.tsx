@@ -6,7 +6,7 @@ import { getLayout } from "@/lib/pages";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
-  title: "Who We Are | Youth Evangelical Fellowship",
+  title: "Who We Are",
 };
 
 export default async function WhoWeArePage({ params }: { params: LocaleParams }) {

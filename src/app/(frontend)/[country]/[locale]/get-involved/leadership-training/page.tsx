@@ -12,7 +12,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "International Leadership Retreats | Youth Evangelical Fellowship",
+  title: "International Leadership Retreats",
 };
 
 export default async function LeadershipTrainingPage({ params }: { params: LocaleParams }) {

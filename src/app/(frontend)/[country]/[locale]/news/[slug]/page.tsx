@@ -24,9 +24,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const found = await getArticle(slug);
   return {
-    title: found
-      ? `${found.article.title} | Youth Evangelical Fellowship`
-      : "News",
+    title: found ? found.article.title : "News",
   };
 }
 

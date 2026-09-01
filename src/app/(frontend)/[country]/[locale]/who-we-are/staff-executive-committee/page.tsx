@@ -9,7 +9,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Staff/Executive Committee | Youth Evangelical Fellowship",
+  title: "Staff/Executive Committee",
 };
 
 /** The frame lists everyone in one grid, in this order. */

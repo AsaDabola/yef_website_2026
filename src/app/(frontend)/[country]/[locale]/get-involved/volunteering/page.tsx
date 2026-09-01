@@ -12,7 +12,7 @@ import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
-  title: "Volunteering | Youth Evangelical Fellowship",
+  title: "Volunteering",
 };
 
 const BAND = "bg-[#eff5ff]";

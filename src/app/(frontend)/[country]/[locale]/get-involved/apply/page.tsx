@@ -11,7 +11,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Connect With YEFI | Youth Evangelical Fellowship",
+  title: "Connect With YEFI",
 };
 
 export default async function ApplyPage({ params }: { params: LocaleParams }) {
