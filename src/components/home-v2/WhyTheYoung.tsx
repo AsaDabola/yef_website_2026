@@ -33,7 +33,7 @@ const defaultItems: ProofItem[] = [
 const defaults = {
   eyebrow: "The Call",
   // ** ** marks the phrase that is set in the italic serif accent.
-  heading: "From the campus **to the nations**.",
+  heading: "From the **campus** to the **nations**.",
 };
 
 export type ProofContent = Partial<typeof defaults> & {
