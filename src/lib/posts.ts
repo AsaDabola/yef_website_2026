@@ -31,7 +31,7 @@ const fallbackMovementItems: MovementItem[] = [
   },
   {
     tag: "NEW CHAPTER",
-    title: "YEF Holds Fellowship Gathering Near Washington University in St. Louis",
+    title: "Reaching Students with the Gospel",
     image: "/images/home-v2/movement-st-louis.jpg",
     alt: "Students seated together at a YEF fellowship gathering in St. Louis",
   },
