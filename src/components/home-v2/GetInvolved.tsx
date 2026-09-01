@@ -27,7 +27,7 @@ const cards = [
     tag: "By Invitation",
     title: "Leadership Training",
     body: "For those who have finished discipleship and are ready to teach. You become a missionary to the campus you already attend.",
-    image: "/images/home-v2/get-involved-leadership-training.png",
+    image: "/images/home-v2/get-involved-leadership-training.webp",
   },
   {
     tag: "Short Term",
