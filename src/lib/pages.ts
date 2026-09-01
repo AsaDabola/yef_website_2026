@@ -19,9 +19,9 @@ export const defaultHomeLayout: PageBlock[] = [
   { blockType: "mission" },
   { blockType: "proof" },
   { blockType: "getInvolved" },
-  { blockType: "testimonials" },
-  { blockType: "giving" },
   { blockType: "movement" },
+  { blockType: "giving" },
+  { blockType: "testimonials" },
   { blockType: "signup" },
 ];
 
