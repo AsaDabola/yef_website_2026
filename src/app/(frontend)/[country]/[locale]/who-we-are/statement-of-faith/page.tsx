@@ -8,7 +8,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Statement of Faith | Youth Evangelical Fellowship",
+  title: "Statement of Faith",
 };
 
 const beliefs = [

@@ -9,7 +9,7 @@ import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
-  title: "Apply for Leadership Training | Youth Evangelical Fellowship",
+  title: "Apply for Leadership Training",
 };
 
 export default async function LeadershipTrainingApplyPage({

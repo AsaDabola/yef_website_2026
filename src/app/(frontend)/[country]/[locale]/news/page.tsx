@@ -12,7 +12,7 @@ import SiteName from "@/components/ui/SiteName";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "News | Youth Evangelical Fellowship",
+  title: "News",
 };
 
 // Editors publish through /admin, so re-read the CMS rather than baking the

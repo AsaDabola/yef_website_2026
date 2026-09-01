@@ -11,7 +11,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Reaching the Campus | Youth Evangelical Fellowship",
+  title: "Reaching the Campus",
 };
 
 export default async function ReachingTheCampusPage({ params }: { params: LocaleParams }) {

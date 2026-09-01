@@ -10,7 +10,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Membership | Youth Evangelical Fellowship",
+  title: "Membership",
 };
 
 export default async function MembershipPage({ params }: { params: LocaleParams }) {

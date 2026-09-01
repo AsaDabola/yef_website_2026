@@ -12,7 +12,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Sharing the Gospel | Youth Evangelical Fellowship",
+  title: "Sharing the Gospel",
 };
 
 export default async function SharingTheGospelPage({ params }: { params: LocaleParams }) {

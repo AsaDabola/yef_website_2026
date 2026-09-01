@@ -10,7 +10,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "YEF Mission School | Youth Evangelical Fellowship",
+  title: "YEF Mission School",
 };
 
 const curriculum = [

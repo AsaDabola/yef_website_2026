@@ -11,7 +11,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import SiteName from "@/components/ui/SiteName";
 
 export const metadata: Metadata = {
-  title: "Network | Youth Evangelical Fellowship",
+  title: "Network",
 };
 
 export default async function NetworkPage({ params }: { params: LocaleParams }) {

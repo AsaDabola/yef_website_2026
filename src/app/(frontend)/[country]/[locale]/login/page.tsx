@@ -12,7 +12,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Sign In | Youth Evangelical Fellowship",
+  title: "Sign In",
 };
 
 /** Mirrors the category list on /resources, so a visitor knows what's

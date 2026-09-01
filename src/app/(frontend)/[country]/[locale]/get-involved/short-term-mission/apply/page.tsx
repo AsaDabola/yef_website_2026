@@ -10,7 +10,7 @@ import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
-  title: "Apply for Short-term Mission | Youth Evangelical Fellowship",
+  title: "Apply for Short-term Mission",
 };
 
 export default async function ShortTermMissionApplyPage({

@@ -9,6 +9,7 @@ import {
 } from "next/font/google";
 import { I18nProvider } from "@/lib/i18n/client";
 import { loadClientMessages } from "@/lib/i18n/messages";
+import { getCountry } from "@/lib/i18n/countries";
 import { isRtl } from "@/lib/i18n/locales";
 import {
   INTERNATIONAL,
@@ -51,11 +52,29 @@ const laBelleAurore = La_Belle_Aurore({
   weight: ["400"],
 });
 
-export const metadata: Metadata = {
-  title: "Youth Evangelical Fellowship",
-  description:
-    "Youth Evangelical Fellowship — To Know Christ, To Make Him Known.",
-};
+/**
+ * The site name shown in the browser tab, with the country appended for
+ * every site but the headquarters one — so a visitor with several country
+ * sites open in tabs can tell them apart at a glance. Each page then sets
+ * just its own short title (e.g. "Network"), and Next.js composes it with
+ * this template into "Network | Youth Evangelical Fellowship (France)".
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ country: string; locale: string }>;
+}): Promise<Metadata> {
+  const { country } = await params;
+  const siteName =
+    country === INTERNATIONAL
+      ? "Youth Evangelical Fellowship"
+      : `Youth Evangelical Fellowship (${getCountry(country)?.name ?? country})`;
+  return {
+    title: { template: `%s | ${siteName}`, default: siteName },
+    description:
+      "Youth Evangelical Fellowship — To Know Christ, To Make Him Known.",
+  };
+}
 
 /**
  * Every page lives under /<country>/<language>. The layout resolves that pair,

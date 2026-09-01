@@ -11,7 +11,7 @@ import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
-  title: "Begin Your Mission Journey | Youth Evangelical Fellowship",
+  title: "Begin Your Mission Journey",
 };
 
 export default async function MissionApplyPage({

@@ -13,7 +13,7 @@ import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 
 export const metadata: Metadata = {
-  title: "Bible Studies | Youth Evangelical Fellowship",
+  title: "Bible Studies",
 };
 
 const BAND = "bg-[#eff5ff]";
