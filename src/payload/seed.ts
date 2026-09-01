@@ -411,7 +411,7 @@ const HOME_BLOCK_ORDER = [
 const OLD_MISSION_VERSE =
   "Your people will offer themselves freely on\nthe day of your power; young people will\ncome to";
 const OLD_PROOF_HEADING =
-  "In the days of your youth, before the days of trouble come, **remember your Creator**.";
+  "In the days of your youth, **remember your Creator**.";
 
 /**
  * A one-time fix-up for the "home" page's live database record, which
