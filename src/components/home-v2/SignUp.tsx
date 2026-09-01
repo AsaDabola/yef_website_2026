@@ -33,7 +33,7 @@ export default async function SignUp({
         height={1738}
         sizes="100vw"
         priority={false}
-        className="yef-pulse absolute inset-0 size-full object-cover opacity-75 mix-blend-screen"
+        className="absolute inset-0 size-full object-cover opacity-75 mix-blend-screen"
       />
       {/* 1920x591 frame: a 1440 column at x=240, y=145, 199 tall. */}
       <div className="relative mx-auto max-w-[1440px] px-6 py-24 text-center sm:px-10 lg:pt-[145px] lg:pb-[215px] 2xl:px-0">

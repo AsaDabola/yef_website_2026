@@ -85,32 +85,6 @@ body {
 }
 
 /*
- * The sign-up band's world map breathes rather than sitting flat — a slow
- * swell in brightness and scale, far enough under the copy not to distract.
- */
-@keyframes yef-pulse {
-  0%,
-  100% {
-    opacity: 0.55;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.035);
-  }
-}
-
-.yef-pulse {
-  animation: yef-pulse 7s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .yef-pulse {
-    animation: none;
-  }
-}
-
-/*
  * History timeline. Entries rise into place as the rail's fill reaches them,
  * and their dot lights up at the same moment, so the line reads as drawing
  * the history rather than sitting there finished.
