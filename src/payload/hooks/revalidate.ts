@@ -15,8 +15,17 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from "paylo
  * the cost of a stale-looking site.
  */
 async function revalidateSite() {
-  const { revalidatePath } = await import("next/cache");
-  revalidatePath("/", "layout");
+  try {
+    const { revalidatePath } = await import("next/cache");
+    revalidatePath("/", "layout");
+  } catch (error) {
+    // Thrown as "static generation store missing" when a save happens
+    // outside a real request — e.g. the build-time seed script, which runs
+    // before `next build` regenerates every static page anyway, so there is
+    // nothing stale left to invalidate. Letting this throw would abort the
+    // save itself, since afterChange hooks run inside the same operation.
+    console.warn("Skipping revalidation outside a request:", error);
+  }
 }
 
 /** A draft save shouldn't invalidate the live cache — only a real publish,
