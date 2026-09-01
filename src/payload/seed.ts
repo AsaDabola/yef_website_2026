@@ -131,20 +131,19 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
     {
       blockType: "proof",
       eyebrow: "The Call",
-      heading:
-        "In the days of your youth, before the days of trouble come, **remember your Creator**.",
+      heading: "From the campus **to the nations**.",
       items: [
         {
-          name: "Know Christ",
-          body: "The university years are a formative season when convictions, values, and direction for life are taking shape. YEF calls students to seek Christ and build their lives firmly upon Him.",
+          name: "Share the\nGospel",
+          body: "We meet students on university campuses and invite them to know Jesus Christ through the Gospel.",
         },
         {
-          name: "Grow in the\nWord",
-          body: "Through Scripture, prayer, fellowship, and discipleship, students deepen their faith, develop a biblical worldview, and learn to follow Christ in every area of life.",
+          name: "Teach the Bible",
+          body: "We help students grow in faith through Scripture, prayer, and Christian fellowship.",
         },
         {
-          name: "Live on Mission",
-          body: "Faith is meant to be lived and shared. Students are encouraged to serve others, make disciples, and carry the Gospel to their friends, campuses, communities, and beyond.",
+          name: "Raise Disciples",
+          body: "We equip students to follow Christ, lead others, and carry the Gospel to the nations.",
         },
       ],
     },
