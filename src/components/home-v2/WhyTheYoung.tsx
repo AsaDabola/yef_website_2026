@@ -19,11 +19,12 @@ const defaultItems: ProofItem[] = [
     body: "We meet students on university campuses and invite them to know Jesus Christ through the Gospel.",
   },
   {
+    icon: { src: "/images/icons/icon-teach-bible.svg", width: 44, height: 58 },
     name: "Teach the Bible",
     body: "We help students grow in faith through Scripture, prayer, and Christian fellowship.",
   },
   {
-    icon: { src: "/images/icons/icon-raise-disciples.svg", width: 67, height: 53 },
+    icon: { src: "/images/icons/icon-raise-disciples.svg", width: 68, height: 53 },
     name: "Raise Disciples",
     body: "We equip students to follow Christ, lead others, and carry the Gospel to the nations.",
   },
