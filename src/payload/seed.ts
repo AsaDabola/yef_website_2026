@@ -73,8 +73,8 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
             "/images/home-v2/hero-fire.webp",
             "Youth gathered around a bonfire at dusk",
           ),
-          heading: "To Know Christ.\nTo Make Him Known.",
-          body: "For we do not preach ourselves but Jesus Christ as Lord",
+          heading: "Not to Be Served,\nbut to Serve.",
+          body: "“For even the Son of Man did not come to be served, but to serve.”\nMark 10:45",
         },
         {
           image: await uploadMedia(
@@ -418,6 +418,10 @@ const SINGLE_EMPHASIS_PROOF_HEADING = "From the campus **to the nations**.";
 /** The second correction fixed the emphasis but kept it on one line — Figma
  *  breaks it across two. */
 const UNBROKEN_PROOF_HEADING = "From the **campus** to the **nations**.";
+/** The hero's original first-slide copy, replaced with the "Not to Be
+ *  Served, but to Serve." heading and Mark 10:45 verse. */
+const OLD_HERO_HEADING = "To Know Christ.\nTo Make Him Known.";
+const OLD_HERO_BODY = "For we do not preach ourselves but Jesus Christ as Lord";
 
 /**
  * A one-time fix-up for the "home" page's live database record, which
@@ -452,6 +456,9 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
 
   const mission = layout.find((block) => block.blockType === "mission");
   const proof = layout.find((block) => block.blockType === "proof");
+  const hero = layout.find((block) => block.blockType === "hero");
+  const heroSlides = hero?.slides as Array<Record<string, unknown>> | undefined;
+  const heroSlide0 = heroSlides?.[0];
   // The condition this fix originally shipped with — kept separate from the
   // later heading-only correction below so a photo already fixed once
   // doesn't get re-uploaded (and duplicated) on a touch-up run.
@@ -462,7 +469,8 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
   const needsFix =
     needsOriginalFix ||
     proof?.heading === SINGLE_EMPHASIS_PROOF_HEADING ||
-    proof?.heading === UNBROKEN_PROOF_HEADING;
+    proof?.heading === UNBROKEN_PROOF_HEADING ||
+    heroSlide0?.heading === OLD_HERO_HEADING;
   if (!needsFix) {
     payload.logger.info("Home layout fix: already applied, skipped.");
     return;
@@ -502,6 +510,15 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
         body: "We equip students to follow Christ, lead others, and carry the Gospel to the nations.",
       },
     ];
+  }
+
+  if (heroSlide0 && heroSlide0.heading === OLD_HERO_HEADING) {
+    heroSlide0.heading = "Not to Be Served,\nbut to Serve.";
+    heroSlide0.body =
+      "“For even the Son of Man did not come to be served, but to serve.”\nMark 10:45";
+  } else if (heroSlide0 && heroSlide0.body === OLD_HERO_BODY) {
+    heroSlide0.body =
+      "“For even the Son of Man did not come to be served, but to serve.”\nMark 10:45";
   }
 
   const about = reordered.find((block) => block.blockType === "about");
