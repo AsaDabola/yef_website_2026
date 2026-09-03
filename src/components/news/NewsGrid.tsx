@@ -9,7 +9,7 @@ import HoverGroup from "@/components/ui/HoverGroup";
 import PhotoEventsGrid from "@/components/news/PhotoEventsGrid";
 import { useT } from "@/lib/i18n/client";
 
-const tabs = ["View All", "News", "Story", "Photo News"];
+const tabs = ["View All", "News", "Photo News"];
 const PAGE_SIZE = 12;
 
 /** 1, 2, …, current-1, current, current+1, …, last — never a run of dots
