@@ -149,7 +149,6 @@ async function buildDefaultHomeLayout(uploadMedia: MediaUploader) {
       ],
     },
     { blockType: "movement" },
-    { blockType: "testimonials" },
     { blockType: "giving" },
     {
       blockType: "signup",
@@ -400,7 +399,6 @@ const HOME_BLOCK_ORDER = [
   "getInvolved",
   "proof",
   "movement",
-  "testimonials",
   "giving",
   "signup",
 ];
@@ -448,7 +446,9 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
   }
 
   const layout = doc.layout as Array<Record<string, unknown>>;
-  const currentOrder = layout.map((block) => block.blockType as string);
+  const currentOrder = layout
+    .map((block) => block.blockType as string)
+    .filter((blockType) => blockType !== "testimonials");
   const canonicalOrder = [...currentOrder].sort(
     (a, b) => HOME_BLOCK_ORDER.indexOf(a) - HOME_BLOCK_ORDER.indexOf(b),
   );
@@ -459,6 +459,7 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
   const hero = layout.find((block) => block.blockType === "hero");
   const heroSlides = hero?.slides as Array<Record<string, unknown>> | undefined;
   const heroSlide0 = heroSlides?.[0];
+  const hasTestimonials = layout.some((block) => block.blockType === "testimonials");
   // The condition this fix originally shipped with — kept separate from the
   // later heading-only correction below so a photo already fixed once
   // doesn't get re-uploaded (and duplicated) on a touch-up run.
@@ -470,17 +471,20 @@ async function fixHomePageLayout(payload: Payload, uploadMedia: MediaUploader) {
     needsOriginalFix ||
     proof?.heading === SINGLE_EMPHASIS_PROOF_HEADING ||
     proof?.heading === UNBROKEN_PROOF_HEADING ||
-    heroSlide0?.heading === OLD_HERO_HEADING;
+    heroSlide0?.heading === OLD_HERO_HEADING ||
+    hasTestimonials;
   if (!needsFix) {
     payload.logger.info("Home layout fix: already applied, skipped.");
     return;
   }
 
-  const reordered = [...layout].sort(
-    (a, b) =>
-      HOME_BLOCK_ORDER.indexOf(a.blockType as string) -
-      HOME_BLOCK_ORDER.indexOf(b.blockType as string),
-  );
+  const reordered = layout
+    .filter((block) => block.blockType !== "testimonials")
+    .sort(
+      (a, b) =>
+        HOME_BLOCK_ORDER.indexOf(a.blockType as string) -
+        HOME_BLOCK_ORDER.indexOf(b.blockType as string),
+    );
 
   if (mission && mission.verse === OLD_MISSION_VERSE) {
     mission.verse = "Young people will come to you";
