@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { draftMode } from "next/headers";
 import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -13,66 +12,6 @@ import { getPageHeader, getLayout } from "@/lib/pages";
 export const metadata: Metadata = {
   title: "Staff/Executive Committee",
 };
-
-/** The frame lists everyone in one grid, in this order. */
-const people = [
-  {
-    name: "Dr. William Mark Wagner",
-    title: "President",
-    image: "/images/staff/william_mark_wagner.webp",
-  },
-  {
-    name: "Danielle White",
-    title: "General Secretary",
-    image: "/images/staff/Danielle_white.jpg",
-  },
-  {
-    name: "Selemon Trife",
-    title: "YEF Africa Representative",
-    image: "/images/staff/Selemon_Trife.webp",
-  },
-  {
-    name: "Victor Ahn",
-    title: "YEF Asia Pacific Representative",
-    image: "/images/staff/victer_ahn.webp",
-  },
-  {
-    name: "Deborah Lan",
-    title: "YEF China Representative",
-    image: "/images/staff/Deborah_Lan.webp",
-  },
-  {
-    name: "Andrea Li",
-    title: "YEF Hong Kong",
-    image: "/images/staff/Andrea_Li.webp",
-  },
-  {
-    name: "Ilinca",
-    title: "YEF Romania",
-    image: "/images/staff/Ilinca.webp",
-  },
-  {
-    name: "Bridaija Jones",
-    title: "YEF HQ Mission Staff",
-    image: "/images/staff/Bridaija_Jones.webp",
-  },
-  {
-    name: "Emmanual Reid",
-    title: "YEF HQ Mission Staff",
-    image: "/images/staff/Emmanual_Reid.webp",
-  },
-  {
-    name: "Olivia Lin",
-    title: "Director of Chinese Mission",
-    image: "/images/staff/olivia-1.webp",
-  },
-  {
-    name: "Josiah Kim",
-    title: "Broadcaster",
-    image: "/images/staff/Josiah.webp",
-  },
-];
-
 
 export default async function StaffExecutiveCommitteePage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
@@ -103,32 +42,10 @@ export default async function StaffExecutiveCommitteePage({ params }: { params: 
 {t(header.heading || "Staff/Executive Committee")}
 </h1>
 
-              <RenderBlocks layout={layout} />
-
-              {/* A fixed staff roster with photos — no generic block carries a
-                  photo grid, so this stays hardcoded. RenderBlocks above is
-                  wired for future editable sections even though the bundled
-                  layout for this route is empty today. */}
-              <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
-                {people.map((person) => (
-                  <div key={person.name}>
-                    <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-[#f7f7f7]">
-                      <Image
-                        src={person.image}
-                        alt={person.name}
-                        fill
-                        sizes="(min-width: 1024px) 319px, (min-width: 640px) 30vw, 45vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    <p className="mt-4 font-sans font-extrabold text-[16px] text-black leading-[24px]">
-                      {t(person.name)}
-                    </p>
-                    <p className="font-sans text-[16px] text-black/70 italic leading-[24px]">
-                      {t(person.title)}
-                    </p>
-                  </div>
-                ))}
+              {/* The staff roster is now the genericPhotoGrid block below —
+                  fully editable from the admin. */}
+              <div className="mt-12">
+                <RenderBlocks layout={layout} />
               </div>
             </div>
           </div>
