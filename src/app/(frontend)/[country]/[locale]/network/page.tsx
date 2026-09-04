@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { draftMode } from "next/headers";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import ChapterMap from "@/components/network/ChapterMap";
 import CountryDirectory from "@/components/network/CountryDirectory";
 import NetworkGlobe from "@/components/network/NetworkGlobe";
 import Footer from "@/components/Footer";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
+import { getLayout } from "@/lib/pages";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
 import SiteName from "@/components/ui/SiteName";
@@ -17,6 +20,8 @@ export const metadata: Metadata = {
 export default async function NetworkPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("network", draft);
   return (
     <>
       <main>
@@ -75,22 +80,16 @@ export default async function NetworkPage({ params }: { params: LocaleParams }) 
 
         <section
           id="chapters-map"
-          className="mx-auto max-w-[1800px] scroll-mt-24 px-6 py-16 lg:px-16"
+          className="mx-auto max-w-[1800px] scroll-mt-24 px-6 pt-16 lg:px-16"
         >
           <Breadcrumb label={t("Network")} />
-          <h1 className="mt-6 max-w-2xl font-display font-bold text-4xl text-v2-navy tracking-[-1px] sm:text-5xl">
-
-{t("Find a chapter near you.")}
-</h1>
-          <p className="mt-4 max-w-xl text-v2-muted-dark leading-relaxed">
-
-{t("YEF chapters meet on campuses around the world. Search the list or drop a pin to see who’s leading a fellowship near you.")}
-</p>
-
-          <div className="mt-10">
-            <ChapterMap />
-          </div>
         </section>
+
+        <RenderBlocks layout={layout} />
+
+        <div className="mx-auto max-w-[1800px] px-6 pb-16 lg:px-16">
+          <ChapterMap />
+        </div>
 
         <CountryDirectory />
       </main>

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { draftMode } from "next/headers";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import TestimonySubmission from "@/components/get-involved/TestimonySubmission";
-import Testimonials from "@/components/home-v2/Testimonials";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getLayout, getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Submit Your Story",
@@ -17,6 +18,8 @@ export default async function SubmitYourStoryPage({ params }: { params: LocalePa
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("submit-your-story");
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("submit-your-story", draft);
   return (
     <>
       <main>
@@ -50,30 +53,9 @@ export default async function SubmitYourStoryPage({ params }: { params: LocalePa
           <div className="mx-auto mt-[15px] max-w-[922px]">
             <TestimonySubmission />
           </div>
-
-          <div className="mt-[115px] grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[671fr_673fr]">
-            <div className="flex items-center px-8 py-12 lg:min-h-[640px] lg:py-0 lg:pr-[30px] lg:pl-[82px]">
-              <p className="font-medium text-[#4b5565] text-base leading-[30px] lg:text-[19.2px]">
-                <span className="font-bold">{t("Hudson Taylor,")}</span>  {t("who would become one of the most influential missionaries to China and the founder of the China Inland Mission, was only 21 years old when he first sailed for China. His willingness to answer God’s call as a young man eventually contributed to a missionary movement that reached far beyond his own lifetime.")}
-</p>
-            </div>
-            <div className="relative min-h-[320px] w-full lg:min-h-[640px]">
-              <Image
-                src="/images/submit-story/hudson-taylor.jpg"
-                alt={t("Hudson Taylor")}
-                fill
-                sizes="(min-width: 1024px) 673px, 100vw"
-                // The engraving is a portrait bust on white, so it sits in the
-                // card rather than filling it the way a photo would.
-                className="object-contain object-bottom"
-              />
-            </div>
-          </div>
         </section>
 
-        <div className="mt-[124px]">
-          <Testimonials />
-        </div>
+        <RenderBlocks layout={layout} />
       </main>
       <Footer />
     </>

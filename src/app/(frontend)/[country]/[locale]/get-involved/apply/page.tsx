@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { draftMode } from "next/headers";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import ConnectForm from "@/components/get-involved/ConnectForm";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getLayout, getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Connect With YEFI",
@@ -18,6 +20,8 @@ export default async function ApplyPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("get-involved/apply");
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("get-involved/apply", draft);
   return (
     <>
       <main>
@@ -46,6 +50,7 @@ export default async function ApplyPage({ params }: { params: LocaleParams }) {
             <div className="min-w-0 flex-1">
               <Breadcrumb label={t("Get Involved")} />
               <div className="mt-[41px] max-w-[922px]">
+                <RenderBlocks layout={layout} />
                 <ConnectForm />
               </div>
 
