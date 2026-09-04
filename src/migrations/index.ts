@@ -11,6 +11,7 @@ import * as migration_20260828_194213_page_header_override from './20260828_1942
 import * as migration_20260829_015231_generic_page_blocks from './20260829_015231_generic_page_blocks';
 import * as migration_20260901_032836_oceania_countries_enum from './20260901_032836_oceania_countries_enum';
 import * as migration_20260904_120000_generic_blocks_background from './20260904_120000_generic_blocks_background';
+import * as migration_20260904_130000_get_involved_route_expansion from './20260904_130000_get_involved_route_expansion';
 
 export const migrations = [
   {
@@ -77,5 +78,10 @@ export const migrations = [
     up: migration_20260904_120000_generic_blocks_background.up,
     down: migration_20260904_120000_generic_blocks_background.down,
     name: '20260904_120000_generic_blocks_background',
+  },
+  {
+    up: migration_20260904_130000_get_involved_route_expansion.up,
+    down: migration_20260904_130000_get_involved_route_expansion.down,
+    name: '20260904_130000_get_involved_route_expansion',
   },
 ];
