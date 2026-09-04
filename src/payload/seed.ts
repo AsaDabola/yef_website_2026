@@ -391,7 +391,69 @@ async function buildDefaultGetInvolvedCampusEvangelismLayout(
   uploadMedia: MediaUploader,
 ) {
   return [
-    // -- slice(0, 5): What You Will Experience -> Gallery -> Where We Serve --
+    {
+      blockType: "genericText",
+      heading: "Reach Students. Share Christ. Make Disciples.",
+      paragraphs: [
+        {
+          body: "Campus evangelism begins with a willing heart. YEF equips young people to meet students, build genuine relationships, share the Gospel, and invite them to discover Christ through God's Word. Every campus is filled with students searching for purpose, identity, and community — many of whom have never had a real conversation about faith. Through everyday moments, intentional outreach, and consistent presence, YEF trains students to become confident, compassionate witnesses for Christ right where they already are.",
+        },
+      ],
+    },
+    {
+      blockType: "genericQuote",
+      quote: "“Go into all the world and preach the gospel to all creation.”",
+      reference: "— Mark 16:15",
+    },
+    {
+      blockType: "genericLinkCards",
+      cards: [
+        {
+          image: await uploadMedia(
+            "/images/get-involved/campus-evangelism-teaser-university.webp",
+            "Students walking together on a university campus",
+          ),
+          title: "Campus Outreach",
+          href: "/get-involved#bible-studies",
+        },
+      ],
+    },
+    {
+      blockType: "genericText",
+      heading: "Why Go into Campus Evangelism?",
+      paragraphs: [
+        {
+          body: "Campus evangelism is more than a single conversation. It is an opportunity to see students, campuses, and communities through the eyes of Christ.\n\nJesus said:",
+        },
+      ],
+    },
+    {
+      blockType: "genericQuote",
+      quote: "“The harvest is plentiful but the workers are few.”",
+      reference: "— Matthew 9:37",
+    },
+    {
+      blockType: "genericText",
+      paragraphs: [
+        {
+          body: "There are campuses where students have never been personally invited to study the Bible. There are students searching for purpose, identity, and community. There are classmates and friends who have never heard the Gospel clearly explained. YEF Campus Evangelism equips participants to step onto these campuses and share Christ alongside fellow students, campus ministries, and local churches.\n\nSometimes the greatest change also happens within the evangelist. Through evangelism, participants learn to depend more deeply on God, overcome fear, love others well, work as a team, and discover that God can use ordinary students who are simply willing to obey Him.",
+        },
+      ],
+    },
+    {
+      blockType: "genericLinkCards",
+      cards: [
+        {
+          image: await uploadMedia(
+            "/images/get-involved/campus-evangelism-teaser-friends.webp",
+            "Two students talking together on campus",
+          ),
+          title: "Share the Gospel",
+          href: "/get-involved#bible-studies",
+        },
+      ],
+    },
+    // -- What You Will Experience -> Gallery -> Where We Serve --
     {
       blockType: "genericText",
       heading: "What You Will Experience",
@@ -488,7 +550,34 @@ async function buildDefaultGetInvolvedCampusEvangelismLayout(
         },
       ],
     },
-    // -- slice(5, 7): Preparing for Evangelism --
+    // -- Who Can Join? --
+    {
+      blockType: "genericText",
+      heading: "Who Can Join?",
+      paragraphs: [
+        {
+          body: "YEF Campus Evangelism is especially designed for students, young adults, church members, volunteers, and emerging evangelists who desire to grow in faith and participate in the Great Commission.\n\nYou do not need to be an experienced evangelist or Bible teacher.\n\nYou need a willing heart.",
+        },
+      ],
+    },
+    {
+      blockType: "genericList",
+      heading: "Participants should be prepared to:",
+      items: [
+        {
+          body: "Participate faithfully in our Bible study program, prayer and Bible study",
+        },
+        { body: "Work together as part of a team" },
+        { body: "Respect local churches, leaders, and cultures" },
+        { body: "Serve wherever help is needed" },
+        { body: "Share their faith with others" },
+        { body: "Remain flexible when plans change" },
+        { body: "Receive guidance and training" },
+        { body: "Approach the mission field with humility" },
+        { body: "Represent Christ through their words and actions" },
+      ],
+    },
+    // -- Preparing for Evangelism --
     {
       blockType: "genericText",
       heading: "Preparing for Evangelism",
@@ -525,7 +614,52 @@ async function buildDefaultGetInvolvedCampusEvangelismLayout(
         },
       ],
     },
-    // -- slice(7, 8): closing CTA --
+    // -- A Typical Day --
+    {
+      blockType: "genericImageText",
+      image: await uploadMedia(
+        "/images/get-involved/campus-evangelism-typical-day.webp",
+        "A YEF student sharing the Gospel on campus",
+      ),
+      imageAlt: "A YEF student sharing the Gospel on campus",
+      imageSide: "right",
+      heading: "A Typical Day in Campus Evangelism",
+      body: "While every day of outreach is different, a typical day may include:",
+    },
+    {
+      blockType: "genericTimeline",
+      items: [
+        {
+          year: "Morning",
+          body: "Prayer, worship, Scripture meditation, breakfast, and preparation for the day's outreach.",
+        },
+        {
+          year: "Daytime",
+          body: "Campus evangelism, outreach, service projects, ministry visits, or meetings with local students and leaders.",
+        },
+        {
+          year: "Afternoon",
+          body: "Bible studies, follow-up meetings, discipleship, ministry training, or additional outreach.",
+        },
+        {
+          year: "Evening",
+          body: "Worship service, fellowship, group Bible study, prayer, and sharing testimonies from the day.",
+        },
+        {
+          year: "End of Day",
+          body: "Personal reflection, journaling, team evaluation, and prayer for the people encountered during outreach.",
+        },
+      ],
+    },
+    {
+      blockType: "genericText",
+      paragraphs: [
+        {
+          body: "Evangelism is not simply one activity during the day. Participants are encouraged to approach the entire day with a missionary heart.",
+        },
+      ],
+    },
+    // -- closing CTA --
     {
       blockType: "genericCta",
       heading: "Begin Your Mission Journey",
@@ -1082,8 +1216,48 @@ async function buildDefaultGetInvolvedVolunteeringLayout(
 }
 
 // --- from get-involved.ts ---
-async function buildDefaultGetInvolvedLayout(_uploadMedia: MediaUploader) {
+async function buildDefaultGetInvolvedLayout(uploadMedia: MediaUploader) {
   return [
+    {
+      blockType: "genericJourney",
+      stages: [
+        {
+          label: "Join",
+          color: "#3D9BE9",
+          title: "Become a Member",
+          body: "Start your journey with YEF.",
+          href: "#join-yef",
+        },
+        {
+          label: "Grow",
+          color: "#0066CF",
+          title: "Bible Studies · Discipleship",
+          body: "Grow in Christ, His Word, and community.",
+          href: "#grow",
+        },
+        {
+          label: "Reach",
+          color: "#2F5FA8",
+          title: "Campus Evangelism · Short-term Mission",
+          body: "Share Christ on campus, and carry it beyond.",
+          href: "#reach",
+        },
+        {
+          label: "Train",
+          color: "#5B4B8A",
+          title: "Summer Training · Leadership Training",
+          body: "Get equipped for ministry and leadership.",
+          href: "#train",
+        },
+        {
+          label: "Serve",
+          color: "#B4823C",
+          title: "Volunteer · Internship",
+          body: "Give your gifts, time, and calling to serve.",
+          href: "#serve",
+        },
+      ],
+    },
     {
       blockType: "genericCta",
       heading: "Become a Member",
@@ -1091,6 +1265,266 @@ async function buildDefaultGetInvolvedLayout(_uploadMedia: MediaUploader) {
       buttonLabel: "Apply Now",
       buttonHref: "/who-we-are/membership",
       background: "navy",
+    },
+    {
+      blockType: "genericText",
+      heading: "Grow",
+      paragraphs: [{ body: "Grow in Christ, His Word, and community." }],
+    },
+    {
+      blockType: "genericImageText",
+      image: await uploadMedia(
+        "/images/get-involved/bible-studies-sunset.png",
+        "The sun setting over a calm ocean",
+      ),
+      imageAlt: "The sun setting over a calm ocean",
+      imageSide: "right",
+      heading: "Bible Studies",
+      body: "Embrace your identity in Christ and live out your calling. YEF Bible Studies bring students together each week — one-on-one or in small groups — to open Scripture, ask honest questions, and learn to feed themselves on the Word, not just for a season, but for a lifetime. Every study is led by a trained student leader, not a lecturer, so you're walked through the text rather than simply told what it means. No question is off-limits — whether you're exploring faith for the first time or you've read the Bible your whole life, this is a place to bring your honest doubts into the light of Scripture, together with others doing the same. The Bible has the power to change lives, and we want every student on your campus to have a place to discover that for themselves.",
+      buttonLabel: "Learn More",
+      buttonHref: "/get-involved/bible-studies",
+      buttonLabel2: "Apply Bible Study",
+      buttonHref2: "/get-involved/apply",
+    },
+    {
+      blockType: "genericIconCards",
+      eyebrow: "What We Study",
+      heading: "Foundations for a Lifetime of Faith",
+      cards: [
+        {
+          icon: await uploadMedia(
+            "/images/icons/icon-four-spiritual-laws.svg",
+            "",
+          ),
+          title: "The Four Spiritual Laws",
+          body: "Discover the essential message of the Gospel—God’s love, our need for salvation, and faith in Jesus Christ.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-romans.svg", ""),
+          title: "Romans",
+          body: "Explore the Gospel, God’s righteousness, and new life through faith in Jesus Christ.",
+        },
+        {
+          icon: await uploadMedia(
+            "/images/icons/icon-way-of-the-cross.svg",
+            "",
+          ),
+          title: "The Way of the Cross",
+          body: "Walk through Christ's journey to the cross, and discover what it means to follow Him in suffering and in glory.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-christ.svg", ""),
+          title: "The Way of Faith",
+          body: "Walk through the foundations of faith—repentance, assurance, and daily trust in the God who keeps His promises.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-romans.svg", ""),
+          title: "Galatians",
+          body: "Stand firm in the freedom Christ won, and learn to live by the Spirit rather than by the law.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-church.svg", ""),
+          title: "Acts",
+          body: "Follow the early church as the Gospel spreads from Jerusalem to the ends of the earth.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-romans.svg", ""),
+          title: "1 & 2 Corinthians",
+          body: "Learn what it means to live as the church—in unity, in love, and in the sufficiency of God’s grace.",
+        },
+        {
+          icon: await uploadMedia(
+            "/images/icons/icon-four-spiritual-laws.svg",
+            "",
+          ),
+          title: "The Sermon on the Mount",
+          body: "Sit under the teaching of Jesus and see what life in the kingdom of God is meant to look like.",
+        },
+        {
+          icon: await uploadMedia(
+            "/images/icons/icon-providing-education.svg",
+            "",
+          ),
+          title: "Providing Education",
+          body: "Each student receives Biblical and practical training, empowering them to reach their dreams and become thriving disciples.",
+        },
+      ],
+    },
+    {
+      blockType: "genericImageText",
+      image: await uploadMedia(
+        "/images/get-involved/discipleship.webp",
+        "A student in discipleship training",
+      ),
+      imageAlt: "A student in discipleship training",
+      heading: "Discipleship Training",
+      body: "Discipleship is one of the key focuses of our ministry. Jesus himself poured His life into twelve ordinary men and sent them to make disciples of the nations. At YEF, discipleship means walking with a trained mentor and a small group of your peers, working through the Word phase by phase — so you grow from being cared for into someone who can care for others. You don't need to have it all figured out. You just need a willingness to follow. Just as Jesus said, “Go, make disciples!”",
+      buttonLabel: "Learn More",
+      buttonHref: "/get-involved/discipleship",
+      buttonLabel2: "Start Discipleship",
+      buttonHref2: "/get-involved/apply",
+    },
+    {
+      blockType: "genericText",
+      heading: "Reach",
+      paragraphs: [{ body: "Share Christ on campus, and carry it beyond." }],
+    },
+    {
+      blockType: "genericFeature",
+      heading: "Campus Evangelism",
+      intro:
+        "Youth Evangelical Fellowship (YEF) is dedicated to sharing the Gospel of Jesus Christ with students, transforming campus culture, and bringing the good news to every corner of university life. As creative and committed Christians, we work daily to reach the spiritually thirsty on campus and awaken the hearts of students worldwide.",
+      image: await uploadMedia(
+        "/images/get-involved/campus-evangelism-walk.webp",
+        "Students walking together on a sunlit campus path",
+      ),
+      imageAlt: "Students walking together on a sunlit campus path",
+      items: [
+        {
+          icon: await uploadMedia("/images/icons/icon-christ.svg", ""),
+          title: "01. Step Out & Share",
+          body: "Step beyond your comfort zone and experience the joy of sharing the Gospel with fellow students, right where they already are.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-church.svg", ""),
+          title: "02. Engage & Grow",
+          body: "Follow up with the students you meet through Bible study and discipleship, so a single conversation grows into a lasting walk with Christ.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-child.svg", ""),
+          title: "03. Equip & Go",
+          body: "Receive Biblical and practical training and take your next step into campus evangelism.",
+        },
+      ],
+      buttonLabel: "Learn more about Campus Evangelism",
+      buttonHref: "/get-involved/campus-evangelism",
+    },
+    {
+      blockType: "genericImageText",
+      image: await uploadMedia(
+        "/images/get-involved/short-term-mission.webp",
+        "A woman leading a classroom in prayer",
+      ),
+      imageAlt: "A woman leading a classroom in prayer",
+      imageSide: "right",
+      heading: "Short-term Mission",
+      body: "YEF short-term mission trips send teams of students to serve during school breaks — on their own campus, in another city, another country, or online. Teams share the Gospel, lead Bible studies, pray for the campuses and communities they visit, and serve alongside local YEF chapters and churches. It's a chance to step out in faith, grow through hands-on ministry, and see God work through students who are simply willing to go.",
+      buttonLabel: "Learn More",
+      buttonHref: "/get-involved/short-term-mission",
+      buttonLabel2: "Apply for Short-term Mission",
+      buttonHref2: "/get-involved/short-term-mission/apply",
+    },
+    {
+      blockType: "genericLinkCards",
+      cards: [
+        {
+          image: await uploadMedia(
+            "/images/get-involved/trio-sharing-the-gospel.webp",
+            "YEF members handing out tracts on a European street",
+          ),
+          title: "Sharing the Gospel",
+          href: "/sharing-the-gospel",
+        },
+        {
+          image: await uploadMedia(
+            "/images/get-involved/trio-reaching-the-campus.webp",
+            "A campus fellowship group gathered in a study lounge",
+          ),
+          title: "Reaching the Campus",
+          href: "/reaching-the-campus",
+        },
+        {
+          image: await uploadMedia(
+            "/images/get-involved/trio-raising-disciples.webp",
+            "Two students swapping contact details outside a campus building",
+          ),
+          title: "Raising Disciples",
+          href: "/what-is-evangelical",
+        },
+      ],
+    },
+    {
+      blockType: "genericText",
+      heading: "Train",
+      paragraphs: [{ body: "Get equipped for ministry and leadership." }],
+    },
+    {
+      blockType: "genericImageText",
+      image: await uploadMedia(
+        "/images/get-involved/summer-training.webp",
+        "YEF students setting up an outreach table on campus",
+      ),
+      imageAlt: "YEF students setting up an outreach table on campus",
+      heading: "Summer Training",
+      body: "Every year, during students' summer break from campus, YEF gathers students from around the world for a season of training in the Word. Days are filled with Bible study, prayer, and fellowship with believers from different countries and cultures — alongside activities, camping, and a hands-on practicum in mission, evangelism, and teaching. Program details and dates vary each year, so stay tuned to our site events if you're interested.",
+      buttonLabel: "Learn More",
+      buttonHref: "/get-involved/summer-training",
+      buttonLabel2: "Apply for Summer Training",
+      buttonHref2: "/get-involved/apply",
+    },
+    {
+      blockType: "genericImageText",
+      image: await uploadMedia(
+        "/images/get-involved/leadership-training-conference.webp",
+        "YEF students clapping at a leadership training conference",
+      ),
+      imageAlt: "YEF students clapping at a leadership training conference",
+      imageSide: "right",
+      heading: "Leadership Training",
+      body: "YEF offers leadership training regionally and internationally to equip students with rich spiritual food for the road ahead. Leadership Training is open to students who have completed their discipleship program on their campus. During their training, they are formed as teachers and missionaries on campus — learning both the theology of mission and the practical craft of instructing and shepherding other students.",
+      buttonLabel: "Learn More",
+      buttonHref: "/get-involved/leadership-training",
+      buttonLabel2: "Apply for Leadership Training",
+      buttonHref2: "/get-involved/leadership-training/apply",
+    },
+    {
+      blockType: "genericText",
+      heading: "Serve",
+      paragraphs: [{ body: "Give your gifts, time, and calling to serve." }],
+    },
+    {
+      blockType: "genericImageText",
+      image: await uploadMedia(
+        "/images/get-involved/volunteering-donation-drive.png",
+        "Volunteers sorting clothing at a donation drive",
+      ),
+      imageAlt: "Volunteers sorting clothing at a donation drive",
+      heading: "Volunteering",
+      body: "As a volunteer with YEF, you put your everyday gifts — administration, hospitality, media, prayer, and more — to work building the ministry in your local chapter. Every role matters: a volunteer setting up chairs or editing a video is part of the same mission as a student sharing the Gospel on campus. Tell us about yourself, and we'll help you find where you're needed most.",
+      buttonLabel: "Learn More",
+      buttonHref: "/get-involved/volunteering",
+      buttonLabel2: "Apply to Volunteer",
+      buttonHref2: "/get-involved/volunteer",
+    },
+    {
+      blockType: "genericFeature",
+      heading: "Internship",
+      intro:
+        "Work under a trained professional in any field and learn the ropes from them! Internships at YEF HQ are open to YEF members from local chapters who have finished their leadership training and are willing to serve in building the ministry together. You can intern in video making, web design, technology, event-planning, communications, and more.",
+      image: await uploadMedia(
+        "/images/get-involved/internship-outreach-table.webp",
+        "An intern smiling and helping a student at an outreach table",
+      ),
+      imageAlt: "An intern smiling and helping a student at an outreach table",
+      items: [
+        {
+          icon: await uploadMedia("/images/icons/icon-christ.svg", ""),
+          title: "Hands-On Ministry:",
+          body: "You won't just observe — you'll carry real responsibility on real projects, from video and design to events and communications, all in service of the Gospel going out.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-church.svg", ""),
+          title: "Mentorship:",
+          body: "A trained staff member walks alongside you, not just teaching a skill but discipling you in how to steward it for the Kingdom.",
+        },
+        {
+          icon: await uploadMedia("/images/icons/icon-child.svg", ""),
+          title: "Sent, Not Just Trained:",
+          body: "An internship at YEF HQ prepares you to carry what you've learned back to your own campus and chapter, equipped to serve and lead.",
+        },
+      ],
+      buttonLabel: "I'm Interested in an Internship",
+      buttonHref: "/get-involved/apply",
     },
     {
       blockType: "genericCta",
@@ -1655,6 +2089,43 @@ async function buildDefaultWhoWeAreMembershipLayout(
 ) {
   return [
     {
+      blockType: "genericJourney",
+      eyebrow: "The Membership Journey",
+      heading: "How You Grow at YEF",
+      stages: [
+        {
+          label: "Connect",
+          color: "#3D9BE9",
+          title: "Start Your Journey",
+          body: "Discover YEF through Bible study, fellowship, and community.",
+        },
+        {
+          label: "Commit",
+          color: "#0066CF",
+          title: "Grow in Community",
+          body: "Become a committed member, grow in God's Word, and live out YEF's Statement of Faith.",
+        },
+        {
+          label: "Serve",
+          color: "#2F5FA8",
+          title: "Serve with Purpose",
+          body: "Use your gifts and time to serve Christ and contribute to the YEF community.",
+        },
+        {
+          label: "Lead",
+          color: "#5B4B8A",
+          title: "Lead Others",
+          body: "Develop as a servant leader and help others grow in Christ.",
+        },
+        {
+          label: "Ministry",
+          color: "#B4823C",
+          title: "Live Your Calling",
+          body: "Explore God's calling and pursue a life of ministry and service.",
+        },
+      ],
+    },
+    {
       blockType: "genericText",
       heading: "What Membership Means",
       paragraphs: [
@@ -1744,9 +2215,78 @@ async function buildDefaultWhoWeAreMissionLayout(_uploadMedia: MediaUploader) {
 
 // --- from who-we-are-staff-executive-committee.ts ---
 async function buildDefaultWhoWeAreStaffExecutiveCommitteeLayout(
-  _uploadMedia: MediaUploader,
+  uploadMedia: MediaUploader,
 ) {
-  return [];
+  const roster: { name: string; title: string; image: string }[] = [
+    {
+      name: "Dr. William Mark Wagner",
+      title: "President",
+      image: "/images/staff/william_mark_wagner.webp",
+    },
+    {
+      name: "Danielle White",
+      title: "General Secretary",
+      image: "/images/staff/Danielle_white.jpg",
+    },
+    {
+      name: "Selemon Trife",
+      title: "YEF Africa Representative",
+      image: "/images/staff/Selemon_Trife.webp",
+    },
+    {
+      name: "Victor Ahn",
+      title: "YEF Asia Pacific Representative",
+      image: "/images/staff/victer_ahn.webp",
+    },
+    {
+      name: "Deborah Lan",
+      title: "YEF China Representative",
+      image: "/images/staff/Deborah_Lan.webp",
+    },
+    {
+      name: "Andrea Li",
+      title: "YEF Hong Kong",
+      image: "/images/staff/Andrea_Li.webp",
+    },
+    {
+      name: "Ilinca",
+      title: "YEF Romania",
+      image: "/images/staff/Ilinca.webp",
+    },
+    {
+      name: "Bridaija Jones",
+      title: "YEF HQ Mission Staff",
+      image: "/images/staff/Bridaija_Jones.webp",
+    },
+    {
+      name: "Emmanual Reid",
+      title: "YEF HQ Mission Staff",
+      image: "/images/staff/Emmanual_Reid.webp",
+    },
+    {
+      name: "Olivia Lin",
+      title: "Director of Chinese Mission",
+      image: "/images/staff/olivia-1.webp",
+    },
+    {
+      name: "Josiah Kim",
+      title: "Broadcaster",
+      image: "/images/staff/Josiah.webp",
+    },
+  ];
+
+  return [
+    {
+      blockType: "genericPhotoGrid",
+      people: await Promise.all(
+        roster.map(async (person) => ({
+          image: await uploadMedia(person.image, person.name),
+          name: person.name,
+          title: person.title,
+        })),
+      ),
+    },
+  ];
 }
 
 // --- from who-we-are-statement-of-faith.ts ---
@@ -2362,6 +2902,80 @@ async function seedPage(
 }
 
 /**
+ * Adds one block to an already-seeded page if — and only if — it doesn't
+ * already have a block of that type. Unlike `seedPage`, this never touches
+ * a page's existing blocks, so it's the right tool for adding a new block
+ * to a page seedPage() has already filled in (which it will never revisit,
+ * since its content is no longer "untouched"); an editor who later removes
+ * the block is left alone, since this only checks for absence once.
+ */
+async function ensureBlockPresent(
+  payload: Payload,
+  route: Page["route"],
+  blockType: string,
+  buildBlock: () => Promise<Record<string, unknown>>,
+  position: "start" | "end" = "start",
+) {
+  const existing = await payload.find({
+    collection: "pages",
+    where: {
+      and: [{ route: { equals: route } }, { country: { equals: "int" } }],
+    },
+    limit: 1,
+    depth: 0,
+  });
+  const doc = existing.docs[0];
+  if (!doc || !Array.isArray(doc.layout)) return;
+  const layout = doc.layout as Array<Record<string, unknown>>;
+  if (layout.some((block) => block.blockType === blockType)) return;
+
+  const block = await buildBlock();
+  const updated =
+    position === "start" ? [block, ...layout] : [...layout, block];
+  await payload.update({
+    collection: "pages",
+    id: doc.id,
+    data: { layout: updated as Page["layout"] },
+  });
+  payload.logger.info(`Page "${route}": added missing ${blockType} block.`);
+}
+
+/**
+ * Replaces a whole page's layout with a richer default, but only while it's
+ * still missing a given block type — so a page seedPage() already filled in
+ * with an earlier, smaller default gets upgraded to the fuller one exactly
+ * once, without clobbering anything an editor added since.
+ */
+async function replaceLayoutIfMissing(
+  payload: Payload,
+  route: Page["route"],
+  blockType: string,
+  buildLayout: () => Promise<{ blockType: string }[]>,
+) {
+  const existing = await payload.find({
+    collection: "pages",
+    where: {
+      and: [{ route: { equals: route } }, { country: { equals: "int" } }],
+    },
+    limit: 1,
+    depth: 0,
+  });
+  const doc = existing.docs[0];
+  if (!doc || !Array.isArray(doc.layout)) return;
+  const layout = doc.layout as Array<Record<string, unknown>>;
+  if (layout.some((block) => block.blockType === blockType)) return;
+
+  await payload.update({
+    collection: "pages",
+    id: doc.id,
+    data: { layout: (await buildLayout()) as Page["layout"] },
+  });
+  payload.logger.info(
+    `Page "${route}": replaced with the fuller default layout.`,
+  );
+}
+
+/**
  * Every real page of the site that is not yet wired to the block editor —
  * listed so Pages shows the whole site rather than just Home and Who We Are,
  * even though editing one of these still means changing code for now. See
@@ -2520,6 +3134,18 @@ const run = async () => {
       buildDefaultWhoWeAreMembershipLayout(uploadMedia),
     ),
   );
+  await step(payload, 'Page "who-we-are/membership" journey block', () =>
+    ensureBlockPresent(
+      payload,
+      "who-we-are/membership",
+      "genericJourney",
+      async () => {
+        const [layout] =
+          await buildDefaultWhoWeAreMembershipLayout(uploadMedia);
+        return layout as Record<string, unknown>;
+      },
+    ),
+  );
   await step(payload, 'Page "who-we-are/staff-executive-committee"', () =>
     seedPage(
       payload,
@@ -2530,6 +3156,11 @@ const run = async () => {
   );
   await step(payload, 'Page "get-involved"', () =>
     seedPage(payload, "get-involved", "Get Involved", () =>
+      buildDefaultGetInvolvedLayout(uploadMedia),
+    ),
+  );
+  await step(payload, 'Page "get-involved" full layout upgrade', () =>
+    replaceLayoutIfMissing(payload, "get-involved", "genericJourney", () =>
       buildDefaultGetInvolvedLayout(uploadMedia),
     ),
   );
@@ -2545,6 +3176,17 @@ const run = async () => {
       "Campus Evangelism",
       () => buildDefaultGetInvolvedCampusEvangelismLayout(uploadMedia),
     ),
+  );
+  await step(
+    payload,
+    'Page "get-involved/campus-evangelism" full layout upgrade',
+    () =>
+      replaceLayoutIfMissing(
+        payload,
+        "get-involved/campus-evangelism",
+        "genericList",
+        () => buildDefaultGetInvolvedCampusEvangelismLayout(uploadMedia),
+      ),
   );
   await step(payload, 'Page "get-involved/campus-evangelism/apply"', () =>
     seedPage(

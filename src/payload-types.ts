@@ -533,6 +533,11 @@ export interface Page {
              */
             buttonLabel?: string | null;
             buttonHref?: string | null;
+            /**
+             * Optional second button, shown after the first.
+             */
+            buttonLabel2?: string | null;
+            buttonHref2?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'genericImageText';
@@ -584,7 +589,10 @@ export interface Page {
             items?:
               | {
                   year: string;
-                  title: string;
+                  /**
+                   * Optional — leave empty for a plain time/date-and-body entry.
+                   */
+                  title?: string | null;
                   body: string;
                   id?: string | null;
                 }[]
@@ -616,6 +624,132 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'genericQuote';
+          }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            eyebrow?: string | null;
+            heading?: string | null;
+            items?:
+              | {
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericList';
+          }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            heading: string;
+            intro: string;
+            image: number | Media;
+            imageAlt?: string | null;
+            items?:
+              | {
+                  icon?: (number | null) | Media;
+                  title: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Optional — leave both empty for no link.
+             */
+            buttonLabel?: string | null;
+            buttonHref?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericFeature';
+          }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            eyebrow?: string | null;
+            heading?: string | null;
+            cards?:
+              | {
+                  icon?: (number | null) | Media;
+                  title: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericIconCards';
+          }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            eyebrow?: string | null;
+            heading?: string | null;
+            cards?:
+              | {
+                  image: number | Media;
+                  imageAlt?: string | null;
+                  title: string;
+                  body?: string | null;
+                  href: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericLinkCards';
+          }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            eyebrow?: string | null;
+            heading?: string | null;
+            stages?:
+              | {
+                  label: string;
+                  color?: ('#3D9BE9' | '#0066CF' | '#2F5FA8' | '#5B4B8A' | '#B4823C') | null;
+                  title: string;
+                  body: string;
+                  /**
+                   * Optional — an in-page anchor like #grow, or a link.
+                   */
+                  href?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericJourney';
+          }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            eyebrow?: string | null;
+            heading?: string | null;
+            people?:
+              | {
+                  image: number | Media;
+                  name: string;
+                  title?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericPhotoGrid';
           }
       )[]
     | null;
@@ -1657,6 +1791,8 @@ export interface PagesSelect<T extends boolean = true> {
               body?: T;
               buttonLabel?: T;
               buttonHref?: T;
+              buttonLabel2?: T;
+              buttonHref2?: T;
               id?: T;
               blockName?: T;
             };
@@ -1724,6 +1860,114 @@ export interface PagesSelect<T extends boolean = true> {
               background?: T;
               quote?: T;
               reference?: T;
+              id?: T;
+              blockName?: T;
+            };
+        genericList?:
+          | T
+          | {
+              background?: T;
+              eyebrow?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericFeature?:
+          | T
+          | {
+              background?: T;
+              heading?: T;
+              intro?: T;
+              image?: T;
+              imageAlt?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              buttonLabel?: T;
+              buttonHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+        genericIconCards?:
+          | T
+          | {
+              background?: T;
+              eyebrow?: T;
+              heading?: T;
+              cards?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericLinkCards?:
+          | T
+          | {
+              background?: T;
+              eyebrow?: T;
+              heading?: T;
+              cards?:
+                | T
+                | {
+                    image?: T;
+                    imageAlt?: T;
+                    title?: T;
+                    body?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericJourney?:
+          | T
+          | {
+              background?: T;
+              eyebrow?: T;
+              heading?: T;
+              stages?:
+                | T
+                | {
+                    label?: T;
+                    color?: T;
+                    title?: T;
+                    body?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericPhotoGrid?:
+          | T
+          | {
+              background?: T;
+              eyebrow?: T;
+              heading?: T;
+              people?:
+                | T
+                | {
+                    image?: T;
+                    name?: T;
+                    title?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

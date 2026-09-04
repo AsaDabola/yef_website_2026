@@ -10,6 +10,7 @@ export default async function GenericImageText({
   heading,
   body,
   button,
+  secondaryButton,
   background,
 }: {
   image: string;
@@ -18,6 +19,7 @@ export default async function GenericImageText({
   heading: string;
   body: string;
   button?: { label: string; href: string };
+  secondaryButton?: { label: string; href: string };
   background?: BackgroundValue;
 }) {
   const t = await getT();
@@ -43,13 +45,25 @@ export default async function GenericImageText({
           <p className="mt-4 font-medium text-[#4b5565] text-base leading-[30px] lg:text-[18.9px]">
             {t(body)}
           </p>
-          {button ? (
-            <Link
-              href={button.href}
-              className="mt-8 inline-block w-fit rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
-            >
-              {t(button.label)}
-            </Link>
+          {button || secondaryButton ? (
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              {button ? (
+                <Link
+                  href={button.href}
+                  className="inline-block w-fit rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+                >
+                  {t(button.label)}
+                </Link>
+              ) : null}
+              {secondaryButton ? (
+                <Link
+                  href={secondaryButton.href}
+                  className="inline-block w-fit rounded-full border border-[#0066cf] px-10 py-4 font-semibold text-[#0066cf] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+                >
+                  {t(secondaryButton.label)}
+                </Link>
+              ) : null}
+            </div>
           ) : null}
         </div>
       </div>

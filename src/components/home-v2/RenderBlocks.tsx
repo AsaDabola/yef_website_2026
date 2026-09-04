@@ -33,6 +33,12 @@ import GenericStats from "@/components/generic/GenericStats";
 import GenericTimeline from "@/components/generic/GenericTimeline";
 import GenericCta from "@/components/generic/GenericCta";
 import GenericQuote from "@/components/generic/GenericQuote";
+import GenericList from "@/components/generic/GenericList";
+import GenericFeature from "@/components/generic/GenericFeature";
+import GenericIconCards from "@/components/generic/GenericIconCards";
+import GenericLinkCards from "@/components/generic/GenericLinkCards";
+import GenericJourney from "@/components/generic/GenericJourney";
+import GenericPhotoGrid from "@/components/generic/GenericPhotoGrid";
 import type { BackgroundValue } from "@/components/generic/background";
 
 /** A media upload as Payload returns it once populated. */
@@ -217,6 +223,8 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
             if (!image || !block.heading || !block.body) return null;
             const buttonLabel = block.buttonLabel as string | undefined;
             const buttonHref = block.buttonHref as string | undefined;
+            const buttonLabel2 = block.buttonLabel2 as string | undefined;
+            const buttonHref2 = block.buttonHref2 as string | undefined;
             return (
               <GenericImageText
                 key={key}
@@ -229,6 +237,11 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 button={
                   buttonLabel && buttonHref
                     ? { label: buttonLabel, href: buttonHref }
+                    : undefined
+                }
+                secondaryButton={
+                  buttonLabel2 && buttonHref2
+                    ? { label: buttonLabel2, href: buttonHref2 }
                     : undefined
                 }
               />
@@ -303,6 +316,142 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 key={key}
                 quote={block.quote as string}
                 reference={block.reference as string | undefined}
+                background={block.background as BackgroundValue | undefined}
+              />
+            );
+          }
+          case "genericList": {
+            const items = (block.items ?? []) as { body: string }[];
+            if (!items.length) return null;
+            return (
+              <GenericList
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                items={items.map((item) => item.body)}
+                background={block.background as BackgroundValue | undefined}
+              />
+            );
+          }
+          case "genericFeature": {
+            const image = imageOf(block.image as Upload);
+            const items = (block.items ?? []) as {
+              icon?: Upload;
+              title: string;
+              body: string;
+            }[];
+            if (!image || !block.heading || !block.intro || !items.length) return null;
+            const buttonLabel = block.buttonLabel as string | undefined;
+            const buttonHref = block.buttonHref as string | undefined;
+            return (
+              <GenericFeature
+                key={key}
+                heading={block.heading as string}
+                intro={block.intro as string}
+                image={image}
+                imageAlt={(block.imageAlt as string) || altOf(block.image as Upload)}
+                items={items.map((item) => ({
+                  icon: imageOf(item.icon ?? null),
+                  title: item.title,
+                  body: item.body,
+                }))}
+                background={block.background as BackgroundValue | undefined}
+                button={
+                  buttonLabel && buttonHref
+                    ? { label: buttonLabel, href: buttonHref }
+                    : undefined
+                }
+              />
+            );
+          }
+          case "genericIconCards": {
+            const cards = (block.cards ?? []) as {
+              icon?: Upload;
+              title: string;
+              body: string;
+            }[];
+            if (!cards.length) return null;
+            return (
+              <GenericIconCards
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                cards={cards.map((card) => ({
+                  icon: imageOf(card.icon ?? null),
+                  title: card.title,
+                  body: card.body,
+                }))}
+                background={block.background as BackgroundValue | undefined}
+              />
+            );
+          }
+          case "genericLinkCards": {
+            const rows = (block.cards ?? []) as {
+              image: Upload;
+              imageAlt?: string;
+              title: string;
+              body?: string;
+              href: string;
+            }[];
+            const cards = rows
+              .map((row) => ({
+                image: imageOf(row.image) ?? "",
+                imageAlt: row.imageAlt || altOf(row.image),
+                title: row.title,
+                body: row.body,
+                href: row.href,
+              }))
+              .filter((card) => card.image);
+            if (!cards.length) return null;
+            return (
+              <GenericLinkCards
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                cards={cards}
+                background={block.background as BackgroundValue | undefined}
+              />
+            );
+          }
+          case "genericJourney": {
+            const stages = (block.stages ?? []) as {
+              label: string;
+              title: string;
+              body: string;
+              color: string;
+              href?: string;
+            }[];
+            if (!stages.length) return null;
+            return (
+              <GenericJourney
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                stages={stages}
+                background={block.background as BackgroundValue | undefined}
+              />
+            );
+          }
+          case "genericPhotoGrid": {
+            const rows = (block.people ?? []) as {
+              image: Upload;
+              name: string;
+              title?: string;
+            }[];
+            const people = rows
+              .map((row) => ({
+                image: imageOf(row.image) ?? "",
+                name: row.name,
+                title: row.title,
+              }))
+              .filter((person) => person.image);
+            if (!people.length) return null;
+            return (
+              <GenericPhotoGrid
+                key={key}
+                eyebrow={block.eyebrow as string | undefined}
+                heading={block.heading as string | undefined}
+                people={people}
                 background={block.background as BackgroundValue | undefined}
               />
             );
