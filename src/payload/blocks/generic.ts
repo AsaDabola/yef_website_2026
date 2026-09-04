@@ -100,6 +100,20 @@ export const GenericImageTextBlock: Block = {
         { name: "buttonHref", type: "text", admin: { width: "50%" } },
       ],
     },
+    {
+      type: "row",
+      fields: [
+        {
+          name: "buttonLabel2",
+          type: "text",
+          admin: {
+            width: "50%",
+            description: "Optional second button, shown after the first.",
+          },
+        },
+        { name: "buttonHref2", type: "text", admin: { width: "50%" } },
+      ],
+    },
   ],
 };
 
@@ -168,7 +182,14 @@ export const GenericTimelineBlock: Block = {
           type: "row",
           fields: [
             { name: "year", type: "text", required: true, admin: { width: "30%" } },
-            { name: "title", type: "text", required: true, admin: { width: "70%" } },
+            {
+              name: "title",
+              type: "text",
+              admin: {
+                width: "70%",
+                description: "Optional — leave empty for a plain time/date-and-body entry.",
+              },
+            },
           ],
         },
         { name: "body", type: "textarea", required: true },
@@ -206,6 +227,171 @@ export const GenericQuoteBlock: Block = {
   ],
 };
 
+export const GenericListBlock: Block = {
+  slug: "genericList",
+  labels: { singular: "Bullet list", plural: "Bullet lists" },
+  admin: { group: "Generic sections" },
+  fields: [
+    backgroundField,
+    { name: "eyebrow", type: "text" },
+    { name: "heading", type: "text" },
+    {
+      name: "items",
+      type: "array",
+      minRows: 1,
+      fields: [{ name: "body", type: "text", required: true }],
+    },
+  ],
+};
+
+export const GenericFeatureBlock: Block = {
+  slug: "genericFeature",
+  labels: { singular: "Feature panel", plural: "Feature panels" },
+  admin: { group: "Generic sections" },
+  fields: [
+    backgroundField,
+    { name: "heading", type: "text", required: true },
+    { name: "intro", type: "textarea", required: true },
+    { name: "image", type: "upload", relationTo: "media", required: true },
+    { name: "imageAlt", type: "text" },
+    {
+      name: "items",
+      type: "array",
+      minRows: 1,
+      maxRows: 6,
+      fields: [
+        { name: "icon", type: "upload", relationTo: "media" },
+        { name: "title", type: "text", required: true },
+        { name: "body", type: "textarea", required: true },
+      ],
+    },
+    {
+      type: "row",
+      fields: [
+        {
+          name: "buttonLabel",
+          type: "text",
+          admin: { width: "50%", description: "Optional — leave both empty for no link." },
+        },
+        { name: "buttonHref", type: "text", admin: { width: "50%" } },
+      ],
+    },
+  ],
+};
+
+export const GenericIconCardsBlock: Block = {
+  slug: "genericIconCards",
+  labels: { singular: "Icon cards row", plural: "Icon cards rows" },
+  admin: { group: "Generic sections" },
+  fields: [
+    backgroundField,
+    { name: "eyebrow", type: "text" },
+    { name: "heading", type: "text" },
+    {
+      name: "cards",
+      type: "array",
+      minRows: 1,
+      fields: [
+        { name: "icon", type: "upload", relationTo: "media" },
+        { name: "title", type: "text", required: true },
+        { name: "body", type: "textarea", required: true },
+      ],
+    },
+  ],
+};
+
+export const GenericLinkCardsBlock: Block = {
+  slug: "genericLinkCards",
+  labels: { singular: "Link cards", plural: "Link cards" },
+  admin: { group: "Generic sections" },
+  fields: [
+    backgroundField,
+    { name: "eyebrow", type: "text" },
+    { name: "heading", type: "text" },
+    {
+      name: "cards",
+      type: "array",
+      minRows: 1,
+      maxRows: 6,
+      fields: [
+        { name: "image", type: "upload", relationTo: "media", required: true },
+        { name: "imageAlt", type: "text" },
+        { name: "title", type: "text", required: true },
+        { name: "body", type: "textarea" },
+        { name: "href", type: "text", required: true },
+      ],
+    },
+  ],
+};
+
+const JOURNEY_STAGE_COLORS = [
+  { label: "Light blue", value: "#3D9BE9" },
+  { label: "Blue", value: "#0066CF" },
+  { label: "Slate blue", value: "#2F5FA8" },
+  { label: "Violet", value: "#5B4B8A" },
+  { label: "Amber", value: "#B4823C" },
+];
+
+export const GenericJourneyBlock: Block = {
+  slug: "genericJourney",
+  labels: { singular: "Journey timeline", plural: "Journey timelines" },
+  admin: { group: "Generic sections" },
+  fields: [
+    backgroundField,
+    { name: "eyebrow", type: "text" },
+    { name: "heading", type: "text" },
+    {
+      name: "stages",
+      type: "array",
+      minRows: 1,
+      maxRows: 8,
+      fields: [
+        {
+          type: "row",
+          fields: [
+            { name: "label", type: "text", required: true, admin: { width: "50%" } },
+            {
+              name: "color",
+              type: "select",
+              defaultValue: JOURNEY_STAGE_COLORS[0]?.value,
+              options: JOURNEY_STAGE_COLORS,
+              admin: { width: "50%" },
+            },
+          ],
+        },
+        { name: "title", type: "text", required: true },
+        { name: "body", type: "textarea", required: true },
+        {
+          name: "href",
+          type: "text",
+          admin: { description: "Optional — an in-page anchor like #grow, or a link." },
+        },
+      ],
+    },
+  ],
+};
+
+export const GenericPhotoGridBlock: Block = {
+  slug: "genericPhotoGrid",
+  labels: { singular: "Photo grid", plural: "Photo grids" },
+  admin: { group: "Generic sections" },
+  fields: [
+    backgroundField,
+    { name: "eyebrow", type: "text" },
+    { name: "heading", type: "text" },
+    {
+      name: "people",
+      type: "array",
+      minRows: 1,
+      fields: [
+        { name: "image", type: "upload", relationTo: "media", required: true },
+        { name: "name", type: "text", required: true },
+        { name: "title", type: "text" },
+      ],
+    },
+  ],
+};
+
 export const genericBlocks: Block[] = [
   GenericTextBlock,
   GenericCardsBlock,
@@ -215,4 +401,10 @@ export const genericBlocks: Block[] = [
   GenericTimelineBlock,
   GenericCtaBlock,
   GenericQuoteBlock,
+  GenericListBlock,
+  GenericFeatureBlock,
+  GenericIconCardsBlock,
+  GenericLinkCardsBlock,
+  GenericJourneyBlock,
+  GenericPhotoGridBlock,
 ];
