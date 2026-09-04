@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { draftMode } from "next/headers";
 import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getPageHeader, getLayout } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Staff/Executive Committee",
@@ -76,6 +78,8 @@ export default async function StaffExecutiveCommitteePage({ params }: { params: 
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("who-we-are/staff-executive-committee");
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("who-we-are/staff-executive-committee", draft);
   return (
     <>
       <main>
@@ -99,6 +103,12 @@ export default async function StaffExecutiveCommitteePage({ params }: { params: 
 {t(header.heading || "Staff/Executive Committee")}
 </h1>
 
+              <RenderBlocks layout={layout} />
+
+              {/* A fixed staff roster with photos — no generic block carries a
+                  photo grid, so this stays hardcoded. RenderBlocks above is
+                  wired for future editable sections even though the bundled
+                  layout for this route is empty today. */}
               <div className="mt-12 grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
                 {people.map((person) => (
                   <div key={person.name}>

@@ -1,30 +1,24 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import SubPageHero from "@/components/SubPageHero";
 import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getPageHeader, getLayout } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Statement of Faith",
 };
 
-const beliefs = [
-  "We believe in the Holy Scriptures as originally given by God, divinely inspired, infallible, entirely trustworthy; and the supreme authority in all matters of faith and conduct.",
-  "We believe in One God, eternally existent in three persons, Father, Son, and Holy Spirit.",
-  "We believe in Our Lord Jesus Christ, God manifest in the flesh, His virgin birth, His sinless human life, His divine miracles, His vicarious and atoning death, His bodily resurrection, His ascension, His mediatorial work, and His Personal return in power and glory.",
-  "We believe in the Salvation of lost and sinful man through the shed blood of the Lord Jesus Christ by faith apart from works, and regeneration by the Holy Spirit.",
-  "We believe in The Holy Spirit, by whose indwelling the believer is enabled to live a holy life, to witness and work for the Lord Jesus Christ.",
-  "We believe in the Unity of the Spirit of all true believers, the Church, the Body of Christ.",
-  "We believe in the Resurrection of both the saved and the lost; they that are saved unto the resurrection of life, they that are lost unto the resurrection of damnation.",
-];
-
 export default async function StatementOfFaithPage({ params }: { params: LocaleParams }) {
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("who-we-are/statement-of-faith");
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("who-we-are/statement-of-faith", draft);
   return (
     <>
       <main>
@@ -45,15 +39,11 @@ export default async function StatementOfFaithPage({ params }: { params: LocaleP
 {t(header.heading || "Statement of Faith")}
 </h1>
               <p className="mt-[18px] font-medium text-[18.9px] text-[#4b5565] leading-[30px]">
-                
+
 {t("WE BELIEVE:")}
 </p>
 
-              <div className="mt-[96px] max-w-[1126px] space-y-[27.2px] text-[20px] text-black leading-[27.2px]">
-                {beliefs.map((belief) => (
-                  <p key={belief}>{t(belief)}</p>
-                ))}
-              </div>
+              <RenderBlocks layout={layout} />
             </div>
           </div>
         </section>
