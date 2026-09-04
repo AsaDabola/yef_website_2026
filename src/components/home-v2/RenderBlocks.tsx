@@ -33,6 +33,7 @@ import GenericStats from "@/components/generic/GenericStats";
 import GenericTimeline from "@/components/generic/GenericTimeline";
 import GenericCta from "@/components/generic/GenericCta";
 import GenericQuote from "@/components/generic/GenericQuote";
+import type { BackgroundValue } from "@/components/generic/background";
 
 /** A media upload as Payload returns it once populated. */
 type Upload = { url?: string | null; alt?: string | null } | number | null;
@@ -190,6 +191,7 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 eyebrow={block.eyebrow as string | undefined}
                 heading={block.heading as string | undefined}
                 paragraphs={rows.map((row) => row.body)}
+                background={block.background as BackgroundValue | undefined}
               />
             );
           }
@@ -206,6 +208,7 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 eyebrow={block.eyebrow as string | undefined}
                 heading={block.heading as string | undefined}
                 cards={cards}
+                background={block.background as BackgroundValue | undefined}
               />
             );
           }
@@ -222,6 +225,7 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 imageSide={block.imageSide as "left" | "right" | undefined}
                 heading={block.heading as string}
                 body={block.body as string}
+                background={block.background as BackgroundValue | undefined}
                 button={
                   buttonLabel && buttonHref
                     ? { label: buttonLabel, href: buttonHref }
@@ -243,6 +247,7 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
               <GenericGallery
                 key={key}
                 images={images as [typeof images[0], typeof images[0], typeof images[0]]}
+                background={block.background as BackgroundValue | undefined}
               />
             );
           }
@@ -255,6 +260,7 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 eyebrow={block.eyebrow as string | undefined}
                 heading={block.heading as string | undefined}
                 stats={stats}
+                background={block.background as BackgroundValue | undefined}
               />
             );
           }
@@ -271,6 +277,7 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 eyebrow={block.eyebrow as string | undefined}
                 heading={block.heading as string | undefined}
                 items={items}
+                background={block.background as BackgroundValue | undefined}
               />
             );
           }
@@ -281,6 +288,7 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 key={key}
                 heading={block.heading as string}
                 body={block.body as string | undefined}
+                background={block.background as BackgroundValue | undefined}
                 button={{
                   label: block.buttonLabel as string,
                   href: block.buttonHref as string,
@@ -295,6 +303,7 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
                 key={key}
                 quote={block.quote as string}
                 reference={block.reference as string | undefined}
+                background={block.background as BackgroundValue | undefined}
               />
             );
           }

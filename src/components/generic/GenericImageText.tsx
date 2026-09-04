@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getT } from "@/lib/i18n/server";
 import Link from "@/components/ui/LocaleLink";
+import { backgroundClasses, type BackgroundValue } from "@/components/generic/background";
 
 export default async function GenericImageText({
   image,
@@ -9,6 +10,7 @@ export default async function GenericImageText({
   heading,
   body,
   button,
+  background,
 }: {
   image: string;
   imageAlt?: string;
@@ -16,11 +18,13 @@ export default async function GenericImageText({
   heading: string;
   body: string;
   button?: { label: string; href: string };
+  background?: BackgroundValue;
 }) {
   const t = await getT();
+  const bg = backgroundClasses(background);
   return (
-    <section className="mx-auto max-w-[1391px] px-6 py-16 lg:py-[100px]">
-      <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
+    <section className={`${bg.section} px-6 py-16 lg:py-[100px]`}>
+      <div className="mx-auto max-w-[1391px] grid grid-cols-1 overflow-hidden rounded-2xl border border-[#dcdfe5] bg-white lg:grid-cols-[672fr_671fr]">
         <div
           className={`relative min-h-[320px] w-full lg:min-h-[480px] ${imageSide === "right" ? "lg:order-2" : ""}`}
         >
