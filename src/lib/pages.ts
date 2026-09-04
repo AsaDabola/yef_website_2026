@@ -38,10 +38,14 @@ const defaultLayouts: Record<string, PageBlock[]> = {
   "who-we-are": defaultWhoWeAreLayout,
 };
 
+const INTERNATIONAL_COUNTRY = "int";
+
 /**
- * The layout an editor has published for this country's page, or the bundled
- * one. `draft` reads the unpublished version, which is how live preview shows
- * work in progress.
+ * The layout an editor has published for this country's page; if this
+ * country has never published its own (the common case — most pages are
+ * only ever edited once, for every site), the international page's layout;
+ * or the bundled one if even that doesn't exist yet. `draft` reads the
+ * unpublished version, which is how live preview shows work in progress.
  */
 export async function getLayout(
   route = "home",
@@ -55,20 +59,33 @@ export async function getLayout(
       import("@payload-config"),
     ]);
     const payload = await getPayload({ config });
+    const country = getCountryCode();
+
     const { docs } = await payload.find({
       collection: "pages",
       depth: 2,
       limit: 1,
       draft,
-      where: {
-        and: [
-          { route: { equals: route } },
-          { country: { equals: getCountryCode() } },
-        ],
-      },
+      where: { and: [{ route: { equals: route } }, { country: { equals: country } }] },
     });
     const layout = docs[0]?.layout as PageBlock[] | undefined;
-    return layout?.length ? layout : fallback;
+    if (layout?.length) return layout;
+
+    if (country !== INTERNATIONAL_COUNTRY) {
+      const intl = await payload.find({
+        collection: "pages",
+        depth: 2,
+        limit: 1,
+        draft,
+        where: {
+          and: [{ route: { equals: route } }, { country: { equals: INTERNATIONAL_COUNTRY } }],
+        },
+      });
+      const intlLayout = intl.docs[0]?.layout as PageBlock[] | undefined;
+      if (intlLayout?.length) return intlLayout;
+    }
+
+    return fallback;
   } catch (error) {
     console.error("Falling back to the bundled page layout: ", error);
     return fallback;
