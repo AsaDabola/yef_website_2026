@@ -1,4 +1,4 @@
-import type { Block } from "payload";
+import type { Block, Field } from "payload";
 
 /**
  * A reusable block library any page's `layout` can draw from, alongside the
@@ -7,11 +7,29 @@ import type { Block } from "payload";
  * page is never blocked from shipping just because a block doesn't fit it.
  */
 
+/** Every generic block's section background, constrained to the site's own
+ *  brand tokens and gradients — never a free-form color/gradient picker. */
+const backgroundField: Field = {
+  name: "background",
+  type: "select",
+  defaultValue: "white",
+  options: [
+    { label: "White (default)", value: "white" },
+    { label: "Light gray", value: "light" },
+    { label: "Navy", value: "navy" },
+    { label: "Blue", value: "blue" },
+    { label: "Gradient — navy to blue", value: "gradient-navy-blue" },
+    { label: "Gradient — blue to accent", value: "gradient-blue-accent" },
+  ],
+  admin: { description: "Section background — picks from the site's brand colors." },
+};
+
 export const GenericTextBlock: Block = {
   slug: "genericText",
   labels: { singular: "Text section", plural: "Text sections" },
   admin: { group: "Generic sections" },
   fields: [
+    backgroundField,
     { name: "eyebrow", type: "text" },
     { name: "heading", type: "text" },
     {
@@ -31,6 +49,7 @@ export const GenericCardsBlock: Block = {
   labels: { singular: "Cards grid", plural: "Cards grids" },
   admin: { group: "Generic sections" },
   fields: [
+    backgroundField,
     { name: "eyebrow", type: "text" },
     { name: "heading", type: "text" },
     {
@@ -56,6 +75,7 @@ export const GenericImageTextBlock: Block = {
   labels: { singular: "Image + text panel", plural: "Image + text panels" },
   admin: { group: "Generic sections" },
   fields: [
+    backgroundField,
     { name: "image", type: "upload", relationTo: "media", required: true },
     { name: "imageAlt", type: "text" },
     {
@@ -88,6 +108,7 @@ export const GenericGalleryBlock: Block = {
   labels: { singular: "Gallery mosaic", plural: "Gallery mosaics" },
   admin: { group: "Generic sections" },
   fields: [
+    backgroundField,
     {
       name: "images",
       type: "array",
@@ -109,6 +130,7 @@ export const GenericStatsBlock: Block = {
   labels: { singular: "Stats row", plural: "Stats rows" },
   admin: { group: "Generic sections" },
   fields: [
+    backgroundField,
     { name: "eyebrow", type: "text" },
     { name: "heading", type: "text" },
     {
@@ -134,6 +156,7 @@ export const GenericTimelineBlock: Block = {
   labels: { singular: "Timeline", plural: "Timelines" },
   admin: { group: "Generic sections" },
   fields: [
+    backgroundField,
     { name: "eyebrow", type: "text" },
     { name: "heading", type: "text" },
     {
@@ -159,6 +182,7 @@ export const GenericCtaBlock: Block = {
   labels: { singular: "Call to action", plural: "Calls to action" },
   admin: { group: "Generic sections" },
   fields: [
+    backgroundField,
     { name: "heading", type: "text", required: true },
     { name: "body", type: "textarea" },
     {
@@ -176,6 +200,7 @@ export const GenericQuoteBlock: Block = {
   labels: { singular: "Pull quote", plural: "Pull quotes" },
   admin: { group: "Generic sections" },
   fields: [
+    backgroundField,
     { name: "quote", type: "textarea", required: true },
     { name: "reference", type: "text" },
   ],
