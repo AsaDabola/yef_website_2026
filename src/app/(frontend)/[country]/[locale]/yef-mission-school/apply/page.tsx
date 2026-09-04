@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { draftMode } from "next/headers";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import ConnectForm from "@/components/get-involved/ConnectForm";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getLayout, getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Apply YEF Mission School",
@@ -17,6 +19,8 @@ export default async function MissionSchoolApplyPage({ params }: { params: Local
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("yef-mission-school/apply");
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("yef-mission-school/apply", draft);
   return (
     <>
       <main>
@@ -43,6 +47,8 @@ export default async function MissionSchoolApplyPage({ params }: { params: Local
             <ConnectForm variant="mission-school" />
           </div>
         </section>
+
+        <RenderBlocks layout={layout} />
 
         <div className="mx-auto max-w-[1391px] px-6">
           <StoriesTrio divider={false} />

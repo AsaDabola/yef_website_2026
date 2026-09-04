@@ -1,31 +1,25 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { draftMode } from "next/headers";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import ResourceTeaserCard from "@/components/get-involved/ResourceTeaserCard";
-import InfoCard from "@/components/get-involved/InfoCard";
-import GalleryMosaic from "@/components/get-involved/GalleryMosaic";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
-import Link from "@/components/ui/LocaleLink";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getLayout, getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Campus Evangelism",
 };
 
-/** The pale blue the frame uses behind the three banded sections. */
-const BAND = "bg-[#eff5ff]";
-
-/** A section heading: Bricolage ExtraBold 46/50 in the frame. */
+/** A section heading: Bricolage ExtraBold 46/50 in the frame. Still used by
+ *  the "Who Can Join?" and "A Typical Day" sections that stay hardcoded. */
 const BAND_HEADING =
   "font-display font-extrabold text-3xl text-black tracking-[-0.8px] sm:text-[46px] sm:leading-[50px]";
-
-/** The short line the frame sets to the right of a band heading. */
-const BAND_INTRO = "text-[15px] text-[#4b5565] leading-[24px]";
 
 /** The blue tick that sits on the hairline above each intro heading. */
 function HeadingRule() {
@@ -36,6 +30,8 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("get-involved/campus-evangelism");
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("get-involved/campus-evangelism", draft);
   return (
     <>
       <main>
@@ -130,108 +126,10 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
           </div>
         </section>
 
-        {/* What You Will Experience */}
-        <section className={`${BAND} mt-[67px] pt-20 pb-24 lg:pt-[121px] lg:pb-[129px]`}>
-          <div className="mx-auto max-w-[1391px] px-6">
-            <h2 className={BAND_HEADING}>{t("What You Will Experience")}</h2>
-
-            <div className="mt-10 grid grid-cols-1 gap-x-[33px] gap-y-[39px] lg:mt-[49px] lg:grid-cols-2">
-              <div className="flex items-center lg:pl-[63px]">
-                <p className="max-w-[531px] font-medium text-2xl text-yef-primary tracking-[-0.8px] sm:text-[36.4px] sm:leading-[50px]">
-
-{t("Every campus is different, but YEF Campus Evangelism is centered around several important areas of ministry.")}
-</p>
-              </div>
-
-              <InfoCard
-                className="lg:min-h-[358px]"
-                title={t("Campus Evangelism")}
-                body={t("University campuses are at the heart of YEF's mission.\nParticipants may visit local universities to meet students, introduce the fellowship, share the gospel, distribute invitations, pray for the campus, and invite students to Bible study.\nFor many participants, approaching someone they have never met can initially feel uncomfortable. Mission provides an opportunity to overcome that fear and experience the joy of speaking about Christ with others.")}
-                quote={t("“How beautiful are the feet of those who bring good news!”\n— Romans 10:15")}
-              />
-
-              <InfoCard
-                className="lg:min-h-[358px]"
-                title={t("Bible Study & Discipleship")}
-                body={t("Evangelism should lead toward discipleship.\n\nMission teams may participate in individual or group Bible studies with students they meet during outreach. Participants can observe experienced Bible teachers, share their own reflections, and learn how God's Word speaks into the lives of different people.\n\nThe goal is not simply to make contact with students, but to help them begin a lasting journey of following Christ.")}
-              />
-
-              <InfoCard
-                className="lg:min-h-[358px]"
-                title={t("Prayer & Worship")}
-                body={t("Every mission begins and ends with prayer.\n\nTeams spend time praying for the mission field, local churches, universities, students, missionaries, and people they encounter.\nMorning devotions, worship services, group prayer, and personal reflection help participants remember that mission is ultimately God's work.\n\nWe go into the field, but God changes hearts.")}
-              />
-
-              <InfoCard
-                className="lg:min-h-[358px]"
-                title={t("Serving the Local Mission")}
-                body={t("Missionaries do not arrive simply to carry out their own plans.\n\nYEF teams seek to serve alongside the local church and existing mission field. Depending on the location, participants may assist with worship services, student gatherings, outreach events, retreats, media ministry, hospitality, children's ministry, community service, or practical ministry needs.\n\nOur desire is to strengthen what God is already building.")}
-              />
-
-              <InfoCard
-                className="lg:min-h-[358px]"
-                title={t("Fellowship")}
-                body={t("Mission is also experienced through community.\n\nParticipants pray together, eat together, evangelize together, study Scripture together, overcome difficulties together, and encourage one another throughout the journey.\n\nThese shared experiences often create meaningful relationships between believers from different churches, cities, cultures, and nations.")}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Gallery */}
-        <section className="mx-auto max-w-[1391px] px-6 pt-[68px] pb-20 lg:pb-[125px]">
-          <GalleryMosaic
-            images={[
-              {
-                src: "/images/get-involved/gallery-campus-evangelism-table.webp",
-                alt: t("YEF students sharing the Gospel at a campus outreach table"),
-              },
-              {
-                src: "/images/get-involved/gallery-campus-evangelism-trees.webp",
-                alt: t("Students walking together beneath campus trees"),
-              },
-              {
-                src: "/images/get-involved/gallery-campus-evangelism-walk.webp",
-                alt: t("Students walking across a sunlit campus path"),
-              },
-            ]}
-          />
-        </section>
-
-        {/* Where We Serve */}
-        <section className={`${BAND} pt-20 pb-20 lg:pt-[110px] lg:pb-[86px]`}>
-          <div className="mx-auto max-w-[1392px] px-6">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
-              <h2 className={`${BAND_HEADING} lg:mt-[11px]`}>{t("Where We Serve")}</h2>
-              <p className={`${BAND_INTRO} lg:max-w-[908px]`}>
-
-{t("YEF's campus evangelism extends across university campuses at home and abroad. Opportunities may include:")}
-</p>
-            </div>
-
-            <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-[62px] lg:mt-[59px] lg:grid-cols-2">
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("Local Campus Outreach")}
-                body={t("Reach students on your own campus through outreach events, one-on-one conversations, and invitations to Bible study.")}
-              />
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("New Campus Outreach")}
-                body={t("Serve alongside YEF chapters and local churches to evangelize university students, establish Bible studies, and strengthen campus fellowships.")}
-              />
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("Pioneering New Campuses")}
-                body={t("Join efforts to reach campuses where YEF has not yet established a fellowship, laying the groundwork for new relationships, Bible studies, and chapters.")}
-              />
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("International Campus Evangelism")}
-                body={t("Experience cross-cultural evangelism by serving alongside YEF leaders and campus ministries in another nation.")}
-              />
-            </div>
-          </div>
-        </section>
+        {/* What You Will Experience, Gallery, Where We Serve — the section
+            copy, InfoCard grids, and photo mosaic here fit the generic
+            blocks and are now CMS-editable. */}
+        <RenderBlocks layout={layout.slice(0, 5)} />
 
         {/* Who Can Join? */}
         <section className="mx-auto max-w-[1391px] px-6 pt-[68px] pb-20 lg:pb-[101px]">
@@ -266,52 +164,8 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
           </div>
         </section>
 
-        {/* Preparing for Mission */}
-        <section className={`${BAND} pt-20 pb-20 lg:pt-[94px] lg:pb-[86px]`}>
-          <div className="mx-auto max-w-[1392px] px-6">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
-              <h2 className={`${BAND_HEADING} lg:max-w-[405px]`}>
-
-{t("Preparing for Evangelism")}
-</h2>
-              <p className={`${BAND_INTRO} lg:mt-[16px] lg:max-w-[908px]`}>
-
-{t("Before stepping onto campus, participants receive preparation to help them share Christ effectively and responsibly. Training may include:")}
-</p>
-            </div>
-
-            <div className="mt-10 grid grid-cols-1 gap-x-[45px] gap-y-[62px] lg:mt-[42px] lg:grid-cols-3">
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("Biblical Preparation")}
-                body={t("Understanding the gospel, the Great Commission, and the biblical foundation of mission.")}
-              />
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("Evangelism Training")}
-                body={t("Learning how to approach students, begin conversations, share personal testimony, explain the gospel, and invite people to Bible study.")}
-              />
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("Spiritual Preparation")}
-                body={t("Developing habits of prayer, Scripture meditation, repentance, and dependence upon God.")}
-              />
-            </div>
-
-            <div className="mt-[62px] grid grid-cols-1 gap-x-8 gap-y-[62px] lg:grid-cols-2">
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("Cultural Preparation")}
-                body={t("Learning about the people and culture of the mission field and how to serve respectfully across cultural differences.")}
-              />
-              <InfoCard
-                className="lg:min-h-[257px]"
-                title={t("Practical Preparation")}
-                body={t("Understanding schedules, transportation, accommodations, team responsibilities, safety guidelines, finances, and other expectations.")}
-              />
-            </div>
-          </div>
-        </section>
+        {/* Preparing for Evangelism — CMS-editable, same as above. */}
+        <RenderBlocks layout={layout.slice(5, 7)} />
 
         {/* A Typical Day in Mission */}
         <section className="mx-auto max-w-[1391px] px-6 pt-20 pb-20 lg:pt-[141px] lg:pb-[110px]">
@@ -373,23 +227,8 @@ export default async function CampusEvangelismPage({ params }: { params: LocaleP
         </section>
 
         {/* The application frame lives on its own page; this is the only door
-            to it from the Mission Trip story. */}
-        <section className="mx-auto max-w-[1391px] px-6 py-20 text-center lg:py-[100px]">
-          <h2 className="font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
-            {t("Begin Your Mission Journey")}
-          </h2>
-          <p className="mx-auto mt-5 max-w-[640px] text-[16.6px] text-black leading-[27.2px]">
-            {t(
-              "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
-            )}
-          </p>
-          <Link
-            href="/get-involved/campus-evangelism/apply"
-            className="mt-9 inline-block rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
-          >
-            {t("Apply for a Campus Mission")}
-          </Link>
-        </section>
+            to it from the Mission Trip story. CMS-editable. */}
+        <RenderBlocks layout={layout.slice(7, 8)} />
 
         <MissionSchoolCta />
       </main>

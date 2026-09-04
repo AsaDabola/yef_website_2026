@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { draftMode } from "next/headers";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import MissionApplyForm from "@/components/get-involved/MissionApplyForm";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import Footer from "@/components/Footer";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getLayout, getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Begin Your Mission Journey",
@@ -22,6 +24,8 @@ export default async function MissionApplyPage({
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("get-involved/campus-evangelism/apply");
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("get-involved/campus-evangelism/apply", draft);
   return (
     <>
       <main>
@@ -59,6 +63,7 @@ export default async function MissionApplyPage({
                     header.intro || "Tell us a little about yourself and where you sense God leading you. Every answer helps our missions team walk with you toward the right opportunity.",
                   )}
                 </p>
+                <RenderBlocks layout={layout} />
                 <MissionApplyForm />
               </div>
 

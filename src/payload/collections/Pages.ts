@@ -95,7 +95,23 @@ export const Pages: CollectionConfig = {
           label: "Get Involved — Leadership Training",
           value: "get-involved/leadership-training",
         },
+        {
+          label: "Get Involved — Apply for Leadership Training",
+          value: "get-involved/leadership-training/apply",
+        },
         { label: "Get Involved — Volunteer with YEF", value: "get-involved/volunteer" },
+        { label: "Get Involved — Volunteering", value: "get-involved/volunteering" },
+        { label: "Get Involved — Bible Studies", value: "get-involved/bible-studies" },
+        { label: "Get Involved — Discipleship Training", value: "get-involved/discipleship" },
+        {
+          label: "Get Involved — Short-term Mission",
+          value: "get-involved/short-term-mission",
+        },
+        {
+          label: "Get Involved — Apply for Short-term Mission",
+          value: "get-involved/short-term-mission/apply",
+        },
+        { label: "Get Involved — Summer Training", value: "get-involved/summer-training" },
         { label: "News", value: "news" },
         { label: "Network", value: "network" },
         { label: "Donate", value: "donate" },

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { draftMode } from "next/headers";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import GetInvolvedSubMenu from "@/components/get-involved/GetInvolvedSubMenu";
 import MissionApplyForm from "@/components/get-involved/MissionApplyForm";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { getLayout } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Apply for Short-term Mission",
@@ -20,6 +23,8 @@ export default async function ShortTermMissionApplyPage({
 }) {
   await applyRequestLocale(params);
   const t = await getT();
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("get-involved/short-term-mission/apply", draft);
   return (
     <>
       <main>
@@ -66,6 +71,8 @@ export default async function ShortTermMissionApplyPage({
             </div>
           </div>
         </section>
+
+        <RenderBlocks layout={layout} />
       </main>
       <Footer />
     </>

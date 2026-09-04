@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { draftMode } from "next/headers";
 import HeaderV2 from "@/components/home-v2/HeaderV2";
 import Breadcrumb from "@/components/Breadcrumb";
 import VolunteerForm from "@/components/get-involved/VolunteerForm";
-import Testimonials from "@/components/home-v2/Testimonials";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getLayout, getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Volunteer with YEF",
@@ -21,6 +22,8 @@ export default async function VolunteerPage({
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("get-involved/volunteer");
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("get-involved/volunteer", draft);
   return (
     <>
       <main>
@@ -54,7 +57,7 @@ export default async function VolunteerPage({
           <VolunteerForm />
         </section>
 
-        <Testimonials />
+        <RenderBlocks layout={layout} />
       </main>
       <Footer />
     </>

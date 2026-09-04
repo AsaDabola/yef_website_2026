@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import Breadcrumb from "@/components/Breadcrumb";
 import CampusEvangelismPromo from "@/components/get-involved/CampusEvangelismPromo";
 import CarouselWhatWeDo from "@/components/get-involved/CarouselWhatWeDo";
@@ -9,11 +10,11 @@ import MinistrySection from "@/components/get-involved/MinistrySection";
 import StoriesTrio from "@/components/get-involved/StoriesTrio";
 import MissionSchoolCta from "@/components/who-we-are/MissionSchoolCta";
 import Footer from "@/components/Footer";
-import Link from "@/components/ui/LocaleLink";
 import JourneyTimeline from "@/components/ui/JourneyTimeline";
+import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getPageHeader } from "@/lib/pages";
+import { getLayout, getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Get Involved",
@@ -98,6 +99,13 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
   await applyRequestLocale(params);
   const t = await getT();
   const header = await getPageHeader("get-involved");
+  // The three plain CTA banners on this page (Join YEF, Have a Story to
+  // Share, Still Not Sure) are the only body content simple enough to fit
+  // the generic blocks — everything else here (the journey timeline, the
+  // per-program MinistrySection panels with their dual CTAs and scroll
+  // anchors, the carousels, StoriesTrio, InternshipSection) stays hardcoded.
+  const { isEnabled: draft } = await draftMode();
+  const layout = await getLayout("get-involved", draft);
   return (
     <>
       <main>
@@ -125,30 +133,10 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 />
               </div>
 
-              {/* JOIN YEF — a compact CTA, not a program card. */}
-              <div
-                id="join-yef"
-                className="mt-10 scroll-mt-32 flex flex-col items-start justify-between gap-5 rounded-2xl bg-v2-navy px-8 py-7 sm:flex-row sm:items-center"
-              >
-                <div>
-                  <p className="font-semibold text-[11px] text-white/60 tracking-[1.92px] uppercase">
-                    {t("Join YEF")}
-                  </p>
-                  <h2 className="mt-1 font-display font-bold text-2xl text-white">
-                    {t("Become a Member")}
-                  </h2>
-                  <p className="mt-1.5 max-w-[440px] text-[14px] text-white/70 leading-[21px]">
-                    {t(
-                      "Take your first step and join a community of students following Jesus together.",
-                    )}
-                  </p>
-                </div>
-                <Link
-                  href="/who-we-are/membership"
-                  className="shrink-0 rounded-full bg-white px-7 py-3.5 font-semibold text-[#00203f] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
-                >
-                  {t("Apply Now")}
-                </Link>
+              {/* JOIN YEF — a compact CTA, not a program card. Editable via
+                  the CMS as the first entry of this page's layout. */}
+              <div id="join-yef" className="mt-10 scroll-mt-32">
+                <RenderBlocks layout={layout.slice(0, 1)} />
               </div>
 
               {/* GROW — growing in Christ, His Word, and community. */}
@@ -296,44 +284,11 @@ export default async function GetInvolvedPage({ params }: { params: LocaleParams
                 <InternshipSection />
               </section>
 
-              {/* Share Your Story — a closing invitation, not another
-                  program category. */}
-              <div className="mt-16 flex flex-col items-start justify-between gap-5 rounded-2xl border border-v2-border bg-white px-8 py-7 sm:flex-row sm:items-center">
-                <div>
-                  <h2 className="font-display font-bold text-black text-lg">
-                    {t("Have a Story to Share?")}
-                  </h2>
-                  <p className="mt-1 max-w-[440px] text-[#4b5565] text-[14px] leading-[21px]">
-                    {t(
-                      "God has been at work in your life — we'd love to hear about it.",
-                    )}
-                  </p>
-                </div>
-                <Link
-                  href="/submit-your-story"
-                  className="shrink-0 rounded-full bg-[#0066cf] px-7 py-3.5 font-semibold text-white text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
-                >
-                  {t("Share Your Story")}
-                </Link>
-              </div>
-
-              <div className="mt-6 flex flex-col items-start justify-between gap-5 rounded-2xl bg-v2-navy px-8 py-7 sm:flex-row sm:items-center">
-                <div>
-                  <h2 className="font-display font-bold text-lg text-white">
-                    {t("Still Not Sure Where to Start?")}
-                  </h2>
-                  <p className="mt-1 max-w-[440px] text-[14px] text-white/70 leading-[21px]">
-                    {t(
-                      "Tell us what you're interested in, and we'll help you find the right opportunity.",
-                    )}
-                  </p>
-                </div>
-                <Link
-                  href="/get-involved/apply"
-                  className="shrink-0 rounded-full bg-white px-7 py-3.5 font-semibold text-[#00203f] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-105"
-                >
-                  {t("Tell Us Your Interests")}
-                </Link>
+              {/* Share Your Story and Still Not Sure — closing invitations,
+                  not program categories. Editable via the CMS as entries
+                  two and three of this page's layout. */}
+              <div className="mt-16">
+                <RenderBlocks layout={layout.slice(1)} />
               </div>
             </div>
           </div>
