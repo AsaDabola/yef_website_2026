@@ -176,7 +176,14 @@ export interface Page {
     | 'get-involved/campus-evangelism/apply'
     | 'get-involved/chapter-affiliation'
     | 'get-involved/leadership-training'
+    | 'get-involved/leadership-training/apply'
     | 'get-involved/volunteer'
+    | 'get-involved/volunteering'
+    | 'get-involved/bible-studies'
+    | 'get-involved/discipleship'
+    | 'get-involved/short-term-mission'
+    | 'get-involved/short-term-mission/apply'
+    | 'get-involved/summer-training'
     | 'news'
     | 'network'
     | 'donate'
@@ -243,8 +250,10 @@ export interface Page {
     | 'ro'
     | 'ru'
     | 'rw'
+    | 'ws'
     | 'sg'
     | 'sk'
+    | 'sb'
     | 'za'
     | 'kr'
     | 'es'
@@ -253,6 +262,7 @@ export interface Page {
     | 'ch'
     | 'tw'
     | 'th'
+    | 'to'
     | 'tr'
     | 'ua'
     | 'ae'
@@ -467,6 +477,10 @@ export interface Page {
             blockType: 'missionSchoolCta';
           }
         | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
             eyebrow?: string | null;
             heading?: string | null;
             /**
@@ -483,6 +497,10 @@ export interface Page {
             blockType: 'genericText';
           }
         | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
             eyebrow?: string | null;
             heading?: string | null;
             cards?:
@@ -501,6 +519,10 @@ export interface Page {
             blockType: 'genericCards';
           }
         | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
             image: number | Media;
             imageAlt?: string | null;
             imageSide?: ('left' | 'right') | null;
@@ -517,6 +539,10 @@ export interface Page {
           }
         | {
             /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            /**
              * Exactly three photos: one large, two stacked beside it.
              */
             images?:
@@ -531,6 +557,10 @@ export interface Page {
             blockType: 'genericGallery';
           }
         | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
             eyebrow?: string | null;
             heading?: string | null;
             stats?:
@@ -545,6 +575,10 @@ export interface Page {
             blockType: 'genericStats';
           }
         | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
             eyebrow?: string | null;
             heading?: string | null;
             items?:
@@ -560,6 +594,10 @@ export interface Page {
             blockType: 'genericTimeline';
           }
         | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
             heading: string;
             body?: string | null;
             buttonLabel: string;
@@ -569,6 +607,10 @@ export interface Page {
             blockType: 'genericCta';
           }
         | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
             quote: string;
             reference?: string | null;
             id?: string | null;
@@ -643,8 +685,10 @@ export interface Media {
     | 'ro'
     | 'ru'
     | 'rw'
+    | 'ws'
     | 'sg'
     | 'sk'
+    | 'sb'
     | 'za'
     | 'kr'
     | 'es'
@@ -653,6 +697,7 @@ export interface Media {
     | 'ch'
     | 'tw'
     | 'th'
+    | 'to'
     | 'tr'
     | 'ua'
     | 'ae'
@@ -758,8 +803,10 @@ export interface Post {
     | 'ro'
     | 'ru'
     | 'rw'
+    | 'ws'
     | 'sg'
     | 'sk'
+    | 'sb'
     | 'za'
     | 'kr'
     | 'es'
@@ -768,6 +815,7 @@ export interface Post {
     | 'ch'
     | 'tw'
     | 'th'
+    | 'to'
     | 'tr'
     | 'ua'
     | 'ae'
@@ -836,8 +884,10 @@ export interface Post {
         | 'ro'
         | 'ru'
         | 'rw'
+        | 'ws'
         | 'sg'
         | 'sk'
+        | 'sb'
         | 'za'
         | 'kr'
         | 'es'
@@ -846,6 +896,7 @@ export interface Post {
         | 'ch'
         | 'tw'
         | 'th'
+        | 'to'
         | 'tr'
         | 'ua'
         | 'ae'
@@ -955,8 +1006,10 @@ export interface PhotoEvent {
     | 'ro'
     | 'ru'
     | 'rw'
+    | 'ws'
     | 'sg'
     | 'sk'
+    | 'sb'
     | 'za'
     | 'kr'
     | 'es'
@@ -965,6 +1018,7 @@ export interface PhotoEvent {
     | 'ch'
     | 'tw'
     | 'th'
+    | 'to'
     | 'tr'
     | 'ua'
     | 'ae'
@@ -1033,8 +1087,10 @@ export interface PhotoEvent {
         | 'ro'
         | 'ru'
         | 'rw'
+        | 'ws'
         | 'sg'
         | 'sk'
+        | 'sb'
         | 'za'
         | 'kr'
         | 'es'
@@ -1043,6 +1099,7 @@ export interface PhotoEvent {
         | 'ch'
         | 'tw'
         | 'th'
+        | 'to'
         | 'tr'
         | 'ua'
         | 'ae'
@@ -1158,8 +1215,10 @@ export interface User {
         | 'ro'
         | 'ru'
         | 'rw'
+        | 'ws'
         | 'sg'
         | 'sk'
+        | 'sb'
         | 'za'
         | 'kr'
         | 'es'
@@ -1168,6 +1227,7 @@ export interface User {
         | 'ch'
         | 'tw'
         | 'th'
+        | 'to'
         | 'tr'
         | 'ua'
         | 'ae'
@@ -1557,6 +1617,7 @@ export interface PagesSelect<T extends boolean = true> {
         genericText?:
           | T
           | {
+              background?: T;
               eyebrow?: T;
               heading?: T;
               paragraphs?:
@@ -1571,6 +1632,7 @@ export interface PagesSelect<T extends boolean = true> {
         genericCards?:
           | T
           | {
+              background?: T;
               eyebrow?: T;
               heading?: T;
               cards?:
@@ -1587,6 +1649,7 @@ export interface PagesSelect<T extends boolean = true> {
         genericImageText?:
           | T
           | {
+              background?: T;
               image?: T;
               imageAlt?: T;
               imageSide?: T;
@@ -1600,6 +1663,7 @@ export interface PagesSelect<T extends boolean = true> {
         genericGallery?:
           | T
           | {
+              background?: T;
               images?:
                 | T
                 | {
@@ -1613,6 +1677,7 @@ export interface PagesSelect<T extends boolean = true> {
         genericStats?:
           | T
           | {
+              background?: T;
               eyebrow?: T;
               heading?: T;
               stats?:
@@ -1628,6 +1693,7 @@ export interface PagesSelect<T extends boolean = true> {
         genericTimeline?:
           | T
           | {
+              background?: T;
               eyebrow?: T;
               heading?: T;
               items?:
@@ -1644,6 +1710,7 @@ export interface PagesSelect<T extends boolean = true> {
         genericCta?:
           | T
           | {
+              background?: T;
               heading?: T;
               body?: T;
               buttonLabel?: T;
@@ -1654,6 +1721,7 @@ export interface PagesSelect<T extends boolean = true> {
         genericQuote?:
           | T
           | {
+              background?: T;
               quote?: T;
               reference?: T;
               id?: T;
