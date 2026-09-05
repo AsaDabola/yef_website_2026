@@ -13,6 +13,7 @@ import * as migration_20260901_032836_oceania_countries_enum from './20260901_03
 import * as migration_20260904_120000_generic_blocks_background from './20260904_120000_generic_blocks_background';
 import * as migration_20260904_130000_get_involved_route_expansion from './20260904_130000_get_involved_route_expansion';
 import * as migration_20260904_140000_generic_blocks_expansion from './20260904_140000_generic_blocks_expansion';
+import * as migration_20260905_015000_generic_blocks_expansion_background_fix from './20260905_015000_generic_blocks_expansion_background_fix';
 
 export const migrations = [
   {
@@ -89,5 +90,10 @@ export const migrations = [
     up: migration_20260904_140000_generic_blocks_expansion.up,
     down: migration_20260904_140000_generic_blocks_expansion.down,
     name: '20260904_140000_generic_blocks_expansion',
+  },
+  {
+    up: migration_20260905_015000_generic_blocks_expansion_background_fix.up,
+    down: migration_20260905_015000_generic_blocks_expansion_background_fix.down,
+    name: '20260905_015000_generic_blocks_expansion_background_fix',
   },
 ];
