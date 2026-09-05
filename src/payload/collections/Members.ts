@@ -1,5 +1,9 @@
 import type { CollectionConfig } from "payload";
 import { APIError } from "payload";
+import { countryOptions } from "@/payload/access";
+
+const isLeader = (data?: { role?: string | null } | null) =>
+  data?.role === "leader";
 
 /**
  * Public-facing accounts for the Resources hub: YEF students, leaders, staff,
@@ -76,6 +80,50 @@ export const Members: CollectionConfig = {
       },
       access: {
         update: ({ req: { user } }) => user?.collection === "users",
+      },
+    },
+    {
+      name: "country",
+      type: "select",
+      options: countryOptions,
+      index: true,
+      admin: {
+        description: "The country site this leader serves — powers the leadership dashboard.",
+        condition: isLeader,
+      },
+    },
+    {
+      name: "trainingStage",
+      type: "select",
+      options: [
+        { label: "Join", value: "join" },
+        { label: "Grow", value: "grow" },
+        { label: "Reach", value: "reach" },
+        { label: "Train", value: "train" },
+        { label: "Serve", value: "serve" },
+      ],
+      index: true,
+      admin: {
+        description: "Where this leader is in the Join/Grow/Reach/Train/Serve journey.",
+        condition: isLeader,
+      },
+    },
+    {
+      name: "advancingToNextStage",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        description: "Checked once this leader is ready to move to the next stage.",
+        condition: isLeader,
+      },
+    },
+    {
+      name: "raisedUpAt",
+      type: "date",
+      admin: {
+        description: "The date this person was raised up as a leader.",
+        condition: isLeader,
+        date: { pickerAppearance: "dayOnly" },
       },
     },
   ],

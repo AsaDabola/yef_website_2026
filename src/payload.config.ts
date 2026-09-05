@@ -5,6 +5,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { buildConfig } from "payload";
 import sharp from "sharp";
+import { LeadershipPositions } from "@/payload/collections/LeadershipPositions";
 import { Media } from "@/payload/collections/Media";
 import { Members } from "@/payload/collections/Members";
 import { Pages } from "@/payload/collections/Pages";
@@ -29,8 +30,12 @@ export default buildConfig({
       titleSuffix: " — YEF",
     },
     components: {
-      // A stat-card row above the default collection list.
-      beforeDashboard: ["@/payload/admin/DashboardStats#default"],
+      // A stat-card row, then the leadership overview, above the default
+      // collection list.
+      beforeDashboard: [
+        "@/payload/admin/DashboardStats#default",
+        "@/payload/admin/LeadershipDashboard#default",
+      ],
     },
     // Live preview renders the real site beside the editor, through a route
     // that turns on Payload's draft mode so unpublished work shows.
@@ -42,7 +47,16 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Pages, Posts, PhotoEvents, Media, Users, Members, Resources],
+  collections: [
+    Pages,
+    Posts,
+    PhotoEvents,
+    Media,
+    Users,
+    Members,
+    Resources,
+    LeadershipPositions,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
