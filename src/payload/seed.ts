@@ -1294,48 +1294,63 @@ async function buildDefaultGetInvolvedLayout(uploadMedia: MediaUploader) {
         {
           icon: await uploadMedia(
             "/images/icons/icon-four-spiritual-laws.svg",
-            "",
+            "Four Spiritual Laws icon",
           ),
           title: "The Four Spiritual Laws",
           body: "Discover the essential message of the Gospel—God’s love, our need for salvation, and faith in Jesus Christ.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-romans.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-romans.svg",
+            "Romans icon",
+          ),
           title: "Romans",
           body: "Explore the Gospel, God’s righteousness, and new life through faith in Jesus Christ.",
         },
         {
           icon: await uploadMedia(
             "/images/icons/icon-way-of-the-cross.svg",
-            "",
+            "The Way of the Cross icon",
           ),
           title: "The Way of the Cross",
           body: "Walk through Christ's journey to the cross, and discover what it means to follow Him in suffering and in glory.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-christ.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-christ.svg",
+            "Christ icon",
+          ),
           title: "The Way of Faith",
           body: "Walk through the foundations of faith—repentance, assurance, and daily trust in the God who keeps His promises.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-romans.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-romans.svg",
+            "Romans icon",
+          ),
           title: "Galatians",
           body: "Stand firm in the freedom Christ won, and learn to live by the Spirit rather than by the law.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-church.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-church.svg",
+            "Church icon",
+          ),
           title: "Acts",
           body: "Follow the early church as the Gospel spreads from Jerusalem to the ends of the earth.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-romans.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-romans.svg",
+            "Romans icon",
+          ),
           title: "1 & 2 Corinthians",
           body: "Learn what it means to live as the church—in unity, in love, and in the sufficiency of God’s grace.",
         },
         {
           icon: await uploadMedia(
             "/images/icons/icon-four-spiritual-laws.svg",
-            "",
+            "Four Spiritual Laws icon",
           ),
           title: "The Sermon on the Mount",
           body: "Sit under the teaching of Jesus and see what life in the kingdom of God is meant to look like.",
@@ -1343,7 +1358,7 @@ async function buildDefaultGetInvolvedLayout(uploadMedia: MediaUploader) {
         {
           icon: await uploadMedia(
             "/images/icons/icon-providing-education.svg",
-            "",
+            "Providing Education icon",
           ),
           title: "Providing Education",
           body: "Each student receives Biblical and practical training, empowering them to reach their dreams and become thriving disciples.",
@@ -1381,17 +1396,23 @@ async function buildDefaultGetInvolvedLayout(uploadMedia: MediaUploader) {
       imageAlt: "Students walking together on a sunlit campus path",
       items: [
         {
-          icon: await uploadMedia("/images/icons/icon-christ.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-christ.svg",
+            "Christ icon",
+          ),
           title: "01. Step Out & Share",
           body: "Step beyond your comfort zone and experience the joy of sharing the Gospel with fellow students, right where they already are.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-church.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-church.svg",
+            "Church icon",
+          ),
           title: "02. Engage & Grow",
           body: "Follow up with the students you meet through Bible study and discipleship, so a single conversation grows into a lasting walk with Christ.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-child.svg", ""),
+          icon: await uploadMedia("/images/icons/icon-child.svg", "Child icon"),
           title: "03. Equip & Go",
           body: "Receive Biblical and practical training and take your next step into campus evangelism.",
         },
@@ -1508,17 +1529,23 @@ async function buildDefaultGetInvolvedLayout(uploadMedia: MediaUploader) {
       imageAlt: "An intern smiling and helping a student at an outreach table",
       items: [
         {
-          icon: await uploadMedia("/images/icons/icon-christ.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-christ.svg",
+            "Christ icon",
+          ),
           title: "Hands-On Ministry:",
           body: "You won't just observe — you'll carry real responsibility on real projects, from video and design to events and communications, all in service of the Gospel going out.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-church.svg", ""),
+          icon: await uploadMedia(
+            "/images/icons/icon-church.svg",
+            "Church icon",
+          ),
           title: "Mentorship:",
           body: "A trained staff member walks alongside you, not just teaching a skill but discipling you in how to steward it for the Kingdom.",
         },
         {
-          icon: await uploadMedia("/images/icons/icon-child.svg", ""),
+          icon: await uploadMedia("/images/icons/icon-child.svg", "Child icon"),
           title: "Sent, Not Just Trained:",
           body: "An internship at YEF HQ prepares you to carry what you've learned back to your own campus and chapter, equipped to serve and lead.",
         },
