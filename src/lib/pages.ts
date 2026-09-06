@@ -8,6 +8,25 @@ export type PageBlock = {
   [key: string]: unknown;
 };
 
+/** Block types that render as their own edge-to-edge section rather than
+ *  content meant to sit inside a text column. */
+const FULL_BLEED_BLOCK_TYPES = new Set(["missionSchoolCta"]);
+
+/**
+ * Splits the full-bleed blocks off the end of a layout so a page with a
+ * sticky sidebar can render everything else inside the narrower content
+ * column and these panels outside it, full width — the same block array an
+ * editor saved, just rendered in two places. Only looks at the tail, since
+ * that's the only place these appear in practice.
+ */
+export function splitTrailingFullBleed(layout: PageBlock[]): [PageBlock[], PageBlock[]] {
+  let end = layout.length;
+  while (end > 0 && FULL_BLEED_BLOCK_TYPES.has(layout[end - 1].blockType)) {
+    end -= 1;
+  }
+  return [layout.slice(0, end), layout.slice(end)];
+}
+
 /**
  * The order the home page's sections ship in. A country with no saved page
  * renders this, so every site works before anyone opens the admin.
