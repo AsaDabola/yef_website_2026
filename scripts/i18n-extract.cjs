@@ -38,6 +38,13 @@ for (const root of ["src/app/(frontend)", "src/components", "src/lib"]) {
   })(root);
 }
 
+// The block conversion moved most page copy out of the components and into the
+// layouts seed.ts writes to the CMS. Pages still render it through t(), so it
+// has to be extracted from here too — otherwise every string an editor's page
+// is built from silently falls back to English, and re-running this script
+// would drop the ones already translated.
+files.push(path.join("src", "payload", "seed.ts"));
+
 const catalog = new Set();
 /** Strings reached from "use client" components, which must be sent to the browser. */
 const clientKeys = new Set();
@@ -71,6 +78,17 @@ for (const file of files) {
   })(src);
 
   (function visit(n) {
+    // uploadMedia("/images/…", "alt text") — the alt is prose that blocks
+    // render through t(imageAlt), but it sits in a bare call argument rather
+    // than an `alt:` field, so the PROSE_FIELDS sweep never sees it.
+    if (
+      ts.isCallExpression(n) &&
+      ts.isIdentifier(n.expression) &&
+      n.expression.text === "uploadMedia"
+    ) {
+      const alt = literal(n.arguments[1]);
+      if (alt) catalog.add(alt);
+    }
     if (
       ts.isCallExpression(n) &&
       ts.isIdentifier(n.expression) &&

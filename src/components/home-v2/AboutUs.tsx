@@ -68,7 +68,7 @@ export default async function AboutUs({ content }: { content?: AboutUsContent })
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <p className="font-display font-bold text-[44px] text-v2-accent tracking-[-1.32px]">
-                    {stat.value}
+                    {t(stat.value)}
                   </p>
                   <p className="mt-2 font-semibold text-xs text-v2-muted tracking-[1.56px] uppercase">
                     {t(stat.label)}
