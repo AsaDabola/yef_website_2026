@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { getT } from "@/lib/i18n/server";
 
 export default async function GalleryMosaic({
   images,
@@ -10,7 +9,6 @@ export default async function GalleryMosaic({
     { src: string; alt: string },
   ];
 }) {
-  const t = await getT();
   const [main, topRight, bottomRight] = images;
 
   return (
@@ -39,10 +37,7 @@ export default async function GalleryMosaic({
             className="object-cover"
           />
         </div>
-        <a
-          href="#"
-          className="group relative aspect-[477/311] w-full overflow-hidden rounded-2xl sm:rounded-tl-none sm:rounded-tr-none sm:rounded-bl-none"
-        >
+        <div className="relative aspect-[477/311] w-full overflow-hidden rounded-2xl sm:rounded-tl-none sm:rounded-tr-none sm:rounded-bl-none">
           <Image
             src={bottomRight.src}
             alt={bottomRight.alt}
@@ -50,17 +45,7 @@ export default async function GalleryMosaic({
             sizes="(min-width: 640px) 26vw, 90vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/60 font-medium text-[19px] text-white transition-opacity group-hover:bg-black/70">
-            {t("See More")}
-            <Image
-              src="/images/icons/icon-arrow-right-24-white.svg"
-              alt=""
-              width={28}
-              height={28}
-              aria-hidden="true"
-            />
-          </div>
-        </a>
+        </div>
       </div>
     </div>
   );
