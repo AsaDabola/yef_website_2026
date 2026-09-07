@@ -16,6 +16,8 @@ import * as migration_20260904_140000_generic_blocks_expansion from './20260904_
 import * as migration_20260905_015000_generic_blocks_expansion_background_fix from './20260905_015000_generic_blocks_expansion_background_fix';
 import * as migration_20260905_020000_leadership_dashboard from './20260905_020000_leadership_dashboard';
 
+import * as migration_20260907_040000_who_we_are_page_blocks from './20260907_040000_who_we_are_page_blocks';
+
 export const migrations = [
   {
     up: migration_20260825_155544_initial.up,
@@ -101,5 +103,10 @@ export const migrations = [
     up: migration_20260905_020000_leadership_dashboard.up,
     down: migration_20260905_020000_leadership_dashboard.down,
     name: '20260905_020000_leadership_dashboard',
+  },
+  {
+    up: migration_20260907_040000_who_we_are_page_blocks.up,
+    down: migration_20260907_040000_who_we_are_page_blocks.down,
+    name: '20260907_040000_who_we_are_page_blocks',
   },
 ];

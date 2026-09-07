@@ -39,6 +39,9 @@ import GenericIconCards from "@/components/generic/GenericIconCards";
 import GenericLinkCards from "@/components/generic/GenericLinkCards";
 import GenericJourney from "@/components/generic/GenericJourney";
 import GenericPhotoGrid from "@/components/generic/GenericPhotoGrid";
+import GenericLead from "@/components/generic/GenericLead";
+import GenericFeatureCard from "@/components/generic/GenericFeatureCard";
+import GenericSplitColumns from "@/components/generic/GenericSplitColumns";
 import type { BackgroundValue } from "@/components/generic/background";
 
 /** A media upload as Payload returns it once populated. */
@@ -456,6 +459,60 @@ export default function RenderBlocks({ layout }: { layout: PageBlock[] }) {
               />
             );
           }
+          case "genericLead":
+            if (!block.body) return null;
+            return (
+              <GenericLead
+                key={key}
+                highlight={block.highlight as string | undefined}
+                body={block.body as string}
+                size={block.size as "large" | "medium" | undefined}
+                background={block.background as BackgroundValue | undefined}
+              />
+            );
+
+          case "genericFeatureCard": {
+            const image = imageOf(block.image as Upload);
+            const paragraphs = ((block.paragraphs ?? []) as { body: string }[])
+              .map((row) => row.body)
+              .filter(Boolean);
+            if (!image || !paragraphs.length) return null;
+            return (
+              <GenericFeatureCard
+                key={key}
+                paragraphs={paragraphs}
+                image={image}
+                imageAlt={block.imageAlt as string | undefined}
+                cardEyebrow={block.cardEyebrow as string}
+                cardEyebrowLine2={block.cardEyebrowLine2 as string | undefined}
+                cardTitle={block.cardTitle as string}
+                cardSide={block.cardSide as "left" | "right" | undefined}
+                background={block.background as BackgroundValue | undefined}
+              />
+            );
+          }
+
+          case "genericSplitColumns": {
+            const items = ((block.items ?? []) as { body: string }[])
+              .map((row) => row.body)
+              .filter(Boolean);
+            const paragraphs = (
+              (block.paragraphs ?? []) as { body: string; boldSuffix?: string }[]
+            ).filter((row) => row.body);
+            if (!block.heading && !items.length && !paragraphs.length) return null;
+            return (
+              <GenericSplitColumns
+                key={key}
+                heading={block.heading as string | undefined}
+                quote={block.quote as string | undefined}
+                introBold={block.introBold as string | undefined}
+                items={items}
+                paragraphs={paragraphs}
+                background={block.background as BackgroundValue | undefined}
+              />
+            );
+          }
+
           default:
             return null;
         }

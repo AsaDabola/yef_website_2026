@@ -753,6 +753,91 @@ export interface Page {
             blockName?: string | null;
             blockType: 'genericPhotoGrid';
           }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            /**
+             * Optional opening phrase, shown in brand blue — e.g. "Youth Evangelical Fellowship (YEF)".
+             */
+            highlight?: string | null;
+            body: string;
+            /**
+             * How big the paragraph is set.
+             */
+            size?: ('large' | 'medium') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericLead';
+          }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            /**
+             * The body copy beside the card, in this order.
+             */
+            paragraphs?:
+              | {
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            image: number | Media;
+            imageAlt?: string | null;
+            cardEyebrow: string;
+            /**
+             * Optional second line, e.g. a verse reference.
+             */
+            cardEyebrowLine2?: string | null;
+            cardTitle: string;
+            cardSide?: ('right' | 'left') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericFeatureCard';
+          }
+        | {
+            /**
+             * Section background — picks from the site's brand colors.
+             */
+            background?: ('white' | 'light' | 'navy' | 'blue' | 'gradient-navy-blue' | 'gradient-blue-accent') | null;
+            heading?: string | null;
+            /**
+             * Shown under the heading, in brand blue.
+             */
+            quote?: string | null;
+            /**
+             * The bold line that introduces the list.
+             */
+            introBold?: string | null;
+            /**
+             * The list under the bold line, in brand blue.
+             */
+            items?:
+              | {
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * The right-hand column.
+             */
+            paragraphs?:
+              | {
+                  body: string;
+                  /**
+                   * Optional bold sentence closing this paragraph.
+                   */
+                  boldSuffix?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'genericSplitColumns';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -2156,6 +2241,58 @@ export interface PagesSelect<T extends boolean = true> {
                     image?: T;
                     name?: T;
                     title?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        genericLead?:
+          | T
+          | {
+              background?: T;
+              highlight?: T;
+              body?: T;
+              size?: T;
+              id?: T;
+              blockName?: T;
+            };
+        genericFeatureCard?:
+          | T
+          | {
+              background?: T;
+              paragraphs?:
+                | T
+                | {
+                    body?: T;
+                    id?: T;
+                  };
+              image?: T;
+              imageAlt?: T;
+              cardEyebrow?: T;
+              cardEyebrowLine2?: T;
+              cardTitle?: T;
+              cardSide?: T;
+              id?: T;
+              blockName?: T;
+            };
+        genericSplitColumns?:
+          | T
+          | {
+              background?: T;
+              heading?: T;
+              quote?: T;
+              introBold?: T;
+              items?:
+                | T
+                | {
+                    body?: T;
+                    id?: T;
+                  };
+              paragraphs?:
+                | T
+                | {
+                    body?: T;
+                    boldSuffix?: T;
                     id?: T;
                   };
               id?: T;
