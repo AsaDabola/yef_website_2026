@@ -75,6 +75,7 @@ export interface Config {
     users: User;
     members: Member;
     resources: Resource;
+    'leadership-positions': LeadershipPosition;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -89,6 +90,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     members: MembersSelect<false> | MembersSelect<true>;
     resources: ResourcesSelect<false> | ResourcesSelect<true>;
+    'leadership-positions': LeadershipPositionsSelect<false> | LeadershipPositionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -1408,6 +1410,97 @@ export interface Member {
    * A member can't sign in until this is checked.
    */
   approved?: boolean | null;
+  /**
+   * The country site this leader serves — powers the leadership dashboard.
+   */
+  country?:
+    | (
+        | 'int'
+        | 'ao'
+        | 'ar'
+        | 'au'
+        | 'at'
+        | 'bd'
+        | 'be'
+        | 'br'
+        | 'cm'
+        | 'ca'
+        | 'cl'
+        | 'co'
+        | 'ci'
+        | 'cz'
+        | 'cd'
+        | 'do'
+        | 'ke'
+        | 'eg'
+        | 'et'
+        | 'fj'
+        | 'fr'
+        | 'de'
+        | 'gh'
+        | 'gr'
+        | 'gt'
+        | 'ht'
+        | 'hn'
+        | 'hu'
+        | 'in'
+        | 'id'
+        | 'il'
+        | 'it'
+        | 'jp'
+        | 'kz'
+        | 'mg'
+        | 'my'
+        | 'mx'
+        | 'mn'
+        | 'mz'
+        | 'mm'
+        | 'np'
+        | 'nl'
+        | 'nz'
+        | 'ng'
+        | 'pk'
+        | 'pe'
+        | 'ph'
+        | 'pl'
+        | 'pt'
+        | 'ro'
+        | 'ru'
+        | 'rw'
+        | 'ws'
+        | 'sg'
+        | 'sk'
+        | 'sb'
+        | 'za'
+        | 'kr'
+        | 'es'
+        | 'lk'
+        | 'se'
+        | 'ch'
+        | 'tw'
+        | 'th'
+        | 'to'
+        | 'tr'
+        | 'ua'
+        | 'ae'
+        | 'gb'
+        | 'us'
+        | 'vn'
+        | 'zm'
+      )
+    | null;
+  /**
+   * Where this leader is in the Join/Grow/Reach/Train/Serve journey.
+   */
+  trainingStage?: ('join' | 'grow' | 'reach' | 'train' | 'serve') | null;
+  /**
+   * Checked once this leader is ready to move to the next stage.
+   */
+  advancingToNextStage?: boolean | null;
+  /**
+   * The date this person was raised up as a leader.
+   */
+  raisedUpAt?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1461,6 +1554,99 @@ export interface Resource {
   focalY?: number | null;
 }
 /**
+ * The leadership roles each country is expected to fill. Leave "Filled" unchecked for an open position — it then shows up on the dashboard's unfilled-positions list.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leadership-positions".
+ */
+export interface LeadershipPosition {
+  id: number;
+  positionTitle: string;
+  country:
+    | 'int'
+    | 'ao'
+    | 'ar'
+    | 'au'
+    | 'at'
+    | 'bd'
+    | 'be'
+    | 'br'
+    | 'cm'
+    | 'ca'
+    | 'cl'
+    | 'co'
+    | 'ci'
+    | 'cz'
+    | 'cd'
+    | 'do'
+    | 'ke'
+    | 'eg'
+    | 'et'
+    | 'fj'
+    | 'fr'
+    | 'de'
+    | 'gh'
+    | 'gr'
+    | 'gt'
+    | 'ht'
+    | 'hn'
+    | 'hu'
+    | 'in'
+    | 'id'
+    | 'il'
+    | 'it'
+    | 'jp'
+    | 'kz'
+    | 'mg'
+    | 'my'
+    | 'mx'
+    | 'mn'
+    | 'mz'
+    | 'mm'
+    | 'np'
+    | 'nl'
+    | 'nz'
+    | 'ng'
+    | 'pk'
+    | 'pe'
+    | 'ph'
+    | 'pl'
+    | 'pt'
+    | 'ro'
+    | 'ru'
+    | 'rw'
+    | 'ws'
+    | 'sg'
+    | 'sk'
+    | 'sb'
+    | 'za'
+    | 'kr'
+    | 'es'
+    | 'lk'
+    | 'se'
+    | 'ch'
+    | 'tw'
+    | 'th'
+    | 'to'
+    | 'tr'
+    | 'ua'
+    | 'ae'
+    | 'gb'
+    | 'us'
+    | 'vn'
+    | 'zm';
+  /**
+   * Checked once someone is serving in this role.
+   */
+  filled?: boolean | null;
+  /**
+   * Who currently holds this position.
+   */
+  filledBy?: (number | null) | Member;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -1511,6 +1697,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'resources';
         value: number | Resource;
+      } | null)
+    | ({
+        relationTo: 'leadership-positions';
+        value: number | LeadershipPosition;
       } | null);
   globalSlug?: string | null;
   user:
@@ -2097,6 +2287,10 @@ export interface MembersSelect<T extends boolean = true> {
   name?: T;
   role?: T;
   approved?: T;
+  country?: T;
+  trainingStage?: T;
+  advancingToNextStage?: T;
+  raisedUpAt?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -2137,6 +2331,18 @@ export interface ResourcesSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leadership-positions_select".
+ */
+export interface LeadershipPositionsSelect<T extends boolean = true> {
+  positionTitle?: T;
+  country?: T;
+  filled?: T;
+  filledBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
