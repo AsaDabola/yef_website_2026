@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import Link from "@/components/ui/LocaleLink";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getLayout } from "@/lib/pages";
+import { getLayout, splitTrailingFullBleed } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Short-term Mission",
@@ -26,7 +26,10 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
   // CTA block doesn't support, so it stays hardcoded too. The fetched
   // layout is split around both.
   const beforeStories = layout.slice(0, 8);
-  const afterCta = layout.slice(8);
+  // The sidebar sticks alongside the whole page body, so only the body's
+  // content blocks go in the column beside it; a trailing full-bleed panel
+  // (e.g. the mission school CTA) still renders edge-to-edge, below it.
+  const [afterCta, trailing] = splitTrailingFullBleed(layout.slice(8));
   return (
     <>
       <main>
@@ -58,42 +61,46 @@ export default async function ShortTermMissionPage({ params }: { params: LocaleP
               <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
                 {t("Step Out in Faith. Go Where You're Sent.")}
               </p>
+
+              <div className="mt-10">
+                <RenderBlocks layout={beforeStories} />
+
+                <div className="mx-auto max-w-[1391px]">
+                  <StoriesTrio divider={false} />
+                </div>
+
+                <section className="mx-auto max-w-[1391px] py-20 text-center lg:py-[100px]">
+                  <h2 className="font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
+                    {t("Ready to Go?")}
+                  </h2>
+                  <p className="mx-auto mt-5 max-w-[640px] text-[16.6px] text-black leading-[27.2px]">
+                    {t(
+                      "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
+                    )}
+                  </p>
+                  <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                    <Link
+                      href="/news"
+                      className="inline-block rounded-full border border-[#0066cf] px-10 py-4 font-semibold text-[#0066cf] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+                    >
+                      {t("See Upcoming Trips")}
+                    </Link>
+                    <Link
+                      href="/get-involved/short-term-mission/apply"
+                      className="inline-block rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
+                    >
+                      {t("Apply for Short-term Mission")}
+                    </Link>
+                  </div>
+                </section>
+
+                <RenderBlocks layout={afterCta} />
+              </div>
             </div>
           </div>
         </section>
 
-        <RenderBlocks layout={beforeStories} />
-
-        <div className="mx-auto max-w-[1391px] px-6">
-          <StoriesTrio divider={false} />
-        </div>
-
-        <section className="mx-auto max-w-[1391px] px-6 py-20 text-center lg:py-[100px]">
-          <h2 className="font-display font-semibold text-3xl text-black sm:text-[34px] sm:leading-[37.4px]">
-            {t("Ready to Go?")}
-          </h2>
-          <p className="mx-auto mt-5 max-w-[640px] text-[16.6px] text-black leading-[27.2px]">
-            {t(
-              "If God is stirring something in you, take the next step. Tell us where you are and our missions team will walk with you from there.",
-            )}
-          </p>
-          <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/news"
-              className="inline-block rounded-full border border-[#0066cf] px-10 py-4 font-semibold text-[#0066cf] text-xs tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
-            >
-              {t("See Upcoming Trips")}
-            </Link>
-            <Link
-              href="/get-involved/short-term-mission/apply"
-              className="inline-block rounded-full bg-[#0066cf] px-10 py-4 font-semibold text-xs text-white tracking-[1.92px] uppercase transition-transform duration-200 hover:scale-[1.02]"
-            >
-              {t("Apply for Short-term Mission")}
-            </Link>
-          </div>
-        </section>
-
-        <RenderBlocks layout={afterCta} />
+        <RenderBlocks layout={trailing} />
       </main>
       <Footer />
     </>

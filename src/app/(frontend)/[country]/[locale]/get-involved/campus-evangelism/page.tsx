@@ -58,11 +58,13 @@ export default async function CampusEvangelismPage({
               <h1 className="mt-[42px] font-display font-extrabold text-4xl text-black tracking-[-0.8px] sm:text-[46px] sm:leading-[60px]">
                 {t(header.heading || "Campus Evangelism")}
               </h1>
+
+              <div className="mt-10">
+                <RenderBlocks layout={layout} />
+              </div>
             </div>
           </div>
         </section>
-
-        <RenderBlocks layout={layout} />
 
         <MissionSchoolCta />
       </main>

@@ -8,7 +8,7 @@ import RenderBlocks from "@/components/home-v2/RenderBlocks";
 import Footer from "@/components/Footer";
 import { getT } from "@/lib/i18n/server";
 import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
-import { getLayout } from "@/lib/pages";
+import { getLayout, splitTrailingFullBleed } from "@/lib/pages";
 
 export const metadata: Metadata = {
   title: "Volunteering",
@@ -19,6 +19,10 @@ export default async function VolunteeringPage({ params }: { params: LocaleParam
   const t = await getT();
   const { isEnabled: draft } = await draftMode();
   const layout = await getLayout("get-involved/volunteering", draft);
+  // The sidebar sticks alongside the whole page body, so only the body's
+  // content blocks go in the column beside it; a trailing full-bleed panel
+  // (e.g. the mission school CTA) still renders edge-to-edge, below it.
+  const [body, trailing] = splitTrailingFullBleed(layout);
   return (
     <>
       <main>
@@ -50,11 +54,15 @@ export default async function VolunteeringPage({ params }: { params: LocaleParam
               <p className="mt-5 max-w-[849px] font-medium text-xl text-[#4b5565] leading-[30px] lg:text-[27px]">
                 {t("Every Gift, Given for the Kingdom")}
               </p>
+
+              <div className="mt-10">
+                <RenderBlocks layout={body} />
+              </div>
             </div>
           </div>
         </section>
 
-        <RenderBlocks layout={layout} />
+        <RenderBlocks layout={trailing} />
       </main>
       <Footer />
     </>
