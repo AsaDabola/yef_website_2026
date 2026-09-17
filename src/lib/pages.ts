@@ -448,3 +448,89 @@ export async function getPageHeader(route: string): Promise<PageHeader> {
     return {};
   }
 }
+
+/** One piece of a page's body copy, in the order an editor arranged it. */
+export type ProseItem =
+  | { kind: "paragraph"; text: string }
+  | { kind: "quote"; text: string; reference?: string };
+
+export type PageProse = {
+  heading?: string;
+  items: ProseItem[];
+};
+
+/** A textarea holding several paragraphs separated by blank lines. */
+function splitParagraphs(body: unknown): ProseItem[] {
+  if (typeof body !== "string") return [];
+  return body
+    .split(/\n\s*\n/)
+    .map((text) => text.trim())
+    .filter(Boolean)
+    .map((text) => ({ kind: "paragraph" as const, text }));
+}
+
+function proseFromBlock(block: PageBlock): ProseItem[] {
+  switch (block.blockType) {
+    case "genericText":
+      return ((block.paragraphs as { body?: unknown }[] | undefined) ?? [])
+        .map((row) => (typeof row?.body === "string" ? row.body.trim() : ""))
+        .filter(Boolean)
+        .map((text) => ({ kind: "paragraph" as const, text }));
+    case "genericImageText":
+      return splitParagraphs(block.body);
+    case "genericQuote": {
+      const text = typeof block.quote === "string" ? block.quote.trim() : "";
+      if (!text) return [];
+      const reference = typeof block.reference === "string" ? block.reference.trim() : "";
+      return [{ kind: "quote", text, ...(reference ? { reference } : {}) }];
+    }
+    default:
+      return [];
+  }
+}
+
+/**
+ * The body copy an editor has published for a page built in code.
+ *
+ * These pages draw a design the generic blocks cannot express — a sub-menu
+ * beside a photo grid, a timeline, a two-column split — so they are React
+ * rather than a list of sections. But their *words* are in the CMS all the
+ * same: the seed puts them there, the Pages screen shows them, and until now
+ * nothing read them back, so an edit saved, published, and changed nothing.
+ * That is the bug this exists to close.
+ *
+ * So the design stays coded and the words come from here, the same way
+ * `getPageHeader` already works for the banner and heading: whatever an
+ * editor has written wins, and a page nobody has touched keeps the copy it
+ * ships with. The order is the order the sections sit in, so a quotation
+ * between two paragraphs still lands between them.
+ *
+ * Only the prose-shaped blocks are read. A timeline or a card grid on one of
+ * these pages is drawn by the coded component from its own data, and pulling
+ * half of it through here would put an editable copy of a heading above a
+ * grid that ignores it.
+ *
+ * `blockTypes` narrows that further, and some pages need it: Welcome's picture
+ * panel is the card beside its text, not another paragraph of it, so that page
+ * asks for its text sections alone rather than taking the card's caption as a
+ * fifth paragraph.
+ */
+export async function getPageProse(
+  route: string,
+  { blockTypes }: { blockTypes?: string[] } = {},
+): Promise<PageProse> {
+  const all = await getLayout(route);
+  const layout = blockTypes ? all.filter((block) => blockTypes.includes(block.blockType)) : all;
+  const items = layout.flatMap(proseFromBlock);
+  const headingBlock = layout.find(
+    (block) =>
+      (block.blockType === "genericText" || block.blockType === "genericImageText") &&
+      typeof block.heading === "string" &&
+      block.heading.trim() !== "",
+  );
+  const heading =
+    headingBlock && typeof headingBlock.heading === "string"
+      ? headingBlock.heading.trim()
+      : undefined;
+  return { heading, items };
+}
