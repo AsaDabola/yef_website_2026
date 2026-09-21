@@ -534,3 +534,53 @@ export async function getPageProse(
       : undefined;
   return { heading, items };
 }
+
+/** One dated entry on a page's timeline, as an editor arranged it. */
+export type TimelineEntry = {
+  year: string;
+  title?: string;
+  /** The entry's paragraphs, split from the single textarea behind it. */
+  body: string[];
+};
+
+export type PageTimeline = {
+  heading?: string;
+  items: TimelineEntry[];
+};
+
+/**
+ * The timeline an editor has published for a page built in code.
+ *
+ * The companion to `getPageProse`, and it exists for the same reason: the
+ * History page's years are drawn by a React component with its own alternating
+ * layout and scroll behaviour, which no generic block draws — but the years
+ * *themselves* are ordinary content, they are in the CMS, the Pages screen
+ * shows them, and until now nothing read them back. Someone correcting a date
+ * saved, published, and changed nothing.
+ *
+ * Only the first timeline section is read. A page with two of them is not a
+ * thing any of these pages do, and quietly concatenating them would be a
+ * stranger answer than using the one at the top.
+ *
+ * `side` is deliberately absent: which side of the line an entry sits on is
+ * layout, not content, so the component alternates them rather than asking an
+ * editor to keep a left/right column straight by hand.
+ */
+export async function getPageTimeline(route: string): Promise<PageTimeline> {
+  const layout = await getLayout(route);
+  const block = layout.find((section) => section.blockType === "genericTimeline");
+  if (!block) return { items: [] };
+
+  const rows = (block.items as { year?: unknown; title?: unknown; body?: unknown }[]) ?? [];
+  const items = rows
+    .map((row) => ({
+      year: typeof row?.year === "string" ? row.year.trim() : "",
+      title: typeof row?.title === "string" && row.title.trim() ? row.title.trim() : undefined,
+      body: splitParagraphs(row?.body).map((item) => item.text),
+    }))
+    .filter((row) => row.year || row.title || row.body.length > 0);
+
+  const heading =
+    typeof block.heading === "string" && block.heading.trim() ? block.heading.trim() : undefined;
+  return { heading, items };
+}
