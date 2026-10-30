@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { APIError } from "payload";
-import { countryOptions } from "@/payload/access";
+import { countryOptions, isSuper, scopeOf, type AdminUser } from "@/payload/access";
 
 const isLeader = (data?: { role?: string | null } | null) =>
   data?.role === "leader";
@@ -14,6 +14,27 @@ const isLeader = (data?: { role?: string | null } | null) =>
  * New accounts are unapproved until a `users` admin flips the checkbox in
  * `/admin`; `beforeLogin` refuses to sign in anyone who isn't.
  */
+/**
+ * The members an admin may see, which is the ones in their own countries.
+ *
+ * This used to be `user?.collection === "users"` — true for any signed-in
+ * editor — so every country admin could read, edit and delete every member in
+ * the network. These records carry names, email addresses, the country someone
+ * is in and where they are in their training, so "any admin" was the wrong
+ * answer; the rest of the CMS has scoped by country all along and this did
+ * not.
+ *
+ * A member with no country set is left to super admins rather than shown to
+ * everyone: an unassigned record is not evidence that it belongs to whoever
+ * happens to be looking.
+ */
+function adminScope(user: AdminUser) {
+  if (isSuper(user)) return true;
+  const scope = scopeOf(user);
+  if (scope.length === 0) return false;
+  return { country: { in: scope } };
+}
+
 export const Members: CollectionConfig = {
   slug: "members",
   auth: true,
@@ -27,16 +48,17 @@ export const Members: CollectionConfig = {
   access: {
     create: () => true,
     read: ({ req: { user } }) => {
-      if (user?.collection === "users") return true;
+      if (user?.collection === "users") return adminScope(user as AdminUser);
       if (user?.collection === "members") return { id: { equals: user.id } };
       return false;
     },
     update: ({ req: { user } }) => {
-      if (user?.collection === "users") return true;
+      if (user?.collection === "users") return adminScope(user as AdminUser);
       if (user?.collection === "members") return { id: { equals: user.id } };
       return false;
     },
-    delete: ({ req: { user } }) => user?.collection === "users",
+    delete: ({ req: { user } }) =>
+      user?.collection === "users" ? adminScope(user as AdminUser) : false,
   },
   hooks: {
     beforeLogin: [

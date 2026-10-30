@@ -16,6 +16,7 @@ import * as migration_20260904_140000_generic_blocks_expansion from './20260904_
 import * as migration_20260905_015000_generic_blocks_expansion_background_fix from './20260905_015000_generic_blocks_expansion_background_fix';
 import * as migration_20260905_020000_leadership_dashboard from './20260905_020000_leadership_dashboard';
 import * as migration_20260921_120000_oceania_distribute_and_people_enums from './20260921_120000_oceania_distribute_and_people_enums';
+import * as migration_20261030_190000_resources_country from './20261030_190000_resources_country';
 
 export const migrations = [
   {
@@ -107,5 +108,10 @@ export const migrations = [
     up: migration_20260921_120000_oceania_distribute_and_people_enums.up,
     down: migration_20260921_120000_oceania_distribute_and_people_enums.down,
     name: '20260921_120000_oceania_distribute_and_people_enums',
+  },
+  {
+    up: migration_20261030_190000_resources_country.up,
+    down: migration_20261030_190000_resources_country.down,
+    name: '20261030_190000_resources_country',
   },
 ];
