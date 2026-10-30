@@ -40,6 +40,9 @@ the new country is created.
 
 ### Addresses
 
+`country-admin-addresses.md` lists every address this will create, so the
+list can be checked before anything exists.
+
 The default is the country's name at `yefi.org` — `germany@yefi.org`,
 `south-korea@yefi.org`. Two overrides:
 
