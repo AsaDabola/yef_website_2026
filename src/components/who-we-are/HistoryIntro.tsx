@@ -2,14 +2,50 @@ import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumb";
 import WhoWeAreSubMenu from "@/components/WhoWeAreSubMenu";
 import { getT } from "@/lib/i18n/server";
+import { getPageProse, type ProseItem } from "@/lib/pages";
 
 type HistoryIntroProps = {
   /** Main heading. Defaults to "History". */
   heading?: string;
 };
 
+/**
+ * The body copy this page ships with, used when nobody has edited it in the
+ * CMS. It is also what the seed writes into the page's sections, so the two
+ * say the same thing — and an editor who changes one of them is changing what
+ * the page shows, which before this was not true.
+ */
+const DEFAULT_BODY_HEADING = "From a Small Campus Mission to a Global Youth Fellowship";
+
+const DEFAULT_BODY: ProseItem[] = [
+  {
+    kind: "paragraph",
+    text: "Youth Evangelical Fellowship (YEF) traces its roots to 2002, when Apostolos Campus Ministry (ACM) was founded by Dr. David Jang together with students from Olivet Theological College and Seminary (OTCS). In 2003, the ministry began developing into what would become Youth Evangelical Fellowship, carrying a growing vision to reach university students through the Word of God, discipleship, and evangelism.",
+  },
+  {
+    kind: "paragraph",
+    text: "A significant new chapter began in New York City in 2009, when YEF was inaugurated with students from Columbia University who were moved by the Holy Spirit to gather for small-group Bible studies and share the gospel of Jesus Christ with their fellow students. From these early gatherings, YEF developed with a clear focus: to reach university students who are thirsty for the Word of God, help them grow as disciples of Jesus Christ, and raise a young generation willing to participate in God’s mission.",
+  },
+  {
+    kind: "paragraph",
+    text: "By the grace of God, the ministry continued expanding internationally. By 2015, YEF’s mission had reached campuses across North America, South America, Europe, Africa, Asia Pacific, Southeast Asia, and South Asia. The growth of YEF reflects Jesus’ description of the Kingdom of God:",
+  },
+  {
+    kind: "quote",
+    text: "“It is like a mustard seed, which, when sown upon the soil, though it is smaller than all the seeds that are upon the soil, yet when it is sown, it grows up and becomes larger than all the garden plants and forms large branches; so that the birds of the air can nest under its shade.”",
+    reference: "Mark 4:31–32",
+  },
+  {
+    kind: "paragraph",
+    text: "YEF’s commission is to raise a young generation who love the Cross of Jesus Christ, boldly proclaim His sacrifice and the power of His salvation, and dream together for the Kingdom of God. YEF firmly believes in international growth and in equipping young people from diverse backgrounds to devote themselves to Jesus Christ and His Great Commission. Through biblical teaching, discipleship, evangelism, leadership development, retreats, mission conferences, and local fellowship life, YEF seeks to help young believers passionately embody Kingdom-centered lifestyles. Youth Evangelical Fellowship is a member of the World Olivet Assembly and an associate member of the World Evangelical Alliance.",
+  },
+];
+
 export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) {
   const t = await getT();
+  const prose = await getPageProse("who-we-are/history");
+  const bodyHeading = prose.heading ?? DEFAULT_BODY_HEADING;
+  const body = prose.items.length > 0 ? prose.items : DEFAULT_BODY;
   return (
     <section className="mx-auto max-w-[1800px] px-6 py-16 lg:px-16">
       <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
@@ -39,35 +75,23 @@ export default async function HistoryIntro({ heading }: HistoryIntroProps = {}) 
           </div>
 
           <h2 className="mt-16 max-w-3xl font-semibold text-3xl text-black sm:text-4xl">
-            {t("From a Small Campus Mission to a Global Youth Fellowship")}
+            {t(bodyHeading)}
           </h2>
 
           <div className="mt-8 max-w-3xl space-y-6 text-lg text-black">
-            <p>
-              {t(
-                "Youth Evangelical Fellowship (YEF) traces its roots to 2002, when Apostolos Campus Ministry (ACM) was founded by Dr. David Jang together with students from Olivet Theological College and Seminary (OTCS). In 2003, the ministry began developing into what would become Youth Evangelical Fellowship, carrying a growing vision to reach university students through the Word of God, discipleship, and evangelism.",
-              )}
-            </p>
-            <p>
-              {t(
-                "A significant new chapter began in New York City in 2009, when YEF was inaugurated with students from Columbia University who were moved by the Holy Spirit to gather for small-group Bible studies and share the gospel of Jesus Christ with their fellow students. From these early gatherings, YEF developed with a clear focus: to reach university students who are thirsty for the Word of God, help them grow as disciples of Jesus Christ, and raise a young generation willing to participate in God’s mission.",
-              )}
-            </p>
-            <p>
-              {t(
-                "By the grace of God, the ministry continued expanding internationally. By 2015, YEF’s mission had reached campuses across North America, South America, Europe, Africa, Asia Pacific, Southeast Asia, and South Asia. The growth of YEF reflects Jesus’ description of the Kingdom of God:",
-              )}
-            </p>
-            <blockquote className="border-l-4 border-yef-primary pl-6 text-xl italic text-yef-navy">
-              {t(
-                "“It is like a mustard seed, which, when sown upon the soil, though it is smaller than all the seeds that are upon the soil, yet when it is sown, it grows up and becomes larger than all the garden plants and forms large branches; so that the birds of the air can nest under its shade.” — Mark 4:31–32",
-              )}
-            </blockquote>
-            <p>
-              {t(
-                "YEF’s commission is to raise a young generation who love the Cross of Jesus Christ, boldly proclaim His sacrifice and the power of His salvation, and dream together for the Kingdom of God. YEF firmly believes in international growth and in equipping young people from diverse backgrounds to devote themselves to Jesus Christ and His Great Commission. Through biblical teaching, discipleship, evangelism, leadership development, retreats, mission conferences, and local fellowship life, YEF seeks to help young believers passionately embody Kingdom-centered lifestyles. Youth Evangelical Fellowship is a member of the World Olivet Assembly and an associate member of the World Evangelical Alliance.",
-              )}
-            </p>
+            {body.map((item, index) =>
+              item.kind === "quote" ? (
+                <blockquote
+                  key={index}
+                  className="border-l-4 border-yef-primary pl-6 text-xl italic text-yef-navy"
+                >
+                  {t(item.text)}
+                  {item.reference ? ` \u2014 ${t(item.reference)}` : null}
+                </blockquote>
+              ) : (
+                <p key={index}>{t(item.text)}</p>
+              ),
+            )}
           </div>
         </div>
       </div>

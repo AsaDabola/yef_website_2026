@@ -1,6 +1,7 @@
 import Image from "next/image";
 import TimelineScroll from "./TimelineScroll";
 import { getT } from "@/lib/i18n/server";
+import { getPageTimeline } from "@/lib/pages";
 
 type Entry = {
   year: string;
@@ -247,9 +248,11 @@ async function EntryCard({ entry }: { entry: Entry }) {
   return (
     <div>
       <p className="font-normal text-base text-[#4f4f4f]">{entry.year}</p>
-      <h3 className="mt-2 font-black text-2xl leading-tight text-[#0a0500] sm:text-3xl">
-        {t(entry.title)}
-      </h3>
+      {entry.title ? (
+        <h3 className="mt-2 font-black text-2xl leading-tight text-[#0a0500] sm:text-3xl">
+          {t(entry.title)}
+        </h3>
+      ) : null}
       {entry.image && (
         <div className="relative mt-4 aspect-[16/10] w-full overflow-hidden rounded-xl">
           <Image
@@ -272,18 +275,35 @@ async function EntryCard({ entry }: { entry: Entry }) {
 
 export default async function HistoryTimeline() {
   const t = await getT();
+
+  // The years an editor has published win over the ones the page ships with,
+  // the same way the prose above them does. Which side of the line an entry
+  // falls on is layout rather than content, so it alternates from the top
+  // instead of being stored — an entry inserted in the middle re-flows the
+  // ones after it rather than doubling up on one side.
+  const authored = await getPageTimeline("who-we-are/history");
+  const entries: Entry[] =
+    authored.items.length > 0
+      ? authored.items.map((item, index) => ({
+          year: item.year,
+          title: item.title ?? "",
+          body: item.body,
+          side: index % 2 === 0 ? "right" : "left",
+        }))
+      : timeline;
+
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-5xl px-6 py-20 lg:px-16">
         <h2 className="text-center font-black text-4xl text-[#0a0500] sm:text-5xl">
-          {t("YEF Through the Years")}
+          {t(authored.heading ?? "YEF Through the Years")}
         </h2>
 
         <TimelineScroll>
           <div className="space-y-16">
-            {timeline.map((entry) => (
+            {entries.map((entry, index) => (
               <div
-                key={entry.year}
+                key={`${entry.year}-${index}`}
                 data-timeline-entry
                 className="yef-timeline-entry relative sm:grid sm:grid-cols-2 sm:gap-x-16"
               >

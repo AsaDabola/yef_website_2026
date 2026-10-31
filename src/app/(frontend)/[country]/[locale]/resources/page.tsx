@@ -14,7 +14,7 @@ import { getT } from "@/lib/i18n/server";
 import { currentViewer } from "@/lib/members";
 import { cmsConfigured } from "@/lib/posts";
 import type { Resource } from "@/payload-types";
-import { applyRequestLocale, type LocaleParams } from "@/lib/i18n/request";
+import { applyRequestLocale, getCountryCode, type LocaleParams } from "@/lib/i18n/request";
 import { getPageHeader } from "@/lib/pages";
 
 export const metadata: Metadata = {
@@ -66,6 +66,16 @@ export default async function ResourcesPage({ params }: { params: LocaleParams }
     const payload = await getPayload({ config });
     const result = await payload.find({
       collection: "resources",
+      // Headquarters' library plus this country's own. A resource left with
+      // no country is headquarters', which is every entry that existed
+      // before countries could own one — so this site shows exactly what it
+      // showed before, plus anything its own team adds.
+      where: {
+        or: [
+          { country: { exists: false } },
+          { country: { equals: getCountryCode() } },
+        ],
+      },
       limit: 500,
       sort: "title",
       overrideAccess: false,

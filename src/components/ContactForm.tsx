@@ -56,7 +56,10 @@ export default function ContactForm() {
         >
           +1 (555) 013-2847
         </a>{" "}
-        {t("· 123 Faith Ave, Springfield")}
+        &middot;{" "}
+        {/* The same string the footer uses, so there is one address in the
+            codebase rather than two that can drift apart. */}
+        {t("519 South Park Avenue, Sanford, FL 32771 USA")}
       </p>
 
       <div className="mt-8 border-t border-v2-border pt-8">

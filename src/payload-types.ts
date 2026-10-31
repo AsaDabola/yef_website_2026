@@ -1538,6 +1538,85 @@ export interface Resource {
   externalUrl?: string | null;
   visibility: 'internal' | 'public';
   /**
+   * Which country's library this belongs to. Left blank it is headquarters', and only a super admin can change it.
+   */
+  country?:
+    | (
+        | 'int'
+        | 'ao'
+        | 'ar'
+        | 'au'
+        | 'at'
+        | 'bd'
+        | 'be'
+        | 'br'
+        | 'cm'
+        | 'ca'
+        | 'cl'
+        | 'co'
+        | 'ci'
+        | 'cz'
+        | 'cd'
+        | 'do'
+        | 'ke'
+        | 'eg'
+        | 'et'
+        | 'fj'
+        | 'fr'
+        | 'de'
+        | 'gh'
+        | 'gr'
+        | 'gt'
+        | 'ht'
+        | 'hn'
+        | 'hu'
+        | 'in'
+        | 'id'
+        | 'il'
+        | 'it'
+        | 'jp'
+        | 'kz'
+        | 'mg'
+        | 'my'
+        | 'mx'
+        | 'mn'
+        | 'mz'
+        | 'mm'
+        | 'np'
+        | 'nl'
+        | 'nz'
+        | 'ng'
+        | 'pk'
+        | 'pe'
+        | 'ph'
+        | 'pl'
+        | 'pt'
+        | 'ro'
+        | 'ru'
+        | 'rw'
+        | 'ws'
+        | 'sg'
+        | 'sk'
+        | 'sb'
+        | 'za'
+        | 'kr'
+        | 'es'
+        | 'lk'
+        | 'se'
+        | 'ch'
+        | 'tw'
+        | 'th'
+        | 'to'
+        | 'tr'
+        | 'ua'
+        | 'ae'
+        | 'gb'
+        | 'us'
+        | 'vn'
+        | 'zm'
+      )
+    | null;
+  /**
    * Optional: a page section id (e.g. "leadership-training") to also surface this resource there.
    */
   relatedSlug?: string | null;
@@ -2319,6 +2398,7 @@ export interface ResourcesSelect<T extends boolean = true> {
   kind?: T;
   externalUrl?: T;
   visibility?: T;
+  country?: T;
   relatedSlug?: T;
   updatedAt?: T;
   createdAt?: T;
